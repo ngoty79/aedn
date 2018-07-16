@@ -1,2 +1,0 @@
-# aedn
-EADN project
