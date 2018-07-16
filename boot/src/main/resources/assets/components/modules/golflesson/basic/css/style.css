@@ -1,0 +1,22 @@
+#container-pro-list .portlet-body .profile p, #container-case-list .portlet-body .desc p{
+    overflow: hidden;
+    height: 100px;
+    margin-top:5px;
+    margin-bottom: 6px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#container-pro-list .portlet-body .profile, #container-pro-vod-list .portlet-body .profile,
+#container-vod-view .portlet-body .profile {
+    width: auto;
+    padding-left: 200px;
+}
+
+.vod-detail-content {
+    padding: 20px;
+}
+
+.margin-bottom-10 {
+    margin-bottom: 10px;
+}

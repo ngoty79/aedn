@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <property name="STAGING_HOME" value="/home/www/golf/logs/"/>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>%-20(%d{HH:mm:ss.SSS} [%thread]) %-5level %logger{80} - %msg%n</pattern>
+        </layout>
+    </appender>
+
+    <appender name="stagingfile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${STAGING_HOME}application.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${STAGING_HOME}application.%d{yyyy-MM-dd}.log.zip</fileNamePattern>
+            <maxHistory>14</maxHistory>
+        </rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>%-20(%d{HH:mm:ss.SSS} [%thread]) %-5level %logger{80} - %msg%n</pattern>
+        </layout>
+    </appender>
+
+    <logger name="com.namowebiz.mugrun.applications" level="INFO" additivity="false">
+        <!--<appender-ref ref="STDOUT"/>-->
+        <appender-ref ref="stagingfile"/>
+    </logger>
+    <logger name="org.apache.catalina.core.ContainerBase" level="OFF">
+    </logger>
+    <root level="ERROR">
+        <!--<appender-ref ref="STDOUT"/>-->
+        <appender-ref ref="stagingfile"/>
+    </root>
+</configuration>

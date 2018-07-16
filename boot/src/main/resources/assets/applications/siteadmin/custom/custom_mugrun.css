@@ -1,0 +1,29 @@
+/*색상 입히기*/
+.darkgray{background-color:#4a4a4a;border:1px solid #4a4a4a}
+.gray{border:1px solid #7F7F7F;background-color:#7F7F7F;}
+.font-white{color:white;}
+.bg_gray{background-color: #f5f6fa}
+.gray_title{border-bottom:3px solid #7F7F7F;}
+
+/*로고변경에 따른 간격조정*/
+.page-header.navbar .page-logo .logo-default{margin-top:10px;}
+.page-header.navbar .page-logo{padding-left:5px;padding-right:0px;}
+
+/*사이드메뉴 color및 롤오버 color변경*/
+.page-sidebar .page-sidebar-menu>li.active.open>a:hover, .page-sidebar .page-sidebar-menu>li.active>a:hover, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu>li.active.open>a:hover, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu>li.active>a:hover
+{background: #1F2E2F;}
+
+.page-sidebar .page-sidebar-menu>li.active.open>a, .page-sidebar .page-sidebar-menu>li.active>a, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu>li.active.open>a, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu>li.active>a
+{background: #385658;}
+
+/*페이지 타이틀 간격조정*/
+.page-content-white .page-title{
+    margin:0 0 20px 0;
+}
+.page-content-white .page-description{
+    margin:0 20px 0;
+    font-size: 16px;
+}
+
+/*리스트 박스 간격조정*/
+.inbox .inbox-sidebar{padding:20px 0;}

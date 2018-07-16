@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.namowebiz.mugrun.applications.siteadmin.dao.user.UserMapper">
+    <resultMap id="user" type="com.namowebiz.mugrun.applications.siteadmin.models.user.User">
+        <id column="user_no" property="userNo"/>
+        <result column="id" property="id"/>
+        <result column="password" property="password"/>
+        <result column="password_mod_date" property="passwordModDate"/>
+        <result column="name" property="name"/>
+        <result column="nickname" property="nickname"/>
+        <result column="user_image" property="userImage"/>
+        <result column="email" property="email"/>
+        <result column="social_id" property="socialId"/>
+        <result column="issue_date" property="issueDate"/>
+        <result column="issue_place" property="issuePlace"/>
+        <result column="tel" property="tel"/>
+        <result column="zipcode" property="zipcode"/>
+        <result column="address" property="address"/>
+        <result column="sub_address" property="subAddress"/>
+        <result column="user_status" property="userStatus"/>
+        <result column="admin_yn" property="adminYn"/>
+        <result column="cert_di" property="certDi"/>
+        <result column="password_reset_yn" property="passwordResetYn"/>
+        <result column="verification_info" property="verificationInfo"/>
+        <result column="birthday" property="birthday"/>
+        <result column="sex" property="sex"/>
+        <result column="receive_types" property="receiveTypes"/>
+        <result column="delete_yn" property="deleteYn"/>
+        <result column="reg_date" property="regDate"/>
+        <result column="reg_user_no" property="regUserNo"/>
+        <result column="mod_date" property="modDate"/>
+        <result column="mod_user_no" property="modUserNo"/>
+    </resultMap>
+
+
+    <resultMap id="userVo" extends="user" type="com.namowebiz.mugrun.applications.siteadmin.models.user.UserVO">
+        <result column="user_group_no" property="userGroupNo"/>
+        <result column="user_group_name" property="userGroupName"/>
+        <result column="pointNo" property="pointNo"/>
+        <result column="pointName" property="pointName"/>
+        <result column="pointValue" property="pointValue"/>
+        <result column="pointRegDate" property="pointRegDate"/>
+    </resultMap>
+
+
+
+
+    <select id="getByUserId" resultMap="userVo" parameterType="string">
+        SELECT usr.*
+        FROM user_info usr
+        WHERE  id = #{id}
+    </select>
+
+    <select id="getByUserIdAndAdminYn" resultMap="userVo" parameterType="map">
+        SELECT usr.*
+        FROM user_info usr
+        WHERE  id = #{userId} AND admin_yn = #{adminYn}
+    </select>
+
+
+
+    <select id="getByPK" resultMap="userVo" parameterType="long">
+        SELECT usr.*
+        FROM user_info usr
+        WHERE  user_no = #{userNo}
+    </select>
+
+    <select id="selectByToken" resultMap="user" parameterType="string">
+        SELECT usr.* FROM user_info usr
+        WHERE user_token = #{token}
+    </select>
+
+    <update id="updateToken" parameterType="com.namowebiz.mugrun.applications.siteadmin.models.user.User" >
+        UPDATE user_info
+        SET
+        user_token = #{userToken},
+        last_access_time = NOW()
+        WHERE user_no = #{userNo}
+    </update>
+
+    <insert id="insert" parameterType="com.namowebiz.mugrun.applications.siteadmin.models.user.User"
+            useGeneratedKeys="true" keyColumn="user_no" keyProperty="userNo">
+        insert into user_info
+        (
+        id,
+        password,
+        password_mod_date,
+        name,
+        nickname,
+        user_image,
+        email,
+        tel,
+        birthday,
+        sex,
+        receive_types,
+        zipcode,
+        address,
+        sub_address,
+        user_status,
+        admin_yn,
+        cert_di,
+        password_reset_yn,
+        verification_info,
+        social_id,
+        issue_date,
+        issue_place,
+        reg_date,
+        reg_user_no,
+        mod_date
+        )
+        values
+        (
+        #{id} ,
+        #{password} ,
+        #{passwordModDate} ,
+        #{name} ,
+        #{nickname} ,
+        #{userImage} ,
+        #{email},
+        #{tel},
+        #{birthday},
+        #{sex},
+        #{receiveTypes},
+        #{zipcode},
+        #{address},
+        #{subAddress},
+        #{userStatus},
+        0,
+        #{certDi},
+        #{passwordResetYn},
+        #{verificationInfo},
+        #{socialId},
+        #{issueDate},
+        #{issuePlace},
+        NOW(),
+        #{regUserNo},
+        NOW()
+        )
+
+        <selectKey resultType="long" keyProperty="userNo">
+            <![CDATA[
+            SELECT LAST_INSERT_ID() AS userNo;
+          ]]>
+        </selectKey>
+    </insert>
+
+    <update id="update" parameterType="com.namowebiz.mugrun.applications.siteadmin.models.user.User" >
+        UPDATE user_info
+        SET
+        id = #{id},
+        password = #{password,jdbcType=VARCHAR},
+        password_mod_date = #{passwordModDate},
+        name = #{name,jdbcType=VARCHAR},
+        nickname = #{nickname,jdbcType=VARCHAR},
+        user_image = #{userImage,jdbcType=VARCHAR},
+        social_id = #{socialId,jdbcType=VARCHAR},
+        issue_date = #{issueDate},
+        issue_place = #{issuePlace},
+        birthday = #{birthday},
+        sex = #{sex},
+        receive_types = #{receiveTypes},
+        email = #{email,jdbcType=VARCHAR},
+        tel = #{tel,jdbcType=VARCHAR},
+        zipcode = #{zipcode,jdbcType=VARCHAR},
+        address = #{address,jdbcType=VARCHAR},
+        sub_address = #{subAddress,jdbcType=VARCHAR},
+        user_status = #{userStatus,jdbcType=VARCHAR},
+        admin_yn = #{adminYn},
+        cert_di = #{certDi},
+        password_reset_yn = #{passwordResetYn},
+        verification_info = #{verificationInfo},
+        mod_date = NOW(),
+        mod_user_no = #{modUserNo}
+        WHERE user_no = #{userNo}
+    </update>
+
+    <delete id="deleteByPK" parameterType="long">
+        UPDATE user_info SET delete_yn = 1 WHERE user_no = #{userNo}
+    </delete>
+
+    <select id="findByEmail" resultMap="userVo" parameterType="string">
+        SELECT usr.*
+        FROM user_info usr
+        WHERE  email = #{email}
+    </select>
+
+    <select id="list" resultMap="userVo" parameterType="map">
+        SELECT *
+        FROM user_info
+        <include refid="whereClause"/>
+        ORDER BY reg_date DESC
+        <if test="pageSize != null">
+            LIMIT #{startIndex}, #{pageSize}
+        </if>
+    </select>
+
+    <select id="countList" resultType="long" parameterType="map">
+        SELECT COUNT(user.user_no)
+        FROM user_info user
+        <if test="userGroupNo != null">
+            LEFT JOIN user_group_users userGroupUsers ON user.user_no = userGroupUsers.user_no
+        </if>
+        <include refid="whereClause"/>
+    </select>
+
+    <select id="getUserWithGroup" resultMap="userVo" parameterType="map">
+        SELECT userInfo.*, userGroup.user_group_no, userGroup.user_group_name
+        FROM user_info userInfo
+        LEFT JOIN user_group_users userGroupUsers ON userInfo.user_no = userGroupUsers.user_no
+        LEFT JOIN user_group userGroup ON userGroupUsers.user_group_no = userGroup.user_group_no
+        WHERE userInfo.admin_yn != 1
+        <choose>
+            <when test="searchId != null">
+                AND LOWER(userInfo.id) LIKE CONCAT('%',LOWER(#{searchId}),'%')
+            </when>
+            <when test="searchName != null">
+                AND LOWER(userInfo.name) LIKE CONCAT('%',LOWER(#{searchName}),'%')
+            </when>
+            <otherwise>
+                AND (LOWER(userInfo.id) LIKE CONCAT('%',LOWER(#{all}),'%') OR LOWER(userInfo.name) LIKE CONCAT('%',LOWER(#{all}),'%'))
+            </otherwise>
+        </choose>
+        GROUP BY userInfo.user_no
+        ORDER BY userInfo.id, userInfo.name, userGroup.user_group_name
+        <if test="pageSize != null">
+            LIMIT #{startIndex}, #{pageSize}
+        </if>
+    </select>
+
+    <select id="getUserInfoByPhone" parameterType="map" resultMap="userVo">
+        select *
+        from user_info
+        where name=#{name}
+        and REPLACE(tel, '-','')=#{tel}
+    </select>
+
+    <update id="updateUserCertDi" parameterType="map">
+        update user_info
+        set cert_di=#{certDi},
+        mod_date = NOW(),
+        mod_user_no = #{modUserNo}
+        where user_no=#{userNo}
+    </update>
+
+    <select id="getUserInfoByCertDI" parameterType="map" resultMap="userVo">
+        select *
+        from user_info
+        where cert_di=#{certDi}
+        limit 1
+    </select>
+
+    <select id="getUserByGroup" resultMap="userVo" parameterType="map">
+        SELECT userInfo.*
+        FROM user_info userInfo
+        LEFT JOIN user_group_users userGroupUsers ON userInfo.user_no = userGroupUsers.user_no
+        WHERE userGroupUsers.user_group_no = ${userGroupNo} AND userInfo.admin_yn != 1
+        <choose>
+            <when test="searchId != null">
+                AND LOWER(userInfo.id) LIKE CONCAT('%',LOWER(#{searchId}),'%')
+            </when>
+            <when test="searchName != null">
+                AND LOWER(userInfo.name) LIKE CONCAT('%',LOWER(#{searchName}),'%')
+            </when>
+            <otherwise>
+                AND (LOWER(userInfo.id) LIKE CONCAT('%',LOWER(#{all}),'%') OR LOWER(userInfo.name) LIKE CONCAT('%',LOWER(#{all}),'%'))
+            </otherwise>
+        </choose>
+        ORDER BY userInfo.id, userInfo.name
+        <if test="pageSize != null">
+            LIMIT #{startIndex}, #{pageSize}
+        </if>
+    </select>
+
+    <sql id="whereClause">
+        <where>
+            admin_yn != 1
+            <if test="name != null">
+                AND name = #{name}
+            </if>
+            <if test="nickname != null">
+                AND nickname = #{nickname}
+            </if>
+            <if test="email != null">
+                AND email = #{email}
+            </if>
+            <if test="tel != null">
+                AND tel = #{tel}
+            </if>
+            <if test="id != null">
+                AND id = #{id}
+            </if>
+            <if test="userStatus != null">
+                AND user_status = #{userStatus}
+            </if>
+            <if test="adminYn != null">
+                AND admin_yn = #{adminYn}
+            </if>
+            <if test="excludeUserNo != null">
+                AND user_no != #{excludeUserNo}
+            </if>
+
+            <if test="searchId != null">
+                AND id LIKE CONCAT('%',#{searchId},'%')
+            </if>
+            <if test="searchName != null">
+                AND name LIKE CONCAT('%',#{searchName},'%')
+            </if>
+            <if test="searchEmail != null">
+                AND email LIKE CONCAT('%',#{searchEmail},'%')
+            </if>
+            <if test="searchAll != null">
+                AND CONCAT(id, password_mod_date, name, nickname, email, tel, zipcode, address
+                , sub_address, user_status, reg_date, mod_date)
+                LIKE CONCAT('%',#{searchAll},'%')
+            </if>
+            <if test="userGroupNo != null">
+                AND userGroupUsers.user_group_no = ${userGroupNo}
+            </if>
+        </where>
+    </sql>
+</mapper>

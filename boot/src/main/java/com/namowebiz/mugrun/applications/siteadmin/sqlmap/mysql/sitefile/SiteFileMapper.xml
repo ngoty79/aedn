@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.namowebiz.mugrun.applications.siteadmin.dao.sitefile.SiteFileDao">
+
+    <resultMap id="siteFile" type="com.namowebiz.mugrun.applications.siteadmin.models.sitefile.SiteFile">
+        <id column="site_file_no" property="siteFileNo"/>
+        <result column="file_use_type" property="fileUseType"/>
+        <result column="original_file_name" property="originalFileName"/>
+        <result column="file_path" property="filePath"/>
+        <result column="file_ext_type" property="fileExtType"/>
+        <result column="file_view_type" property="fileViewType"/>
+        <result column="file_alt_tag" property="fileAltTag"/>
+        <result column="file_size" property="fileSize"/>
+        <result column="download_cnt" property="downloadCnt"/>
+        <result column="file_del_yn" property="fileDelYn"/>
+        <result column="file_del_descs" property="fileDelDescs"/>
+        <result column="big_file_type" property="bigFileType"/>
+        <result column="big_file_start_date" property="bigFileStartDate"/>
+        <result column="big_file_end_date" property="bigFileEndDate"/>
+        <result column="av_player_type" property="avPlayerType"/>
+        <result column="av_subtitles" property="avSubtitles"/>
+        <result column="memo" property="memo"/>
+        <result column="bd_config_no" property="bdConfigNo"/>
+        <result column="bd_content_no" property="bdContentNo"/>
+        <result column="thumbnail_file_path" property="thumbnailFilePath"/>
+        <result column="reg_date" property="regDate"/>
+        <result column="reg_user_no" property="regUserNo"/>
+        <result column="mod_date" property="modDate"/>
+        <result column="mod_user_no" property="modUserNo"/>
+    </resultMap>
+
+    <resultMap id="siteFileVO" extends="siteFile" type="com.namowebiz.mugrun.applications.siteadmin.models.sitefile.SiteFileVO">
+
+    </resultMap>
+  
+  <select id="getSiteFile" parameterType="long" resultMap="siteFile">
+  <![CDATA[
+    SELECT  site_file_no        AS siteFileNo
+         ,  file_use_type       AS fileUseType
+         ,  file_path           AS filePath
+         ,  original_file_name  AS originalFileName
+         ,  file_size           AS fileSize
+         ,  file_ext_type       AS fileExtType
+         ,  reg_date            AS regDate
+         ,  file_del_yn         AS useAdminDel
+         ,  file_del_descs      AS fileDelDescs
+         ,  thumbnail_file_path AS thumbnailFilePath
+      FROM  SITE_FILE
+     WHERE  site_file_no         = #{value}
+  ]]>
+  </select>
+  
+  <select id="getSiteFiles" resultMap="siteFile" parameterType="map">
+  <![CDATA[
+      SELECT  site_file_no        AS siteFileNo
+           ,  file_use_type       AS fileUseType
+           ,  file_path           AS filePath
+           ,  original_file_name  AS originalFileName
+           ,  file_size           AS fileSize
+           ,  file_ext_type       AS fileExtType
+           ,  reg_date            AS regDate
+           ,  thumbnail_file_path AS thumbnailFilePath
+        FROM  SITE_FILE
+       WHERE  IFNULL(file_del_yn,0) = 0
+       AND site_file_no IN 
+  ]]>
+       <foreach  item="item" index="index" collection="arrFileNo" open="(" separator="," close=")">
+         #{item}
+       </foreach>
+  </select>
+  
+  <select id="getSiteFileListOfModulePks" parameterType="map" resultMap="siteFile">
+  <![CDATA[
+      SELECT  site_file_no         AS siteFileNo
+           ,  file_path            AS filePath
+           ,  original_file_name   AS originalFileName
+           ,  file_size            AS fileSize
+           ,  file_ext_type        AS fileExtType
+           ,  file_view_type       AS fileViewType
+           ,  big_file_type        AS bigFileType
+           ,  file_alt_tag         AS fileAltTag
+           ,  reg_date             AS regDate
+           ,  thumbnail_file_path  AS thumbnailFilePath
+        FROM  SITE_FILE
+       WHERE  IFNULL(file_del_yn,0) = 0
+         AND  file_use_type         = #{fileUseType}
+         AND  bd_content_no IN 
+  ]]>
+       <foreach  item="item" index="index" collection="arrContentNo" open="(" separator="," close=")">
+         #{item}
+       </foreach>
+  </select>
+  
+  <select id="getSiteFileListOfModule" parameterType="com.namowebiz.mugrun.applications.siteadmin.models.sitefile.SiteFileVO" resultMap="siteFile">
+  <![CDATA[
+    SELECT  site_file_no        AS siteFileNo
+         ,  site_id             AS siteId
+         ,  file_path           AS filePath
+         ,  original_file_name  AS originalFileName
+         ,  file_size           AS fileSize
+         ,  file_ext_type       AS fileExtType
+         ,  file_view_type      AS fileViewType
+         ,  big_file_type       AS bigFileType
+         ,  file_alt_tag        AS fileAltTag
+         ,  reg_date            AS regDate
+         ,  thumbnail_file_path AS thumbnailFilePath
+         ,  av_player_type      AS avPlayerType
+         ,  file_del_yn         AS useAdminDel
+         ,  file_del_descs      AS fileDelDescs 
+      FROM  SITE_FILE
+     WHERE  file_use_type        = #{fileUseType}
+  ]]>
+	  <if test="useAdminDel != ''">
+	     AND  IFNULL(file_del_yn,0) = #{useAdminDel}
+	  </if>
+  </select>
+  
+  <insert id="addFile" parameterType="com.namowebiz.mugrun.applications.siteadmin.models.sitefile.SiteFile">
+  <![CDATA[
+    INSERT
+      INTO SITE_FILE
+            (   file_use_type
+            ,   original_file_name
+            ,   file_path
+            ,   file_ext_type
+            ,   file_view_type
+            ,   big_file_type
+            ,   av_subtitles
+            ,   av_player_type
+            ,   file_alt_tag
+            ,   file_size
+            ,   memo
+            ,   reg_date
+            ,   reg_user_no
+            ,   bd_content_no
+            ,   bd_config_no
+            ,   thumbnail_file_path
+            ) 
+    VALUES
+            (   #{fileUseType}
+            ,   #{originalFileName}
+            ,   #{filePath}
+            ,   #{fileExtType}
+            ,   IFNULL(#{fileViewType}, 'F')
+            ,   IFNULL(#{bigFileType}, 'N')
+            ,   #{avSubtitles}
+            ,   #{avPlayerType}
+            ,   #{fileAltTag}
+            ,   #{fileSize}
+            ,   #{memo}
+            ,   NOW()
+            ,   #{regUserNo}
+            ,   #{bdContentNo}
+            ,   #{bdConfigNo}
+            ,   #{thumbnailFilePath}
+            ) 
+    ]]>
+      <selectKey resultType="long" keyProperty="siteFileNo">
+          <![CDATA[
+            SELECT LAST_INSERT_ID() AS siteFileNo;
+          ]]>
+      </selectKey>
+  </insert>
+  
+  <delete id="deleteFile" parameterType="long">
+  <![CDATA[
+    DELETE 
+      FROM  SITE_FILE
+     WHERE  site_file_no = #{siteFileNo}
+  ]]>
+  </delete>
+  
+  <delete id="deleteFileOfModule" parameterType="com.namowebiz.mugrun.applications.siteadmin.models.sitefile.SiteFileVO">
+  <![CDATA[
+    DELETE
+      FROM SITE_FILE
+     WHERE  site_id = #{siteId}
+       AND  file_use_type = #{fileUseType}
+       AND  file_path     = #{filePath}
+  ]]>
+  </delete>
+  
+  <update id="modifyFileOfModule" parameterType="com.namowebiz.mugrun.applications.siteadmin.models.sitefile.SiteFileVO">
+  <![CDATA[
+    UPDATE  SITE_FILE
+       SET  file_path = #{newFilePath}
+            ,original_file_name = #{fileName}
+     WHERE  file_use_type       = #{fileUseType}
+       AND  file_path           = #{filePath}
+  ]]>
+  </update>
+  
+  <update id="modifyFileOfAllModule" parameterType="com.namowebiz.mugrun.applications.siteadmin.models.sitefile.SiteFileVO">
+  <![CDATA[
+      UPDATE  SITE_FILE
+         SET  file_path = REPLACE(file_path, #{filePath}, #{newFilePath})
+       WHERE  file_use_type = #{fileUseType}
+  ]]>
+  </update>
+  
+  <select id="getAllSiteFileListOfBoard" parameterType="com.namowebiz.mugrun.applications.siteadmin.models.sitefile.SiteFile" resultMap="siteFile">
+  <![CDATA[
+    SELECT  site_file_no                              AS siteFileNo
+         ,  file_use_type                             AS fileUseType
+         ,  original_file_name                        AS originalFileName
+         ,  file_path                                 AS filePath
+         ,  file_ext_type                             AS fileExtType
+         ,  file_view_type                            AS fileViewType
+         ,  file_alt_tag                              AS fileAltTag
+         ,  file_size                                 AS fileSize
+         ,  download_cnt                              AS downCnt
+         ,  DATE_FORMAT(reg_date,'%Y-%m-%d %H:%i:%s') AS strRegDate
+         ,  reg_user_no                               AS regUserNo
+         ,  file_del_yn                               AS useAdminDel
+         ,  file_del_descs                            AS fileDelDescs
+         ,  reg_date                                  AS regDate
+         ,  big_file_type                             AS bigFileType
+      FROM  SITE_FILE
+     WHERE  1=1
+            AND  bd_config_no = #{bdConfigNo}
+            AND  file_use_type = 'module_board_content'
+  ]]>
+             <if test="bigFileType!=''" >
+               AND  big_file_type = #{bigFileType}
+            </if>
+            <if test="fieldFileNameOri!=null">
+              or original_file_name LIKE CONCAT('%' ,#{query} ,'%')
+            </if>
+            
+         <if test="sort==''">
+           ORDER BY reg_date
+         </if>
+         <if test="sort!=''">
+           ORDER BY ${sort} ${dir}
+         </if>
+      <if test="lastIndex!=0">
+        LIMIT #{recordCountPerPage} OFFSET #{firstIndex} 
+      </if>
+  </select>
+  
+  <select id="getCommentFileListOfContent" parameterType="long" resultMap="siteFile">
+  <![CDATA[
+    SELECT  site_file_no        AS siteFileNo
+         ,  original_file_name  AS originalFileName
+         ,  file_path           AS filePath
+         ,  file_ext_type       AS fileExtType
+         ,  file_view_type      AS fileViewType
+         ,  big_file_type       AS bigFileType
+         ,  file_alt_tag        AS fileAltTag
+         ,  file_size           AS fileSize
+         ,  download_cnt        AS downCnt
+      FROM  SITE_FILE
+     WHERE  IFNULL(file_del_yn,0) = 0
+       AND  bd_content_no         = #{bdContentNo}
+       AND  file_use_type         = 'module_board_comment'
+  ]]>
+  </select>
+  
+  <update id="submitFileDeleteReason" parameterType="com.namowebiz.mugrun.applications.siteadmin.models.sitefile.SiteFile">
+  <![CDATA[
+    UPDATE  SITE_FILE
+       SET  file_del_yn = 1
+          , file_del_descs = #{fileDelDescs}
+     WHERE  site_file_no   = #{siteFileNo}
+  ]]>
+  </update>
+  
+  <select id="getSiteTotalFileUsage" resultType="long" parameterType="string">
+  <![CDATA[
+    SELECT  IFNULL(SUM(file_size),0)
+      FROM  SITE_FILE
+     WHERE  site_id  =  #{siteId}
+            AND  IFNULL(file_del_yn, 0) <> '1'
+  ]]>
+  </select>
+
+  <select id="getOverdueFileList" parameterType="map" resultMap="siteFile">
+  <![CDATA[
+    SELECT  site_file_no        AS siteFileNo
+         ,  site_id             AS siteId
+         ,  file_use_type       AS fileUseType
+         ,  file_path           AS filePath
+         ,  original_file_name  AS originalFileName
+         ,  file_size           AS fileSize
+         ,  file_ext_type       AS fileExtType
+         ,  reg_date            AS regDate
+         ,  thumbnail_file_path AS thumbnailFilePath
+      FROM  SITE_FILE
+     WHERE  site_id = #{siteId}
+            AND IFNULL(file_del_yn,0) = 0
+            AND reg_date < DATE_SUB ( now() , interval #{fileDue}  day)
+  ]]>
+            <if test="bigFileType!=''" >
+               AND  big_file_type = #{bigFileType}
+            </if>
+  </select>
+  <update id="updateOverdueFileFlag" parameterType="map">
+  <![CDATA[
+    UPDATE  SITE_FILE
+       SET  file_del_yn = '1'
+     WHERE  site_id = #{siteId}
+            AND IFNULL(file_del_yn,0) = 0
+            AND reg_date < DATE_SUB ( now() , interval #{fileDue}  day)
+  ]]>
+            
+            <if test="bigFileType!=''" >
+               AND  big_file_type = #{bigFileType}
+            </if>
+  </update>
+  <delete id="deleteOverdueFiles" parameterType="map">
+  <![CDATA[
+    DELETE 
+      FROM  SITE_FILE
+     WHERE  site_id = #{value}
+            AND reg_date < DATE_SUB ( now() , interval #{fileDue}  day)
+  ]]>
+            <if test="bigFileType!=''" >
+               AND  big_file_type = #{bigFileType}
+            </if>
+  </delete>
+
+  <delete id="deleteOverdueFilesByFlag" parameterType="map">
+  <![CDATA[
+    DELETE 
+      FROM  SITE_FILE
+     WHERE  site_id = #{value}
+            AND reg_date < DATE_SUB ( now() , interval #{fileDue}  day)
+            AND file_del_yn = 1
+  ]]>
+  </delete>
+
+    <select id="getFirstBoardFile" resultMap="siteFile" parameterType="long">
+        SELECT *
+        FROM site_file siteFile
+        WHERE siteFile.bd_content_no = #{boardContentNo}
+        LIMIT 1
+    </select>
+
+    <select id="getFirstBoardImageFile" resultMap="siteFile" parameterType="long">
+        SELECT *
+        FROM site_file siteFile
+        WHERE siteFile.bd_content_no = #{boardContentNo} AND LOWER(siteFile.file_ext_type) IN ('png', 'gif', 'tif', 'bmp', 'jpg', 'jpeg')
+        ORDER BY siteFile.site_file_no ASC
+        LIMIT 1
+    </select>
+
+</mapper>

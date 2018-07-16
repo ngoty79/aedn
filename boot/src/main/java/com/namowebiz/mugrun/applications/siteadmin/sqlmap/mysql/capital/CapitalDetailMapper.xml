@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.namowebiz.mugrun.applications.siteadmin.dao.capital.CapitalDetailMapper">
+    <resultMap id="capitalDetail" type="com.namowebiz.mugrun.applications.siteadmin.models.capital.CapitalDetail">
+        <id column="capital_detail_no" property="capitalDetailNo"/>
+        <result column="title" property="title"/>
+        <result column="amount" property="amount"/>
+        <result column="status" property="status"/>
+        <result column="capital_type" property="capitalType"/>
+        <result column="start_date" property="startDate"/>
+        <result column="end_date" property="endDate"/>
+        <result column="notice" property="notice"/>
+        <result column="approve_date" property="approveDate"/>
+        <result column="approve_user_no" property="approveUserNo"/>
+        <result column="finish_user_no" property="finishUserNo"/>
+        <result column="finish_date" property="finishDate"/>
+        <result column="reg_date" property="regDate"/>
+        <result column="reg_user_no" property="regUserNo"/>
+        <result column="mod_date" property="modDate"/>
+        <result column="mod_user_no" property="modUserNo"/>
+    </resultMap>
+
+    <resultMap id="capitalDetailVO" extends="capitalDetail" type="com.namowebiz.mugrun.applications.siteadmin.models.capital.CapitalDetailVO">
+        <result column="reg_user_name" property="regUserName"/>
+        <result column="approveUserName" property="approveUserName"/>
+        <result column="finishUserName" property="finishUserName"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="com.namowebiz.mugrun.applications.siteadmin.models.capital.CapitalDetail"
+            useGeneratedKeys="true" keyColumn="capital_detail_no" keyProperty="capitalDetailNo">
+        <bind name="currentDate" value="@com.namowebiz.mugrun.applications.framework.common.utils.DateUtil@getCurrentDate()"/>
+        insert into capital_detail
+        (
+            title,
+            amount,
+            status,
+            capital_type,
+            start_date,
+            end_date,
+            notice,
+            reg_date,
+            reg_user_no
+        )
+
+        VALUES(
+            #{title},
+            #{amount},
+            #{status},
+            #{capitalType},
+            #{startDate},
+            #{endDate},
+            #{notice},
+            #{currentDate},
+            #{regUserNo}
+        )
+    </insert>
+
+    <delete id="delete" parameterType="long">
+        DELETE FROM capital_detail
+          WHERE capital_detail_no = #{capitalDetailNo}
+    </delete>
+
+    <update id="update" parameterType="com.namowebiz.mugrun.applications.siteadmin.models.capital.CapitalDetail">
+        <bind name="currentDate" value="@com.namowebiz.mugrun.applications.framework.common.utils.DateUtil@getCurrentDate()"/>
+        UPDATE capital_detail
+            SET
+                title = #{title},
+                amount = #{amount},
+                capital_type = #{capitalType},
+                start_date = #{startDate},
+                end_date = #{endDate},
+                notice = #{notice},
+                mod_user_no = #{modUserNo},
+                mod_date = #{currentDate}
+          WHERE capital_detail_no = #{capitalDetailNo}
+    </update>
+
+    <update id="approve" parameterType="com.namowebiz.mugrun.applications.siteadmin.models.capital.CapitalDetail">
+        <bind name="currentDate" value="@com.namowebiz.mugrun.applications.framework.common.utils.DateUtil@getCurrentDate()"/>
+          UPDATE capital_detail
+            SET
+              status = 'A',
+              approve_user_no = #{approveUserNo},
+              approve_date = #{currentDate}
+          WHERE capital_detail_no = #{capitalDetailNo}
+    </update>
+
+    <update id="finish" parameterType="com.namowebiz.mugrun.applications.siteadmin.models.capital.CapitalDetail">
+        <bind name="currentDate" value="@com.namowebiz.mugrun.applications.framework.common.utils.DateUtil@getCurrentDate()"/>
+          UPDATE capital_detail
+            SET
+                status = 'F',
+                finish_user_no = #{finishUserNo},
+                finish_date = #{currentDate}
+          WHERE capital_detail_no = #{capitalDetailNo}
+    </update>
+
+
+
+    <select id="list" resultMap="capitalDetailVO" parameterType="map">
+        SELECT
+            capital.*
+            , (Select name from user_info Where user_no = capital.reg_user_no) as reg_user_name
+            , (Select name from user_info Where user_no = capital.approve_user_no) as approveUserName
+            , (Select name from user_info Where user_no = capital.finish_user_no) as finishUserName
+        FROM capital_detail capital
+        <include refid="whereClause"/>
+        <if test="orderField == null">
+            ORDER BY reg_date DESC
+        </if>
+        <if test="orderField != null">
+            ORDER BY ${orderField}
+        </if>
+        <if test="pageSize != null">
+            LIMIT #{startIndex}, #{pageSize}
+        </if>
+    </select>
+
+    <select id="count" resultType="long" parameterType="map">
+        SELECT
+            COUNT(capital.capital_detail_no)
+        FROM capital_detail capital
+        <include refid="whereClause"/>
+    </select>
+
+
+    <select id="getByPK" resultMap="capitalDetailVO" parameterType="long">
+        SELECT * FROM capital_detail
+          WHERE capital_detail_no = #{capitalDetailNo}
+    </select>
+
+    <sql id="whereClause">
+        <where>
+            <if test="status != null">
+                AND capital.status = #{status}
+            </if>
+            <if test="capitalType != null">
+                AND capital.capital_type = #{capitalType}
+            </if>
+
+            <if test="startDate != null">
+                AND capital.start_Date >= DATE(#{startDate})
+            </if>
+            <if test="endDate != null">
+                <![CDATA[ AND capital.end_date <= DATE(#{endDate}) ]]>
+            </if>
+            <if test="searchText != null">
+                AND capital.title LIKE CONCAT('%', #{searchText}, '%')
+            </if>
+        </where>
+    </sql>
+
+</mapper>

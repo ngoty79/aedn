@@ -1,0 +1,25 @@
+<div class="modal" id="modal-create-credit" style="z-index: 10070;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-green bg-font-green">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title" style="text-align: left;">Tạo/Chỉnh Sửa Hợp Đồng Vay</h4>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn green" id="btn-save-credit">Tạo/Chỉnh Sửa</button>
+                <button type="button" class="btn btn-outline green" data-dismiss="modal" aria-hidden="true">Hủy</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="tmpl-sum-info">
+    <label class="control-label col-md-2">Tổng số kỳ trả:</label>
+    <label class="control-label col-md-1 text-align-left"> <b>${totalPaySession}</b></label>
+    <label class="control-label col-md-5 text-align-left">Số tiền trả/kỳ: <b>${payBySession}</b> &nbsp;&nbsp;&nbsp;- Lãi/Kỳ: <b>${profitBySession}</b></label>
+    <label class="control-label col-md-4 text-align-left">Tổng số tiền trả: <b>${totalPayAmount}</b> </label>
+</script>
+<script src="/assets/applications/siteadmin/scripts/customer/popupCredit.js" type="text/javascript"></script>

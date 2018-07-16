@@ -1,0 +1,17 @@
+#container-recentBoardWidget-skinB .mainBox-content .desc .desc-tit {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    margin-bottom: 5px;
+}
+
+#container-recentBoardWidget-skinB .mainBox-content .desc .desc-tit a {
+    color: #777;
+}
+
+#container-recentBoardWidget-skinB .mainBox-content .desc .desc-txt {
+    height: 35px;
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

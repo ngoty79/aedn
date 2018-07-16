@@ -1,0 +1,53 @@
+@media print {
+    @page{margin:0px auto;}
+
+    body{ background-color:#FFFFFF; background-image:none; color:#000000 }
+}
+@page{margin:0px auto;}
+body {
+    font-size: 16px;
+    line-height: 1.42857;
+}
+.logo{
+    width: 120px;
+}
+.h2, h2 {
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 0px;
+
+}
+label{
+    font-weight: normal!important;
+}
+.print-layout{
+    padding: 40px 40px;
+    width: 900px;
+}
+p {
+    margin: 0 0 4px;
+}
+.row {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+.col-md-6 {
+    width: 50%;
+    float: left!important;
+}
+.table-print{
+    width: 90%;
+    border: 1px solid #ddd;
+}
+.table-print tr{
+    height: 35px;
+    border-bottom: 1px solid #ddd;
+}
+.table-print tr th{
+    background-color: #f4f4f4;
+    text-align:center;
+    border-right: 1px solid #ddd;
+}
+.table-print tr td{
+    border-right: 1px solid #ddd;
+}

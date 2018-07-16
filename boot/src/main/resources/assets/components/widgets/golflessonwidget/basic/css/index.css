@@ -1,0 +1,19 @@
+#container-golflessonwidget .txt-golflesson-content {
+    height: 33px;
+    line-height: 1.3em;
+    overflow: hidden;
+    padding-top: 3px;
+    font-size:12px;
+    width:100%;
+}
+#container-golflessonwidget .txt-golflesson-content p{font-size:12px;}
+
+#container-golflessonwidget .vod-desc {
+    color: #777;
+}
+#container-golflessonwidget .txt-golflesson-content p, #container-golflessonwidget .txt-golflesson-content div{
+		font-size: 12px;
+		overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

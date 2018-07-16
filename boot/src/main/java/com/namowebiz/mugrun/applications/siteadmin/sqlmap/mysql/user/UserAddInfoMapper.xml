@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.namowebiz.mugrun.applications.siteadmin.dao.user.UserAddInfoMapper">
+    <resultMap id="userAddInfo" type="com.namowebiz.mugrun.applications.siteadmin.models.user.UserAddInfo">
+        <id column="user_no" property="userNo"/>
+        <id column="item_no" property="itemNo"/>
+        <result column="item_value" property="itemValue"/>
+        <result column="reg_date" property="regDate"/>
+        <result column="reg_user_no" property="regUserNo"/>
+        <result column="mod_date" property="modDate"/>
+        <result column="mod_user_no" property="modUserNo"/>
+    </resultMap>
+
+
+    <resultMap id="userAddInfoVO" extends="userAddInfo" type="com.namowebiz.mugrun.applications.siteadmin.models.user.UserAddInfoVO">
+        <result column="itemName" property="itemName"/>
+        <result column="itemType" property="itemType"/>
+        <result column="requiredYn" property="requiredYn"/>
+        <result column="helpMsg" property="helpMsg"/>
+        <result column="defaultValue" property="defaultValue"/>
+    </resultMap>
+
+    <select id="list" resultMap="userAddInfoVO" parameterType="map">
+        SELECT *
+        FROM user_add_info
+        <include refid="whereClause"/>
+        ORDER BY reg_date DESC
+        <if test="pageSize != null">
+            LIMIT #{startIndex}, #{pageSize}
+        </if>
+    </select>
+
+    <update id="update" parameterType="com.namowebiz.mugrun.applications.siteadmin.models.user.UserAddInfo" >
+        UPDATE user_add_info
+        SET
+        item_value = #{itemValue},
+        mod_date = NOW(),
+        mod_user_no = #{modUserNo}
+        WHERE user_no = #{userNo} AND item_no = #{itemNo}
+    </update>
+
+    <delete id="deleteByUserNo" parameterType="long">
+        DELETE FROM user_add_info WHERE user_no = #{userNo}
+    </delete>
+
+    <insert id="insert" parameterType="com.namowebiz.mugrun.applications.siteadmin.models.user.UserAddInfo">
+        insert into user_add_info
+        (
+        user_no,
+        item_no,
+        item_value,
+        reg_date,
+        reg_user_no,
+        mod_date
+        )
+        values
+        (
+        #{userNo} ,
+        #{itemNo} ,
+        #{itemValue} ,
+        NOW(),
+        #{regUserNo},
+        NOW()
+        )
+    </insert>
+
+    <select id="getListItemOfUser" resultMap="userAddInfoVO" parameterType="long">
+        SELECT userAddInfo.*
+            , userAddItem.item_name itemName
+            , userAddItem.item_type itemType
+            , userAddItem.required_yn requiredYn
+            , userAddItem.help_msg helpMsg
+            , userAddItem.default_value defaultValue
+        FROM user_add_info userAddInfo
+          LEFT JOIN user_add_item userAddItem ON userAddItem.item_no = userAddInfo.item_no
+        WHERE  userAddInfo.user_no = #{userNo}
+        ORDER BY userAddItem.view_order ASC
+    </select>
+
+    <sql id="whereClause">
+        <where>
+            1 = 1
+            <if test="userNo != null">
+                AND user_no = #{userNo}
+            </if>
+            <if test="itemNo != null">
+                AND item_no = #{itemNo}
+            </if>
+        </where>
+    </sql>
+
+
+</mapper>

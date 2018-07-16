@@ -1,0 +1,150 @@
+/*category management*/
+#btn-categoryMnt-addCategory {
+    font-size: 13px;
+}
+.container-categoryMnt-list {
+    margin: 30px 7px 0px 30px;
+}
+.container-categoryMnt-list .row {
+    padding: 10px;
+}
+.container-categoryMnt-list .bootstrap-table .table,
+.container-categoryMnt-list .fixed-table-container
+{
+    border: none;
+}
+.container-categoryMnt-list .section-categoryMnt-list {
+    padding: 0px;
+}
+.section-categoryMnt-list .bootstrap-table .table:not(.table-condensed) {
+    padding: 0px !important;
+}
+.section-categoryMnt-list .bootstrap-table .table:not(.table-condensed) > tbody > tr > td {
+    padding: 8px 10px !important;
+}
+.container-categoryMnt-info {
+    margin: 25px 15px 30px 0;
+}
+.container-categoryMnt-info .form-body {
+    padding-top: 15px;
+}
+
+.container-categoryMnt-info .fileinput {
+    width: 100%;
+}
+
+.container-categoryMnt-info .file-name-clear {
+    position: relative;
+    margin-left: -28px;
+    z-index: 1001;
+    padding-top: 10px;
+    cursor: pointer;
+    border: none;
+}
+
+.custom-well {
+    min-height: 480px;
+}
+
+/*Facility management*/
+#container-clubhouse-facilityMnt .input-group-addon {
+    border: none;
+    font-size: 25px;
+}
+#container-clubhouse-facilityMnt .table-facilityMnt-list {
+    height: 450px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.container-facilityMnt-list {
+    margin: 30px 7px 0px 30px;
+}
+.container-facilityMnt-list .row {
+    padding: 10px;
+}
+.container-facilityMnt-list .section-facilityMnt-list {
+    padding: 0px;
+}
+.container-facilityMnt-list .btn-facility-remove {
+    margin-top: 5px;
+}
+
+.container-facilityMnt-list a.btn-facilityMnt-add,
+.container-facilityMnt-list a.btn-facilityMnt-delete
+{
+    color: #777;
+}
+
+/*Event management*/
+#container-clubhouse-eventMnt .inbox-sidebar {
+    border: medium none;
+}
+#container-clubhouse-eventMnt .table-list-header {
+    margin-bottom: 3px;
+}
+#container-clubhouse-eventMnt .table-list-header tbody tr .form-group {
+    padding: 30px 0 8px;
+}
+#container-clubhouse-eventMnt .fixed-table-pagination .pagination-detail {
+    display: none;
+}
+#container-clubhouse-eventMnt .fixed-table-pagination {
+    margin-top: 20px;
+    text-align: center;
+}
+#container-clubhouse-eventMnt .table-list-header .search-clear {
+    position: relative;
+    margin-left: -28px;
+    z-index: 1001;
+    padding-top: 10px;
+    cursor: pointer;
+    border: none;
+}
+#container-clubhouse-eventMnt .table-list-header  .btn-search {
+    cursor: pointer;
+}
+#container-clubhouse-eventMnt .table-header-title .group-eventMnt-eventStatus {
+    padding-top: 15px;
+}
+#container-clubhouse-eventMnt .group-eventMnt-filter .control-label {
+    text-align: center;
+    padding-top: 5px;
+}
+.modal-eventMnt-addEvent .modal-dialog {
+    min-width: 780px;
+}
+.modal-eventMnt-addEvent .input-append .fa {
+    pointer-events: none;
+    position: absolute;
+    right: -4px;
+    top: 10px;
+}
+.modal-eventMnt-addEvent .control-label {
+    text-align: left;
+    padding-left: 30px;
+}
+.modal-eventMnt-addEvent .control-label.label-addEvent-eventStatus {
+    text-align: right;
+    padding-right: 0px;
+}
+.modal-eventMnt-addEvent .group-addEvent-peopleCount input {
+    width: 55px;
+    margin-right: 8px;
+}
+.modal-eventMnt-addEvent .date-addEvent {
+    width: 112px;
+}
+
+.modal-eventMnt-addEvent .input-append-date {
+    padding-left: 0px;
+}
+.modal-eventMnt-addEvent .group-attendAgreementYn {
+    text-align: left;
+    padding-left: 0px;
+}
+.modal-eventMnt-addEvent .group-attendAgreementYn .cb-attendAgreementYn {
+    margin-left: 15px;
+}
+.modal-eventMnt-addEvent .row-attendAgreementYn {
+    margin-top: -15px;
+}

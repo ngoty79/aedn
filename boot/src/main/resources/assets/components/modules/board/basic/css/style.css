@@ -1,0 +1,804 @@
+#checkpass {
+    font-size: 14px !important;
+    height: auto !important;
+}
+
+#checkpass input{
+    height: 30px;
+    width: 200px !important;
+}
+
+.password-error-msg {
+    color: #e73d4a;
+    margin-left: 60px;
+    font-size: 12px;
+}
+
+.reset-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.fileIcon{
+    margin-top: 5px;
+    margin-left: 5px;
+}
+.pt-module-board-skin-basic {
+    color: #666666;
+    font-size: 14px;
+    font-family: '나눔고딕', 'Nanum Gothic', '돋움', Dotum, Helvetica, sans-serif;
+}
+@media only all and (min-width: 320px) and (max-width: 719px) {
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-search-box {
+        padding-right: 39px;
+        margin-top: 10px;
+        display: block;
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-search-query {
+        -ms-box-sizing: border-box!important;
+        -moz-box-sizing: border-box!important;
+        -webkit-box-sizing: border-box!important;
+        box-sizing: border-box!important;
+        width: 100%;
+        height: 30px;
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-search-btn {
+        position: absolute;
+        top: 0;
+        right: 10px;
+    }
+}
+.pt-module-board-skin-basic .pt-module-board-list-album {
+    margin-top: 15px;
+    border-top: 2px solid #3a517d;
+    border-bottom: 1px solid #cccccc;
+    color: #999999;
+    text-align: center;
+}
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-board-list-body {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-board-list-title {
+    text-align: left;
+}
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-title {
+    line-height: 1.5;
+}
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-board-ico-lock,
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-board-ico-new,
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-board-ico-reply,
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-board-ico-photo {
+    margin-left: 5px;
+    vertical-align: middle;
+}
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-board-ico-reply {
+    margin-right: 5px;
+}
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-board-list-comment-cnt {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    color: #3a517d;
+    margin-left: 5px;
+    font-size: 10px;
+}
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-thumb-wrap {
+    position: absolute;
+    top: 17px;
+    left: 0;
+}
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-thumb {
+    display: block;
+    overflow: hidden;
+    position: relative;
+    max-width: 140px;
+    max-height: 100px;
+    margin: 0 auto;
+    font-size: 0;
+}
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-thumb:before {
+    content: " ";
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    border: 1px solid #999999;
+    -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=40);
+    filter: alpha(opacity=40);
+    opacity: 0.4;
+    z-index: 2;
+}
+@media only all and (min-width: 320px) and (max-width: 719px) {
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-thumb {
+        max-width: 100px;
+        max-height: 80px;
+    }
+}
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-thumb-img {
+    position: relative;
+    width: 100%;
+    z-index: 1;
+}
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-board-list-row {
+    zoom: 1;
+    position: relative;
+    padding: 17px 0 17px 150px;
+    border-top: 0 none;
+    border-bottom: 1px solid #f2f2f2;
+    min-height: 100px;
+}
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-board-list-row:before {
+    content: '';
+    display: block;
+}
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-board-list-row:after {
+    content: '';
+    display: table;
+    clear: both;
+}
+@media only all and (min-width: 320px) and (max-width: 719px) {
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list-album .pt-board-list-row {
+        padding-left: 110px;
+        min-height: 80px;
+    }
+}
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-cont {
+    text-align: left;
+}
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-title,
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-detail,
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-detail2,
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-detail3 {
+    zoom: 1;
+    margin-bottom: 10px;
+}
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-title:before,
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-detail:before,
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-detail2:before,
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-detail3:before {
+    content: '';
+    display: block;
+}
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-title:after,
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-detail:after,
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-detail2:after,
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-detail3:after {
+    content: '';
+    display: table;
+    clear: both;
+}
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-title > .pt-module-board-list-author,
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-detail > .pt-module-board-list-author,
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-detail2 > .pt-module-board-list-author,
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-detail3 > .pt-module-board-list-author,
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-title > .pt-module-board-list-date-write,
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-detail > .pt-module-board-list-date-write,
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-detail2 > .pt-module-board-list-date-write,
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-detail3 > .pt-module-board-list-date-write,
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-title > .pt-module-board-list-date-modify,
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-detail > .pt-module-board-list-date-modify,
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-detail2 > .pt-module-board-list-date-modify,
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-detail3 > .pt-module-board-list-date-modify,
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-title > .pt-module-board-list-recommend,
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-detail > .pt-module-board-list-recommend,
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-detail2 > .pt-module-board-list-recommend,
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-detail3 > .pt-module-board-list-recommend,
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-title > .pt-module-board-list-reply,
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-detail > .pt-module-board-list-reply,
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-detail2 > .pt-module-board-list-reply,
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-detail3 > .pt-module-board-list-reply,
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-title > .pt-module-board-list-comment,
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-detail > .pt-module-board-list-comment,
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-detail2 > .pt-module-board-list-comment,
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-detail3 > .pt-module-board-list-comment,
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-title > .pt-module-board-list-hit,
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-detail > .pt-module-board-list-hit,
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-detail2 > .pt-module-board-list-hit,
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-detail3 > .pt-module-board-list-hit,
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-title > .pt-module-board-list-file,
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-detail > .pt-module-board-list-file,
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-detail2 > .pt-module-board-list-file,
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-detail3 > .pt-module-board-list-file,
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-title > .pt-module-board-list-ip,
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-detail > .pt-module-board-list-ip,
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-detail2 > .pt-module-board-list-ip,
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-detail3 > .pt-module-board-list-ip {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    margin-right: 10px;
+}
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-title .pt-module-board-list-category,
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-detail .pt-module-board-list-category,
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-detail2 .pt-module-board-list-category,
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-detail3 .pt-module-board-list-category,
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-title .pt-module-board-list-author,
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-detail .pt-module-board-list-author,
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-detail2 .pt-module-board-list-author,
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-detail3 .pt-module-board-list-author {
+    float: left;
+}
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-title .pt-module-board-list-category,
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-detail .pt-module-board-list-category,
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-detail2 .pt-module-board-list-category,
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-detail3 .pt-module-board-list-category {
+    margin-right: 5px;
+}
+@media only all and (min-width: 720px) and (max-width: 1023px) {
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-title .pt-module-board-list-date-modify,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-detail .pt-module-board-list-date-modify,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-detail2 .pt-module-board-list-date-modify,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-detail3 .pt-module-board-list-date-modify,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-title .pt-module-board-list-ip,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-detail .pt-module-board-list-ip,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-detail2 .pt-module-board-list-ip,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-detail3 .pt-module-board-list-ip {
+        display: none;
+    }
+}
+@media only all and (min-width: 320px) and (max-width: 719px) {
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-title .pt-module-board-list-date-modify,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-detail .pt-module-board-list-date-modify,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-detail2 .pt-module-board-list-date-modify,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-detail3 .pt-module-board-list-date-modify,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-title .pt-module-board-list-ip,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-detail .pt-module-board-list-ip,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-detail2 .pt-module-board-list-ip,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-detail3 .pt-module-board-list-ip {
+        display: none;
+    }
+}
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-module-board-list-file .pt-board-ico-attach {
+    vertical-align: -2px;
+}
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-board-ico-lock,
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-board-ico-new,
+.pt-module-board-skin-basic .pt-module-board-list-album .pt-board-ico-photo {
+    margin-left: 0;
+    margin-right: 5px;
+}
+.pt-module-board-skin-basic .pt-module-board-list-album-hr .mobile .pt-module-board-list-detail2,
+.pt-module-board-skin-basic .pt-module-board-list-album-hr .mobile .pt-module-board-list-detail3 {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+}
+@media only all and (min-width: 1024px) {
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list-album-hr .pt-module-board-list-thumb-spacer {
+        height: 100px;
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list-album-hr .pt-module-board-list-thumb-wrap {
+        position: static;
+        float: none;
+        width: auto;
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list-album-hr .pt-module-board-list-thumb-img {
+        min-height: 80px;
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list-album-hr .pt-board-list-body {
+        zoom: 1;
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list-album-hr .pt-board-list-body:before {
+        content: '';
+        display: block;
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list-album-hr .pt-board-list-body:after {
+        content: '';
+        display: table;
+        clear: both;
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list-album-hr .pt-board-list-row {
+        float: left;
+        width: 20%;
+        padding-left: 2.5%;
+        padding-right: 2.5%;
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list-album-hr .pt-module-board-list-cont {
+        width: auto;
+        float: none;
+        margin-top: 15px;
+        text-align: center;
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list-album-hr .pt-module-board-list-title {
+        height: 55px;
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list-album-hr .pt-module-board-list-title .pt-module-board-list-category,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list-album-hr .pt-module-board-list-detail .pt-module-board-list-category,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list-album-hr .pt-module-board-list-detail2 .pt-module-board-list-category,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list-album-hr .pt-module-board-list-detail3 .pt-module-board-list-category,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list-album-hr .pt-module-board-list-title .pt-module-board-list-author,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list-album-hr .pt-module-board-list-detail .pt-module-board-list-author,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list-album-hr .pt-module-board-list-detail2 .pt-module-board-list-author,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list-album-hr .pt-module-board-list-detail3 .pt-module-board-list-author {
+        float: none;
+        display: block;
+        margin-bottom: 5px;
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list-album-hr .pt-module-board-list-title .pt-a,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list-album-hr .pt-module-board-list-detail .pt-a,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list-album-hr .pt-module-board-list-detail2 .pt-a,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list-album-hr .pt-module-board-list-detail3 .pt-a {
+        overflow: hidden;
+        display: block;
+        white-space: normal;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        max-height: 36px;
+        max-width: none;
+        line-height: 1.5;
+    }
+}
+@media only all and (min-width: 1024px) and (max-width: 1280px) {
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list-album-hr .pt-module-board-list-thumb-spacer {
+        height: 100px;
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list-album-hr .pt-module-board-list-thumb-wrap {
+        position: static;
+        float: none;
+        width: auto;
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list-album-hr .pt-module-board-list-thumb-img {
+        min-height: 80px;
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list-album-hr .pt-board-list-body {
+        zoom: 1;
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list-album-hr .pt-board-list-body:before {
+        content: '';
+        display: block;
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list-album-hr .pt-board-list-body:after {
+        content: '';
+        display: table;
+        clear: both;
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list-album-hr .pt-board-list-row {
+        float: left;
+        width: 20%;
+        padding-left: 2.5%;
+        padding-right: 2.5%;
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list-album-hr .pt-module-board-list-cont {
+        width: auto;
+        float: none;
+        margin-top: 15px;
+        text-align: center;
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list-album-hr .pt-module-board-list-title {
+        height: 55px;
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list-album-hr .pt-module-board-list-title .pt-module-board-list-category,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list-album-hr .pt-module-board-list-detail .pt-module-board-list-category,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list-album-hr .pt-module-board-list-detail2 .pt-module-board-list-category,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list-album-hr .pt-module-board-list-detail3 .pt-module-board-list-category,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list-album-hr .pt-module-board-list-title .pt-module-board-list-author,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list-album-hr .pt-module-board-list-detail .pt-module-board-list-author,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list-album-hr .pt-module-board-list-detail2 .pt-module-board-list-author,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list-album-hr .pt-module-board-list-detail3 .pt-module-board-list-author {
+        float: none;
+        display: block;
+        margin-bottom: 5px;
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list-album-hr .pt-module-board-list-title .pt-a,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list-album-hr .pt-module-board-list-detail .pt-a,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list-album-hr .pt-module-board-list-detail2 .pt-a,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list-album-hr .pt-module-board-list-detail3 .pt-a {
+        overflow: hidden;
+        display: block;
+        white-space: normal;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        max-height: 36px;
+        max-width: none;
+        line-height: 1.5;
+    }
+}
+@media only all and (min-width: 720px) and (max-width: 1023px) {
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list-album-hr .pt-module-board-list-detail2,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list-album-hr .pt-module-board-list-detail3 {
+        display: inline-block;
+        *display: inline;
+        *zoom: 1;
+    }
+}
+@media only all and (min-width: 320px) and (max-width: 719px) {
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list-album-hr .pt-module-board-list-detail2,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list-album-hr .pt-module-board-list-detail3 {
+        display: inline-block;
+        *display: inline;
+        *zoom: 1;
+    }
+}
+@media only all and (min-width: 1024px) {
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list .pt-board-col-modify {
+        width: 75px;
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list .pt-board-col-reply {
+        width: 45px;
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list .pt-board-col-comment {
+        width: 45px;
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list .pt-board-col-ip {
+        width: 110px;
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-module-board-list .pt-board-col-attach {
+        width: 35px;
+    }
+}
+@media only all and (min-width: 720px) and (max-width: 1023px) {
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-list-body {
+        display: block;
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-list-row {
+        zoom: 1;
+        display: block;
+        padding-bottom: 12px;
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-list-row:before {
+        content: '';
+        display: block;
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-list-row:after {
+        content: '';
+        display: table;
+        clear: both;
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-list-importance0,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-list-importance1,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-list-head {
+        display: none;
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-col-title {
+        display: block;
+        line-height: 1.5;
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-col-writer,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-col-date {
+        border-top: 0 none;
+        padding-top: 0;
+        float: left;
+        display: inline-block;
+        *display: inline;
+        *zoom: 1;
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-col-state {
+        border-top: 0 none;
+        padding-top: 0;
+        float: right;
+        display: inline-block;
+        *display: inline;
+        *zoom: 1;
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list.pt-board-list-check {
+        position: relative;
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list.pt-board-list-check .pt-board-col-check {
+        display: inline-block;
+        *display: inline;
+        *zoom: 1;
+        position: absolute;
+        left: 0;
+        margin-top: 3px;
+        border-top: 0 none;
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list.pt-board-list-check .pt-board-col-category {
+        padding-left: 35px;
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list.pt-board-list-check .pt-board-col-title {
+        padding-left: 35px;
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-col-category,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-col-writer,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-col-reply,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-col-comment,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-col-hit {
+        border-top: 0 none;
+        padding-top: 0;
+        width: auto;
+        float: left;
+        display: inline-block;
+        *display: inline;
+        *zoom: 1;
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-col-category:before,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-col-writer:before,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-col-reply:before,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-col-comment:before,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-col-hit:before {
+        margin-right: 5px;
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-col-writer,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-col-date,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-col-reply,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-col-comment,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-col-hit,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-col-attach {
+        padding-bottom: 5px;
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-col-category {
+        display: block;
+        float: left;
+        padding: 17px 10px 0 10px;
+        line-height: 1.5;
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-col-category:after {
+        content: ']';
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-col-category:before {
+        content: '[';
+        margin-right: 0;
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-col-reply:before {
+        content: "답글";
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-col-comment:before {
+        content: "댓글";
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-col-ip:before {
+        content: "IP";
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-col-hit:before {
+        content: "조회";
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-col-attach {
+        border-top: 0 none;
+        padding-top: 0;
+        margin-top: 2px;
+        float: left;
+        display: inline-block;
+        *display: inline;
+        *zoom: 1;
+    }
+}
+@media only all and (min-width: 320px) and (max-width: 719px) {
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-list-body {
+        display: block;
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-list-row {
+        zoom: 1;
+        display: block;
+        padding-bottom: 12px;
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-list-row:before {
+        content: '';
+        display: block;
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-list-row:after {
+        content: '';
+        display: table;
+        clear: both;
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-list-importance0,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-list-importance1,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-list-head {
+        display: none;
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-col-title {
+        display: block;
+        line-height: 1.5;
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-col-writer,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-col-date {
+        border-top: 0 none;
+        padding-top: 0;
+        float: left;
+        display: inline-block;
+        *display: inline;
+        *zoom: 1;
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-col-state {
+        border-top: 0 none;
+        padding-top: 0;
+        float: right;
+        display: inline-block;
+        *display: inline;
+        *zoom: 1;
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list.pt-board-list-check {
+        position: relative;
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list.pt-board-list-check .pt-board-col-check {
+        display: inline-block;
+        *display: inline;
+        *zoom: 1;
+        position: absolute;
+        left: 0;
+        margin-top: 3px;
+        border-top: 0 none;
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list.pt-board-list-check .pt-board-col-category {
+        padding-left: 35px;
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list.pt-board-list-check .pt-board-col-title {
+        padding-left: 35px;
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-col-category,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-col-writer,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-col-reply,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-col-comment,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-col-hit {
+        border-top: 0 none;
+        padding-top: 0;
+        width: auto;
+        float: left;
+        display: inline-block;
+        *display: inline;
+        *zoom: 1;
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-col-category:before,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-col-writer:before,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-col-reply:before,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-col-comment:before,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-col-hit:before {
+        margin-right: 5px;
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-col-writer,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-col-date,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-col-reply,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-col-comment,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-col-hit,
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-col-attach {
+        padding-bottom: 5px;
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-col-category {
+        display: block;
+        float: left;
+        padding: 17px 10px 0 10px;
+        line-height: 1.5;
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-col-category:after {
+        content: ']';
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-col-category:before {
+        content: '[';
+        margin-right: 0;
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-col-reply:before {
+        content: "답글";
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-col-comment:before {
+        content: "댓글";
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-col-ip:before {
+        content: "IP";
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-col-hit:before {
+        content: "조회";
+    }
+    html:not(.pt-layout-fixed) .pt-module-board-skin-basic .pt-board-wrap .pt-board-list .pt-board-col-attach {
+        border-top: 0 none;
+        padding-top: 0;
+        margin-top: 2px;
+        float: left;
+        display: inline-block;
+        *display: inline;
+        *zoom: 1;
+    }
+}
+.pt-module-board-skin-basic .pt-board-view-status {
+    margin-top: 30px;
+}
+.pt-module-board-skin-basic .pt-board-view-status-item {
+    padding: 5px 7px;
+    border: 1px solid #cccccc;
+    background-color: #f2f2f2;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+.pt-module-board-skin-basic .pt-board-view-status-item > b {
+    color: #3a517d;
+}
+@media only all and (min-width: 1024px) {
+    .pt-module-board-skin-basic {
+        font-family: '나눔고딕', 'Nanum Gothic', 'ng', '돋움', Dotum, Helvetica, sans-serif;
+    }
+}
+
+.pt-module-board-skin-basic .sns_file_add_name { display:block; margin:3px 5px 0 2px; font-size:11px;}
+.pt-module-board-skin-basic .reply_re {padding:10px 10px 10px 50px; text-align:left; background:url(../../images/bg_replay.gif) no-repeat 30px 10px;}
+.pt-module-board-skin-basic .fileUpload {
+    position: relative;
+    overflow: hidden;
+    margin-left: 5px;
+}
+.pt-module-board-skin-basic .fileUpload input.upload {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+.pt-module-board-skin-basic .btnUpload{display:inline-block;*display:inline;*zoom:1;padding:4px 12px;margin-bottom:0;line-height:20px;text-align:center;vertical-align:middle;cursor:pointer;color:#333333;text-shadow:0 1px 1px rgba(255, 255, 255, 0.75);background-color:#f5f5f5;background-image:-moz-linear-gradient(top, #ffffff, #e6e6e6);background-image:-webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6));background-image:-webkit-linear-gradient(top, #ffffff, #e6e6e6);background-image:-o-linear-gradient(top, #ffffff, #e6e6e6);background-image:linear-gradient(to bottom, #ffffff, #e6e6e6);background-repeat:repeat-x;filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe6e6e6', GradientType=0);border-color:#e6e6e6 #e6e6e6 #bfbfbf;border-color:rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);*background-color:#e6e6e6;filter:progid:DXImageTransform.Microsoft.gradient(enabled = false);border:1px solid #cccccc;*border:0;border-bottom-color:#b3b3b3;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;*margin-left:.3em;-webkit-box-shadow:inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05);-moz-box-shadow:inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05);box-shadow:inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05);}.btn:hover,.btn:focus,.btn:active,.btn.active,.btn.disabled,.btn[disabled]{color:#333333;background-color:#e6e6e6;*background-color:#d9d9d9;}
+
+/*.pt-module-board-skin-basic ul.sns-share {*/
+	/*position:absolute;*/
+	/*top:3px;*/
+	/*right:0px;*/
+	/*list-style:none;*/
+/*}*/
+
+.pt-module-board-skin-basic ul.sns-share {
+    display: inline-block;
+    float: right;
+    right: 0px;
+    list-style: none;
+    margin-top: -118px;
+}
+
+.pt-module-board-skin-basic ul.sns-share li.sns-item {
+	float:left;
+	padding-right:5px;
+}
+.pt-module-board-skin-basic ul.sns-share li.sns-item img.sns-icon {
+	width:24px;
+	height:24px;
+}
+
+.pt-module-board-skin-basic ul.sns-share li.sns-item img.sns-icon-facebook {
+	background:url(../images/sns_icon_f.gif) 0px 0px no-repeat;
+}
+.pt-module-board-skin-basic ul.sns-share li.sns-item img.sns-icon-twitter {
+	background:url(../images/sns_icon_t.gif) 0px 0px no-repeat;
+}
+.pt-module-board-skin-basic ul.sns-share li.sns-item img.sns-icon-me2day {
+	background:url(../images/sns_icon_m.gif) 0px 0px no-repeat;
+}
+
+
+
+
+
+/*게시판 타이틀 공통 */
+.container.board .page-header {
+    background: url(../images/header_bg.png) no-repeat right;
+    height:130px;
+    border-bottom:0;
+    margin-bottom:20px;
+    margin-top:20px;
+}
+.container.board .page-header h1{
+    padding-top:30px;
+    color:#545454;
+    font-weight:bold;
+    font-size:36px;
+}
+
+.container-board-read-img{
+    text-align: center;
+    margin-bottom: 10px;
+    /*width: 200px;*/
+    /*height:200px;*/
+    /*float:left;*/
+    /*margin-right:*/
+    /*10px;*/
+}
+.container-board-read-img img{
+    width: 600px!important;
+}
+
+.divWriteComment .right_float{
+    height: 34px;
+    padding: 5px 0px;
+}
+.divWriteComment .button{
+    height: 25px!important;
+}
+.pt-board-reply-info .fa-reply{
+    transform: rotate(180deg);
+    position: relative;
+    top: 2px;
+    margin-right: 5px;
+}
+

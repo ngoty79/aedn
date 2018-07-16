@@ -1,0 +1,213 @@
+/*Common Left area*/
+.text-align-left {
+    text-align: left !important;
+}
+
+.text-align-right {
+    text-align: right !important;
+}
+
+.inbox-sidebar {
+    padding: 0 !important;
+    border-bottom: none !important;
+}
+
+.inbox .inbox-body {
+    padding: 0 !important;
+}
+
+.portlet.light {
+    padding: 0 !important;
+}
+
+.border-bottom-banner-list {
+    border-bottom: 1px solid #ddd;
+}
+
+.list-action-margin-left {
+    margin-left: 5px;
+}
+
+.list-action-margin-right {
+    margin-right: 5px;
+}
+
+.list-action-margin {
+    margin: 0 5px 0;
+}
+
+.table-fixed {
+    table-layout: fixed;
+    margin-bottom: 0px;
+}
+
+.fixed-table-container {
+    border: none !important;
+    margin-bottom: 58px;
+}
+
+#container-banner-list .fixed-table-pagination {
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+}
+
+#container-banner-list .fixed-table-pagination .pagination-detail {
+    display: none;
+}
+
+#table-banner-list tbody tr{
+    border-bottom: 1px solid #e7ecf1;
+}
+
+.portlet>.portlet-title>.nav-tabs {
+    float: left !important;
+}
+
+#table-list-action > tbody > tr > td {
+    padding: 8px 0 !important;
+}
+
+#table-banner-list tbody tr td:nth-child(3), #table-banner-list tbody tr td:nth-child(4) {
+    display: none;
+}
+
+.table-category-list tbody tr td:nth-child(1) {
+    display: none;
+}
+
+#table-banner-list tbody tr td.checkbox-item {
+    width: 10%;
+}
+
+@media (min-width: 992px) and (max-width: 1500px) {
+
+    .btn-banner-list-action {
+        width: 101%;
+        font-size: 13px;
+        height: 34px;
+        overflow: hidden;
+    }
+
+}
+
+@media (min-width: 1501px){
+
+    .btn-banner-list-action {
+        width: 101%;
+        font-size: 13px;
+        height: 34px;
+    }
+
+}
+
+@media (max-width: 992px) {
+
+    .btn-banner-list-action {
+        width: 100%;
+    }
+
+}
+
+/*Specific module or widgets*/
+
+#table-banner-config-list tbody tr td {
+    vertical-align: middle;
+    height: 130px;
+}
+
+#table-banner-config-list tbody tr td:last-child {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+#table-banner-config-list tbody tr{
+    border-bottom: 1px solid #e7ecf1;
+}
+
+.banner-config-title{
+    margin-top: 34px;
+    padding-left: 5px !important;
+}
+
+.banner-config-url{
+    max-width: 220px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+    overflow: hidden;
+}
+
+.banner-image {
+    max-width: 164px;
+    max-height: 90px;
+}
+
+#table-banner-config-list .btn-edit {
+    font-size: 17px;
+}
+
+#table-banner-config-list .btn-delete {
+    font-size: 19px;
+}
+
+.pointer-click-icon{
+    cursor: pointer;
+}
+
+#container-banner-config .banner-title {
+    border-bottom: 1px solid #ddd;
+    margin: 18px 0;
+}
+
+.text-align-left {
+    text-align: left !important;
+}
+
+.text-align-center {
+    text-align: center !important;
+}
+
+.padding-top-icheck {
+    padding-top: 6px;
+}
+
+.padding-left-30{
+    padding-left: 30px;
+}
+
+#form-add-banner-config .control-label {
+    text-align: left;
+}
+
+#form-add-banner-config .fa-calendar {
+    pointer-events: none;
+    top: 12px;
+    position: absolute;
+    margin-left: 140px;
+}
+
+.fileinput-filename {
+    width: 470px;
+    text-overflow: ellipsis;
+    position: absolute;
+    white-space: nowrap;
+}
+
+.padding-right-30{
+    padding-right: 30px;
+}
+
+.image-width-height{
+    margin: 5px 0 15px 0;
+}
+
+.image-original-width-height{
+    margin-right: 5px;
+}
+
+@media (min-width: 768px) {
+    #modal-add-banner-config .modal-dialog {
+        width: 780px;
+        margin: 30px auto;
+    }
+}

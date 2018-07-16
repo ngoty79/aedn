@@ -1,0 +1,281 @@
+<section class="pt-formset">
+    <header class="pt-formset-header">
+        <h1 class="pt-formset-title fa fa-circle-o">기본정보</h1>
+    </header>
+    <div class="pt-formset-row">
+        <div class="pt-formset-row">
+            <label class="pt-form-label pt-col2"> <i class="pt-form-ico-req">*</i>
+                이름
+            </label>
+            <div class="pt-col8 pt-formset-multi input-pnl-right">
+                <div class="pt-formset-multi-withtip">
+                    <input type="text" class="pt-form-control pt-form-box-sizing pt-form-input pt-form-long"
+                           name="name" th:value="${result.user.name}"/>
+                </div>
+            </div>
+        </div>
+        <div class="pt-formset-row">
+            <label class="pt-form-label pt-col2"> <i class="pt-form-ico-req">*</i>
+                아이디
+            </label>
+            <div class="pt-col8 pt-formset-multi input-pnl-right">
+                <div class="pt-formset-multi-withtip">
+                    <input type="text" name="id" maxlength="15" th:readonly="${result.user.userNo != null}? 'true'"
+                           class="pt-form-control pt-form-box-sizing pt-form-input pt-form-long"
+                           th:value="${result.user.id}"/>
+                </div>
+            </div>
+        </div>
+        <div class="pt-formset-row">
+            <label class="pt-form-label pt-col2">
+                <i class="pt-form-ico-req" th:if="${result.user.userNo == null}">*</i> 비밀번호</label>
+            <div class="pt-col8 pt-formset-multi input-pnl-right">
+                <div class="pt-formset-multi-withtip">
+                    <input type="password" name="password" maxlength="15" class="pt-form-control pt-form-box-sizing pt-form-input pt-form-long" />
+                </div>
+            </div>
+        </div>
+        <div class="pt-formset-row">
+            <label class="pt-form-label pt-col2">
+                <i class="pt-form-ico-req" th:if="${result.user.userNo == null}">*</i> 비밀번호 확인</label>
+            <div class="pt-col8 pt-formset-multi input-pnl-right">
+                <div class="pt-formset-multi-withtip">
+                    <input type="password" name="repassword" maxlength="15" class="pt-form-control pt-form-box-sizing pt-form-input pt-form-long" />
+                </div>
+            </div>
+        </div>
+        <div class="pt-formset-row">
+            <label class="pt-form-label pt-col2">
+                <i class="pt-form-ico-req">*</i> 닉네임
+            </label>
+            <div class="pt-col8 pt-formset-multi input-pnl-right">
+                <div class="pt-formset-multi-withtip">
+                    <input type="text" class="pt-form-control pt-form-box-sizing pt-form-input pt-form-long"
+                           name="nickname" th:value="${result.user.nickname}"/>
+                </div>
+            </div>
+        </div>
+        <div class="pt-formset-row">
+            <label class="pt-form-label pt-col2"> <i class="pt-form-ico-req">*</i>
+                이메일
+            </label>
+            <div class="pt-col8 pt-formset-multi input-pnl-right">
+                <div class="pt-formset-multi-withtip">
+                    <div class="email-name-message">
+                        <input type="text" name="emailName" class="pt-form-control pt-form-box-sizing pt-form-input" th:value="${result.user.emailFirstPart}"/>
+                    </div>
+                    <span class="pt-formset-term">@</span>
+                    <div class="email-region-message">
+                        <input type="text" name="emailRegion" class="pt-form-control pt-form-box-sizing pt-form-input valid" th:value="${result.user.emailSecondPart}">
+                    </div>
+                    <i class="pt-formset-term"></i>
+                    <select name="email3" itemconfigno="email" class="pt-form-control pt-form-box-sizing pt-form-select margin-left-10">
+                        <option value="">직접입력</option>
+                        <option value="naver.com">naver.com</option>
+                        <option value="daum.net">daum.net</option>
+                        <option value="hotmail.com">hotmail.com</option>
+                        <option value="nate.com">nate.com</option>
+                        <option value="yahoo.co.kr">yahoo.co.kr</option>
+                        <option value="paran.com">paran.com</option>
+                        <option value="empas.com">empas.com</option>
+                        <option value="dreamwiz.com">dreamwiz.com</option>
+                        <option value="freechal.com">freechal.com</option>
+                        <option value="lycos.c.kr">lycos.c.kr</option>
+                        <option value="korea.com">korea.com</option>
+                        <option value="gmail.com">gmail.com</option>
+                        <option value="hanmir.com">hanmir.com</option>
+                    </select>
+                    <i class="pt-formset-term"></i>
+                </div>
+            </div>
+        </div>
+        <div class="pt-formset-row">
+            <label class="pt-form-label pt-col2">
+                <i class="pt-form-ico-req">*</i> 전화번호
+            </label>
+            <div class="pt-col8 pt-formset-multi input-pnl-right">
+                <div class="pt-formset-multi-withtip">
+                    <div class="tel1-message">
+                        <select name="tel1" class="pt-form-control pt-form-box-sizing pt-form-select valid" th:data-tel1="${result.user.phone1}">
+                            <option value="010">010</option>
+                            <option value="011">011</option>
+                            <option value="0130">0130</option>
+                            <option value="016">016</option>
+                            <option value="017">017</option>
+                            <option value="019">019</option>
+                            <option value="02">02</option>
+                            <option value="031">031</option>
+                            <option value="032">032</option>
+                            <option value="033">033</option>
+                            <option value="041">041</option>
+                            <option value="042">042</option>
+                            <option value="043">043</option>
+                            <option value="044">044</option>
+                            <option value="0502">0502</option>
+                            <option value="0505">0505</option>
+                            <option value="051">051</option>
+                            <option value="052">052</option>
+                            <option value="053">053</option>
+                            <option value="054">054</option>
+                            <option value="055">055</option>
+                            <option value="061">061</option>
+                            <option value="062">062</option>
+                            <option value="063">063</option>
+                            <option value="064">064</option>
+                            <option value="070">070</option>
+                        </select>
+                    </div>
+                    <span class="pt-formset-term">-</span>
+                    <div class="tel2-message">
+                        <input type="text" name="tel2" maxlength="4" class="pt-form-control pt-form-box-sizing pt-form-input pt-form-shortest" th:value="${result.user.phone2}"/>
+                    </div>
+                    <span class="pt-formset-term">-</span>
+                    <div class="tel3-message">
+                        <input type="text" name="tel3" maxlength="4" class="pt-form-control pt-form-box-sizing pt-form-input pt-form-shortest" th:value="${result.user.phone3}"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pt-formset-row">
+            <label class="pt-form-label pt-col2">
+                <i class="pt-form-ico-req">*</i> 생년월일:
+            </label>
+            <div class="pt-col8 pt-formset-multi input-pnl-right">
+                <div class="pt-formset-multi-withtip">
+                    <div class="year-birthday-message">
+                        <input type="text" name="yearBirthday" th:value="${result.user.birthdayList.get(0)}"
+                               class="pt-form-control pt-form-box-sizing pt-form-input pt-form-shortest"/>
+                    </div>
+                    <span class="pt-formset-term">년</span>
+                    <div class="month-birthday-message">
+                        <input type="text" name="monthBirthday" th:value="${result.user.birthdayList.get(1)}"
+                               class="pt-form-control pt-form-box-sizing pt-form-input pt-form-shortest"/>
+                    </div>
+                    <span class="pt-formset-term">월</span>
+                    <div class="day-birthday-message">
+                        <input type="text" name="dayBirthday" th:value="${result.user.birthdayList.get(2)}"
+                               class="pt-form-control pt-form-box-sizing pt-form-input pt-form-shortest"/>
+                        <input class="display-none" type="text" name="maxDayBirthday" value="31"/>
+                    </div>
+                    <span class="pt-formset-term">일</span>
+                </div>
+            </div>
+        </div>
+        <div class="pt-formset-row">
+            <label class="pt-form-label pt-col2">
+                <i class="pt-form-ico-req">*</i>
+                성별
+            </label>
+            <div class="pt-col8 pt-formset-multi input-pnl-right">
+                <div class="pt-formset-multi-withtip" >
+                    <div style="margin-top: 8px;">
+                        <input type="radio" name="sex"id="rad_sex_M" value="M" th:checked="${result.user.sex == 'M'}? 'checked'"/>
+                        <label for="rad_sex_M">남자</label> &nbsp;
+                        <input type="radio" name="sex"id="rad_sex_F" value="F" th:checked="${result.user.sex == 'F'}? 'checked'"/>
+                        <label for="rad_sex_F">여자</label> &nbsp;
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pt-formset-row">
+            <label class="pt-form-label pt-col2"><i class="pt-form-ico-req">*</i> 주소</label>
+            <div class="pt-col10 pt-formset-multi" style="width: 70%;">
+                <div class="pt-formset-ctrlrow pt-formset-zipcode">
+                    <div class="pt-formset-multi pt-formset-zipcode-input">
+                        <input type="text" name="zipcode" th:value="${result.user.zipcode}" class="pt-form-control pt-form-box-sizing pt-form-shortest">
+                        <span class="pt-formset-term"></span>
+                    </div>
+                    <button id="searchZipcodeAdress" class="pt-btn pt-btn-small pt-formset-zipcode-find reset-margin-left">우편번호찾기</button>
+                </div>
+                <div class="pt-formset-ctrlrow pt-formset-address">
+                    <div class="sub-address-message">
+                        <input type="text" name="subAddress" th:value="${result.user.subAddress}"  class="pt-form-control pt-form-box-sizing pt-form-input pt-form-longest"/>
+                    </div>
+                    <i class="pt-formset-term"></i>
+                    <div class="address-message">
+                        <input type="text" name="address" th:value="${result.user.address}"  class="pt-form-control pt-form-box-sizing pt-form-input pt-form-long"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pt-formset-row">
+            <label class="pt-form-label pt-col2">
+                <i class="pt-form-ico-req">*</i> 이메일/SMS
+            </label>
+            <div class="pt-col8 pt-formset-multi input-pnl-right">
+                <div class="pt-formset-multi-withtip" >
+                    <div style="margin-top: 8px;">
+                        <input type="checkbox" id="chk_mail" name="receiveType[]"
+                               value="E" th:checked="${result.user.receiveTypeEmail}? 'checked'" />
+                        <label for="chk_sms">이메일</label> &nbsp;
+                        <input type="checkbox" id="chk_sms" name="receiveType[]"
+                               value="sms" th:checked="${result.user.receiveTypeSms}? 'checked'"/>
+                        <label for="chk_sms">SMS</label> &nbsp;
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="pt-formset" id="container-add-info">
+    <header class="pt-formset-header">
+        <h1 class="pt-formset-title fa fa-circle-o">추가정보</h1>
+    </header>
+    <div class="pt-formset-row">
+        <th:block th:each="additional, iterStat : ${result.additionalList}">
+            <th:block th:if="${additional['itemType'] == 'text'}">
+                <div class="pt-formset-row">
+                    <label class="pt-form-label pt-col2">
+                        <i class="pt-form-ico-req" th:if="${additional['requiredYn'] == 1}">*</i>
+                        [[${additional['itemName']}]]
+                    </label>
+
+                    <div class="pt-col8 pt-formset-multi input-pnl-right">
+                        <div class="pt-formset-multi-withtip">
+                            <input type="text" th:value="${additional['itemValue']}"
+                                   th:name="${additional['itemType'] + additional['itemNo']}"
+                                   class="pt-form-control pt-form-box-sizing pt-form-input pt-form-long"/>
+                            <span class="" th:if="${additional['helpMsg'] != ''}">[[${additional['helpMsg']}]]</span>
+                            <i class="pt-formset-term"></i>
+                            <span class="error_msg" th:id="${'msg_' + additional['itemNo']}"></span>
+                        </div>
+                    </div>
+                </div>
+            </th:block>
+        </th:block>
+    </div>
+</section>
+
+<section class="pt-formset" th:if="${result.capchaYn == 1}">
+    <header class="pt-formset-header">
+        <h1 class="pt-formset-title"></h1>
+    </header>
+    <fieldset class="pt-form-fieldset">
+        <legend class="pt-form-legend">자동가입방지 코드 입력</legend>
+        <div class="pt-formset-row">
+            <label class="pt-form-label pt-col2">
+                <i class="pt-form-ico-req">*</i>
+                자동가입방지
+            </label>
+            <div class="pt-col10 pt-formset-multi" style="width: 70%;">
+                <div class="pt-formset-ctrlrow pt-formset-zipcode">
+                    <img id="captchaImg" src="/captcha/captcha.do?dummy=" width="117px" height="64px">
+                </div>
+                <div class="pt-formset-ctrlrow pt-formset-address">
+                    <input type="text" id="jcaptcha" onkeydown="javascript: $('#capchaMsg').hide();"
+                           name="jcaptcha" class="pt-form-control pt-form-box-sizing pt-form-input pt-form-long">
+                    <i class="pt-formset-term"></i>
+                    <button type="button" id="btn-user-info-captcha"
+                            onclick='javascript: $("#captchaImg").attr("src", "/captcha/captcha.do?dummy=" + (new Date().getTime()));'
+                            class="pt-btn pt-btn-small pt-formset-zipcode-find">
+                        새로고침
+                    </button>
+                </div>
+                <span class="pt-formset-alert" id="capchaMsg" style="display: none;">
+                    보안문자가 잘못 입력되었습니다.
+                </span>
+            </div>
+        </div>
+    </fieldset>
+</section>

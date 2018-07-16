@@ -1,0 +1,254 @@
+.reset-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.pt-module-userloginNamo-skin-basic {
+    position: relative;
+    color: #666666;
+    font-size: 12px;
+    font-family: '나눔고딕', 'Nanum Gothic', '돋움', Dotum, Helvetica, sans-serif;
+}
+.pt-module-userloginNamo-skin-basic .pt-module-userloginNamo-a {
+    text-decoration: none;
+    color: #666666;
+}
+.pt-module-userloginNamo-skin-basic .pt-module-userloginNamo-a:hover,
+.pt-module-userloginNamo-skin-basic .pt-module-userloginNamo-a:focus {
+    text-decoration: underline;
+}
+.pt-module-userloginNamo-skin-basic .pt-module-userloginNamo-wrapper {
+    background-color: #f2f2f2;
+    margin-top:30px;
+    padding-top:40px;
+    padding-bottom:40px;
+}
+.pt-module-userloginNamo-skin-basic .pt-module-userloginNamo-form {
+    width: 410px;
+    margin: 0 auto;
+    padding: 30px;
+}
+
+.display_msg {
+    zoom: 1;
+    margin-top: 10px;
+    margin-left: 55px;
+    width: 390px;
+    height: 30px;
+    line-height: 30px;
+    border: 1px solid #f35a5a;
+    background: #ffe5e5;
+    /*display: none;*/
+}
+
+.pt-btn-primary {
+    color: #ffffff;
+    border-color: #d01432 !important;
+    background-color: #e6000a !important;
+}
+
+@media only all and (min-width: 320px) and (max-width: 719px) {
+    html:not(.pt-layout-fixed) .pt-module-userloginNamo-skin-basic .pt-module-userloginNamo-form {
+        width: auto;
+        margin-top: 15px;
+        padding: 10px;
+    }
+}
+.pt-module-userloginNamo-skin-basic .pt-module-userloginNamo-body {
+    position: relative;
+    padding-right: 110px;
+    padding-bottom: 30px;
+}
+@media only all and (min-width: 320px) and (max-width: 719px) {
+    html:not(.pt-layout-fixed) .pt-module-userloginNamo-skin-basic .pt-module-userloginNamo-body {
+        padding-right: 0;
+    }
+}
+.pt-module-userloginNamo-skin-basic .pt-module-userloginNamo-login-btn-wrap {
+    position: absolute;
+    width: 90px;
+    top: 0;
+    bottom: 30px;
+    right: 0;
+    *zoom: 1;
+}
+@media only all and (min-width: 320px) and (max-width: 719px) {
+    html:not(.pt-layout-fixed) .pt-module-userloginNamo-skin-basic .pt-module-userloginNamo-login-btn-wrap {
+        margin-top: 15px;
+        position: static;
+        display: block;
+        width: 100%;
+    }
+}
+.pt-module-userloginNamo-skin-basic .pt-module-userloginNamo-login-btn {
+    position: absolute;
+    width: 90px;
+    padding-left: 0;
+    padding-right: 0;
+    top: 0;
+    bottom: 30px;
+    right: 0;
+    *bottom: auto;
+    *padding: 24px 0;
+    border-color:#567623 !important;
+    background-color:#567623 !important;
+}
+@media only all and (min-width: 320px) and (max-width: 719px) {
+    html:not(.pt-layout-fixed) .pt-module-userloginNamo-skin-basic .pt-module-userloginNamo-login-btn {
+        margin-top: 15px;
+        position: static;
+        display: block;
+        width: 100%;
+        *padding: 9px 0;
+    }
+}
+.pt-module-userloginNamo-skin-basic .pt-module-userloginNamo-input-row {
+    position: relative;
+    padding-left: 55px;
+    *padding-right: 11px;
+    margin-top: 10px;
+}
+.pt-module-userloginNamo-skin-basic .pt-module-userloginNamo-input-row:first-child {
+    margin-top: 0;
+}
+.pt-module-userloginNamo-skin-basic .pt-module-userloginNamo-input-row .pt-form-input {
+    width: 100%;
+}
+.pt-module-userloginNamo-skin-basic .pt-module-userloginNamo-input-row .pt-form-label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 55px;
+    height: 30px;
+    line-height: 30px;
+}
+.pt-module-userloginNamo-skin-basic .pt-module-userloginNamo-option {
+    zoom: 1;
+    margin-top: 10px;
+    margin-left: 55px;
+    position: absolute;
+}
+
+.pt-module-userloginNamo-skin-basic .pt-module-userloginNamo-option .pt-form-chkbox {
+    float: left;
+    margin-left: 15px;
+}
+.pt-module-userloginNamo-skin-basic .pt-module-userloginNamo-option .pt-form-chkbox:first-child {
+    margin-left: 0;
+}
+@media only all and (min-width: 320px) and (max-width: 719px) {
+    html:not(.pt-layout-fixed) .pt-module-userloginNamo-skin-basic .pt-module-userloginNamo-option {
+        position: static;
+        margin-left: 0;
+    }
+}
+.pt-module-userloginNamo-skin-basic .pt-module-userloginNamo-link {
+    margin-top: 15px;
+    margin-left: 55px;
+}
+@media only all and (min-width: 320px) and (max-width: 719px) {
+    html:not(.pt-layout-fixed) .pt-module-userloginNamo-skin-basic .pt-module-userloginNamo-link {
+        margin-left: 0;
+    }
+}
+.pt-module-userloginNamo-skin-basic .pt-modal .pt-module-userloginNamo-modal-wrap {
+    width: 410px;
+    margin: 0 auto;
+}
+@media only all and (min-width: 320px) and (max-width: 719px) {
+    html:not(.pt-layout-fixed) .pt-module-userloginNamo-skin-basic .pt-modal .pt-module-userloginNamo-modal-wrap {
+        width: auto;
+    }
+}
+.pt-module-userloginNamo-skin-basic .pt-module-userloginNamo-captcha {
+    zoom: 1;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #f2f2f2;
+    text-align: center;
+}
+.pt-module-userloginNamo-skin-basic .pt-module-userloginNamo-captcha:before {
+    content: '';
+    display: block;
+}
+.pt-module-userloginNamo-skin-basic .pt-module-userloginNamo-captcha:after {
+    content: '';
+    display: table;
+    clear: both;
+}
+.pt-module-userloginNamo-skin-basic .pt-module-userloginNamo-captcha-inner {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+}
+.pt-module-userloginNamo-skin-basic .pt-module-userloginNamo-captcha-img {
+    float: left;
+    border: 1px solid #cccccc;
+    vertical-align: top;
+}
+@media only all and (min-width: 320px) and (max-width: 719px) {
+    html:not(.pt-layout-fixed) .pt-module-userloginNamo-skin-basic .pt-module-userloginNamo-captcha-img {
+        float: none;
+    }
+}
+.pt-module-userloginNamo-skin-basic .pt-module-userloginNamo-captcha-input {
+    margin-left: 15px;
+    float: left;
+}
+.pt-module-userloginNamo-skin-basic .pt-module-userloginNamo-captcha-input > .pt-btn {
+    display: block;
+    margin-top: 10px;
+}
+.pt-module-userloginNamo-skin-basic .pt-module-userloginNamo-captcha-input > .pt-form-control,
+.pt-module-userloginNamo-skin-basic .pt-module-userloginNamo-captcha-input > .pt-btn {
+    width: 150px;
+}
+@media only all and (min-width: 320px) and (max-width: 719px) {
+    html:not(.pt-layout-fixed) .pt-module-userloginNamo-skin-basic .pt-module-userloginNamo-captcha-input {
+        float: none;
+        padding-top: 15px;
+        margin-left: 0;
+    }
+}
+@media only all and (min-width: 1024px) {
+    .pt-module-userloginNamo-skin-basic {
+        font-family: '나눔고딕', 'Nanum Gothic', 'ng', '돋움', Dotum, Helvetica, sans-serif;
+    }
+}
+
+
+.ui-dialog-titlebar-close {
+    visibility: hidden;
+}
+
+.error {
+    border: 1px solid red !important;
+}
+
+.error_msg {
+    color: #d9534f;
+    padding-top: 8px !important;
+    display: inline-block;
+}
+.pt-btn-primary{border-color:#567623;background-color:#567623}
+
+
+
+/*게시판 타이틀 공통 */
+.container.member .page-header {
+    background: url(../images/header_member_bg.png) no-repeat right;
+    height:130px;
+    border-bottom:0;
+    margin-bottom:20px;
+    margin-top:20px;
+}
+.container.member .page-header h1{
+    padding-top:30px;
+    color:#545454;
+    font-weight:bold;
+    font-size:36px;
+}
+

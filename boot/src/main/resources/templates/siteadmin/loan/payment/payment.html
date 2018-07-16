@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="'siteadmin/layout/common_layout'">
+<head>
+    <link href="/assets/templates/admin/apps/css/inbox.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/vendors/bootstrap.table/1.9.1/bootstrap-table.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/vendors/jquery.loadmask/jquery.loadmask.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/vendors/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/vendors/select2/css/select2-bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <style>
+        .select2-selection__choice {
+            background-color: #eee!important;
+            border: 1px solid #eee!important;
+        }
+        /*.select2-container.select2-container--default, .select2-selection.select2-selection--multiple{*/
+            /*display: block;*/
+        /*}*/
+    </style>
+</head>
+<body>
+
+<!-- BEGIN CONTENT -->
+<div layout:fragment="page-content" class="page-content-wrapper">
+    <!-- BEGIN CONTENT BODY -->
+    <div class="page-content" id="container-payment">
+        <div class="inbox">
+            <div class="row">
+                <div class="col-md-12" id="container-userIndex-contents">
+                    <div class="inbox-body" id="container-userIndex-info">
+                        <div class="inbox-content">
+                            <div class="portlet-body">
+                                <div class="tabbable-line">
+                                    <ul class="nav nav-tabs ">
+                                        <li class="active">
+                                            <a href="#container-payment-single" data-toggle="tab" aria-expanded="true">Nộp theo từng KH</a>
+                                        </li>
+                                        <li class="">
+                                            <a href="#container-payment-group" data-toggle="tab" aria-expanded="false">Nộp theo nhóm</a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="container-payment-single">
+                                            <form id="form-loan-search" class="form-horizontal">
+                                                <div class="row form-group">
+                                                    <label class="control-label col-lg-2 col-md-2 col-sm-3">NV Phụ trách</label>
+                                                    <div class="col-lg-2 col-md-2 col-sm-3">
+                                                        <select class="form-control" name="staffUserNo">
+                                                            <option value="">Tất cả</option>
+                                                            <option th:each="user : ${userList}" th:selected="${user.userNo == loginUser.userNo}? 'selected'"
+                                                                    th:value="${user.userNo}" th:text="${user.name}"></option>
+                                                        </select>
+                                                    </div>
+                                                    <label class="control-label col-lg-1 col-md-2 col-sm-2">Mã KH</label>
+                                                    <div class="col-lg-2 col-md-2 col-sm-3 ">
+                                                        <div class="input-group ">
+                                                            <input id="customerCode" name="customerCode" type="text" class="form-control" placeholder="Mã Khách Hàng">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-1 col-md-1 col-sm-1 ">
+                                                        <button type="button" id="btn-search" class="btn green">
+                                                            <i class="fa fa-search"></i> Xem
+                                                        </button>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="row form-group"></div>
+                                            </form>
+                                            <table class="table-payment-list" ></table>
+                                            <div class="row" style="margin-top: 10px; margin-bottom: 10px; padding-left: 15px; padding-right: 15px; text-align:center;">
+                                                <button type="button" class="btn btn-sm btn-circle btn-outline green btn-print">
+                                                    <i class="fa fa-print"></i> In Danh Sách
+                                                </button>
+                                                <button type="button" class="btn btn-sm btn-circle btn-outline green btn-approve">
+                                                    <i class="fa fa-check"></i> Nộp tiền
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane" id="container-payment-group">
+                                            <th:block th:include="siteadmin/loan/payment/paymentGroup"></th:block>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <th:block th:include="siteadmin/customer/popup/popupPaymentDetail"></th:block>
+    <!-- END CONTENT BODY -->
+</div>
+<!-- END CONTENT -->
+
+<div style="display: none;" layout:fragment="page-scripts">
+    <script src="/assets/vendors/jquery.print/jQuery.print.min.js" type="text/javascript"></script>
+    <script src="/assets/vendors/select2/js/select2.min.js" type="text/javascript"></script>
+    <script src="/assets/vendors/jquery.inputmask/jquery.inputmask.bundle.js" type="text/javascript"></script>
+    <script src="/assets/templates/admin/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
+    <script src="/assets/templates/admin/global/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.vi.min.js" type="text/javascript"></script>
+    <script src="/assets/vendors/bootstrap.table/1.9.1/bootstrap-table.min.js" type="text/javascript"></script>
+    <script src="/assets/vendors/bootstrap.table/1.9.1/locale/bootstrap-table-vi-VN.js" type="text/javascript"></script>
+    <script src="/assets/templates/admin/global/plugins/bootstrap-select/js/bootstrap-select.min.js" type="text/javascript"></script>
+    <script src="/assets/vendors/jquery.tmpl/1.4.2/jquery.tmpl.min.js" type="text/javascript"></script>
+    <script src="/assets/templates/admin/global/plugins/jstree/dist/jstree.min.js" type="text/javascript"></script>
+    <script src="/assets/vendors/icheck/icheck.min.js" type="text/javascript"></script>
+    <script src="/assets/vendors/smarteditor/2.0/js/HuskyEZCreator.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/assets/vendors/jquery.loadmask/jquery.loadmask.min.js" type="text/javascript"></script>
+    <script src="/assets/vendors/jquery-serialize-object/2.5.0/jquery.serialize-object.min.js" type="text/javascript"></script>
+    <script src="/assets/templates/admin/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js" type="text/javascript"></script>
+    <script src="/assets/templates/admin/global/plugins/counterup/jquery.waypoints.min.js" type="text/javascript"></script>
+    <script src="/assets/templates/admin/global/plugins/counterup/jquery.counterup.js" type="text/javascript"></script>
+    <script src="/assets/applications/siteadmin/scripts/loan/payment.js" type="text/javascript"></script>
+    <script src="/assets/applications/siteadmin/scripts/loan/paymentGroup.js" type="text/javascript"></script>
+</div>
+</body>
+</html>

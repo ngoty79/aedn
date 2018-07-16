@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.namowebiz.mugrun.applications.siteadmin.dao.cost.CostDetailMapper">
+    <resultMap id="costDetail" type="com.namowebiz.mugrun.applications.siteadmin.models.cost.CostDetail">
+        <id column="cost_detail_no" property="costDetailNo"/>
+        <result column="name" property="name"/>
+        <result column="amount" property="amount"/>
+        <result column="status" property="status"/>
+        <result column="date" property="date"/>
+        <result column="notice" property="notice"/>
+        <result column="approve_date" property="approveDate"/>
+        <result column="approve_user_no" property="approveUserNo"/>
+        <result column="reg_date" property="regDate"/>
+        <result column="reg_user_no" property="regUserNo"/>
+        <result column="mod_date" property="modDate"/>
+        <result column="mod_user_no" property="modUserNo"/>
+    </resultMap>
+
+    <resultMap id="costDetailVO" extends="costDetail" type="com.namowebiz.mugrun.applications.siteadmin.models.cost.CostDetailVO">
+        <result column="reg_user_name" property="regUserName"/>
+        <result column="approveUserName" property="approveUserName"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="com.namowebiz.mugrun.applications.siteadmin.models.cost.CostDetail"
+            useGeneratedKeys="true" keyColumn="cost_detail_no" keyProperty="costDetailNo">
+        <bind name="currentDate" value="@com.namowebiz.mugrun.applications.framework.common.utils.DateUtil@getCurrentDate()"/>
+        insert into cost_detail
+        (
+            name,
+            amount,
+            date,
+        notice,
+            reg_date,
+            reg_user_no
+        )
+
+        VALUES(
+            #{name},
+            #{amount},
+            #{date},
+            #{notice},
+            #{currentDate},
+            #{regUserNo}
+        )
+    </insert>
+
+    <delete id="delete" parameterType="long">
+        DELETE FROM cost_detail
+          WHERE cost_detail_no = #{costDetailNo}
+    </delete>
+
+    <update id="update" parameterType="com.namowebiz.mugrun.applications.siteadmin.models.cost.CostDetail">
+        <bind name="currentDate" value="@com.namowebiz.mugrun.applications.framework.common.utils.DateUtil@getCurrentDate()"/>
+        UPDATE cost_detail
+            SET
+              name = #{name},
+              amount = #{amount},
+              date = #{date},
+              notice = #{notice},
+              mod_user_no = #{modUserNo},
+              mod_date = #{currentDate}
+          WHERE cost_detail_no = #{costDetailNo}
+    </update>
+
+    <update id="approve" parameterType="com.namowebiz.mugrun.applications.siteadmin.models.cost.CostDetail">
+        <bind name="currentDate" value="@com.namowebiz.mugrun.applications.framework.common.utils.DateUtil@getCurrentDate()"/>
+          UPDATE cost_detail
+            SET
+              status = 'A',
+              approve_user_no = #{approveUserNo},
+              mod_user_no = #{modUserNo},
+              approve_date = #{currentDate}
+          WHERE cost_detail_no = #{costDetailNo}
+    </update>
+
+    <select id="list" resultMap="costDetailVO" parameterType="map">
+        SELECT
+            cost.*
+            , (Select name from user_info Where user_no = cost.reg_user_no) as reg_user_name
+            , (Select name from user_info Where user_no = cost.approve_user_no) as approveUserName
+        FROM cost_detail cost
+        <include refid="whereClause"/>
+        ORDER BY reg_date DESC
+        <if test="pageSize != null">
+            LIMIT #{startIndex}, #{pageSize}
+        </if>
+    </select>
+
+    <select id="count" resultType="long" parameterType="map">
+        SELECT
+            COUNT(cost.cost_detail_no)
+        FROM cost_detail cost
+        <include refid="whereClause"/>
+    </select>
+
+
+    <select id="getByPK" resultMap="costDetailVO" parameterType="long">
+        SELECT * FROM cost_detail
+          WHERE cost_detail_no = #{costDetailNo}
+    </select>
+
+    <sql id="whereClause">
+        <where>
+            <if test="status != null">
+                AND cost.status = #{status}
+            </if>
+            <if test="startDate != null">
+                AND cost.date >= DATE(#{startDate})
+            </if>
+            <if test="endDate != null">
+                <![CDATA[ AND cost.date <= DATE(#{endDate}) ]]>
+            </if>
+
+            <if test="searchText != null">
+                AND cost.name LIKE CONCAT('%', #{searchText}, '%')
+            </if>
+        </where>
+    </sql>
+
+</mapper>

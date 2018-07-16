@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.namowebiz.mugrun.applications.siteadmin.dao.customer.LoanDao">
+    <resultMap id="loan" type="com.namowebiz.mugrun.applications.siteadmin.models.customer.Loan">
+        <id column="loan_no" property="loanNo"/>
+        <result column="customer_no" property="customerNo"/>
+        <result column="staff_user_no" property="staffUserNo"/>
+        <result column="duty_staff_no" property="dutyStaffNo"/>
+        <result column="contract_code" property="contractCode"/>
+        <result column="loan_amount" property="loanAmount"/>
+        <result column="loan_period" property="loanPeriod"/>
+        <result column="start_date" property="startDate"/>
+        <result column="end_date" property="endDate"/>
+        <result column="loan_type" property="loanType"/>
+        <result column="loan_pay_type" property="loanPayType"/>
+        <result column="status" property="status"/>
+        <result column="total_late" property="totalLate"/>
+        <result column="finished_date" property="finishedDate"/>
+        <result column="discount_amount" property="discountAmount"/>
+        <result column="extra_amount" property="extraAmount"/>
+        <result column="loan_interest" property="loanInterest"/>
+        <result column="approve_user_no" property="approveUserNo"/>
+        <result column="approve_date" property="approveDate"/>
+        <result column="deny_user_no" property="denyUserNo"/>
+        <result column="deny_date" property="denyDate"/>
+        <result column="finish_user_no" property="finishUserNo"/>
+        <result column="request_user_no" property="requestUserNo"/>
+        <result column="request_date" property="requestDate"/>
+        <result column="finish_date" property="finishDate"/>
+        <result column="finished_note" property="finishedNote"/>
+        <result column="finish_return_amount" property="finishReturnAmount"/>
+        <result column="customer_asset" property="customerAsset"/>
+        <result column="delete_yn" property="deleteYn"/>
+
+        <result column="reg_date" property="regDate"/>
+        <result column="reg_user_no" property="regUserNo"/>
+        <result column="mod_date" property="modDate"/>
+        <result column="mod_user_no" property="modUserNo"/>
+    </resultMap>
+
+    <resultMap id="loanCount" type="com.namowebiz.mugrun.applications.siteadmin.models.customer.LoanCount">
+        <result column="newType" property="newType"/>
+        <result column="count" property="count"/>
+    </resultMap>
+    <resultMap id="loanVO" extends="loan" type="com.namowebiz.mugrun.applications.siteadmin.models.customer.LoanVO">
+        <result column="customer_code" property="customerCode"/>
+        <result column="province_name" property="provinceName"/>
+        <result column="district_name" property="districtName"/>
+        <result column="town_name" property="townName"/>
+        <result column="customerName" property="customerName"/>
+        <result column="staff_user_name" property="staffUserName"/>
+        <result column="duty_user_name" property="dutyUserName"/>
+        <result column="paid" property="paid"/>
+        <result column="delay_days" property="delayDays"/>
+        <result column="delay_amount" property="delayAmount"/>
+        <result column="approve_user_name" property="approveUserName"/>
+        <result column="requestUserName" property="requestUserName"/>
+        <result column="finishUserName" property="finishUserName"/>
+        <result column="totalPaidAmount" property="totalPaidAmount"/>
+        <result column="alreadyPaidSession" property="alreadyPaidSession"/>
+        <result column="currentDebt" property="currentDebt"/>
+        <result column="remainProfit" property="remainProfit"/>
+        <result column="regUserName" property="regUserName"/>
+        <result column="returnCapital" property="returnCapital"/>
+    </resultMap>
+    <select id="getByPK" resultMap="loanVO" parameterType="long">
+        SELECT loan.*
+        FROM loan loan
+        WHERE  loan_no = #{value}
+    </select>
+
+    <select id="getInfoByPK" resultMap="loanVO" parameterType="string">
+        <bind name="currentDate" value="@com.namowebiz.mugrun.applications.framework.common.utils.DateUtil@getCurrentDate()"/>
+        <![CDATA[
+        SELECT L.*
+              , U.name staff_user_name
+              , cust.name customerName
+              , cust.customer_code
+              , (Select name from user_info Where user_no = L.duty_staff_no) as duty_user_name
+              , (Select name from user_info Where user_no = L.approve_user_no) as approve_user_name
+              , (Select name from user_info Where user_no = L.reg_user_no) as regUserName
+              , (Select name from user_info Where user_no = L.finish_user_no) as finishUserName
+              , (Select province_name from province Where province_no = cust.province_no) as province_name
+              , IFNULL((select COUNT(loan_no) from loan_detail where loan_no = L.loan_no and status = 'P'  and confirm_date IS NOT NULL), 0) as alreadyPaidSession
+              , (select IFNULL(SUM(amount), 0)  from loan_detail where loan_no = L.loan_no and status = 'P' and confirm_date IS NOT NULL) as paid
+              , (select SUM(capital)  from loan_detail where loan_no = L.loan_no and confirm_date IS NULL ) as currentDebt
+              , IFNULL((select SUM(profit)  from loan_detail where loan_no = L.loan_no and (status != 'P') ),0) as remainProfit
+              , IFNULL((select COUNT(loan_no)  from loan_detail where loan_no = L.loan_no and status != 'P' and end_date <= DATE(#{currentDate}) and L.status != 'F'), 0) as delay_days
+              , (select IFNULL(SUM(amount), 0)  from loan_detail where loan_no = L.loan_no and status != 'P' and end_date <= DATE(#{currentDate}) and L.status != 'F') as delay_amount
+              , (select SUM(amount) from loan_detail where loan_no = L.loan_no) as totalPaidAmount
+            FROM loan L
+            LEFT OUTER JOIN customer cust ON cust.customer_no = L.customer_no
+            LEFT OUTER JOIN user_info U ON U.user_no = L.staff_user_no
+        WHERE L.loan_no = #{loaNo} AND (L.delete_yn = 0)
+        ]]>
+    </select>
+
+
+
+    <insert id="insert" parameterType="com.namowebiz.mugrun.applications.siteadmin.models.customer.Loan"
+            useGeneratedKeys="true" keyColumn="loan_no" keyProperty="loanNo">
+        insert into loan
+        (
+            customer_no,
+            staff_user_no,
+            duty_staff_no,
+            contract_code,
+            loan_amount,
+            loan_period,
+            start_date,
+            end_date,
+            loan_type,
+            loan_pay_type,
+            loan_interest,
+            status,
+            customer_asset,
+            delete_yn,
+            reg_date,
+            reg_user_no
+        )
+        values
+        (
+            #{customerNo} ,
+            #{staffUserNo} ,
+            #{dutyStaffNo} ,
+            #{contractCode} ,
+            #{loanAmount} ,
+            #{loanPeriod} ,
+            #{startDate} ,
+            #{endDate} ,
+            #{loanType} ,
+            #{loanPayType} ,
+            #{loanInterest} ,
+            #{status} ,
+            #{customerAsset} ,
+            0,
+            #{regDate},
+            #{regUserNo}
+        )
+    </insert>
+
+    <update id="update" parameterType="com.namowebiz.mugrun.applications.siteadmin.models.customer.Loan" >
+        UPDATE loan
+        SET
+            staff_user_no = #{staffUserNo},
+            duty_staff_no = #{dutyStaffNo},
+            loan_amount = #{loanAmount},
+            loan_period = #{loanPeriod},
+            start_date = #{startDate},
+            end_date = #{endDate},
+            status = #{status},
+            loan_type = #{loanType},
+            loan_pay_type = #{loanPayType},
+            loan_interest = #{loanInterest},
+            customer_asset = #{customerAsset},
+            <if test="extraAmount != null">
+                extra_amount = #{extraAmount},
+            </if>
+            <if test="finishDate != null">
+                finish_date = #{finishDate},
+            </if>
+            <if test="requestUserNo != null">
+                request_user_no = #{requestUserNo},
+            </if>
+            <if test="requestDate != null">
+                request_date = #{requestDate},
+            </if>
+            <if test="finishUserNo != null">
+                finish_user_no = #{finishUserNo},
+            </if>
+            <if test="approveDate != null">
+                approve_date = #{approveDate},
+            </if>
+            <if test="approveUserNo != null">
+                approve_user_no = #{approveUserNo},
+            </if>
+            <if test="denyDate != null">
+                deny_date = #{denyDate},
+            </if>
+            <if test="denyUserNo != null">
+                deny_user_no = #{denyUserNo},
+            </if>
+
+            <if test="finishedNote != null">
+                finished_note = #{finishedNote},
+            </if>
+            <if test="finishReturnAmount != null">
+                finish_return_amount = #{finishReturnAmount},
+            </if>
+
+            mod_date = #{modDate},
+            mod_user_no = #{modUserNo}
+        WHERE loan_no = #{loanNo}
+    </update>
+
+    <delete id="delete" parameterType="long">
+        UPDATE loan SET delete_yn = 1  WHERE loan_no = #{loanNo}
+    </delete>
+
+
+    <select id="getByCustomerNo" resultMap="loanVO" parameterType="long">
+        <bind name="currentDate" value="@com.namowebiz.mugrun.applications.framework.common.utils.DateUtil@getCurrentDate()"/>
+        <![CDATA[
+        SELECT L.*
+              , U.name staff_user_name
+              , cust.name customerName
+              , cust.customer_code
+              , (Select name from user_info Where user_no = L.duty_staff_no) as duty_user_name
+              , (Select name from user_info Where user_no = L.request_user_no) as requestUserName
+              , (Select name from user_info Where user_no = L.approve_user_no) as approve_user_name
+              , (Select name from user_info Where user_no = L.finish_user_no) as finishUserName
+              , (Select name from user_info Where user_no = L.reg_user_no) as regUserName
+              , IFNULL((select COUNT(loan_no) from loan_detail where loan_no = L.loan_no and status = 'P' and confirm_date IS NOT NULL), 0) as alreadyPaidSession
+              , (select IFNULL(SUM(amount), 0)  from loan_detail where loan_no = L.loan_no and status = 'P' and confirm_date IS NOT NULL) as paid
+              , (select SUM(capital)  from loan_detail where loan_no = L.loan_no and confirm_date IS NULL) as currentDebt
+              , IFNULL((select COUNT(loan_no)  from loan_detail where loan_no = L.loan_no and status != 'P' and end_date <= DATE(#{currentDate}) and L.status != 'F'), 0) as delay_days
+              , (select IFNULL(SUM(amount), 0)  from loan_detail where loan_no = L.loan_no and status != 'P' and end_date <= DATE(#{currentDate}) and L.status != 'F') as delay_amount
+              , (select SUM(amount) from loan_detail where loan_no = L.loan_no) as totalPaidAmount
+            FROM loan L
+            LEFT OUTER JOIN customer cust ON cust.customer_no = L.customer_no
+            LEFT OUTER JOIN user_info U ON U.user_no = L.staff_user_no
+        WHERE L.customer_no = #{customerNo} AND (L.delete_yn IS NULL OR L.delete_yn = 0)
+        ORDER BY reg_date DESC
+        ]]>
+    </select>
+
+    <select id="list" resultMap="loanVO" parameterType="map">
+        <bind name="currentDate" value="@com.namowebiz.mugrun.applications.framework.common.utils.DateUtil@getCurrentDate()"/>
+        SELECT
+            A.*
+            , (Select name from user_info Where user_no = A.duty_staff_no) as duty_user_name
+            , (Select name from user_info Where user_no = A.finish_user_no) as finishUserName
+            , (Select name from user_info Where user_no = A.request_user_no) as requestUserName
+            , (Select name from town Where town_no = A.town_no) as town_name
+            , (Select name from district Where district_no = A.district_no) as district_name
+            , (Select province_name from province Where province_no = A.province_no) as province_name
+            , IFNULL((select COUNT(loan_no) from loan_detail where loan_no = A.loan_no and status = 'P' and confirm_date IS NOT NULL), 0) as alreadyPaidSession
+            , (select IFNULL(SUM(amount), 0)  from loan_detail where loan_no = A.loan_no and status = 'P' and confirm_date IS NOT NULL) as paid
+            , (select SUM(capital)  from loan_detail where loan_no = A.loan_no and confirm_date IS NULL) as currentDebt
+            , (select IFNULL(SUM(amount), 0)  from loan_detail where loan_no = A.loan_no and confirm_date IS NULL and <![CDATA[ end_date <= DATE(#{currentDate}) ]]> and A.status != 'F') as delay_amount
+            , (select SUM(amount) from loan_detail where loan_no = A.loan_no) as totalPaidAmount
+        FROM (
+            <![CDATA[
+            SELECT * FROM (
+                SELECT L.*
+                      , U.name staff_user_name
+                      , cust.name customerName
+                      , cust.customer_code
+                      , cust.town_no town_no
+                      , cust.district_no
+                      , cust.province_no
+                      , (select COUNT(loan_no) from loan_detail where loan_no = L.loan_no) as totalSession
+                      , IFNULL((select COUNT(loan_no)  from loan_detail where loan_no = L.loan_no and confirm_date IS NULL and end_date <= DATE(#{currentDate}) and L.status != 'F'), 0) as delay_days
+                    FROM loan L
+                    LEFT OUTER JOIN customer cust ON cust.customer_no = L.customer_no
+                    LEFT OUTER JOIN user_info U ON U.user_no = L.staff_user_no
+            ) L
+            ]]>
+            <include refid="whereClause"/>
+            ORDER BY L.reg_date DESC
+            <if test="pageSize != null">
+                LIMIT #{startIndex}, #{pageSize}
+            </if>
+        ) A
+    </select>
+
+    <sql id="whereClause">
+        <where>
+            AND (L.delete_yn IS NULL OR L.delete_yn = 0)
+            <if test="currentMonth != null">
+                AND MONTH(L.reg_date) = MONTH(CURRENT_DATE())
+            </if>
+            <if test="staffUserNo != null">
+                AND L.staff_user_no = #{staffUserNo}
+            </if>
+            <if test="townNo != null">
+                AND L.town_no = #{townNo}
+            </if>
+            <if test="customerNo != null">
+                AND L.customer_no = #{customerNo}
+            </if>
+            <if test="loanPayType != null">
+                AND L.loan_pay_type = #{loanPayType}
+            </if>
+            <if test="customerCode != null">
+                AND L.customer_code LIKE CONCAT('%', #{customerCode}, '%')
+            </if>
+            <if test="excludeFinished == true">
+                AND L.totalSession  > L.alreadyPaidSession
+            </if>
+
+            <if test="delayType != null">
+                <choose>
+                    <when test="delayType == 'delay'">
+                        AND L.delay_days > 0
+                    </when>
+                    <when test="delayType == 'normal'">
+                        AND L.delay_days = 0
+                    </when>
+                </choose>
+            </if>
+            <if test="status != null">
+                <choose>
+                    <when test="status == 'NA'">
+                        AND L.status IN ('N', 'A')
+                    </when>
+                    <otherwise>
+                        AND L.status = #{status}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="searchText != null">
+                AND CONCAT(L.customerName ,L.customer_code, L.contract_code) LIKE CONCAT('%',#{searchText},'%')
+            </if>
+        </where>
+    </sql>
+
+
+    <select id="getPayment" resultMap="loanVO" parameterType="map">
+        <bind name="currentDate" value="@com.namowebiz.mugrun.applications.framework.common.utils.DateUtil@getCurrentDate()"/>
+        SELECT A.*
+            , (Select name from user_info Where user_no = A.duty_staff_no) as duty_user_name
+            , IFNULL((select COUNT(loan_no)  from loan_detail where loan_no = A.loan_no and confirm_date IS NULL and <![CDATA[ end_date <= DATE(#{currentDate})  ]]> and A.status != 'F'), 0) as delay_days
+            , (select SUM(capital) from loan_detail where loan_no = A.loan_no and confirm_date IS NULL) as currentDebt
+
+        FROM (
+            <![CDATA[
+            SELECT * FROM (
+                SELECT L.*
+                      , U.name staff_user_name
+                      , cust.name customerName
+                      , cust.customer_code
+                      , cust.town_no town_no
+                      , (select COUNT(loan_no) from loan_detail where loan_no = L.loan_no) as totalSession
+                      , IFNULL((select COUNT(loan_no) from loan_detail where loan_no = L.loan_no and status = 'P' and confirm_date IS NOT NULL), 0) as alreadyPaidSession
+                    FROM loan L
+                    LEFT OUTER JOIN customer cust ON cust.customer_no = L.customer_no
+                    LEFT OUTER JOIN user_info U ON U.user_no = L.staff_user_no
+
+            ) L
+            ]]>
+            <include refid="whereClause"/>
+            ORDER BY L.reg_date DESC
+            <if test="pageSize != null">
+                LIMIT #{startIndex}, #{pageSize}
+            </if>
+        ) A
+    </select>
+
+
+    <select id="count" resultType="long" parameterType="map">
+        <bind name="currentDate" value="@com.namowebiz.mugrun.applications.framework.common.utils.DateUtil@getCurrentDate()"/>
+        <![CDATA[
+        SELECT COUNT(L.loan_no) FROM (
+            SELECT L.*
+                , cust.name customerName
+                , cust.town_no town_no
+                , cust.customer_code
+                , IFNULL((select COUNT(loan_no) from loan_detail where loan_no = L.loan_no and status = 'P' and confirm_date IS NOT NULL), 0) as alreadyPaidSession
+                , (select COUNT(loan_no) from loan_detail where loan_no = L.loan_no) as totalSession
+                , (Select name from user_info Where user_no = L.duty_staff_no) as duty_user_name
+                , IFNULL((select COUNT(loan_no)  from loan_detail where loan_no = L.loan_no and status = 'D' and L.status != 'F'), 0) as delay_days
+                FROM loan L
+                LEFT OUTER JOIN customer cust ON cust.customer_no = L.customer_no
+                LEFT OUTER JOIN user_info U ON U.user_no = L.staff_user_no
+        ) L
+        ]]>
+        <include refid="whereClause"/>
+    </select>
+
+
+
+    <select id="getCountOfStaff" resultMap="loanCount" parameterType="map">
+        SELECT A.newType, COUNT(A.newType) count FROM
+        (
+            SELECT
+             IF((select count(loan_no) from loan where customer_no = L.customer_no AND delete_yn = 0 AND loan_no != L.loan_no)>0, 'old', 'new') newType
+            FROM loan L WHERE
+            L.staff_user_no = #{userNo} AND L.delete_yn = 0
+            AND DATE_FORMAT(L.approve_date, '%Y-%m') = #{yearMonth}
+        ) A
+        Group By A.newType
+    </select>
+
+
+    <select id="getMaxContractCode" resultType="string" parameterType="string">
+        SELECT Max(contract_code) FROM loan where contract_code like concat(#{value}, '%');
+    </select>
+
+    <update id="updateContractCode" parameterType="com.namowebiz.mugrun.applications.siteadmin.models.customer.Loan">
+        UPDATE loan SET contract_code = #{contractCode} WHERE loan_no = #{loanNo}
+    </update>
+
+    <update id="updateMoneyFlow" parameterType="map">
+        UPDATE money_flow
+        SET title = REPLACE(title, #{contractCode}, #{newContractCode})
+        WHERE title LIKE concat('%', #{contractCode}, '%')
+    </update>
+
+
+</mapper>

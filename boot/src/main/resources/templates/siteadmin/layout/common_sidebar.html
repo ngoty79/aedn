@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<!-- BEGIN SIDEBAR -->
+<div id="container-commonSidebar" class="page-sidebar navbar-collapse collapse ">
+    <!-- BEGIN SIDEBAR MENU -->
+    <ul class="page-sidebar-menu  page-header-fixed " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" style="padding-top: 20px">
+        <li class="sidebar-toggler-wrapper hide">
+            <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+            <div class="sidebar-toggler"></div>
+            <!-- END SIDEBAR TOGGLER BUTTON -->
+        </li>
+        <li class="nav-item commonSidebar-first-depth-menu" th:each="adminMenu : ${session.loginUser.myAdminMenu}">
+            <a th:href="${#strings.isEmpty(adminMenu.menuUrl)}? 'javascript:;' : ${adminMenu.menuUrl}" class="nav-link nav-toggle">
+                <i th:class="${adminMenu.iconClass}"></i>
+                <span class="title" th:text="${adminMenu.menuName}"></span>
+                <span th:classappend="${#lists.isEmpty(adminMenu.childMenus)}? '':'arrow'"></span>
+            </a>
+            <ul class="sub-menu" th:unless="${#lists.isEmpty(adminMenu.childMenus)}">
+                <li class="nav-item commonSidebar-second-depth-menu" th:each="childMenu : ${adminMenu.childMenus}">
+                    <a th:href="${childMenu.menuUrl}" class="nav-link commonSidebar-second-depth-menu-item" th:switch="${childMenu.menuName}">
+                        <span class="title" th:text="${childMenu.menuName}"></span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <!-- END SIDEBAR MENU -->
+    <!-- END SIDEBAR MENU -->
+</div>
+<!-- END SIDEBAR -->
+</body>
+</html>

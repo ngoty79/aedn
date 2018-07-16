@@ -1,0 +1,32 @@
+/*Participate*/
+.modal-applicant-info .modal-dialog {
+    width: 900px;
+}
+.modal-applicant-info .modal-body {
+    padding: 0px;
+}
+.modal-applicant-info .inbox .inbox-body,
+.modal-applicant-info .inbox .inbox-sidebar {
+    border: none;
+}
+.modal-applicant-info .inbox .row {
+    padding-top: 15px;
+}
+.modal-applicant-info .fixed-table-pagination .pagination-detail {
+    display: none;
+}
+.modal-applicant-info .fixed-table-pagination {
+    margin-top: 20px;
+    text-align: center;
+}
+.modal-applicant-info .btn-participate-applyStatus {
+    width: 80px;
+}
+.modal-applicant-info .action-grid-column {
+    font-size: 24px;
+    padding-top: 8px;
+}
+.modal-applicant-info .mg-top-5 {
+    margin-top: 5px;
+}
+/*Awaiter*/

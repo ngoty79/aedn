@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="'mugrun/errors/error_common_layout'">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+
+
+<head>
+    <title>401</title>
+    <link href="/assets/vendors/bootstrap3.dialog/css/bootstrap-dialog.min.css" rel="stylesheet" type="text/css"/>
+    <script src="/assets/templates/admin/global/plugins/jquery.min.js" type="text/javascript"></script>
+    <script src="/assets/templates/admin/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="/assets/vendors/bootstrap3.dialog/js/bootstrap-dialog.min.js" type="text/javascript"></script>
+    <script src="/assets/vendors/lodash/lodash.min.js" type="text/javascript"></script>
+    <script src="/assets/vendors/momentjs/moment-with-locales.min.js" type="text/javascript"></script>
+    <script th:src="'/messages/common/client/messages_' + ${#locale.getLanguage()} + '.js'" type="text/javascript"></script>
+    <script src="/assets/applications/mugrun/scripts/mugrun.js" type="text/javascript"></script>
+    <script src="/assets/applications/mugrun/scripts/error401.js"></script>
+</head>
+<!-- END HEAD -->
+
+<body class="page-500-full-page">
+</body>
+
+</html>

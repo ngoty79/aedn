@@ -1,0 +1,93 @@
+.portlet.light {
+    padding: 0 !important;
+}
+
+.portlet>.portlet-title>.nav-tabs {
+    float: left !important;
+}
+
+#form-member-join-step, #content-verification, #form-member-info, #form-join-complete {
+    padding: 20px 50px !important;
+    border: 1px solid #e7ecf1;
+    border-top: none;
+    margin-bottom: 20px;
+}
+
+.text-align-center {
+    text-align: center;
+}
+
+.text-align-right {
+    text-align: right;
+}
+
+#form-member-join-step .form-body , #form-member-info .form-body , #form-join-complete .form-body {
+    height: 500px;
+}
+
+.portlet.light .portlet-body {
+    padding-top: 0 !important;
+}
+
+.portlet>.portlet-title {
+    margin-bottom: 0 !important;
+}
+
+.input-provision-name {
+    height: 34px;
+    padding: 6px 12px;
+    background-color: #fff;
+    border: 1px solid #c2cad8;
+    margin: 0 20px;
+}
+
+#form-provision-actions {
+    border: 1px solid #e7ecf1;
+    border-bottom: none;
+    border-top: none;
+}
+
+#form-provision-actions .form-body{
+    padding: 10px 25px 0px 12px;
+}
+
+#container-user-agreement .bootstrap-table .fixed-table-container {
+    border-top: none;
+}
+
+.well {
+    background-color: #ffffff !important;
+    border: 1px solid #dae2ea !important;
+}
+
+.the-legend {
+    border-style: none;
+    border-width: 0;
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom: 0;
+}
+
+#form-select-verification legend {
+    width: 102px !important;
+}
+
+#form-select-verification-method legend {
+    width: 120px !important;
+}
+
+#form-select-verification-method .form-body {
+    padding-left: 110px;
+}
+
+.select-method-verification{
+    margin-right: 20px;
+}
+
+.label-complete-padding {
+    padding-left: 20px;
+}
+
+.label-enter-member-info {
+    opacity: 0.3;
+}

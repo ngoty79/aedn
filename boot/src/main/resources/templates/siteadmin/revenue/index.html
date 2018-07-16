@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="'siteadmin/layout/common_layout'">
+<head>
+    <link href="/assets/templates/admin/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/templates/admin/apps/css/inbox.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/vendors/bootstrap.table/1.9.1/bootstrap-table.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/vendors/jquery.loadmask/jquery.loadmask.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<!-- BEGIN CONTENT -->
+<div layout:fragment="page-content" class="page-content-wrapper">
+    <!-- BEGIN CONTENT BODY -->
+    <div class="page-content" id="container-revenue" th:data-revenue-yn="${user.revenueYn}">
+        <div class="inbox">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="inbox-body">
+                        <div class="inbox-content">
+                            <div class="portlet-body">
+                                <div class="row">
+                                    <table class="table table-fixed table-list-header">
+                                        <tbody>
+                                        <tr class="table-header-title">
+                                            <td class="p-left p-right">
+                                                <label class="control-label col-md-2" style="width: 90px;margin-top:10px;">Từ Ngày</label>
+                                                <div  class="col-md-2" style="padding-left: 0px;">
+                                                    <div class="input-group " >
+                                                        <div class="input-group-addon"><i class="fa fa-calendar-check-o text-primary" aria-hidden="true"></i></div>
+                                                        <input id="start-date" name="date" type="text" class="form-control" placeholder="Ngày tháng">
+                                                    </div>
+                                                </div>
+                                                <label class="control-label col-md-2" style="width: 120px;margin-top:10px;">Đến Ngày</label>
+                                                <div  class="col-md-2" >
+                                                    <div class="input-group ">
+                                                        <div class="input-group-addon"><i class="fa fa-calendar-check-o text-primary" aria-hidden="true"></i></div>
+                                                        <input id="end-date" name="date" type="text" class="form-control" placeholder="Ngày tháng">
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr class="table-header-title">
+                                            <td class="p-left p-right">
+                                                <label class="control-label col-md-2" style="width: 90px;margin-top:10px;">Tìm kiếm</label>
+                                                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-6 input-group">
+                                                    <input name="searchText" type="text" class="form-control text-search">
+                                                                <span class="input-group-addon btn-search">
+                                                                    <i class="fa fa-search"></i>
+                                                                </span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="row" style="margin-top: 10px; margin-bottom: 10px; padding-left: 15px; padding-right: 15px;">
+                                        <button type="button" class="btn btn-sm btn-circle btn-outline green btn-delete"><i class="glyphicon glyphicon-remove"></i> Xóa Dữ Liệu</button>
+                                        <button type="button" class="btn btn-sm btn-circle btn-outline green pull-right btn-add"><i class="fa fa-plus"></i> Tạo mới</button>
+                                    </div>
+                                    <table class="table-revenue-detail"></table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal" id="modal-revenue-detail">
+                <div class="modal-dialog modal-md">
+                    <div class="modal-content">
+                        <div class="modal-header bg-green bg-font-green">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h4 class="modal-title" style="text-align: left;">Tạo/Chỉnh Khoản Thu</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form class="form-horizontal">
+                                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                                <input type="hidden" class="form-control" name="revenueDetailNo"/>
+                                <div class="change-password-group">
+                                    <div class="control-group">
+                                        <div class="row form-group">
+                                            <label class="control-label col-md-4">Tiêu đề</label>
+                                            <div class="col-md-8">
+                                                <input type="text" class="form-control" name="name"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <div class="row form-group">
+                                            <label class="control-label col-md-4">Ngày tháng</label>
+                                            <div id="revenue-date" class="col-md-5">
+                                                <div class="input-group ">
+                                                    <div class="input-group-addon"><i class="fa fa-calendar-check-o text-primary" aria-hidden="true"></i></div>
+                                                    <input name="date" type="text" class="form-control" placeholder="Ngày tháng">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <div class="row form-group">
+                                            <label class="control-label col-md-4">Số tiền</label>
+                                            <div class="col-md-5">
+                                                <input class="form-control currency" name="amount"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <div class="row form-group">
+                                            <label class="control-label col-md-4">Ghi chú</label>
+                                            <div class="col-md-8">
+                                                <textarea class="form-control" cols="8" name="notice"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn green" id="btn-save-revenue-detail">Tạo/Chỉnh Sửa</button>
+                            <button type="button" class="btn btn-outline green" data-dismiss="modal" aria-hidden="true">Hủy</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+<script type="text/html" id="tmplSalaryDetail">
+
+</script>
+
+    </div>
+    <!-- END CONTENT BODY -->
+</div>
+<!-- END CONTENT -->
+
+<div style="display: none;" layout:fragment="page-scripts">
+    <script src="/assets/templates/admin/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
+    <script src="/assets/templates/admin/global/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.vi.min.js" type="text/javascript"></script>
+    <script src="/assets/vendors/bootstrap.table/1.9.1/bootstrap-table.min.js" type="text/javascript"></script>
+    <script src="/assets/vendors/bootstrap.table/1.9.1/locale/bootstrap-table-vi-VN.js" type="text/javascript"></script>
+    <script src="/assets/vendors/icheck/icheck.min.js" type="text/javascript"></script>
+    <script src="/assets/vendors/jquery.tmpl/1.4.2/jquery.tmpl.min.js" type="text/javascript"></script>
+    <script src="/assets/applications/siteadmin/scripts/revenue/revenueDetail.js" type="text/javascript"></script>
+</div>
+</body>
+</html>

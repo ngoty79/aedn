@@ -1,0 +1,405 @@
+@charset "UTF-8";
+.post-footer a:link, .post-footer a:visited, .post-footer a:active{color:#fff}
+.monthlyRound .well-lg.monthlyRound select.form-control{
+  display:inline-block;
+  width:200px;
+  border-radius: 0;
+}
+.post-header{
+  border-top:2px solid #93a564;
+}
+.table-responsive .table{
+  border-bottom:1px solid #e5e5e5;
+}
+.post-header .table-responsive table.table .post-header-title td:first-child,
+.post-header .table-responsive table.table .post-info2 td:first-child{
+  text-align:left;
+  padding-left:25px;
+}
+.post-header .table-responsive table.table .post-header-title td{
+  position:relative;
+}
+.post-header .table-responsive table.table .post-header-title span.label{
+  display:inline-block;
+  position:relative;
+  top:-3px;
+}
+.post-header .table-responsive table.table .post-header-title span.loca-info{
+  position:absolute;
+  right:15px;
+  top:35px;
+}
+.post-header .table-responsive table.table .post-info td{
+  padding:25px 10px;
+  border-bottom:1px solid #e5e5e5;;
+}
+.post-header  .post-header-title, .post-header .post-info .info-tit{
+  padding:25px;
+  background:#f2f2f2;
+}
+.post-header  .post-header-title, .post-header .post-info {
+  border-bottom:1px solid #e5e5e5;
+  
+}
+.post-header .table-responsive table.table .post-info td.term{
+  white-space: nowrap;
+  word-break: break-all;
+}
+.post-header .post-info span{
+  display:inline-block;
+  border-right:1px solid #e5e5e5;
+  border-bottom:1px solid #e5e5e5;
+  padding:25px;
+}
+.post-header  .post-header-title span, .post-header  .post-header-title h3{
+  display:inline-block;
+}
+.post-header  .post-header-title h3{
+  font-size: 20px;
+  font-weight:600;
+  margin-left:10px;
+  margin-top:20px;
+  margin-bottom:10px;
+}
+.post-header .table-responsive table.table .post-info2 td{
+  position: relative;
+}
+.post-header .table-responsive table.table .post-info2 span.counting{
+  position:absolute;
+  right:15px;
+  top:10px;
+}
+.post-body{
+  border-bottom:1px solid #e5e5e5;
+  padding:20px 50px;
+}
+.post-body img{
+  margin-top:10px;
+  margin-bottom:10px;
+}
+
+.post-footer{
+  border-bottom:1px solid #e5e5e5;
+  padding:20px 0;
+  clear:both;
+  overflow:hidden;
+}
+@media screen and (max-width: 767px){
+  .post-header .table-responsive table.table{
+    width:100%;
+  }
+  .post-header .table-responsive table.table .post-info {
+    width:100%;
+    overflow:hidden;
+  }
+  .post-header .table-responsive table.table .post-info td{
+    width:50%;
+    float:left;
+    padding:20px 0 !important;
+    border-top:0;
+  }
+   .post-header .table-responsive table.table .post-info td.info-tit{
+    width:30%;
+   }
+   .post-header .table-responsive table.table .post-info td.date, .post-header .table-responsive table.table .post-info td.term, .post-header .table-responsive table.table .post-info td.num{
+    width:70%;
+   }
+   .monthlyRound.list .table-responsive .table tr th,  .monthlyRound.list .table-responsive .table tr td{
+    padding-left:30%;
+  }
+  .table-responsive>.table>tbody>tr>td{white-space: normal;}
+  .post-body img{
+    width:100%;
+  }
+  .post-footer{
+    padding-left:20px;
+    padding-right:20px;
+  }
+
+ .monthlyRound.list table, .monthlyRound.list thead, .monthlyRound.list tbody, .monthlyRound.list th, .monthlyRound.list td, .monthlyRound.list tr {
+    display: block;
+  }
+
+  .monthlyRound.list thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  .monthlyRound.list tr { border: 1px solid #ccc; }
+
+  .monthlyRound.list td {
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 50%;
+  }
+
+  .monthlyRound.list td:before {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 30%;
+    padding-right: 10px;
+    white-space: nowrap;
+    height:100%;
+    line-height:40px;
+    background:#f8f8f8;
+  }
+
+  .monthlyRound.list td:nth-of-type(1):before { content: "번호"; }
+  .monthlyRound.list td:nth-of-type(2):before { content: "진행상태"; }
+  .monthlyRound.list td:nth-of-type(3):before { content: "제목"; }
+  .monthlyRound.list td:nth-of-type(4):before { content: "지역"; }
+  .monthlyRound.list td:nth-of-type(5):before { content: "장소"; }
+  .monthlyRound.list td:nth-of-type(6):before { content: "일시"; }
+  .monthlyRound.list td:nth-of-type(7):before { content: "신청기간"; }
+  .monthlyRound.list td:nth-of-type(8):before { content: "참가현황"; }
+
+}
+
+
+.form-control .post-footer .btn-left{
+  text-align:left;
+  float:left;
+  padding-left:15px;
+} 
+.post-footer .btn-right{
+  text-align:right;
+  float:right;
+  padding-right:15px;
+}
+.label.label-default.bordered{
+  background:#fff;
+  border:1px solid #ccc;
+  color:#545454;
+  font-size:15px;
+}
+.label.label-default.bordered b{
+  color:red;
+}
+
+.post-comments {
+  overflow:hidden;
+  font-size: 14px;
+  font-weight: 400;
+  margin: 6px 10px 3px 0; 
+  width:100%;
+}
+.post-comments .post-comments-title {
+  font-size: 20px; 
+}
+.post-comments .comment-list {
+  margin-bottom: 60px; 
+}
+.post-comments .comment-list .comment-each {
+  margin: 0; 
+}
+.post-comments .comment-list .comment-each > .comment-each:last-child {
+  margin-bottom: 0;
+  margin-top: 0px;
+}
+.post-comments .comment-list .comment-object {
+  height: 50px;
+  width: 50px;
+  border-radius: 50px !important; 
+}
+.post-comments .comment-list .comment-heading > a {
+  color: #9aa5b2;
+  font-weight: 600; 
+}
+.post-comments .comment-list .comment-heading > a:link {
+  color: #5f7c2a;
+  text-decoration: none;
+  font-size:14px;
+}
+.post-comments .comment-list .comment-heading > .c-date {
+  font-size: 14px; 
+}
+.post-comments .comment-each .comment-each i {
+  position: relative;
+  top: 2px; 
+}
+.post-comments .comment-each.input {
+  overflow:hidden;
+  background:#f2f2f2;
+  padding:10px;
+}
+.post-comments .form-group textarea{
+  width:calc(100% - 95px);
+  float:left;
+}
+.post-comments .form-group button{
+  width:75px;
+  margin-left:10px;
+  height:75px;
+  font-size:12px;
+  font-weight:bold;
+  color:#fff;
+}
+.post-comments input{
+  width:20%;margin-left:5%;
+}
+.post-comments input:focus,.post-comments textarea:focus {
+  outline: 0;
+  border: 1px solid #ccc; 
+}
+/*.comment-list  .comment-each{*/
+  /*border-bottom:1px solid #ccc;*/
+/*}*/
+.comment-list  .comment-each:first-child{
+  border-top:2px solid #93a564;
+}
+
+.comment-each > .comment-each{
+  margin:0;
+  padding-top:20px;
+  padding-left:60px;
+  /*border-top:1px solid #ccc;*/
+}
+.comment-each{
+  border-top:1px solid #ccc;
+}
+.comment-each.comment-last{
+  border-bottom:1px solid #ccc;
+}
+.comment-each > .comment-each .clearfix{
+  padding-bottom:10px;
+
+}
+.comment-each > .comment-each.reply{
+  margin-top:0;
+  margin-bottom:0;
+}
+.comment-each .reply-child-comment{
+  padding-left:60px;
+}
+.comment-each h4.comment-heading{padding-top:10px; margin-bottom: 12px;}
+.comment-each .clearfix {
+  text-align:right;
+  padding-bottom:10px; 
+}
+.fa-reply{
+  -ms-transform: rotate(180deg); /* IE 9 */
+  -webkit-transform: rotate(180deg); /* Safari */
+  transform: rotate(180deg);
+}
+
+
+
+
+/*=========================== apply =================================*/
+.monthlyRound h3{
+    font-size: 20px;
+    font-weight: 600;
+    margin-left: 10px;
+}
+.monthlyRound h4{
+  font-size:16px;
+  font-weight: bold;
+  padding:5px 0 10px 35px;
+}
+.monthlyRound h4.icon01{
+  background: url('img/icon_apply01.png') no-repeat ;
+}
+.monthlyRound h4.icon02{
+  background: url('img/icon_apply02.png') no-repeat;
+}
+.apl-input-group{
+  overflow:hidden;
+  padding:20px;
+  border:1px solid #ccc;
+  margin-bottom:40px;
+}
+
+.apply-header-title{
+  background:#f2f2f2;
+  border-top:2px solid #93a564;
+  padding:20px;
+  position:relative;
+  margin-bottom:20px;
+} 
+.apply-header-title  span, .apply-header-title h3{
+          display:inline-block;
+}
+.apply-header-title span.label{
+  position:relative;
+  top:-3px;
+}
+.apply-header-title h3{
+  font-size: 20px;
+  font-weight:600;
+  margin-left:10px;
+}
+.apply-header-title .loca-info{
+  position:absolute;
+  right:15px;
+  top:25px;
+}
+
+.apply-body{
+  padding-left:30px;
+  padding-right:30px;
+}
+.apply-footer{margin-bottom:30px;}
+.text-downcount{
+  font-size: 14px;
+  display: inline-block;
+  float: right;
+}
+.error{
+  border: 1px solid #ff6466;
+}
+label.error{
+  border: 0px!important;
+  color: #ff6466;
+}
+.container-comment-text{
+  white-space: pre;
+  padding:10px 0;
+}
+.background-gray{
+  background-color: #a6a6a6!important;
+}
+
+
+
+@media screen and (max-width: 528px){
+ .page-content-wrapper{padding-left:0 !important;padding-right:0 !important;}
+ .post-header .table-responsive table.table .post-header-title span.loca-info{top:5px;left:25px;font-weight:bold;}
+  .application-member .application-member-list span.txt{
+  font-size:13px;
+  display:block;
+  }
+  .apply-header-title h3{font-size:18px;margin-left:0;margin-top:5px;display:block;}
+  .apply-header-title .loca-info{font-size:13px;top:23px;left:90px;}
+}
+
+/*골프장정보*/
+.container.clubinfo{max-width: none;}
+.clubinfo .row{padding-left:30px;text-align:left;}
+.container.clubinfo h3{border-bottom:1px solid #567623;padding-bottom:15px;margin-bottom:20px;color:#545454;text-align:left;}
+.club_info{width:220px;height:120px; margin-right:15px;display:inline-block;}
+.club_info a  img{border:1px solid #ccc;}
+.align-center{text-align:center;}
+
+
+/*게시판 타이틀 공통 */
+.container.clubinfo .page-header {
+    background: url(./img/header_bg.png) no-repeat right;
+    height:130px;
+    border-bottom:0;
+    margin-bottom:20px;
+    margin-top:20px;
+}
+.container.clubinfo .page-header h1{
+    padding-top:30px;
+    color:#545454;
+    font-weight:bold;
+    font-size:36px;
+}
+@media screen and (max-width: 1200px){
+.container {
+   max-width: none;
+}
+}

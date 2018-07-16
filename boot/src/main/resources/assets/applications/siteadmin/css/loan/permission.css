@@ -1,0 +1,18 @@
+#container-permission-contents{
+
+}
+
+#container-permission-contents label{
+    text-align: left!important;
+}
+#container-permission-contents .form-actions{
+    border-top: 1px solid #eef1f5;
+    text-align: center;
+    padding-top: 20px;
+}
+#container-permission-contents .form-group{
+    /*margin-bottom: 5px;*/
+}
+.menu-row{
+    margin-bottom: 10px;
+}

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="'siteadmin/layout/common_layout'">
+<head>
+    <link href="/assets/templates/admin/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css" />
+    <!--<link href="/assets/templates/admin/apps/css/inbox.min.css" rel="stylesheet" type="text/css" />-->
+    <link href="/assets/vendors/jquery.loadmask/jquery.loadmask.css" rel="stylesheet" type="text/css" />
+    <style>
+        .table-bordered{
+
+        }
+        .table-bordered th{
+            background-color: rgba(227, 227, 227, 0.73);
+            font-size: 14px;
+        }
+        .table-bordered td{
+            padding-left: 30px!important;
+        }
+    </style>
+</head>
+<body>
+
+<!-- BEGIN CONTENT -->
+<div layout:fragment="page-content" class="page-content-wrapper">
+    <!-- BEGIN CONTENT BODY -->
+    <div class="page-content" id="container-report-estimate">
+        <div class="inbox">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="inbox-body">
+                        <div class="inbox-content">
+                            <div class="portlet-body" style="padding-left: 15px;">
+                                <div class="row form-inline form-group" style="margin-top: 20px;">
+                                    <div class="form-group">
+                                        <div class="input-group ">
+                                            <label class="control-label" style="margin: 0 10px 0 0;">Ngày bắt đầu</label>
+                                        </div>
+                                        <div class="input-group " style="margin: 0 10px 0 0;">
+                                            <div class="input-group-addon"><i class="fa fa-calendar-check-o text-primary" aria-hidden="true"></i></div>
+                                            <input id="start-date" name="date" type="text" th:value="${#dates.format(startDate, 'dd/MM/yyyy')}" class="form-control" placeholder="Ngày bắt đầu">
+                                        </div>
+                                        <div class="input-group ">
+                                            <label class="control-label" style="margin: 0 10px 0 0;">Ngày kết thúc</label>
+                                        </div>
+                                        <div class="input-group ">
+                                            <div class="input-group-addon"><i class="fa fa-calendar-check-o text-primary" aria-hidden="true"></i></div>
+                                            <input id="end-date" name="date" type="text" th:value="${#dates.format(endDate, 'dd/MM/yyyy')}" class="form-control" placeholder="Ngày kết thúc">
+                                        </div>
+                                    </div>
+                                    <button type="button" id="btn-search" class="btn green">
+                                        <i class="fa fa-search"></i> Xem lịch sử
+                                    </button>
+                                </div>
+                                <div class="row">
+                                    <label class="control-label bold col-md-6"></label>
+                                </div>
+                                <div class="row div-line"></div>
+                                <div class="row" style="margin-top: 30px;">
+                                    <div class="col-lg-6 col-md-8 col-sm-12">
+                                        <div class="portlet light bordered">
+                                            <div class="portlet-title">
+                                                <div class="caption">
+                                                    <i class="fa fa-database font-red"></i>
+                                                    <span class="caption-subject font-red sbold uppercase">Báo Cáo Doanh Thu & Lợi Nhuận</span>
+                                                </div>
+                                            </div>
+                                            <div class="portlet-body">
+                                                <div class="table-responsive">
+                                                    <table class="table table-bordered">
+                                                        <tbody>
+                                                        <tr>
+                                                            <th class="bold"> I. Doanh Thu Tín Dụng</th>
+                                                            <th> &nbsp;</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <td> 1. Doanh thu tin dụng</td>
+                                                            <td class="text-align-right"> [[${#numbers.formatInteger(loanRevenue.revenue,3, 'COMMA')}]] </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td> 2. Doanh thu tất toán trước hạn</td>
+                                                            <td class="text-align-right" >
+                                                                <th:block th:if="${stopLoanRevenue.revenue > 0}">
+                                                                    [[${#numbers.formatInteger(stopLoanRevenue.revenue, 3, 'COMMA')}]]
+                                                                </th:block>
+                                                                <th:block th:if="${stopLoanRevenue.revenue == 0}">0</th:block>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td> 3. Tổng doanh thu</td>
+                                                            <td class="text-align-right blue bold"> [[${#numbers.formatInteger(stopLoanRevenue.revenue + loanRevenue.revenue,3,'COMMA')}]]</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th class="bold"> II. Lợi Nhuận</th>
+                                                            <th> &nbsp;</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <td> 1. Lợi nhuận tin dụng</td>
+                                                            <td class="text-align-right"> [[${#numbers.formatInteger(loanRevenue.profit,3,'COMMA')}]]</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td> 2. Lợi nhuận tất toán trước hạn</td>
+                                                            <td class="text-align-right">
+                                                                <th:block th:if="${stopLoanRevenue.profit > 0}">
+                                                                    [[${#numbers.formatInteger(stopLoanRevenue.profit,3,'COMMA')}]]
+                                                                </th:block>
+                                                                <th:block th:if="${stopLoanRevenue.profit == 0}">0</th:block>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td> 3. Tổng lợi nhuận</td>
+                                                            <td class="text-align-right blue bold"> [[${#numbers.formatInteger(stopLoanRevenue.profit + loanRevenue.profit,3,'COMMA')}]]</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th class="bold"> III. Các khoản thu khác</th>
+                                                            <th> &nbsp;</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <td> 1. Các khoản thu khác</td>
+                                                            <td class="text-align-right">
+                                                                <th:block th:if="${amountRevenue > 0}">
+                                                                    [[${#numbers.formatInteger(amountRevenue, 3,'COMMA')}]]
+                                                                </th:block>
+                                                                <th:block th:if="${amountRevenue == 0}">0</th:block>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th class="bold"> IV. Phi thí</th>
+                                                            <th> &nbsp;</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <td> 1. Tiền lương</td>
+                                                            <td class="text-align-right">
+                                                                <th:block th:if="${salaryDetail.total > 0}">
+                                                                    [[${#numbers.formatInteger(salaryDetail.total, 3,'COMMA')}]]
+                                                                </th:block>
+                                                                <th:block th:if="${salaryDetail.total == 0}">0</th:block>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td> 2. Chi phí khác</td>
+                                                            <td class="text-align-right">
+                                                                <th:block th:if="${amountCost> 0}">
+                                                                    [[${#numbers.formatInteger(amountCost, 3,'COMMA')}]]
+                                                                </th:block>
+                                                                <th:block th:if="${amountCost == 0}">0</th:block>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td> 3. Tổng chi phí</td>
+                                                            <td class="text-align-right blue bold">
+                                                                [[${#numbers.formatInteger(salaryDetail.total + amountCost,3,'COMMA')}]]
+                                                            </td>
+                                                        </tr>
+
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <!-- END CONTENT BODY -->
+</div>
+<!-- END CONTENT -->
+
+<div style="display: none;" layout:fragment="page-scripts">
+    <script src="/assets/templates/admin/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
+    <script src="/assets/templates/admin/global/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.vi.min.js" type="text/javascript"></script>
+    <script src="/assets/vendors/jquery.tmpl/1.4.2/jquery.tmpl.min.js" type="text/javascript"></script>
+    <script src="/assets/applications/siteadmin/scripts/report/estimate.js" type="text/javascript"></script>
+</div>
+</body>
+</html>

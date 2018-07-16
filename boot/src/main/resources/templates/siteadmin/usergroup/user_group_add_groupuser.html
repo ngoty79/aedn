@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+<body>
+<div id="container-usergroup-add-groupuser">
+    <!--[Start] UserGroup grid-->
+    <div class="inbox-sidebar">
+        <table class="table table-fixed table-list-header">
+            <tbody>
+            <tr class="table-header-title">
+                <td class="p-left p-right">
+                    <label class="col-md-6 pull-left"></label>
+                    <div class="col-md-6">
+                        <button type="button" class="btn btn-outline green pull-right btn-back"><i class="glyphicon glyphicon-arrow-left"></i> Quay lại</button>
+                    </div>
+                </td>
+            </tr>
+            <tr class="table-header-title">
+                <td class="p-left p-right">
+                    <div class="col-lg-1 col-md-2 col-sm-2 col-xs-4 p-right">
+                        <select class="form-control select-option-search" name="optSearch">
+                            <option value="all">Tất cả</option>
+                            <option value="searchName">Theo tên NV</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-6 input-group">
+                        <input name="textSearch" type="text" class="form-control text-search">
+                        <span class="glyphicon glyphicon-remove search-clear hide"></span>
+                        <span class="input-group-addon btn-search">
+                            <i class="fa fa-search"></i>
+                        </span>
+                    </div>
+                </td>
+            </tr>
+            <tr class="table-header-actions">
+                <td class="p-left p-right">
+                    <button type="button" class="btn btn-sm btn-circle btn-outline green btn-select-all"><i class="fa fa-users"></i> Chọn tất cả</button>
+                    <button type="button" class="btn btn-sm btn-circle btn-outline green pull-right btn-add"><i class="fa fa-plus"></i> Thêm NV được chọn vào nhóm</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <table class="table-list-content"></table>
+    </div>
+    <!--[End] UserGroup grid-->
+</div>
+</body>
+</html>

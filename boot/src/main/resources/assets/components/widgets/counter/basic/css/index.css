@@ -1,0 +1,31 @@
+.container-widget-counter{
+    display: inline-block;
+    min-width: 100px;
+    float: right;
+    height: 100%;
+    min-height: 30px!important;
+    background: #2b3540;
+}
+.container-widget-counter > .container-widget-counter-content{
+    display: table;
+    height: 100%;
+    background: transparent;
+}
+.container-widget-counter span{
+    display: table-cell;
+    vertical-align: middle;
+    color: white;
+}
+
+.container-widget-counter span.counter{
+    height: 30px;
+    line-height: 30px;
+    font-family: 'NanumGothic';
+    color: #fff;
+    display: block;
+    padding: 0 10px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+

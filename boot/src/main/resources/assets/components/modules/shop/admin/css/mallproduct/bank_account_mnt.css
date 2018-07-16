@@ -1,0 +1,8 @@
+
+#container-mallproduct-bank-account .fixed-table-pagination .pagination-detail {
+    display: none;
+}
+#container-mallproduct-bank-account .fixed-table-pagination {
+    margin-top: 5px;
+    text-align: center;
+}

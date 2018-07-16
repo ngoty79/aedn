@@ -1,0 +1,136 @@
+@charset "UTF-8";
+@import url(https://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+*{
+	font-family: 'Nanum Gothic', sans-serif;
+}
+
+.right{
+	display:block;
+	float:right;
+}
+.left{
+	display:block;
+	float:left;
+}
+.align-center{
+	text-align:center;
+}
+.align-right{
+	text-align:right;
+}
+.align-left{
+	text-align:left;
+}
+.container table{
+	width:100%;
+}
+.container-attendcheck-wrapper .page-header {
+	background: url(img/header_bg.png) no-repeat right;
+	height:130px;
+	border-bottom:0;
+
+}
+.page-header.attend_chk{
+	background: url(img/header_attend_bg.png) no-repeat right;
+	height:130px;
+	border-bottom:0;
+}
+.page-header.attend_chk h1{padding-top:30px;color:#545454;font-weight:bold;}
+.page-header.calendar{
+	background: url(img/header_calendar_bg.png) no-repeat right;
+	height:130px;
+	border-bottom:0;
+	margin-top:20px;
+	margin-bottom:20px;
+}
+/*.page-header h1{
+	font-weight: 600;
+	padding-top:30px;
+}*/
+.attend_chk .well-lg, .monthlyRound .well-lg{
+	background-color:#f2f2f2;
+	border:0;
+	border-radius: 0;
+}
+.application-member-list h3{
+	font-size:22px;
+	font-weight:bold;
+	color:#5f7c2a;
+}
+.application-member-list h3:before{
+	  font-size: 14px;
+    line-height: 20px;
+    margin-right: 5px;
+    vertical-align: text-bottom;
+}
+
+.btn-primary, .btn-primary.active, .btn-primary.focus, .btn-primary:active, .btn-primary:focus, .btn-primary:hover, .open>.dropdown-toggle.btn-primary{
+	background:#567623;
+	color:#fff;
+	font-weight: bold;
+	border:0;
+}
+.btn-secondary{
+	background:#ff8400;
+	color:#fff;
+	font-weight: bold;
+	border:0;
+
+}
+.table-responsive{
+	border-top:2px solid #93a564;
+	padding-bottom:0;
+	font-size:14px;
+}
+.table-responsive .table{
+	border-bottom:1px solid #b2b2b2;
+}
+.table-responsive .table tr th, .table-responsive .table tr td{
+	padding:13px 0;
+	text-align:center;
+}
+.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover{
+	background:#567623;
+	border:1px solid #567623;
+	border-radius: 2px;
+}
+.pagination>li>a, .pagination>li>span{
+	border-radius: 2px;
+	margin-left:3px;
+	margin-right:3px;	
+	color:#545454;
+	font-size:12px;
+}
+
+.label{
+	padding: 7px 10px;
+  border-radius: 15px;
+  display:inline-block;
+  min-width:60px;
+}
+.label-primary{
+	background:#299dff; 
+}
+.label-secondary{
+	background:#ff8400;
+}
+
+.container-attendcheck-filter {
+	margin-bottom: 30px;
+}
+
+.container-attendcheck-filter select {
+	width: 114px;
+	height: 28px;
+	padding-left: 5px;
+}
+
+.container-attendcheck-filter span {
+	padding-left: 10px;
+}
+
+.symbol-attendcheck-star {
+	color: orange;
+	font-size: 14px;
+}

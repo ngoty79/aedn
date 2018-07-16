@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.namowebiz.mugrun.applications.siteadmin.dao.salary.SalaryMstMapper">
+    <resultMap id="salaryMst" type="com.namowebiz.mugrun.applications.siteadmin.models.salary.SalaryMst">
+        <id column="salary_master_no" property="salaryMasterNo"/>
+        <result column="user_no" property="userNo"/>
+        <result column="salary" property="salary"/>
+        <result column="allowance" property="allowance"/>
+        <result column="insurance" property="insurance"/>
+        <result column="extra_cost" property="extraCost"/>
+        <result column="delete_yn" property="deleteYn"/>
+
+        <result column="reg_date" property="regDate"/>
+        <result column="reg_user_no" property="regUserNo"/>
+        <result column="mod_date" property="modDate"/>
+        <result column="mod_user_no" property="modUserNo"/>
+    </resultMap>
+
+    <resultMap id="salaryMstVO" extends="salaryMst" type="com.namowebiz.mugrun.applications.siteadmin.models.salary.SalaryMstVO">
+        <result column="reg_user_name" property="regUserName"/>
+        <result column="user_name" property="userName"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="com.namowebiz.mugrun.applications.siteadmin.models.salary.SalaryMst">
+        <bind name="currentDate" value="@com.namowebiz.mugrun.applications.framework.common.utils.DateUtil@getCurrentDate()"/>
+        insert into salary_mst(user_no, salary, allowance, insurance, extra_cost, delete_yn, reg_date, reg_user_no)
+                        VALUES(#{userNo}, #{salary}, #{allowance}, #{insurance}, #{extraCost}, 0, #{currentDate}, #{userNo} )
+    </insert>
+
+    <update id="delete" parameterType="long">
+        UPDATE salary_mst
+            SET delete_yn = 1
+          WHERE salary_master_no = #{salaryMasterNo}
+    </update>
+
+    <update id="update" parameterType="com.namowebiz.mugrun.applications.siteadmin.models.salary.SalaryMst">
+        <bind name="currentDate" value="@com.namowebiz.mugrun.applications.framework.common.utils.DateUtil@getCurrentDate()"/>
+        UPDATE salary_mst
+            SET
+              salary = #{salary},
+              allowance = #{allowance},
+              insurance = #{insurance},
+              extra_cost = #{extraCost},
+              delete_yn = #{deleteYn},
+              mod_user_no = #{modUserNo},
+              mod_date = #{currentDate}
+          WHERE salary_master_no = #{salaryMasterNo}
+    </update>
+
+
+    <select id="getAvailableUsers" resultMap="com.namowebiz.mugrun.applications.siteadmin.dao.user.UserMapper.user">
+        Select * from user_info WHERE admin_yn != 1 AND delete_yn = 0 AND user_no not in (
+            select DISTINCT user_no from salary_mst where delete_yn = 0
+        )
+    </select>
+
+    <select id="getAllUsers" resultMap="com.namowebiz.mugrun.applications.siteadmin.dao.user.UserMapper.user">
+        SELECT U.* FROM user_info U
+            INNER JOIN salary_mst salaryMst ON U.user_no = salaryMst.user_no AND salaryMst.delete_yn = 0
+            WHERE U.admin_yn != 1 AND U.delete_yn = 0 AND U.user_status = 'A'
+
+    </select>
+
+
+
+
+    <select id="getByUserNo" resultMap="salaryMstVO" parameterType="long">
+        SELECT
+            S.*
+            , (Select name from user_info Where user_no = S.reg_user_no) as reg_user_name
+            , U.name as user_name
+        FROM salary_mst S
+        LEFT OUTER JOIN user_info U ON U.user_no = S.user_no
+        WHERE S.user_no = #{userNo} AND S.delete_yn != 1
+        LIMIT 0,1
+    </select>
+
+    <select id="list" resultMap="salaryMstVO" parameterType="map">
+        SELECT
+            S.*
+            , (Select name from user_info Where user_no = S.reg_user_no) as reg_user_name
+            , U.name as user_name
+        FROM salary_mst S
+        LEFT OUTER JOIN user_info U ON U.user_no = S.user_no
+        <include refid="whereClause"/>
+        ORDER BY reg_date
+        <if test="pageSize != null">
+            LIMIT #{startIndex}, #{pageSize}
+        </if>
+    </select>
+
+    <select id="count" resultType="long" parameterType="map">
+        SELECT
+            COUNT(S.salary_master_no)
+        FROM salary_mst S
+        LEFT OUTER JOIN user_info U ON U.user_no = S.user_no
+        <include refid="whereClause"/>
+    </select>
+
+
+    <select id="getByPK" resultMap="salaryMstVO" parameterType="long">
+        SELECT S.* FROM salary_mst S
+          WHERE S.salary_master_no = #{salaryMasterNo}
+    </select>
+
+    <sql id="whereClause">
+        <where>
+            S.delete_yn != 1
+            <if test="searchText != null">
+                AND U.name LIKE CONCAT('%', #{searchText}, '%')
+            </if>
+        </where>
+    </sql>
+</mapper>

@@ -1,0 +1,10 @@
+.uploadify-button {
+	border: 1px solid #dfdfdf;
+	color: gray;
+	font: 11px Arial, Helvetica, sans-serif;
+	text-align: center;
+	width: 100%;
+}
+.uploadify:hover .uploadify-button {
+	color: black;
+}

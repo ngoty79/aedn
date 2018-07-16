@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.namowebiz.mugrun.applications.framework.dao.menu.AdminMenuMapper">
+    <resultMap id="menu" type="com.namowebiz.mugrun.applications.framework.models.menu.AdminMenu">
+        <id column="menu_code" property="menuCode"/>
+        <result column="parent_menu_code" property="parentMenuCode"/>
+        <result column="menu_name" property="menuName"/>
+        <result column="description" property="description"/>
+        <result column="menu_url" property="menuUrl"/>
+        <result column="auth_group_data" property="authGroupData"/>
+        <result column="system_type" property="systemType"/>
+        <result column="icon_class" property="iconClass"/>
+        <result column="use_yn" property="useYn"/>
+        <result column="reg_date" property="regDate"/>
+    </resultMap>
+
+    <select id="get" resultMap="menu" parameterType="String">
+        SELECT *
+        FROM admin_menu
+        WHERE menu_code = #{menuCode} AND use_yn = 1
+    </select>
+
+    <select id="getAdminMenusForRole" resultMap="menu" parameterType="String">
+        SELECT *
+        FROM admin_menu
+        <where>
+            use_yn = 1
+            <if test="authGroupCode != null">
+                AND auth_group_data LIKE CONCAT('%',#{authGroupCode},'%')
+            </if>
+        </where>
+        ORDER BY menu_code
+    </select>
+
+    <select id="getChildAdminMenus" resultMap="menu" parameterType="String">
+        SELECT *
+            FROM admin_menu
+            WHERE use_yn = 1 AND parent_menu_code IS NOT NULL
+            ORDER BY menu_code
+    </select>
+
+
+
+
+</mapper>

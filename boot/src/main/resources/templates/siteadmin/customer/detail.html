@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="'siteadmin/layout/common_layout'">
+<head>
+    <link href="/assets/templates/admin/apps/css/inbox.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/templates/admin/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/templates/admin/global/plugins/jstree/dist/themes/default/style.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/templates/admin/global/plugins/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/vendors/bootstrap.table/1.9.1/bootstrap-table.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/vendors/jquery.loadmask/jquery.loadmask.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/vendors/icheck/skins/all.css" rel="stylesheet" type="text/css">
+    <link href="/assets/templates/admin/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" type="text/css">
+    <link href="/assets/applications/siteadmin/css/customer/customer.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<!-- BEGIN CONTENT -->
+<div layout:fragment="page-content" class="page-content-wrapper">
+    <!-- BEGIN CONTENT BODY -->
+    <div class="page-content" id="container-customer-detail">
+        <div class="inbox">
+
+                <div class="portlet box porlet-green">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            Thông tin khách hàng</div>
+                        <div class="tools">
+                            <a href="javascript:;" class="collapse"> </a>
+                        </div>
+                    </div>
+                    <div class="portlet-body" style="display: block; ">
+                        <form class="form-horizontal" id="form-customer-detail">
+                            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                            <input type="hidden" name="customerNo"  th:value="${customer.customerNo}"/>
+                            <div class="row form-group">
+                                <label class="control-label col-md-2 col-sm-4 max-width-140"><span class="required" aria-required="true">* </span> Tên KH</label>
+                                <div class="col-sm-3 col-md-2">
+                                    <input type="text" class="form-control input-sm" name="name" th:value="${customer.name}">
+                                </div>
+                                <label class="control-label col-md-2 col-sm-4 max-width-140"><span class="required" aria-required="true">* </span> Số CMND</label>
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control input-sm letter-spacing-2" name="socialId" th:value="${customer.socialId}" style="letter-spacing: 1.5px;font-weight: bold;">
+                                </div>
+                                <label class="control-label col-md-2 col-sm-4 max-width-140">Ngày cấp:</label>
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control input-sm input-date" name="issueDate" data-inputmask="'alias': 'dd/mm/yyyy'" placeholder="dd/mm/yyyy" th:value="${#dates.format(customer.issueDate, 'dd/MM/yyyy')}">
+                                    <small id="date-issue-invalide-msg" class="help-block" style="display: none;">Nhập ngày không hợp lệ.</small>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <label class="control-label col-md-2 col-sm-4 max-width-140">Nơi Cấp:</label>
+                                <div class="col-sm-3 col-md-2">
+                                    <input type="text" class="form-control input-sm" name="issuePlace" th:value="${customer.issuePlace}">
+                                </div>
+                                <label class="control-label col-md-2 col-sm-4 max-width-140">Số Passport</label>
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control input-sm letter-spacing-2" name="passportNo" th:value="${customer.passportNo}" style="letter-spacing: 1.5px;font-weight: bold;">
+                                </div>
+                            </div>
+
+                            <div class="row form-group">
+                                <label class="control-label col-md-2 col-sm-4 max-width-140">Số điện thoại</label>
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control input-sm" name="phone" th:value="${customer.phone}">
+                                </div>
+                                <label class="control-label col-md-2 col-sm-4 max-width-140">Email</label>
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control input-sm" name="email" th:value="${customer.email}">
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <label class="control-label col-md-2 col-sm-4 max-width-140">Ngày sinh</label>
+                                <div class="col-md-2">
+                                    <input class="form-control form-control-solid input-sm input-date" name="birthday" th:value="${customer.birthday}" data-inputmask="'alias': 'dd/mm/yyyy'" type="text" placeholder="dd/mm/yyyy"/>
+                                    <small id="date-invalide-msg" class="help-block" style="display: none;">Nhập ngày không hợp lệ.</small>
+                                </div>
+                                <label class="control-label col-md-2 col-sm-4 max-width-140"><span class="required" aria-required="true">* </span>Giới tính</label>
+                                <div class="col-md-4">
+                                    <label class="col-md-5 radio-inline">
+                                        <input class="input-sm" type="radio" name="sex" value="M" th:checked="${customer.sex == 'M'}? 'checked'">
+                                        Nam
+                                    </label>
+                                    <label class="col-md-5 radio-inline">
+                                        <input class="input-sm" type="radio" name="sex" value="F" th:checked="${customer.sex == 'F'}? 'checked'">
+                                        Nữ
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <label class="control-label col-md-2 col-sm-4 max-width-140"><span class="required" aria-required="true">* </span> Khu vực</label>
+                                <div class="col-md-2">
+                                    <select class="form-control input-sm" name="provinceNo">
+                                        <option value="1">Kiêng Giang</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <select class="form-control input-sm" name="districtNo">
+                                        <option value="1">Phú Quốc</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <select class="form-control input-sm" name="townNo">
+                                        <option value="">Chọn</option>
+                                        <option th:each="town : ${townList}" th:value="${town.townNo}" th:text="${town.name}" th:selected="${customer.townNo == town.townNo}? 'selected'"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <label class="control-label col-md-2 col-sm-4 max-width-140"><span class="required" aria-required="true">* </span> Nơi thường trú</label>
+                                <div class="col-md-9">
+                                    <input class="form-control input-sm" type="text" name="address" th:value="${customer.address}"/>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <label class="control-label col-md-2 col-sm-4 max-width-140">Nơi tạm trú</label>
+                                <div class="col-md-9">
+                                    <input class="form-control input-sm" type="text" name="subAddress" th:value="${customer.subAddress}"/>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <label class="control-label col-md-2 col-sm-4 max-width-140"><span class="required" aria-required="true">* </span> NV Phụ Trách</label>
+                                <div class="col-sm-3 col-md-2">
+                                    <select class="form-control input-sm" name="staffUserNo">
+                                        <option value="">Chọn</option>
+                                        <option th:each="user : ${userList}" th:value="${user.userNo}" th:text="${user.name}" th:selected="${customer.staffUserNo == user.userNo}? 'selected'"></option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row form-group" style="text-align: center;margin-top: 15px;">
+                                <button type="button" class="btn btn-sm btn-circle btn-outline blue" id="btn-save-town">Chỉnh Sửa</button>
+                                <a href="/admin/customer/index" class="btn btn-sm btn-circle btn-outline blue">
+                                    <i class="fa fa-list"></i>
+                                    Quay lại danh sách
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="caption font-green-sharp" style="padding-bottom: 5px;">
+                        <i class="icon-speech font-green-sharp"></i>
+                        <span class="caption-subject bold uppercase"> Thông tin tín dụng</span>
+                        <span class="caption-helper"></span>
+
+                        <a id="btn-add-credit" style="margin-left: 10px;" class="btn btn-sm btn-circle btn-outline blue btn-add" href="javascript:;">
+                            Tạo Giải Ngân
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-4" style="text-align: right;">
+
+                </div>
+            </div>
+            <div class="row" style="margin-left: 0px; margin-right: 0px;">
+                <div class="tabbable-line" id="container-customer-credits">
+
+                </div>
+            </div>
+            <th:block th:include="siteadmin/customer/popup/popupCredit"></th:block>
+            <th:block th:include="siteadmin/customer/popup/popupPaymentDetail"></th:block>
+            <th:block th:include="siteadmin/customer/popup/popupStopLoan"></th:block>
+            <th:block th:include="siteadmin/customer/popup/popupApproveLoan"></th:block>
+        </div>
+    </div>
+    <!-- END CONTENT BODY -->
+</div>
+<!-- END CONTENT -->
+
+<div style="display: none;" layout:fragment="page-scripts">
+
+    <script src="/assets/templates/admin/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
+    <script src="/assets/templates/admin/global/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.vi.min.js" type="text/javascript"></script>
+    <script src="/assets/vendors/jquery.inputmask/jquery.inputmask.bundle.js" type="text/javascript"></script>
+    <script src="/assets/vendors/bootstrap.table/1.9.1/bootstrap-table.min.js" type="text/javascript"></script>
+    <script src="/assets/vendors/bootstrap.table/1.9.1/locale/bootstrap-table-vi-VN.js" type="text/javascript"></script>
+    <script src="/assets/templates/admin/global/plugins/bootstrap-select/js/bootstrap-select.min.js" type="text/javascript"></script>
+    <script src="/assets/vendors/jquery.tmpl/1.4.2/jquery.tmpl.min.js" type="text/javascript"></script>
+    <script src="/assets/templates/admin/global/plugins/jstree/dist/jstree.min.js" type="text/javascript"></script>
+    <script src="/assets/vendors/icheck/icheck.min.js" type="text/javascript"></script>
+    <script src="/assets/vendors/smarteditor/2.0/js/HuskyEZCreator.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/assets/vendors/jquery.loadmask/jquery.loadmask.min.js" type="text/javascript"></script>
+    <script src="/assets/vendors/jquery-serialize-object/2.5.0/jquery.serialize-object.min.js" type="text/javascript"></script>
+    <script src="/assets/templates/admin/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js" type="text/javascript"></script>
+    <script src="/assets/applications/siteadmin/scripts/customer/detail.js" type="text/javascript"></script>
+</div>
+</body>
+</html>

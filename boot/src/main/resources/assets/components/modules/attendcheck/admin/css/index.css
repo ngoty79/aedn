@@ -1,0 +1,93 @@
+.display-none {
+    display: none !important;
+}
+
+.text-align-left {
+    text-align: left !important;
+}
+
+.reset-padding-left {
+    padding-left: 0 !important;
+}
+
+.margin-bottom-10 {
+    margin-bottom: 10px;
+}
+
+.portlet.light {
+    padding: 0 !important;
+}
+
+.portlet>.portlet-title {
+    margin-bottom: 0 !important;
+}
+
+.portlet.light .portlet-body {
+    padding-top: 0 !important;
+}
+
+#form-attendance-check-setting, #form-attendance-statistics,
+#form-regular-attendance-ranking, #form-top1-ranking{
+    padding: 20px 15px !important;
+    border: 1px solid #e7ecf1;
+    border-top: none;
+    margin-bottom: 20px;
+}
+
+#text-area-greeting {
+    height: 120px;
+}
+
+#end-time-msg {
+    color: #e73d4a;
+}
+
+#form-attendance-statistics .input-append .fa,
+#form-regular-attendance-ranking .input-append .fa,
+#form-top1-ranking .input-append .fa{
+    pointer-events: none;
+    position: absolute;
+    right: 25px;
+    top: 10px;
+}
+
+.icon-tilde {
+    position: absolute;
+    margin-top: 10px;
+    font-size: 20px;
+    margin-left: -5px;
+}
+
+.progress-bar-graph {
+    background-color: #5AB1EF;
+}
+
+#table-statistics-list thead tr th, #table-regular-attendance thead tr th,
+#table-top1-ranking thead tr th{
+    text-align: center;
+}
+
+#table-statistics-list tbody tr, #table-regular-attendance tbody tr,
+#table-top1-ranking tbody tr{
+    border-bottom: 1px solid #e7ecf1;
+}
+
+.progress {
+    margin-bottom: 0px !important;
+}
+
+#form-attendance-statistics .bootstrap-table .fixed-table-container,
+#form-regular-attendance-ranking .bootstrap-table .fixed-table-container,
+#form-top1-ranking .bootstrap-table .fixed-table-container{
+    border: none;
+}
+
+@media (max-width: 768px) {
+
+    .icon-tilde {
+        position: absolute;
+        margin-top: 10px;
+        font-size: 20px;
+        margin-left: 0px;
+    }
+}

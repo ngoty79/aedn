@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.namowebiz.mugrun.applications.siteadmin.dao.permission.MenuPermissionMapper">
+    <resultMap id="menuPermission" type="com.namowebiz.mugrun.applications.siteadmin.models.permission.MenuPermission">
+        <id column="permission_no" property="permissionNo"/>
+        <result column="menu_code" property="menuCode"/>
+        <result column="user_group_no" property="userGroupNo"/>
+        <result column="reg_user_no" property="regUserNo"/>
+        <result column="reg_date" property="regDate"/>
+    </resultMap>
+
+
+
+    <insert id="insert" parameterType="com.namowebiz.mugrun.applications.siteadmin.models.permission.MenuPermission"
+            useGeneratedKeys="true" keyColumn="permission_no" keyProperty="permissionNo">
+        <bind name="currentDate" value="@com.namowebiz.mugrun.applications.framework.common.utils.DateUtil@getCurrentDate()"/>
+        INSERT INTO menu_permission
+                (
+                  menu_code,
+                  user_group_no,
+                  reg_user_no,
+                  reg_date
+                )
+        VALUES
+                (
+                    #{menuCode},
+                    #{userGroupNo},
+                    #{regUserNo},
+                    #{currentDate}
+                )
+    </insert>
+
+    <insert id="insertList" parameterType="map">
+        <bind name="currentDate" value="@com.namowebiz.mugrun.applications.framework.common.utils.DateUtil@getCurrentDate()"/>
+        INSERT INTO men_permission (menu_code, user_group_no, reg_user_no, reg_date)
+        VALUES
+          <foreach collection="userMenuList" item="item" separator=",">
+              (#{item.menuCode}, #{item.userGroupNo}, #{item.regUserNo}, #{currentDate})
+          </foreach>
+    </insert>
+
+
+    <delete id="deleteByUserNo" parameterType="long">
+        DELETE FROM men_permission WHERE user_group_no = #{userGroupNo}
+    </delete>
+
+
+</mapper>

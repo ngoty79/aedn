@@ -1,0 +1,10 @@
+#container-mallproduct-mall .input-size-small {
+    float: left;
+    max-width : 60px;
+    margin-right: 5px;
+}
+
+#container-mallproduct-mall .input-size-medium  {
+    max-width: 100px;
+    float: left;
+}

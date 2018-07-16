@@ -1,0 +1,181 @@
+/*common*/
+.custom-border-left {
+    border-left: 1px solid #eee;
+}
+.custom-border-right {
+    border-right: 1px solid #eee;
+}
+.custom-border-bottom {
+    border-bottom: 1px solid #eee;
+}
+.custom-border-top {
+    border-top: 1px solid #eee;
+}
+.custom-border {
+    border: 1px solid #eee;
+}
+.custom-border-untop {
+    border-left: 1px solid #eee;
+    border-right: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+}
+.well {
+    background-color: #ffffff !important;
+    border: 1px solid #dae2ea !important;
+    border-radius: 0px;
+    min-height: 480px;
+}
+.the-legend {
+    border: medium none;
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom: 0;
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 96px;
+}
+/*index*/
+#container-admin-calendar .inbox .inbox-body {
+    padding: 0px;
+}
+
+#container-admin-calendar .inbox .inbox-body .portlet.light {
+    padding: 5px 15px 15px;
+}
+
+#container-admin-calendar .inbox .inbox-body .portlet > .portlet-title {
+    margin-bottom: 0px;
+    border-bottom: none;
+}
+
+#container-admin-calendar .inbox .inbox-body .portlet.light .portlet-body {
+    padding: 0px 15px 15px;
+    border: 1px solid #eee;
+}
+
+/*category management*/
+.container-categoryMnt-categoryList {
+    margin: 30px 7px 0px 30px;
+}
+
+#btn-categoryMnt-addCategory {
+    font-size: 13px;
+}
+
+.container-categoryMnt-categoryList .row {
+    padding: 10px;
+}
+.container-categoryMnt-categoryInfo {
+    margin: 25px 15px 30px 0;
+}
+.container-categoryMnt-categoryList .bootstrap-table .table,
+.container-categoryMnt-categoryList .fixed-table-container
+{
+    border: none;
+}
+
+.container-categoryMnt-categoryList .section-categoryMnt-listCategory {
+    padding: 0px;
+}
+
+.section-categoryMnt-listCategory .bootstrap-table .table:not(.table-condensed) {
+    padding: 0px !important;
+}
+.section-categoryMnt-listCategory .bootstrap-table .table:not(.table-condensed) > tbody > tr > td {
+    padding: 8px 10px !important;
+}
+
+.container-categoryMnt-categoryInfo .form-body {
+    padding-top: 15px;
+}
+
+.container-categoryMnt-categoryInfo .fileinput {
+    width: 100%;
+}
+
+.container-categoryMnt-categoryInfo .file-name-clear {
+    position: relative;
+    margin-left: -28px;
+    z-index: 1001;
+    padding-top: 10px;
+    cursor: pointer;
+    border: none;
+}
+
+/*schedule management*/
+.container-calendar-scheduleManagement .inbox-sidebar {
+    border: none;
+    padding: 0px;
+}
+
+.container-calendar-scheduleManagement .table-list-header {
+    margin-bottom: 3px;
+}
+
+.container-calendar-scheduleManagement .table-list-header tbody tr .form-group {
+    padding: 30px 0 8px;
+}
+
+.container-calendar-scheduleManagement .table-list-header .group-option-search {
+    padding-right: 5px;
+}
+
+.container-calendar-scheduleManagement .table-list-header .search-clear {
+    position: relative;
+    margin-left: -18px;
+    z-index: 1001;
+    padding-top: 10px;
+    cursor: pointer;
+}
+
+.container-calendar-scheduleManagement .table-list-header .btn-search {
+    cursor: pointer;
+}
+
+.container-calendar-scheduleManagement .fixed-table-pagination .pagination-detail {
+    display: none;
+}
+
+.container-calendar-scheduleManagement .fixed-table-pagination {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.modal-calendar-registSchedule .modal-dialog.modal-dialog .modal-content {
+    width: 610px;
+}
+
+.modal-calendar-registSchedule .form-horizontal .control-label {
+    text-align: left;
+}
+
+.modal-calendar-registSchedule .schedule-date-group .control-label {
+    padding-left: 0px;
+    width: 60px;
+}
+
+.modal-calendar-registSchedule .input-append {
+    position: relative;
+    padding-left: 0px;
+    padding-right: 30px;
+}
+
+.modal-calendar-registSchedule .input-append .fa {
+    pointer-events: none;
+    position: absolute;
+    right: 37px;
+    top: 10px;
+}
+
+.modal-calendar-registSchedule .input-append input {
+    padding-right: 30px;
+}
+
+.label-scheduleMnt-categories {
+    margin-top: 5px;
+}
+
+.container-calendar-scheduleManagement .table-list-content .btn-edit {
+    margin-right: 7px
+;
+}

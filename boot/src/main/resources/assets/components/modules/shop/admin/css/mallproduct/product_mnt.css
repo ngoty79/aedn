@@ -1,0 +1,142 @@
+/*[start] product list*/
+#container-mallproduct-product .portlet.light {
+    padding: 12px 0 0;
+}
+#container-mallproduct-productgrid .portlet.light.bordered.portlet-productlist {
+    padding-bottom: 10px;
+}
+#container-mallproduct-categoryTree .portlet.light .portlet-body {
+    padding: 5px 5px 10px;
+    min-height: 500px;
+    overflow: auto;
+}
+#container-mallproduct-product .portlet-bottom {
+    width: 100%;
+    background-color: #f5f5f5;
+    padding: 10px;
+}
+
+#container-mallproduct-productgrid .portlet.light .portlet-body {
+    min-height: 554px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+#container-mallproduct-productgrid .fixed-table-pagination .pagination-detail {
+    display: none;
+}
+#container-mallproduct-productgrid .fixed-table-pagination {
+    margin-top: 5px;
+    text-align: center;
+}
+#container-mallproduct-product .search-clear {
+    position: relative;
+    margin-left: -28px;
+    z-index: 1001;
+    padding-top: 10px;
+    cursor: pointer;
+    border: none;
+}
+#container-mallproduct-product .btn-search, .btn-open {
+    cursor: pointer;
+}
+/*[End] product list*/
+
+/*[Start] Product editor*/
+#modal-mallproduct-productEditor .modal-dialog {
+    min-width: 800px;
+}
+#modal-mallproduct-productEditor .search-clear {
+    border: 1px solid #ccc;
+    border-left: 0px;
+}
+#form-mallproduct-productEditor .table > tbody {
+    padding-left: 10px;
+}
+#form-mallproduct-productEditor .table > tbody > tr > td {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+#form-mallproduct-productEditor .table > tbody > tr > td:first-child {
+    padding-left: 20px;
+}
+#form-mallproduct-productEditor .form-group .control-label {
+    text-align: left;
+}
+.modal-mallproduct-productEditor .portlet.light.portlet-productEditor-categoryTree {
+    padding: 0px;
+}
+#container-mallproduct-product .modal-mallproduct-productEditor .portlet.light.portlet-productEditor-categoryTree .portlet-body {
+    overflow: hidden;
+    padding-top: 0px;
+    min-height: 171px !important;
+    max-height: 171px !important;
+}
+.modal-mallproduct-productEditor .portlet.light.portlet-productEditor-mainImage .portlet-body {
+    height: 144px;
+}
+.modal-mallproduct-productEditor .portlet.light.portlet-productEditor-mainImage {
+    margin-bottom: 5px;
+}
+.modal-mallproduct-productEditor .form-horizontal .radio {
+    padding-top: 2px;
+}
+.modal-mallproduct-productEditor .fileinput .uneditable-input {
+    min-width: 149px;
+    width: 149px;
+}
+.modal-mallproduct-productEditor .fileinput .fileinput-filename {
+    width: 90%;
+}
+.modal-mallproduct-productEditor .jstree-default .jstree-wholerow-clicked:not(.jstree-wholerow-hovered) {
+    background: none;
+}
+.modal-mallproduct-productEditor .number-producteditor-minBuyCount {
+    margin-right: 20px;
+}
+/*[End] Product editor*/
+
+/*[Start] Product options*/
+#container-mallproduct-product .portlet.light.portlet-productEditor-productOptions .portlet-body {
+    min-height: 150px;
+    max-height: 150px;
+    padding: 0px;
+}
+#container-mallproduct-product .portlet.light.portlet-productEditor-productOptions .portlet-title {
+    min-height: 40px;
+    padding: 10px;
+    margin-bottom: 0px;
+}
+#form-mallproduct-productEditor .portlet-productEditor-productOptions .portlet-title a {
+    color: #32c5d2;
+    text-decoration: none;
+}
+#container-mallproduct-product .table-productEditorOptions-header th:first-child,
+#form-mallproduct-productEditor .portlet-productEditor-productOptions .table > tbody > tr > td:first-child {
+    text-align: center;
+    padding-left: 5px;
+}
+#form-mallproduct-productEditor .portlet-productEditor-productOptions .table > tbody > tr > td {
+    height: 37px;
+}
+#form-mallproduct-productEditor .portlet-productEditor-productOptions .optionPrice {
+    text-align: right;
+}
+#form-mallproduct-productEditor .portlet-productEditor-productOptions th.optionPrice {
+    padding-right: 20px;
+}
+#form-mallproduct-productEditor .portlet-productEditor-productOptions td.checkboxProductOption input {
+    margin-left: 5px;
+}
+#container-productEditor-productOptions a[disabled="disabled"] {
+    pointer-events: none;
+}
+/*[End] Product options*/
+
+/*[Start] Upload product dialog*/
+#modal-productmnt-uploadproduct .modal-dialog {
+    max-width: 450px;
+}
+#modal-productmnt-uploadproduct .fileinput-filename {
+    max-width: 178px;
+}
+/*[End] Upload product dialog*/

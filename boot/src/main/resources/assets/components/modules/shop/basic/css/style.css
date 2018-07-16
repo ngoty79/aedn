@@ -1,0 +1,21 @@
+/* login */
+#login{border-top:2px solid #8f8f8f;margin-top:30px; background:#f2f2f2; border-bottom:1px solid #8f8f8f; *zoom:1}
+#login:after{content:''; display:block; clear:both}
+#login .login_member{float:left;padding:40px 50px; background:#fff;  position:relative; padding-right:109px}
+#login .login_member li{position:relative;padding-left:70px; margin-bottom:7px}
+#login .login_member li label{position:absolute; left:0; top:4px}
+#login .login_member li .input_txt{width:160px; height:17px}
+#login .login_member li.btn{padding-top:15px}
+#login .login_member .btnLogin{position:absolute; left:295px; top:40px}
+#login .login_guest{float:left;padding:40px 50px; position:relative}
+#login .login_guest h2{margin-bottom:10px}
+#login .login_guest .ms_buy{margin-bottom:30px; line-height:1.4em}
+#login .login_guest .ms_inqury{margin-bottom:30px; font-size:11px; line-height:1.4em; color:#999999}
+#login .login_guest li{position:relative;padding-left:70px; margin-bottom:7px}
+#login .login_guest li label{position:absolute; left:0; top:4px}
+#login .login_guest li .input_txt{width:130px; height:17px}
+#login .login_guest .btnLogin{position:absolute; right:-10px; top:106px}
+#login.b2 .login_member{padding:20px 70px 20px 20px}
+#login.b2 .login_member h2{margin-bottom:25px}
+#login.b2 .login_member .btnLogin{top:60px; left:265px}
+#login.b2 .login_guest{padding:20px 25px}

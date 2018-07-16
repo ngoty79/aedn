@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="'siteadmin/layout/common_layout'">
+<head>
+    <link href="/assets/templates/admin/apps/css/inbox.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/templates/admin/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/templates/admin/global/plugins/jstree/dist/themes/default/style.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/templates/admin/global/plugins/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/vendors/bootstrap.table/1.9.1/bootstrap-table.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/vendors/jquery.loadmask/jquery.loadmask.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/vendors/icheck/skins/all.css" rel="stylesheet" type="text/css">
+    <link href="/assets/templates/admin/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" type="text/css">
+    <link href="/assets/applications/siteadmin/css/loan/index.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<!-- BEGIN CONTENT -->
+<div layout:fragment="page-content" class="page-content-wrapper">
+    <!-- BEGIN CONTENT BODY -->
+    <div class="page-content" id="container-loan">
+        <div class="inbox">
+            <div class="row">
+                <div class="col-md-12" id="container-userIndex-contents"
+                     th:data-approve-yn="${user.approve}" th:data-finish-yn="${user.finish}">
+                    <div class="inbox-body" id="container-userIndex-info">
+                        <div class="inbox-content">
+                            <form id="form-loan-search">
+                                <div class="row form-group">
+                                    <label class="control-label col-lg-2 col-md-2 col-sm-3 " >Khu vực</label>
+                                    <div class="row col-lg-2 col-md-3 col-sm-3">
+                                        <select class="form-control" name="townNo">
+                                            <option value="">Tất cả</option>
+                                            <option th:each="town : ${townList}" th:value="${town.townNo}" th:text="${town.name}"></option>
+                                        </select>
+                                    </div>
+                                    <label class="control-label col-lg-offset-1 col-md-offset-1 col-lg-2 col-md-2 col-sm-3 ">Phụ trách</label>
+                                    <div class="row col-lg-2 col-md-3 col-sm-3 ">
+                                        <select class="form-control" name="staffUserNo">
+                                            <option value="">Tất cả</option>
+                                            <option th:each="user : ${userList}" th:value="${user.userNo}" th:text="${user.name}"></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <label class="control-label col-lg-2 col-md-2 col-sm-3">Quá hạn</label>
+                                    <div class="row col-lg-2 col-md-3 col-sm-3">
+                                        <select class="form-control" name="delayType">
+                                            <option value="">Tất cả</option>
+                                            <option value="delay">Nợ quá hạng</option>
+                                            <option value="normal">Không có nợ quá hạng</option>
+                                        </select>
+                                    </div>
+                                    <label class="control-label col-lg-offset-1 col-md-offset-1 col-lg-2 col-md-2 col-sm-3">Trạng thái HĐ</label>
+                                    <div class="row col-lg-2 col-md-3 col-sm-3">
+                                        <select class="form-control" name="status">
+                                            <option value="">Tất cả</option>
+                                            <option value="NA" selected="selected">Đợi duyệt & đã duyệt</option>
+                                            <option value="N">HĐ đợi duyệt</option>
+                                            <option value="A">Đã duyệt</option>
+                                            <option value="R">Đang Trình Tất Toán</option>
+                                            <option value="F">Đã tất toán</option>
+                                            <option value="C">Bị Từ Chối</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <label class="control-label col-lg-2 col-md-2 col-sm-3">Tìm kiếm</label>
+                                    <div class="col-lg-3 col-md-4 col-sm-5 input-group">
+                                        <input name="searchText" type="text" class="form-control text-search">
+                                        <span class="input-group-addon btn-search">
+                                            <i class="fa fa-search"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </form>
+                            <table class="table-loan-list"></table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <th:block th:include="siteadmin/customer/popup/popupPaymentDetail"></th:block>
+        <th:block th:include="siteadmin/customer/popup/popupStopLoan"></th:block>
+        <th:block th:include="siteadmin/customer/popup/popupApproveLoan"></th:block>
+        <th:block th:include="siteadmin/customer/popup/popupLoanDetail"></th:block>
+
+
+    </div>
+    <!-- END CONTENT BODY -->
+</div>
+<!-- END CONTENT -->
+
+<div style="display: none;" layout:fragment="page-scripts">
+    <script src="/assets/vendors/jquery.inputmask/jquery.inputmask.bundle.js" type="text/javascript"></script>
+    <script src="/assets/templates/admin/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
+    <script src="/assets/templates/admin/global/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.vi.min.js" type="text/javascript"></script>
+    <script src="/assets/vendors/bootstrap.table/1.9.1/bootstrap-table.min.js" type="text/javascript"></script>
+    <script src="/assets/vendors/bootstrap.table/1.9.1/locale/bootstrap-table-vi-VN.js" type="text/javascript"></script>
+    <script src="/assets/templates/admin/global/plugins/bootstrap-select/js/bootstrap-select.min.js" type="text/javascript"></script>
+    <script src="/assets/vendors/jquery.tmpl/1.4.2/jquery.tmpl.min.js" type="text/javascript"></script>
+    <script src="/assets/templates/admin/global/plugins/jstree/dist/jstree.min.js" type="text/javascript"></script>
+    <script src="/assets/vendors/icheck/icheck.min.js" type="text/javascript"></script>
+    <script src="/assets/vendors/smarteditor/2.0/js/HuskyEZCreator.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/assets/vendors/jquery.loadmask/jquery.loadmask.min.js" type="text/javascript"></script>
+    <script src="/assets/vendors/jquery-serialize-object/2.5.0/jquery.serialize-object.min.js" type="text/javascript"></script>
+    <script src="/assets/templates/admin/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js" type="text/javascript"></script>
+    <script src="/assets/templates/admin/global/plugins/counterup/jquery.waypoints.min.js" type="text/javascript"></script>
+    <script src="/assets/templates/admin/global/plugins/counterup/jquery.counterup.js" type="text/javascript"></script>
+    <script src="/assets/applications/siteadmin/scripts/loan/loan.js" type="text/javascript"></script>
+</div>
+</body>
+</html>

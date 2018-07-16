@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="'siteadmin/layout/common_layout'">
+<head>
+    <link href="/assets/templates/admin/apps/css/inbox.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/templates/admin/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/templates/admin/global/plugins/jstree/dist/themes/default/style.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/templates/admin/global/plugins/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/vendors/bootstrap.table/1.9.1/bootstrap-table.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/vendors/jquery.loadmask/jquery.loadmask.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/vendors/icheck/skins/all.css" rel="stylesheet" type="text/css">
+    <link href="/assets/templates/admin/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" type="text/css">
+    <link href="/assets/applications/siteadmin/css/customer/customer.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<!-- BEGIN CONTENT -->
+<div layout:fragment="page-content" class="page-content-wrapper">
+    <!-- BEGIN CONTENT BODY -->
+    <div class="page-content" id="container-customer">
+        <div class="inbox">
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="dashboard-stat2 ">
+                        <div class="display">
+                            <div class="number">
+                                <h3 class="font-green-sharp">
+                                    <span data-counter="counterup" th:data-value="${summary.totalCustomer}">0</span>
+                                </h3>
+                                <small>Tổng Khách Hàng</small>
+                            </div>
+                            <div class="icon">
+                                <i class="icon-user"></i>
+                            </div>
+                        </div>
+                        <div class="progress-info">
+                            <div class="progress">
+                                <span style="width: 100%;" class="progress-bar progress-bar-success green-sharp">
+                                    <span class="sr-only"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="dashboard-stat2 ">
+                        <div class="display">
+                            <div class="number">
+                                <h3 class="font-purple-soft">
+                                    <span data-counter="counterup" th:data-value="${summary.totalNewCustomer}">0</span>
+                                </h3>
+                                <small>Khách Hàng Mới</small>
+                            </div>
+                            <div class="icon">
+                                <i class="icon-user"></i>
+                            </div>
+                        </div>
+                        <div class="progress-info">
+                            <div class="progress">
+                                <span style="width: 100%;" class="progress-bar progress-bar-success purple-soft">
+                                    <span class="sr-only"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="dashboard-stat2 ">
+                        <div class="display">
+                            <div class="number">
+                                <h3 class="font-red-haze blue" style="color:#3598dc!important;">
+                                    <span data-counter="counterup" th:data-value="${summary.totalApproveCustomer}">0</span>
+                                </h3>
+                                <small>Khách Hàng Đang Vay</small>
+                            </div>
+                            <div class="icon">
+                                <i class="icon-user"></i>
+                            </div>
+                        </div>
+                        <div class="progress-info">
+                            <div class="progress">
+                                <span style="width: 100%;" class="progress-bar progress-bar-success blue">
+                                    <span class="sr-only"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="dashboard-stat2 ">
+                        <div class="display">
+                            <div class="number">
+                                <h3 class="font-red-haze">
+                                    <span data-counter="counterup" th:data-value="${summary.totalFinishedCustomer}">0</span>
+                                </h3>
+                                <small>Khách Hàng Đã Tất Toán</small>
+                            </div>
+                            <div class="icon">
+                                <i class="icon-user"></i>
+                            </div>
+                        </div>
+                        <div class="progress-info">
+                            <div class="progress">
+                                <span style="width: 100%;" class="progress-bar progress-bar-success red-haze">
+                                    <span class="sr-only"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="row">
+                <div class="col-md-12" id="container-userIndex-contents">
+                    <div class="inbox-body" id="container-userIndex-info">
+                        <div class="inbox-content">
+                            <form id="form-customer-search">
+                            <div class="row form-group">
+                                <label class="control-label col-lg-1 col-md-2 col-sm-3 col-xs-5" >Khu vực</label>
+                                <div class="row col-lg-2 col-md-2 col-sm-3 col-xs-7">
+                                    <select class="form-control" name="townNo">
+                                        <option value="">Chọn</option>
+                                        <option th:each="town : ${townList}" th:value="${town.townNo}" th:text="${town.name}"></option>
+                                    </select>
+                                </div>
+                                <label class="control-label col-lg-1 col-md-2 col-sm-3 col-xs-5">Phụ trách</label>
+                                <div class="row col-lg-2 col-md-2 col-sm-3 col-xs-7">
+                                    <select class="form-control" name="staffUserNo">
+                                        <option value="">Chọn</option>
+                                        <option th:each="user : ${userList}" th:value="${user.userNo}" th:text="${user.name}"></option>
+                                    </select>
+                                </div>
+                                <label class="control-label col-lg-1 col-md-2 col-sm-3 col-xs-5">Trạng Thái</label>
+                                <div class="row col-lg-2 col-md-2 col-sm-3 col-xs-7">
+                                    <select class="form-control" name="loanStatus">
+                                        <option value="">Tất cả</option>
+                                        <option value="N">Khách hàng mới</option>
+                                        <option value="A">Đang vay</option>
+                                        <option value="F">Đã tất toán</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <label class="control-label col-md-1 col-sm-2" >Tìm kiếm</label>
+                                <div class="col-lg-9 col-md-9 form-inline row">
+                                    <div class="form-group">
+                                        <select class="form-control" name="searchType">
+                                            <option value="">Tìm tất cả</option>
+                                            <option value="name">Tên khách hàng</option>
+                                            <option value="phone">Số điện thoại</option>
+                                            <option value="socialId">Số CMND</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <input name="searchText" type="text" class="form-control text-search">
+                                            <span class="input-group-addon btn-search">
+                                                <i class="fa fa-search"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </form>
+                            <div class="form-group">
+                                <button th:if="${user.adminYn == true}" type="button" class="btn btn-sm btn-circle btn-outline green btn-delete"><i class="glyphicon glyphicon-remove"></i> Xóa Dữ Liệu</button>
+                                <button type="button" class="btn btn-sm btn-circle btn-outline green pull-right btn-add" style="margin-bottom: 10px;"><i class="fa fa-plus"></i> Tạo mới</button>
+                            </div>
+
+                            <table class="table-customer-list"></table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <th:block th:include="siteadmin/customer/popup/popupCustomer"></th:block>
+        <th:block th:include="siteadmin/customer/popup/popupCustomerLoan"></th:block>
+
+
+    </div>
+    <!-- END CONTENT BODY -->
+</div>
+<!-- END CONTENT -->
+
+<div style="display: none;" layout:fragment="page-scripts">
+    <script src="/assets/templates/admin/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
+    <script src="/assets/templates/admin/global/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.vi.min.js" type="text/javascript"></script>
+    <script src="/assets/vendors/bootstrap.table/1.9.1/bootstrap-table.min.js" type="text/javascript"></script>
+    <script src="/assets/vendors/bootstrap.table/1.9.1/locale/bootstrap-table-vi-VN.js" type="text/javascript"></script>
+    <script src="/assets/templates/admin/global/plugins/bootstrap-select/js/bootstrap-select.min.js" type="text/javascript"></script>
+    <script src="/assets/vendors/jquery.tmpl/1.4.2/jquery.tmpl.min.js" type="text/javascript"></script>
+    <script src="/assets/templates/admin/global/plugins/jstree/dist/jstree.min.js" type="text/javascript"></script>
+    <script src="/assets/vendors/icheck/icheck.min.js" type="text/javascript"></script>
+    <script src="/assets/vendors/smarteditor/2.0/js/HuskyEZCreator.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/assets/vendors/jquery.loadmask/jquery.loadmask.min.js" type="text/javascript"></script>
+    <script src="/assets/vendors/jquery-serialize-object/2.5.0/jquery.serialize-object.min.js" type="text/javascript"></script>
+    <script src="/assets/templates/admin/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js" type="text/javascript"></script>
+    <script src="/assets/templates/admin/global/plugins/counterup/jquery.waypoints.min.js" type="text/javascript"></script>
+    <script src="/assets/templates/admin/global/plugins/counterup/jquery.counterup.js" type="text/javascript"></script>
+    <script src="/assets/applications/siteadmin/scripts/customer/customer.js" type="text/javascript"></script>
+</div>
+</body>
+</html>

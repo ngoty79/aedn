@@ -1,0 +1,189 @@
+#container-findId-rightPanel .inbox-body {
+    padding: 20px 20px 0 20px !important;
+}
+
+.content {
+    padding-left: 25px;
+}
+
+.inbox-sidebar {
+    padding: 10px 0 0 0 !important;
+    border-bottom: none !important;
+}
+
+.table-fixed {
+    table-layout: fixed;
+    margin-bottom: 0px;
+}
+
+.border-bottom-user-list {
+    border-bottom: 1px solid #ddd;
+}
+
+#text-user-list {
+    color: #666;
+    font-weight: bold;
+}
+
+.pointer-click-icon {
+    cursor: pointer;
+}
+
+.inbox-sidebar .bootstrap-table .fixed-table-container .fixed-table-pagination .pull-left.pagination-detail {
+    display: none !important;
+}
+
+.inbox-sidebar .bootstrap-table .fixed-table-container .fixed-table-pagination .pull-right.pagination {
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+.inbox-sidebar .bootstrap-table .fixed-table-container .fixed-table-pagination {
+    display: flex !important;
+    border: 1px solid #e7ecf1;
+    border-top: none;
+}
+
+#table-list-module tbody tr td:nth-child(3) {
+    display: none;
+}
+
+#table-list-module tbody tr {
+    border-bottom: 1px solid #e7ecf1;
+}
+
+#table-list-module tbody tr td.checkbox-item {
+    width: 10%;
+}
+
+.list-action-margin-left {
+    margin-left: 5px;
+}
+
+.list-action-margin-right {
+    margin-right: 5px;
+}
+
+.list-action-margin {
+    margin: 0 5px 0;
+}
+
+.fixed-table-container {
+    border: none !important;
+    border-top: 1px solid #ddd;
+}
+
+.inbox-actions {
+    margin-right: 15px;
+}
+
+#btn-change-password {
+    width: 100%;
+    overflow: auto;
+}
+
+.icon-at-email {
+    position: relative;
+    width: 2%;
+    float: left;
+    padding: 8px 0;
+    margin-left: -9px;
+}
+
+.the-legend {
+    border-style: none;
+    border-width: 0;
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom: 0;
+}
+
+legend {
+    width: 60px !important;
+}
+
+.well {
+    background-color: #ffffff !important;
+    border: 1px solid #dae2ea !important;
+}
+
+.text-align-left {
+    text-align: left !important;
+}
+
+#table-list-action tbody tr td {
+    padding: 8px 0 !important;
+}
+
+.bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
+    width: 101% !important;
+}
+
+.btn-events-disable {
+    pointer-events: none;
+}
+
+.email-region-column {
+    margin-left: -11px;
+}
+
+.help-block{
+    color: #e73d4a !important;
+}
+
+#search-clear {
+    position: relative;
+    margin-left: -18px;
+    z-index: 1001;
+    padding-top: 10px;
+}
+
+#btn-select-all {
+    width: 100%;
+}
+
+/*[Start]FindId detail*/
+#container-findId-rightPanel > .portlet > .portlet-title > .nav-tabs {
+    float: left;
+}
+
+#container-findId-rightPanel .well .form-body {
+    padding-left: 10px;
+}
+
+#container-findId-rightPanel .well .form-body .group-findId-sub {
+    padding-left: 55px;
+}
+
+#container-findId-rightPanel .well .form-body .label-concealId-description {
+    padding-left: 35px;
+}
+
+#container-findId-rightPanel .well .form-body .group-findId-sub-child {
+    padding-left: 73px;
+}
+
+#container-findId-rightPanel legend {
+    padding-left: 3px;
+    padding-right: 3px;
+    width: auto !important;
+}
+/*[End]FindId detail*/
+
+#modal-findId-verificationMailEditor .modal-dialog,
+#modal-findPw-verificationMailEditor .modal-dialog {
+    min-width: 800px;
+}
+
+#container-findId-rightPanel > .portlet {
+    padding: 0px;
+    margin-bottom: 0px;
+}
+
+#container-findId-rightPanel {
+    padding-bottom: 0px;
+}
+
+#container-findId-rightPanel .form .form-actions {
+    padding-bottom: 0px;
+}

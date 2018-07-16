@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.namowebiz.mugrun.applications.siteadmin.dao.revenue.RevenueDetailMapper">
+    <resultMap id="revenueDetail" type="com.namowebiz.mugrun.applications.siteadmin.models.revenue.RevenueDetail">
+        <id column="revenue_detail_no" property="revenueDetailNo"/>
+        <result column="name" property="name"/>
+        <result column="amount" property="amount"/>
+        <result column="status" property="status"/>
+        <result column="date" property="date"/>
+        <result column="notice" property="notice"/>
+        <result column="approve_date" property="approveDate"/>
+        <result column="approve_user_no" property="approveUserNo"/>
+        <result column="reg_date" property="regDate"/>
+        <result column="reg_user_no" property="regUserNo"/>
+        <result column="mod_date" property="modDate"/>
+        <result column="mod_user_no" property="modUserNo"/>
+    </resultMap>
+
+    <resultMap id="revenueDetailVO" extends="revenueDetail" type="com.namowebiz.mugrun.applications.siteadmin.models.revenue.RevenueDetailVO">
+        <result column="reg_user_name" property="regUserName"/>
+        <result column="approveUserName" property="approveUserName"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="com.namowebiz.mugrun.applications.siteadmin.models.revenue.RevenueDetail"
+            useGeneratedKeys="true" keyColumn="revenue_detail_no" keyProperty="revenueDetailNo">
+        <bind name="currentDate" value="@com.namowebiz.mugrun.applications.framework.common.utils.DateUtil@getCurrentDate()"/>
+        insert into revenue_detail
+        (
+            name,
+            amount,
+            date,
+             notice,
+            reg_date,
+            reg_user_no
+        )
+
+        VALUES(
+            #{name},
+            #{amount},
+            #{date},
+            #{notice},
+            #{currentDate},
+            #{regUserNo}
+        )
+    </insert>
+
+    <delete id="delete" parameterType="long">
+        DELETE FROM revenue_detail
+          WHERE revenue_detail_no = #{revenueDetailNo}
+    </delete>
+
+    <update id="update" parameterType="com.namowebiz.mugrun.applications.siteadmin.models.revenue.RevenueDetail">
+        <bind name="currentDate" value="@com.namowebiz.mugrun.applications.framework.common.utils.DateUtil@getCurrentDate()"/>
+        UPDATE revenue_detail
+            SET
+              name = #{name},
+              amount = #{amount},
+              date = #{date},
+              notice = #{notice},
+              mod_user_no = #{modUserNo},
+              mod_date = #{currentDate}
+          WHERE revenue_detail_no = #{revenueDetailNo}
+    </update>
+
+    <update id="approve" parameterType="com.namowebiz.mugrun.applications.siteadmin.models.revenue.RevenueDetail">
+        <bind name="currentDate" value="@com.namowebiz.mugrun.applications.framework.common.utils.DateUtil@getCurrentDate()"/>
+          UPDATE revenue_detail
+            SET
+              status = 'A',
+              approve_user_no = #{approveUserNo},
+              mod_user_no = #{modUserNo},
+              approve_date = #{currentDate}
+          WHERE revenue_detail_no = #{revenueDetailNo}
+    </update>
+
+    <select id="list" resultMap="revenueDetailVO" parameterType="map">
+        SELECT
+            revenue.*
+            , (Select name from user_info Where user_no = revenue.reg_user_no) as reg_user_name
+            , (Select name from user_info Where user_no = revenue.approve_user_no) as approveUserName
+        FROM revenue_detail revenue
+        <include refid="whereClause"/>
+        <if test="orderField == null">
+            ORDER BY reg_date DESC
+        </if>
+        <if test="orderField != null">
+            ORDER BY ${orderField}
+        </if>
+        <if test="pageSize != null">
+            LIMIT #{startIndex}, #{pageSize}
+        </if>
+    </select>
+
+    <select id="count" resultType="long" parameterType="map">
+        SELECT
+            COUNT(revenue.revenue_detail_no)
+        FROM revenue_detail revenue
+        <include refid="whereClause"/>
+    </select>
+
+
+    <select id="getByPK" resultMap="revenueDetailVO" parameterType="long">
+        SELECT * FROM revenue_detail
+          WHERE revenue_detail_no = #{revenueDetailNo}
+    </select>
+
+    <sql id="whereClause">
+        <where>
+            <if test="status != null">
+                AND revenue.status = #{status}
+            </if>
+            <if test="startDate != null">
+                AND revenue.date >= DATE(#{startDate})
+            </if>
+
+            <if test="endDate != null">
+                <![CDATA[ AND revenue.date <= DATE(#{endDate}) ]]>
+            </if>
+            <if test="searchText != null">
+                AND revenue.name LIKE CONCAT('%', #{searchText}, '%')
+            </if>
+        </where>
+    </sql>
+
+</mapper>

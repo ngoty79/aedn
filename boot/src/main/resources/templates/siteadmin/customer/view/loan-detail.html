@@ -1,0 +1,142 @@
+<input type="hidden" name="status" th:value="${loan.status}"/>
+<div class="row form-group" style="display: none;">
+    <label class="control-label col-md-6 blue bold">Thông tin của khách hàng</label>
+</div>
+<div class="row form-group">
+    <label class="control-label col-md-2 max-width-160">Họ tên:</label>
+    <label class="control-label col-md-2 max-width-200"><b>[[${customer.name}]]</b></label>
+    <label class="control-label col-md-2 max-width-160">Số liên lạc:</label>
+    <label class="control-label col-md-2 max-width-220">[[${customer.phoneFormat}]]</label>
+</div>
+<div class="row form-group">
+    <label class="control-label col-md-2 max-width-160">Số CMND:</label>
+    <label class="control-label col-md-2 max-width-200">[[${customer.socialIdFormat}]]</label>
+    <label class="control-label col-md-2 max-width-160">Ngày cấp:</label>
+    <label class="control-label col-md-2 max-width-220">[[${#dates.format(customer.issueDate, 'dd/MM/yyyy')}]]</label>
+    <label class="control-label col-md-2 max-width-100">Nơi cấp:</label>
+    <label class="control-label col-md-2 max-width-220">[[${customer.issuePlace}]]</label>
+</div>
+<div class="row form-group">
+    <label class="control-label col-md-2 max-width-160">Địa chỉ thường trú:</label>
+    <label class="control-label col-md-10 ">[[${customer.address}]]</label>
+</div>
+<div class="row form-group" style="padding-top: 10px;border-top: 1px solid rgb(221, 221, 221);">
+    <label class="control-label col-md-2 max-width-220 blue bold">Chi tiết tín dụng</label>
+    <th:block th:if="${not #strings.equals(loan.status, 'N')}">
+        <label class="control-label col-md-2 max-width-200">
+            <button type="button" class="btn btn-sm btn-circle btn-outline blue btn-loan-detail" th:data-loan-no="${loan.loanNo}">
+                <i class="fa fa-calendar" aria-hidden="true"></i> Chi Tiết Lịch Trả
+            </button>
+        </label>
+    </th:block>
+</div>
+<div class="row form-group" >
+    <label class="control-label col-md-2 max-width-160">NV Phụ Trách:</label>
+    <label class="control-label col-md-2 max-width-200"><b>[[${loan.staffUserName}]]</b></label>
+    <label class="control-label col-md-2 max-width-160">Người Duyệt:</label>
+    <label class="control-label col-md-2 max-width-220"><b>[[${loan.approveUserName}]]</b></label>
+
+</div>
+
+<div class="row form-group">
+    <label class="control-label col-md-2 max-width-160">Số tiền vay:</label>
+    <label class="control-label col-md-2 max-width-200">[[${loan.loanAmountFormat}]]</label>
+    <label class="control-label col-md-2 max-width-160">Lãi suất: </label>
+    <label class="control-label col-md-2 max-width-200">[[${loan.loanInterest}]]%</label>
+</div>
+<div class="row form-group">
+    <label class="control-label col-md-2 max-width-160">Thời gian vay: </label>
+    <label class="control-label col-md-2 max-width-200">[[${loan.loanPeriod}]] tháng</label>
+    <label class="control-label col-md-2 max-width-160">Từ ngày:</label>
+    <label class="control-label col-md-5">
+        [[${#dates.format(loan.startDate, 'dd/MM/yyyy')}]] ~ [[${#dates.format(loan.endDate, 'dd/MM/yyyy')}]] <b>([[${loan.totalDays}]] ngày)</b>
+    </label>
+</div>
+<div class="row form-group">
+    <label class="control-label col-md-2 max-width-160">Loại hình vay:</label>
+    <label class="control-label col-md-2 max-width-200">
+        <th:block th:if="${loan.loanType == '1'}">Góp đều</th:block>
+        <th:block th:if="${loan.loanType == '2'}">Dư nợ giảm dần</th:block>
+    </label>
+    <label class="control-label col-md-2 max-width-160">Phương thức trả: </label>
+    <label class="control-label col-md-2 max-width-200">
+        <th:block th:if="${loan.loanPayType == '1'}">Hàng ngày</th:block>
+        <th:block th:if="${loan.loanPayType == '2'}">Hàng tuần</th:block>
+        <th:block th:if="${loan.loanPayType == '3'}">Hàng tháng</th:block>
+    </label>
+</div>
+<div class="row form-group" style="padding-top: 10px;border-top: 1px solid rgb(221, 221, 221);">
+    <label class="control-label col-md-2 max-width-160">Tiền trả hàng kỳ:</label>
+    <label class="control-label col-md-2 max-width-200 text-align-right">[[${loan.payBySessionFormat}]]</label>
+    <label class="control-label col-md-2 max-width-160">Tiền Vốn:</label>
+    <label class="control-label col-md-2 max-width-200 text-align-right">[[${loan.capitalBySessionFormat}]]</label>
+    <label class="control-label col-md-2 max-width-140">Tiền lãi</label>
+    <label class="control-label col-md-2 max-width-200">[[${loan.profitBySessionFormat}]]</label>
+</div>
+
+<div class="row form-group">
+    <label class="control-label col-md-2 max-width-160">Tồng số kỳ thu:</label>
+    <label class="control-label col-md-2 max-width-200 text-align-right">[[${loan.totalPaySessions}]]</label>
+    <label class="control-label col-md-2 max-width-160">Tổng tiền phải thu: </label>
+    <label class="control-label col-md-2 max-width-200 text-align-right">
+        <th:block th:if="${not #strings.equals(loan.status, 'N')}">
+            [[${loan.totalPaidAmountFormat}]]
+        </th:block>
+        <th:block th:if="${#strings.equals(loan.status, 'N')}">
+            [[${#numbers.formatInteger(loan.totalPaySessions * loan.payBySession,3,'POINT')}]] VNĐ
+        </th:block>
+    </label>
+
+</div>
+<th:block th:if="${not #strings.equals(loan.status, 'N')}">
+    <div class="row form-group">
+        <label class="control-label col-md-2 max-width-160">Số kỳ đã thu:</label>
+        <label class="control-label col-md-2 max-width-200 text-align-right">[[${loan.alreadyPaidSession}]]</label>
+        <label class="control-label col-md-2 max-width-160">Số tiền đã thu:</label>
+        <label class="control-label col-md-2 max-width-200 text-align-right">[[${loan.paidFormat}]]</label>
+
+    </div>
+    <div class="row form-group red" stype="margin-bottom: 5px;" th:if="${loan.delayDays>0} and loan.status == 'A'">
+        <label class="control-label col-md-2 max-width-160">Số kỳ chưa thu:</label>
+        <label class="control-label col-md-2 max-width-200 text-align-right">[[${loan.delayDays}]]</label>
+        <label class="control-label col-md-2 max-width-160">Nợ quá hạn:</label>
+        <label class="control-label col-md-2 max-width-200 text-align-right">[[${loan.delayAmountFormat}]]</label>
+    </div>
+    <div class="row form-group" th:if="${loan.totalPaySessions -  loan.alreadyPaidSession>0}">
+        <label class="control-label col-md-2 max-width-160">Tổng số kỳ còn lại:</label>
+        <label class="control-label col-md-2 max-width-200 text-align-right">[[${loan.totalPaySessions -  loan.alreadyPaidSession}]]</label>
+        <label class="control-label col-md-2 max-width-160">Tổng dư nợ:</label>
+        <label class="control-label col-md-2 max-width-200 text-align-right">[[${loan.currentDebtFormat}]]</label>
+    </div>
+    <th:block th:if="${status == 'finish'}">
+        <div class="row form-group help-message-finish" style="display: none;">
+            <img src="/assets/applications/siteadmin/images/finish_policy.jpg" alt="logo" width="max-width: 100%;">
+        </div>
+        <div class="row form-group" style="border-top: 1px solid #cac5c5; padding-top: 8px;">
+            <label class="control-label col-md-2 max-width-160">Vốn thu hổi:</label>
+            <div class="col-md-2 max-width-200">
+                <input type="text" class="form-control input-sm" readonly name="finishReturnAmount" th:value="${loan.status == 'R'? loan.currentDebt : loan.currentDebt}">
+            </div>
+            <label class="control-label col-md-2 max-width-180">Lãi Thu hồi: <i class="fa fa-question-circle green"></i> </label>
+            <div class="col-md-2 max-width-200">
+                <input  type="text" class="form-control input-sm" readonly name="remainProfit" th:value="${loan.remainProfit}">
+            </div>
+        </div>
+        <div class="row form-group">
+            <label class="control-label col-md-2 max-width-160">Giảm lãi:</label>
+            <div class="col-md-2 max-width-200">
+                <input type="text" class="form-control input-sm" name="discount" th:value="${loan.status == 'R'? loan.remainProfit - loan.extraAmount : ''}">
+            </div>
+        </div>
+        <div class="row form-group">
+            <label class="control-label col-md-2 max-width-160">Ghi chú:</label>
+            <div class="col-md-9">
+                <textarea type="text" style="height: 70px;" cols="8" class="form-control input-sm" name="finishedNote">[[${loan.finishedNote}]]</textarea>
+            </div>
+        </div>
+
+    </th:block>
+</th:block>
+
+
+

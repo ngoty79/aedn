@@ -1,0 +1,144 @@
+#category-container-processing{
+    z-index: 2;
+}
+
+#category-search-sales {
+    z-index: 1;
+}
+
+.text-font-color{
+    color: rgb(52, 73, 94);
+}
+
+.pointer-click-icon {
+    cursor: pointer;
+}
+
+.search-clear {
+    position: absolute;
+    margin-left: -22px;
+    z-index: 1001;
+    padding-top: 10px;
+    color: #777 !important;
+    cursor: pointer;
+}
+
+.text-align-right{
+    text-align: right !important;
+}
+
+.none-border-top{
+    border-top: none !important;
+}
+
+.container-setting-header {
+    padding: 15px 10px;
+    background: #F8F8F8;
+}
+
+.background-header{
+    background: #F8F8F8;
+}
+
+#form-search-processing-status .portlet.light,
+#form-search-sales-status .portlet.light{
+    padding: 0 !important;
+}
+
+#form-search-processing-status, #form-search-sales-status,
+#form-search-order-info, #form-search-order-action,
+#form-download-order-info{
+    padding-top: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#form-result-processing-status, #form-result-sales-status {
+    padding-top: 15px;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+#container-order-delivery-order .fixed-table-pagination,
+#container-order-delivery-delivery .fixed-table-pagination,
+#container-order-delivery-return-refund .fixed-table-pagination{
+    margin-top: 10px;
+    text-align: center;
+}
+
+#container-order-delivery-order .fixed-table-pagination .pagination-detail,
+#container-order-delivery-delivery .fixed-table-pagination .pagination-detail,
+#container-order-delivery-return-refund .fixed-table-pagination .pagination-detail{
+    display: none;
+}
+
+#form-search-processing-status .input-append .fa.fa-calendar, #form-search-sales-status .input-append .fa.fa-calendar,
+#form-search-refund-request .input-append .fa.fa-calendar, #form-search-refund-complete .input-append .fa.fa-calendar,
+#form-search-order-info .input-append .fa.fa-calendar{
+    pointer-events: none;
+    position: absolute;
+    right: 25px;
+    top: 10px;
+}
+
+#form-search-processing-status label, #form-result-processing-status label,
+#form-search-sales-status label, #form-result-sales-status label,
+#form-search-order-info label, #form-search-order-action label{
+    text-align: left;
+}
+
+#container-order-delivery-order .fixed-table-container, #container-order-delivery-delivery .fixed-table-container,
+#container-order-delivery-return-refund .fixed-table-container{
+    border: none !important;
+}
+
+#table-order-list tbody tr, #table-pending-list tbody tr, #table-shipping-list tbody tr,
+#table-return-refund-request-list tbody tr, #table-return-refund-list tbody tr{
+    border-bottom: 1px solid #e7ecf1;
+}
+
+#table-order-list tbody tr td, #table-pending-list tbody tr td, #table-shipping-list tbody tr td,
+#table-return-refund-request-list tbody tr td, #table-return-refund-list tbody tr td{
+    cursor: default !important;
+}
+
+.the-legend {
+    width: auto;
+    border-style: none;
+    border-width: 0;
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom: 0;
+}
+
+.well {
+    background-color: #ffffff !important;
+    border: 1px solid #dae2ea !important;
+}
+
+#form-search-processing-status .portlet.light .portlet-body,
+#form-search-sales-status .portlet.light .portlet-body{
+    padding-top: 0 !important;
+}
+
+#form-search-processing-status .portlet-dashboard-categoryTree,
+#form-search-sales-status .portlet-dashboard-categoryTree{
+    position: absolute;
+    width: 55%;
+    min-width: 200px;
+}
+
+.text-color-blue{
+    color: #0000ff;
+}
+
+#modal-order-detail label{
+    text-align: left;
+}
+
+@media (min-width: 768px) {
+    #modal-order-detail .modal-dialog {
+        width: 780px;
+        margin: 30px auto;
+    }
+}

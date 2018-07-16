@@ -1,0 +1,52 @@
+@media screen and (max-width: 767px){
+ .reservation-list table, .reservation-list thead, .reservation-list tbody, .reservation-list th, .reservation-list td, .reservation-list tr {
+    display: block;
+  }
+
+  .reservation-list thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  .reservation-list tr { border: 1px solid #ccc; }
+
+  .reservation-list .table-responsive .table tr td {
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 40%;
+    text-align:left;
+  }
+
+  .reservation-list .table-responsive .table tr td:before {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 35%;
+    padding-right: 10px;
+    white-space: nowrap;
+    height:100%;
+    line-height:40px;
+    background:#f8f8f8;
+    text-align:center;
+  }
+
+  .reservation-list td:nth-of-type(1):before { content: "번호"; }
+  .reservation-list td:nth-of-type(2):before { content: "진행상태"; }
+  .reservation-list td:nth-of-type(3):before { content: "제목"; }
+  .reservation-list td:nth-of-type(4):before { content: "지역"; }
+  .reservation-list td:nth-of-type(5):before { content: "장소"; }
+  .reservation-list td:nth-of-type(6):before { content: "일시"; }
+  .reservation-list td:nth-of-type(7):before { content: "신청기간"; }
+  .reservation-list td:nth-of-type(8):before { content: "참가현황"; }
+
+}
+.reservation-view .table-responsive .table tr th{
+  width:30%;
+  background:#f2f2f2;
+}
+.reservation-view .table-responsive .table tr td{
+  text-align:left;
+  padding-left:30px;
+}

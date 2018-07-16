@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+
+<head>
+    <meta charset="utf-8" />
+    <title>AEĐN - Credit</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&amp;subset=all" rel="stylesheet" type="text/css" />
+    <link href="/assets/templates/admin/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/templates/admin/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/templates/admin/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/templates/admin/global/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/templates/admin/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+    <!-- END GLOBAL MANDATORY STYLES -->
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <link href="/assets/vendors/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/vendors/select2/css/select2-bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <!-- END PAGE LEVEL PLUGINS -->
+    <!-- BEGIN THEME GLOBAL STYLES -->
+    <link href="/assets/templates/admin/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css" />
+    <link href="/assets/templates/admin/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
+    <!-- END THEME GLOBAL STYLES -->
+    <!-- BEGIN PAGE LEVEL STYLES -->
+    <link href="/assets/vendors/formvalidation/0.7.0/css/formValidation.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/templates/admin/pages/css/login-4.min.css" rel="stylesheet" type="text/css"/>
+
+    <!-- END PAGE LEVEL STYLES -->
+    <!-- BEGIN THEME LAYOUT STYLES -->
+    <!-- END THEME LAYOUT STYLES -->
+    <link rel="shortcut icon" href="favicon.ico" /> </head>
+<!-- END HEAD -->
+    <style>
+        .main-logo{
+            font-size: 30px;
+            line-height: 30px;
+            display: inline-block;
+            color: white
+        }
+    </style>
+<body class=" login">
+
+<div id="container-main">
+    <div class="logo" style="margin-bottom: 0px">
+        <img src="/assets/applications/siteadmin/images/main-logo.png" alt="logo" class="logo-default" style="height: 129px;">
+    </div>
+    <!-- END LOGO -->
+    <!-- BEGIN LOGIN -->
+    <div class="content" id="login-wrapper">
+        <!-- BEGIN LOGIN FORM -->
+        <form class="login-form" action="/admin/login" method="post">
+            <div th:class="${#strings.isEmpty(errorMessage)}? 'alert alert-danger display-hide' : 'alert alert-danger'">
+                <button class="close" data-close="alert"></button>
+                <span th:text="${#strings.isEmpty(errorMessage)}? '' : #{${errorMessage}}">Incorrect User or Password!</span>
+            </div>
+            <div class="form-group">
+                <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+                <label class="control-label visible-ie8 visible-ie9">Username</label>
+                <div class="input-icon">
+                    <i class="fa fa-user"></i>
+                    <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Tên đăng nhập" name="userId"
+                           th:value="${#strings.isEmpty(userId)}? '' : ${userId}"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label visible-ie8 visible-ie9">Password</label>
+                <div class="input-icon">
+                    <i class="fa fa-lock"></i>
+                    <input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="Mật khẩu" name="password" />
+                </div>
+            </div>
+            <div class="form-actions">
+                <label class="checkbox">
+                    <input type="checkbox" name="admin-remember-me" />Nhớ Đăng Nhập</label>
+                <button type="button" class="btn green pull-right" id="btn-loginPage-login"> Đăng Nhập </button>
+            </div>
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+            <input type="hidden" name="loginType" value="admin"/>
+        </form>
+        <!-- END LOGIN FORM -->
+    </div>
+    <!-- END LOGIN -->
+    <!-- BEGIN COPYRIGHT -->
+    <div class="copyright"> Copyright© 2017 AEĐN Ltd. All Rights Reserved. </div>
+</div>
+
+<!-- END COPYRIGHT -->
+<!--[if lt IE 9]>
+<script src="/assets/templates/admin/global/plugins/respond.min.js"></script>
+<script src="/assets/templates/admin/global/plugins/excanvas.min.js"></script>
+<![endif]-->
+<!-- BEGIN CORE PLUGINS -->
+<script src="/assets/templates/admin/global/plugins/jquery.min.js" type="text/javascript"></script>
+<script src="/assets/templates/admin/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="/assets/templates/admin/global/plugins/js.cookie.min.js" type="text/javascript"></script>
+<script src="/assets/templates/admin/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
+<script src="/assets/templates/admin/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+<script src="/assets/templates/admin/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+<script src="/assets/templates/admin/global/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
+<script src="/assets/templates/admin/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+<!-- END CORE PLUGINS -->
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+<script src="/assets/templates/admin/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+<script src="/assets/templates/admin/global/plugins/jquery-validation/js/additional-methods.min.js" type="text/javascript"></script>
+<script src="/assets/vendors/select2/js/select2.full.min.js" type="text/javascript"></script>
+<script src="/assets/templates/admin/global/plugins/backstretch/jquery.backstretch.min.js" type="text/javascript"></script>
+<!-- END PAGE LEVEL PLUGINS -->
+<!-- BEGIN THEME GLOBAL SCRIPTS -->
+<script src="/assets/templates/admin/global/scripts/app.min.js" type="text/javascript"></script>
+<!-- END THEME GLOBAL SCRIPTS -->
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+<script type="text/javascript" src="/assets/vendors/lodash/3.10.1/lodash.min.js"></script>
+<script src="/assets/vendors/formvalidation/0.7.0/js/formValidation.min.js" type="text/javascript"></script>
+<script src="/assets/vendors/formvalidation/0.7.0/js/framework/bootstrap.min.js" type="text/javascript"></script>
+<script src="/assets/vendors/formvalidation/0.7.0/js/language/vi_VN.js" type="text/javascript"></script>
+<script src="/assets/vendors/momentjs/moment-with-locales.min.js" type="text/javascript"></script>
+
+
+<script type="text/javascript" th:src="'/messages/common/client/messages_' + ${#locale.getLanguage()} + '.js'"></script>
+<script type="text/javascript" src="/assets/applications/mugrun/scripts/mugrun.js"></script>
+<script type="text/javascript" src="/assets/applications/siteadmin/scripts/site_login.js"></script>
+<!-- END PAGE LEVEL SCRIPTS -->
+<!-- BEGIN THEME LAYOUT SCRIPTS -->
+<!-- END THEME LAYOUT SCRIPTS -->
+</body>
+
+</html>

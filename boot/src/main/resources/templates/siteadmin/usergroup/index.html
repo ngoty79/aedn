@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="'siteadmin/layout/common_layout'">
+<head>
+    <link href="/assets/templates/admin/apps/css/inbox.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/templates/admin/global/plugins/jstree/dist/themes/default/style.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/templates/admin/global/plugins/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/vendors/bootstrap.table/1.9.1/bootstrap-table.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/vendors/jquery.loadmask/jquery.loadmask.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/vendors/icheck/skins/all.css" rel="stylesheet" type="text/css">
+    <link href="/assets/templates/admin/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" type="text/css">
+    <link href="/assets/applications/siteadmin/css/usergroup/index.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<!-- BEGIN CONTENT -->
+<div layout:fragment="page-content" class="page-content-wrapper">
+    <!-- BEGIN CONTENT BODY -->
+    <div class="page-content" id="container-admin-usergroup">
+        <div class="inbox">
+            <div class="row">
+                <div class="col-md-3" id="page-usergroup-grouplist" th:include="siteadmin/usergroup/group_list"></div>
+                <div class="col-md-9" id="page-usergroup-management" th:include="siteadmin/usergroup/user_group_management"></div>
+                <div class="col-md-12 hide" id="page-usergroup-add-groupuser" th:include="siteadmin/usergroup/user_group_add_groupuser"></div>
+            </div>
+        </div>
+    </div>
+    <!-- END CONTENT BODY -->
+</div>
+<!-- END CONTENT -->
+
+<div style="display: none;" layout:fragment="page-scripts">
+    <script src="/assets/vendors/bootstrap.table/1.9.1/bootstrap-table.min.js" type="text/javascript"></script>
+    <script src="/assets/vendors/bootstrap.table/1.9.1/locale/bootstrap-table-ko-KR.min.js" type="text/javascript"></script>
+    <script src="/assets/templates/admin/global/plugins/bootstrap-select/js/bootstrap-select.min.js" type="text/javascript"></script>
+    <script src="/assets/vendors/jquery.tmpl/1.4.2/jquery.tmpl.min.js" type="text/javascript"></script>
+    <script src="/assets/templates/admin/global/plugins/jstree/dist/jstree.min.js" type="text/javascript"></script>
+    <script src="/assets/vendors/icheck/icheck.min.js" type="text/javascript"></script>
+    <script src="/assets/vendors/jquery.loadmask/jquery.loadmask.min.js" type="text/javascript"></script>
+    <script src="/assets/vendors/jquery-serialize-object/2.5.0/jquery.serialize-object.min.js" type="text/javascript"></script>
+    <script src="/assets/templates/admin/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js" type="text/javascript"></script>
+    <script type="text/javascript" src="https://spi.maps.daum.net/imap/map_js_init/postcode.v2.js"></script>
+
+    <script src="/assets/applications/siteadmin/scripts/usergroup/group_manage.js" type="text/javascript"></script>
+    <script src="/assets/applications/siteadmin/scripts/usergroup/groupuser_add.js" type="text/javascript"></script>
+    <script src="/assets/applications/siteadmin/scripts/usergroup/group_list.js" type="text/javascript"></script>
+    <script src="/assets/applications/siteadmin/scripts/usergroup/index.js" type="text/javascript"></script>
+
+</div>
+</body>
+</html>

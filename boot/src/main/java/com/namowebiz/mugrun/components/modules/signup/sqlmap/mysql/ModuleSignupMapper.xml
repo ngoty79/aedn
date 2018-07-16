@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.namowebiz.mugrun.components.modules.signup.dao.ModuleSignupMapper">
+    <resultMap id="moduleSignup" type="com.namowebiz.mugrun.components.modules.signup.models.ModuleSignup">
+        <id column="module_no" property="moduleNo"/>
+        <result column="module_title" property="moduleTitle"/>
+        <result column="module_desc" property="moduleDesc"/>
+        <result column="member_join_step" property="memberJoinStep"/>
+        <result column="mobile_verify_service" property="mobileVerifyService"/>
+        <result column="ipin_verify_service" property="ipinVerifyService"/>
+        <result column="cert_type" property="certType"/>
+        <result column="captcha_yn" property="captchaYn"/>
+        <result column="provision_agree_yn" property="provisionAgreeYn"/>
+        <result column="reg_date" property="regDate"/>
+        <result column="reg_user_no" property="regUserNo"/>
+        <result column="mod_date" property="modDate"/>
+        <result column="mod_user_no" property="modUserNo"/>
+    </resultMap>
+
+    <resultMap id="moduleSignupVO" extends="moduleSignup" type="com.namowebiz.mugrun.components.modules.signup.models.ModuleSignupVO">
+        <result column="mobileVerifyServiceCompName" property="mobileVerifyServiceCompName"/>
+        <result column="ipinVerifyServiceCompName" property="ipinVerifyServiceCompName"/>
+    </resultMap>
+
+    <select id="list" resultMap="moduleSignupVO" parameterType="map">
+        SELECT *
+              ,moduleCertCompinfo1.cert_compnm mobileVerifyServiceCompName
+              ,moduleCertCompinfo2.cert_compnm ipinVerifyServiceCompName
+        FROM module_signup moduleSignup
+            LEFT JOIN module_cert_compinfo moduleCertCompinfo1 ON moduleSignup.mobile_verify_service = moduleCertCompinfo1.cert_compcd AND moduleCertCompinfo1.cert_type = 'S'
+            LEFT JOIN module_cert_compinfo moduleCertCompinfo2 ON moduleSignup.ipin_verify_service = moduleCertCompinfo2.cert_compcd AND moduleCertCompinfo2.cert_type = 'I'
+        <include refid="whereClause"/>
+        ORDER BY moduleSignup.reg_date DESC
+        <if test="pageSize != null">
+            LIMIT #{startIndex}, #{pageSize}
+        </if>
+    </select>
+
+    <sql id="whereClause">
+        <where>
+            1 = 1
+            <if test="captchaYn != null">
+                AND captcha_yn = #{captchaYn}
+            </if>
+        </where>
+    </sql>
+
+    <insert id="insert" parameterType="com.namowebiz.mugrun.components.modules.signup.models.ModuleSignup"
+            useGeneratedKeys="true" keyColumn="module_no" keyProperty="moduleNo">
+        insert into module_signup
+        (
+        module_title,
+        module_desc,
+        member_join_step,
+        mobile_verify_service,
+        ipin_verify_service,
+        cert_type,
+        captcha_yn,
+        provision_agree_yn,
+        reg_date,
+        reg_user_no,
+        mod_date,
+        mod_user_no
+        )
+        values
+        (
+        #{moduleTitle} ,
+        #{moduleDesc} ,
+        #{memberJoinStep} ,
+        #{mobileVerifyService} ,
+        #{ipinVerifyService} ,
+        #{certType},
+        #{captchaYn},
+        #{provisionAgreeYn},
+        NOW(),
+        #{regUserNo},
+        NOW(),
+        #{modUserNo}
+        )
+
+        <selectKey resultType="long" keyProperty="moduleNo">
+            <![CDATA[
+      	SELECT LAST_INSERT_ID() AS moduleNo;
+    	]]>
+        </selectKey>
+    </insert>
+
+    <update id="update" parameterType="com.namowebiz.mugrun.components.modules.signup.models.ModuleSignup" >
+        UPDATE module_signup
+        SET
+        module_title = #{moduleTitle},
+        module_desc = #{moduleDesc},
+        member_join_step = #{memberJoinStep},
+        mobile_verify_service = #{mobileVerifyService},
+        ipin_verify_service = #{ipinVerifyService},
+        cert_type = #{certType},
+        captcha_yn = #{captchaYn},
+        provision_agree_yn = #{provisionAgreeYn},
+        reg_date = #{regDate},
+        reg_user_no = #{regUserNo},
+        mod_date = NOW(),
+        mod_user_no = #{modUserNo}
+        WHERE module_no = #{moduleNo}
+    </update>
+
+</mapper>

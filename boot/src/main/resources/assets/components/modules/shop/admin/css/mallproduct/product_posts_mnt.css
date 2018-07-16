@@ -1,0 +1,82 @@
+#container-mallproduct-productposts .portlet.light {
+    padding: 12px 0 0;
+}
+#container-mallproduct-productposts .portlet.light.bordered.portlet-productposts {
+    padding-bottom: 10px;
+}
+#container-mallproduct-productposts .portlet.light .portlet-body {
+    min-height: 554px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+#container-mallproduct-productposts .fixed-table-pagination .pagination-detail {
+    display: none;
+}
+#container-mallproduct-productposts .fixed-table-pagination {
+    margin-top: 5px;
+    text-align: center;
+}
+#container-mallproduct-productposts .search-clear {
+    position: relative;
+    margin-left: -28px;
+    z-index: 1001;
+    padding-top: 10px;
+    cursor: pointer;
+    border: none;
+}
+#container-mallproduct-productposts .btn-search, .btn-open {
+    cursor: pointer;
+}
+#container-mallproduct-productposts .group-productpost-optsearch {
+    text-align: right;
+}
+
+/*[Start] Posting editor*/
+#modal-productPosting-editor .modal-body {
+    padding: 0 15px 15px;
+}
+#modal-productPosting-editor .row-postingEditor-actions {
+    background-color: #f5f5f5;
+    height: 40px;
+    padding-top: 9px;
+}
+#modal-productPosting-editor .row-postingEditor-actions a {
+    color: #32c5d2;
+    text-decoration: none;
+}
+#modal-productPosting-editor .field-postingEditor-content {
+    height: 300px;
+    text-align: center !important;
+
+}
+#modal-productPosting-editor .modal-body td:nth-child(1),
+#modal-productPosting-editor .modal-body td:nth-child(3){
+    text-align: right;
+}
+#modal-productPosting-editor .modal-body td:nth-child(2),
+#modal-productPosting-editor .modal-body td:nth-child(4){
+    text-align: left;
+}
+
+#modal-productPosting-editor .modal-footer {
+    text-align: center;
+}
+#modal-productPosting-editor .field-postingEditor-content .field-postingEditor-title {
+    margin-top: 30px;
+    margin-bottom: 40px;
+    font-size: 14px;
+    text-align: left;
+    white-space: pre-line;
+}
+#modal-productPosting-editor .field-postingEditor-content .field-postingEditor-reply {
+    text-align: left;
+}
+
+#modal-productPosting-editor .field-postingEditor-content .field-postingEditor-reply label {
+    margin-bottom: 5px;
+}
+
+.font-color-blue{
+    color: blue;
+}
+/*[End] Posting editor*/

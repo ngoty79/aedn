@@ -1,0 +1,32 @@
+.reset-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.pt-module-modifyuserNamo-skin-basic {
+    color: #333333;
+    font-size: 12px;
+    font-family: '나눔고딕', 'Nanum Gothic', '돋움', Dotum, Helvetica, sans-serif;
+    position: static;
+}
+.pt-module-modifyuserNamo-skin-basic .pt-module-modifyuserNamo-container {
+    width: 100%;
+    position: relative;
+}
+
+.pt-module-modifyuserNamo-skin-basic .error{
+    border: 1px solid #FE2E64;
+}
+
+.error_msg {
+    color: #d9534f;;
+    margin-top: 8px;
+    display: inline-block;
+}
+
+.ui-dialog .ui-dialog-buttonpane {
+    text-align: center !important;
+}
+.ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset {
+    float: none !important;
+}

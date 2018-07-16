@@ -1,0 +1,100 @@
+@charset "utf-8";
+
+/*if you don't want to use this web-font in your project, remove it */
+/*
+@font-face {
+    font-family: 'NanumGothicBold';
+    src: url('/resources/font/NanumGothic-Bold.eot');
+    src: url('/resources/font/NanumGothic-Bold.eot?#iefix') format('embedded-opentype'), url('/resources/font/NanumGothic-Bold.ttf') format('truetype'), url('/resources/font/NanumGothic-Bold.svg#NanumGothic-Bold') format('svg');
+}
+
+@font-face {
+    font-family: 'NanumGothicExtraBold';
+    src: url('/resources/font/NanumGothic-ExtraBold.eot');
+    src: url('/resources/font/NanumGothic-ExtraBold.eot?#iefix') format('embedded-opentype'), url('/resources/font/NanumGothic-ExtraBold.ttf') format('truetype'), url('/resources/font/NanumGothic-ExtraBold.svg#NanumGothic-ExtraBold') format('svg');
+}
+
+@font-face {
+    font-family: 'NanumGothic';
+    src: url('/resources/font/NanumGothic-Regular.eot');
+    src: url('/resources/font/NanumGothic-Regular.eot?#iefix') format('embedded-opentype'), url('/resources/font/NanumGothic-Regular.ttf') format('truetype'), url('/resources/font/NanumGothic-Regular.svg#NanumGothic') format('svg');
+}
+*/
+/* define user's base style  */
+.pt-layout:after {
+    content: '' !important;
+    display: block;
+    height: 0px;
+    clear: both;
+    visibility: hidden;
+}
+.pt-module-registrationNamo-skin-basic .pt-module-registrationNamo-steplist .pt-module-registrationNamo-step.pt-module-registrationNamo-step-current .pt-module-registrationNamo-step-inner {
+    background-color: #567623 !important;
+    border-color: #567623 !important;
+    border-right: 1px solid #567623 !important; 
+}
+.pt-btn-primary {
+  color: #ffffff!important;
+  border-color: #567623 !important;
+  background-color: #567623 !important;
+}
+.pt-btn-primary:hover,
+.pt-btn-primary:focus {
+  color: #ffffff;
+  border-color: #567623 !important;
+  background-color: #567623 !important;
+}
+.pt-btn-sub:hover, .pt-btn-sub:focus {
+    color: #ffffff!important;
+    border-color: #999999;
+    background-color: #989498;
+}
+.pt-form-control:focus {
+  border-color: #567623 !important;
+}
+.pt-formset .pt-formset-header.pt-formset-header-main .pt-formset-title {
+  border-bottom: 2px solid #567623;
+}
+.pt-board-list {
+    margin-top: 15px;
+    width: 100%;
+    color: #666666;
+    font-size: 14px;
+    text-align: center;
+    border-top: 2px solid #567623;
+    border-bottom: 1px solid #cccccc;
+    border-spacing: 0;
+}
+.pt-board-paging-base.pt-board-paging-current, .pt-board-paging-base:hover, .pt-board-paging-base:focus {
+    color: #567623;
+    border-color: #dfdfdf;
+    background-color: #fff;
+    text-decoration: none;
+    font-weight: bold; 
+    cursor: pointer;
+    z-index: 2;
+}
+.pt-board-edit {
+    position: relative;
+    color: #666666;
+    font-size: 14px;
+    border-top: 2px solid #567623;
+}
+.pt-board-view-header .pt-board-view-title {
+    margin: 0;
+    padding: 15px 10px;
+    border-top: 2px solid #567623;
+    border-bottom: 1px solid #cccccc;
+    color: #666666;
+    font-size: 16px;
+    line-height: 1.5;
+}
+.pt-btn-sub {
+    color: #ffffff!important;
+    border-color: #999999!important;
+    background-color: #aeaaaf!important;;
+}
+.pt-board-list-td.pt-board-col-title > .pt-a:hover {
+    color: #567623;
+    text-decoration: none;
+}

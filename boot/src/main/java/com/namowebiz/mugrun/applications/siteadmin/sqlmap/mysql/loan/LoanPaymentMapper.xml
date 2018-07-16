@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.namowebiz.mugrun.applications.siteadmin.dao.customer.LoanPaymentMapper">
+
+    <resultMap id="loanPayment" type="com.namowebiz.mugrun.applications.siteadmin.models.customer.LoanPayment">
+        <id column="payment_no" property="paymentNo"/>
+        <result column="detail_no_list" property="detailNoList"/>
+        <result column="loan_no" property="loanNo"/>
+        <result column="status" property="status"/>
+        <result column="amount" property="amount"/>
+        <result column="approve_date" property="approveDate"/>
+        <result column="approve_user_no" property="approveUserNo"/>
+        <result column="reg_date" property="regDate"/>
+        <result column="reg_user_no" property="regUserNo"/>
+    </resultMap>
+
+    <resultMap id="loanPaymentVO" extends="loanPayment" type="com.namowebiz.mugrun.applications.siteadmin.models.customer.LoanPaymentVO">
+        <result column="reg_user_name" property="regUserName"/>
+        <result column="customer_name" property="customerName"/>
+        <result column="customer_code" property="customerCode"/>
+        <result column="staffUserName" property="staffUserName"/>
+        <result column="loan_amount" property="loanAmount"/>
+        <result column="loan_period" property="loanPeriod"/>
+        <result column="start_date" property="startDate"/>
+        <result column="end_date" property="endDate"/>
+        <result column="contract_code" property="contractCode"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="com.namowebiz.mugrun.applications.siteadmin.models.customer.LoanPayment"
+            useGeneratedKeys="true" keyColumn="payment_no" keyProperty="paymentNo">
+        <bind name="currentDate" value="@com.namowebiz.mugrun.applications.framework.common.utils.DateUtil@getCurrentDate()"/>
+        insert into loan_payment
+        (
+            loan_no,
+            detail_no_list,
+            status,
+            amount,
+            reg_date,
+            reg_user_no
+        )
+        VALUES(
+            #{loanNo},
+            #{detailNoList},
+            #{status},
+            #{amount},
+            #{currentDate},
+            #{regUserNo}
+        )
+    </insert>
+
+
+    <update id="approve" parameterType="com.namowebiz.mugrun.applications.siteadmin.models.customer.LoanPayment">
+        <bind name="currentDate" value="@com.namowebiz.mugrun.applications.framework.common.utils.DateUtil@getCurrentDate()"/>
+          UPDATE loan_payment
+            SET
+              status = #{status},
+              approve_user_no = #{approveUserNo},
+              approve_date = #{currentDate}
+          WHERE payment_no = #{paymentNo}
+    </update>
+
+    <delete id="delete" parameterType="long">
+        DELETE FROM loan_payment WHERE payment_no = #{paymentNo}
+    </delete>
+
+    <update id="approveList" parameterType="map">
+        <bind name="currentDate" value="@com.namowebiz.mugrun.applications.framework.common.utils.DateUtil@getCurrentDate()"/>
+          UPDATE loan_payment
+            SET
+              status = #{status},
+              approve_user_no = #{approveUserNo},
+              approve_date = #{currentDate}
+          WHERE payment_no IN
+        <foreach collection="paymentNoList" separator="," open="(" close=")" item="item">
+            #{item}
+        </foreach>
+    </update>
+
+    <select id="getByPK" resultMap="loanPaymentVO" parameterType="long">
+        SELECT
+            payment.*
+            , U.name as reg_user_name
+            , customer.name customer_name
+            , customer.customer_code customer_code
+            , loan.contract_code
+            , loan.loan_amount
+            , loan.loan_period
+            , loan.start_date
+            , loan.end_date
+
+        FROM loan_payment payment
+            INNER JOIN user_info U ON U.user_no = payment.reg_user_no
+            INNER JOIN loan loan ON loan.loan_no = payment.loan_no
+            INNER JOIN customer customer ON loan.customer_no = customer.customer_no
+            WHERE payment_no = #{paymentNo}
+    </select>
+    <select id="list" resultMap="loanPaymentVO" parameterType="map">
+        SELECT
+            payment.*
+            , U.name as reg_user_name
+            , customer.name customer_name
+            , customer.customer_code customer_code
+            , loan.contract_code
+            , loan.loan_amount
+            , loan.loan_period
+            , loan.start_date
+            , loan.end_date
+            , LENGTH(payment.detail_no_list) - LENGTH(REPLACE(payment.detail_no_list, ',', '')) as countDetail
+            , (Select name from user_info Where user_no = loan.staff_user_no) as staffUserName
+
+        FROM loan_payment payment
+            INNER JOIN user_info U ON U.user_no = payment.reg_user_no
+            INNER JOIN loan loan ON loan.loan_no = payment.loan_no
+            INNER JOIN customer customer ON loan.customer_no = customer.customer_no
+        <include refid="whereClause"/>
+        ORDER BY DATE(payment.reg_date) ASC, loan.staff_user_no ASC, countDetail DESC
+        <if test="pageSize != null">
+            LIMIT #{startIndex}, #{pageSize}
+        </if>
+    </select>
+
+    <select id="count" resultType="long" parameterType="map">
+        SELECT
+            COUNT(payment.payment_no)
+        FROM loan_payment payment
+        INNER JOIN user_info U ON U.user_no = payment.reg_user_no
+        INNER JOIN loan loan ON loan.loan_no = payment.loan_no
+        INNER JOIN customer customer ON loan.customer_no = customer.customer_no
+
+        <include refid="whereClause"/>
+    </select>
+
+    <sql id="whereClause">
+        <where>
+            <if test="status != null">
+                AND payment.status = #{status}
+            </if>
+            <if test="staffUserNo != null">
+                AND loan.staff_user_no = #{staffUserNo}
+            </if>
+            <if test="startDate != null">
+                AND DATE(payment.reg_date) >= DATE(#{startDate})
+            </if>
+            <if test="endDate != null">
+                <![CDATA[ AND DATE(payment.reg_date) <= DATE(#{endDate}) ]]>
+            </if>
+        </where>
+    </sql>
+
+</mapper>

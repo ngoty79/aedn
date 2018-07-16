@@ -1,0 +1,115 @@
+/*page list*/
+.container-golfpackage-list .package .tab-pane .product-list {
+    width: 100%;
+}
+.container-golfpackage-list .tab-pane .product-list div.item:nth-child(2n),
+.container-golfpackage-list .tab-pane .product-list div.item:nth-child(2n-1) {
+    width: 490px;
+}
+.container-golfpackage-list .item .photo img {
+    width: 100%;
+}
+.truncate {
+    text-overflow: '';
+    /* Required for text-overflow to do anything */
+    white-space: nowrap;
+    overflow: hidden;
+}
+/*page view*/
+.container-golfpackage-view .item.view .thumnail-group img {
+    width: 24.25%;
+}
+.container-golfpackage-view .item .photo img {
+    margin-left: auto;
+    margin-right: auto;
+    width: 468px;
+}
+.img-golfpackage-big {
+    text-align: center;
+}
+.container-golfpackage-view .photo .badge-event {
+    left: 11px;
+    top: 10px;
+}
+.container-golfpackage-view .item.view .photo {
+    min-height: 399px;
+}
+
+.container-golfpackage-view .img-view-item {
+    width: 115px;
+    height: 75px;
+    display:inline-block;
+    padding: 2px;
+}
+
+.container-golfpackage-view .img-view-item .img-view-plan {
+    background: #ccc none repeat scroll 0 0;
+    border-radius: 0 !important;
+    height: 100%;
+    margin-top: 5px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.container-golfpackage-view .item.view .thumnail-group .img-view-item img {
+    width: 110px;
+    height: auto;
+}
+
+.product-noti img {
+    max-width: 100%;
+}
+
+.product-img img {
+    max-width: 100%;
+}
+
+/*page apply*/
+.text-apply-productAgreement {
+    height: 160px;
+    overflow-y: auto;
+}
+
+/*page reservation list*/
+.container-reservation-list .tabbable-custom .nav.nav-tabs.borderd {
+    border-top: 0px;
+    border-right: 0px;
+    border-left: 0px;
+}
+
+.container-reservation-list .tabbable-custom .nav-tabs.borderd li {
+    border-left:1px solid #ccc;
+    border-top:1px solid #ccc;
+    border-right:1px solid #ccc;
+}
+
+.error-msg {
+    color: #ff4242;
+}
+
+span.error-msg.range-people-count {
+    font-size: 12px;
+}
+
+
+@media screen and (min-width: 991px) and (max-width: 1235px){
+    .container-golfpackage-view .img-view-item {
+    width: 24%;
+    height: auto;
+  }
+  .container-golfpackage-view .item.view .thumnail-group .img-view-item img{
+    width:100%;
+  }
+}   
+@media screen and (max-width: 543px){
+    .container-golfpackage-view .img-view-item {
+    width: 24%;
+    height: auto;
+  }
+  .container-golfpackage-view .item.view .thumnail-group .img-view-item img{
+    width:100%;
+  }
+}  
+@media screen and (max-width: 543px){
+    .container-golfpackage-view .item.view .photo{padding:0;}
+} 

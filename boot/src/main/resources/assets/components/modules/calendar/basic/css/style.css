@@ -1,0 +1,20 @@
+#container-calendar .img-category {
+    width: 100%;
+    height: 26px;
+    text-align: center;
+    padding-bottom: 2px;
+    padding-top: 1px;
+}
+#container-calendar .fc-event-container img {
+    width: 95%;
+    height: 100%;
+}
+
+#modal-calendar-scheduleDetail .txt-schedule-content {
+    max-height: 500px;
+    overflow: auto;
+}
+
+#modal-calendar-scheduleDetail .txt-schedule-content img{
+    max-width: 90%;
+}

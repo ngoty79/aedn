@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.namowebiz.mugrun.applications.siteadmin.dao.customer.CustomerDao">
+    <resultMap id="customer" type="com.namowebiz.mugrun.applications.siteadmin.models.customer.Customer">
+        <id column="customer_no" property="customerNo"/>
+        <result column="customer_code" property="customerCode"/>
+        <result column="name" property="name"/>
+        <result column="sex" property="sex"/>
+        <result column="birthday" property="birthday"/>
+        <result column="phone" property="phone"/>
+        <result column="email" property="email"/>
+        <result column="social_id" property="socialId"/>
+        <result column="issue_date" property="issueDate"/>
+        <result column="issue_place" property="issuePlace"/>
+        <result column="address" property="address"/>
+        <result column="sub_address" property="subAddress"/>
+        <result column="customer_type" property="customerType"/>
+        <result column="job" property="job"/>
+        <result column="province_no" property="provinceNo"/>
+        <result column="district_no" property="districtNo"/>
+        <result column="town_no" property="townNo"/>
+        <result column="province_name" property="provinceName"/>
+        <result column="district_name" property="districtName"/>
+        <result column="town_name" property="townName"/>
+        <result column="passport_no" property="passportNo"/>
+        <result column="staff_user_no" property="staffUserNo"/>
+        <result column="staff_user_name" property="staffUserName"/>
+        <result column="delete_yn" property="deleteYn"/>
+
+        <result column="reg_date" property="regDate"/>
+        <result column="reg_user_no" property="regUserNo"/>
+        <result column="mod_date" property="modDate"/>
+        <result column="mod_user_no" property="modUserNo"/>
+    </resultMap>
+
+    <resultMap id="customerVO" extends="customer" type="com.namowebiz.mugrun.applications.siteadmin.models.customer.CustomerVO">
+        <result column="loanCount" property="loanCount"/>
+        <result column="currentDebt" property="currentDebt"/>
+        <result column="delay_days" property="delayDays"/>
+        <result column="delay_amount" property="delayAmount"/>
+        <result column="totalPaidAmount" property="totalPaidAmount"/>
+        <result column="loanStatus" property="loanStatus"/>
+        <result column="totalCustomer" property="totalCustomer"/>
+        <result column="totalActiveCustomer" property="totalActiveCustomer"/>
+        <result column="totalApproveCustomer" property="totalApproveCustomer"/>
+        <result column="reg_user_name" property="regUserName"/>
+        <result column="contract_code" property="contractCode"/>
+    </resultMap>
+
+    <select id="getByPK" resultMap="customer" parameterType="long">
+        SELECT cust.*
+               , U.name staff_user_name
+               , (Select name from user_info Where user_no = cust.reg_user_no) as reg_user_name
+               , (Select name from town Where town_no = cust.town_no) as town_name
+               , (Select name from district Where district_no = cust.district_no) as district_name
+               , (Select province_name from province Where province_no = cust.province_no) as province_name
+            FROM customer cust
+            LEFT OUTER JOIN user_info U ON U.user_no = cust.staff_user_no
+        WHERE  cust.customer_no = #{customerNo}
+    </select>
+
+
+    <insert id="insert" parameterType="com.namowebiz.mugrun.applications.siteadmin.models.customer.Customer"
+            useGeneratedKeys="true" keyColumn="customer_no" keyProperty="customerNo">
+        insert into customer
+        (
+            name,
+            sex,
+            birthday,
+            phone,
+            email,
+            social_id,
+            issue_date,
+            issue_place,
+            passport_no,
+            address,
+            sub_address,
+            customer_type,
+            job,
+            province_no,
+            district_no,
+            town_no,
+            staff_user_no,
+            customer_code,
+
+            reg_date,
+            reg_user_no
+        )
+        values
+        (
+            #{name} ,
+            #{sex} ,
+            #{birthday} ,
+            #{phone} ,
+            #{email} ,
+            #{socialId} ,
+            #{issueDate},
+            #{issuePlace},
+            #{passportNo} ,
+            #{address} ,
+            #{subAddress} ,
+            #{customerType} ,
+            #{job} ,
+            #{provinceNo} ,
+            #{districtNo} ,
+            #{townNo} ,
+            #{staffUserNo} ,
+            #{customerCode} ,
+
+            #{regDate} ,
+            #{regUserNo}
+        )
+    </insert>
+
+    <update id="update" parameterType="com.namowebiz.mugrun.applications.siteadmin.models.customer.Customer" >
+        UPDATE customer
+        SET
+            name = #{name,jdbcType=VARCHAR},
+            birthday = #{birthday},
+            sex = #{sex},
+            staff_user_no = #{staffUserNo},
+            phone = #{phone},
+            email = #{email,jdbcType=VARCHAR},
+            customer_code = #{customerCode,jdbcType=VARCHAR},
+            social_id = #{socialId},
+            issue_date = #{issueDate},
+            issue_place = #{issuePlace},
+            passport_no = #{passportNo},
+            address = #{address},
+            sub_address = #{subAddress},
+            customer_type = #{customerType},
+            job = #{job},
+            town_no = #{townNo},
+            mod_date = #{modDate},
+            mod_user_no = #{modUserNo}
+        WHERE customer_no = #{customerNo}
+    </update>
+
+    <delete id="delete" parameterType="long">
+        UPDATE customer SET delete_yn = 1  WHERE customer_no = #{customerNo}
+    </delete>
+
+    <select id="getSummary" resultMap="customerVO" parameterType="map">
+        SELECT
+            (Select COUNT(customer_no) FROM customer where delete_yn = 0) as totalCustomer,
+            (Select COUNT(DISTINCT C.customer_no) FROM customer C INNER JOIN loan L ON L.customer_no = C.customer_no  where C.delete_yn = 0 AND L.delete_yn = 0 AND L.status != 'N') as totalActiveCustomer,
+            (Select COUNT(DISTINCT C.customer_no) FROM customer C INNER JOIN loan L ON L.customer_no = C.customer_no  where C.delete_yn = 0 AND L.delete_yn = 0 AND L.status = 'A') as totalApproveCustomer
+        FROM Dual
+    </select>
+    <select id="list" resultMap="customerVO" parameterType="map">
+        <bind name="currentDate" value="@com.namowebiz.mugrun.applications.framework.common.utils.DateUtil@getCurrentDate()"/>
+        SELECT * FROM(
+            SELECT cust.*
+                  , U.name staff_user_name
+                  , (Select name from user_info Where user_no = cust.reg_user_no) as reg_user_name
+                  , IFNULL((Select status from loan Where customer_no = cust.customer_no order by reg_date DESC limit 0,1), 'N') as loanStatus
+                  , loanInfo.loanCount
+                  , loanInfo.currentDebt
+                  , loanInfo.delay_days
+                  , loanInfo.delay_amount
+                  , loanInfo.contract_code
+                FROM customer cust
+                LEFT OUTER JOIN user_info U ON U.user_no = cust.staff_user_no
+                LEFT OUTER JOIN (
+                    SELECT
+                        A.customer_no
+                        , COUNT(A.customer_no) as loanCount
+                        , SUM(A.delay_days) as delay_days
+                        , SUM(A.delay_amount) as delay_amount
+                        , SUM(A.currentDebt) as currentDebt
+                        , GROUP_CONCAT(A.contract_code) contract_code
+                    FROM (
+                    <![CDATA[
+                        select
+                            L.loan_no
+                            , L.customer_no
+                            , L.contract_code
+                            , (select SUM(capital) from loan_detail where loan_no = L.loan_no and confirm_date IS NULL) as currentDebt
+                            , (select COUNT(loan_no)  from loan_detail where loan_no = L.loan_no and confirm_date IS NULL and end_date <= DATE(#{currentDate}) and L.status != 'F') as delay_days
+                            , (select IFNULL(SUM(amount), 0)  from loan_detail where loan_no = L.loan_no and confirm_date IS NULL and end_date <= DATE(#{currentDate}) and L.status != 'F') as delay_amount
+                            from loan L WHERE L.status = 'A'
+                    ]]>
+                        ) A GROUP BY A.customer_no
+            ) loanInfo ON loanInfo.customer_no = cust.customer_no
+        ) F    
+        <include refid="whereClause"/>
+        <if test="sortName != null">
+            <choose>
+                <when test="sortName == 'townName'">
+                    ORDER BY F.town_name ${sortOrder}
+                </when>
+                <when test="sortName == 'name'">
+                    ORDER BY F.name ${sortOrder}
+                </when>
+                <when test="sortName == 'staffUserName'">
+                    ORDER BY F.staff_user_name ${sortOrder}
+                </when>
+                <when test="sortName == 'regDate'">
+                    ORDER BY F.reg_date ${sortOrder}
+                </when>
+                <when test="sortName == 'regUserName'">
+                    ORDER BY F.reg_user_name ${sortOrder}
+                </when>
+                <otherwise>
+                    ORDER BY detail.end_date ASC
+                </otherwise>
+            </choose>
+        </if>
+        <if test="sortName == null">
+            ORDER BY F.reg_date DESC
+        </if>
+        <if test="pageSize != null">
+            LIMIT #{startIndex}, #{pageSize}
+        </if>
+    </select>
+
+    <select id="count" resultType="long" parameterType="map">
+        SELECT COUNT(F.customer_no) FROM(
+            SELECT cust.*
+                  , IFNULL((Select status from loan Where customer_no = cust.customer_no order by reg_date limit 0,1), 'N') as loanStatus
+                FROM customer cust
+                LEFT OUTER JOIN user_info U ON U.user_no = cust.staff_user_no
+        ) F
+        <include refid="whereClause"/>
+    </select>
+
+
+    <sql id="whereClause">
+        <where>
+            AND (F.delete_yn IS NULL OR F.delete_yn = 0)
+            <if test="currentMonth != null">
+                AND MONTH(F.reg_date) = MONTH(CURRENT_DATE())
+            </if>
+            <if test="name != null">
+                AND F.name LIKE CONCAT('%', #{name}, '%')
+            </if>
+            <if test="email != null">
+                AND F.email LIKE CONCAT('%', #{email}, '%')
+            </if>
+            <if test="phone != null">
+                AND F.phone LIKE CONCAT('%', #{phone}, '%')
+            </if>
+            <if test="socialId != null">
+                AND F.social_id LIKE CONCAT('%', #{socialId}, '%')
+            </if>
+            <if test="staffUserNo != null">
+                AND F.staff_user_no = #{staffUserNo}
+            </if>
+            <if test="townNo != null">
+                AND F.town_no = #{townNo}
+            </if>
+            <if test="loanStatus != null">
+                AND F.loanStatus = #{loanStatus}
+            </if>
+            <if test="searchText != null">
+                <choose>
+                    <when test="searchType == 'name'">
+                        AND F.name LIKE CONCAT('%', #{searchText}, '%')
+                    </when>
+                    <when test="searchType == 'phone'">
+                        AND F.phone LIKE CONCAT('%', #{searchText}, '%')
+                    </when>
+                    <when test="searchType == 'socialId'">
+                        AND F.social_id LIKE CONCAT('%', #{searchText}, '%')
+                    </when>
+                    <otherwise>
+                        AND CONCAT(F.name, F.phone, F.social_id) LIKE CONCAT('%', #{searchText}, '%')
+                    </otherwise>
+                </choose>
+
+            </if>
+
+        </where>
+    </sql>
+
+    <select id="getMaxCustomerCode" resultType="string">
+        SELECT MAX(customer_code) FROM customer
+    </select>
+</mapper>

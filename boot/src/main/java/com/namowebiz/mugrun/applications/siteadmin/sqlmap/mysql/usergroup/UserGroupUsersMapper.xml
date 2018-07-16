@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.namowebiz.mugrun.applications.siteadmin.dao.usergroup.UserGroupUsersMapper">
+
+    <resultMap id="userGroupUsers" type="com.namowebiz.mugrun.applications.siteadmin.models.usergroup.UserGroupUsers">
+        <id column="user_group_no" property="userGroupNo"/>
+        <id column="user_no" property="userNo"/>
+        <result column="reg_date" property="regDate"/>
+        <result column="reg_user_no" property="regUserNo"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="com.namowebiz.mugrun.applications.siteadmin.models.usergroup.UserGroupUsers">
+        insert into user_group_users
+        (
+        user_group_no,
+        user_no,
+        reg_date,
+        reg_user_no
+        )
+        values
+        (
+        #{userGroupNo} ,
+        #{userNo} ,
+        NOW(),
+        #{regUserNo}
+        )
+    </insert>
+
+    <delete id="deleteByUserNo" parameterType="long">
+        DELETE FROM user_group_users WHERE user_no = #{userNo}
+    </delete>
+
+    <select id="deleteByPK" parameterType="map">
+        DELETE FROM user_group_users
+        WHERE user_group_no = #{userGroupNo} AND user_no = #{userNo}
+    </select>
+
+    <select id="checkUsersAssigned" resultMap="userGroupUsers" parameterType="map">
+        SELECT *
+        FROM user_group_users
+        WHERE user_group_no <![CDATA[ <> ]]> #{userGroupNo}
+        AND user_no IN
+        <foreach collection="listUserNo" open="(" separator="," close=")" item="item">
+            #{item}
+        </foreach>
+        LIMIT 1
+    </select>
+
+    <select id="getByPK" resultMap="userGroupUsers" parameterType="map">
+        SELECT *
+        FROM user_group_users
+        WHERE user_group_no = ${userGroupNo}
+        AND user_no = #{userNo}
+    </select>
+
+    <select id="getByUserNo" resultMap="userGroupUsers" parameterType="long">
+        SELECT *
+        FROM user_group_users
+        WHERE user_no = #{userNo}
+    </select>
+
+    <select id="getByUserGroupNo" resultMap="userGroupUsers" parameterType="long">
+        SELECT *
+        FROM user_group_users
+        WHERE user_group_no = #{userGroupNo}
+    </select>
+
+    <delete id="deleteOtherGroupOfUser" parameterType="map">
+        DELETE FROM user_group_users
+        WHERE user_no = #{userNo}
+        AND user_group_no <![CDATA[ <> ]]> #{userGroupNo}
+    </delete>
+
+    <update id="updateUserGroupNo" parameterType="map">
+        UPDATE user_group_users
+        SET
+        user_group_no = #{newUserGroupNo}
+        WHERE user_group_no = #{oldUserGroupNo}
+    </update>
+</mapper>
+ 

@@ -1,0 +1,113 @@
+<form class="form-horizontal" autocomplete="off">
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+    <input type="hidden" name="loanNo" th:value="${loan.loanNo}"/>
+    <input type="hidden" name="customerNo" th:value="${customer.customerNo}"/>
+    <div class="row form-group">
+        <label class="control-label col-md-2">Họ tên:</label>
+        <label class="control-label col-md-5 text-align-left"><b>[[${customer.name}]]</b>&nbsp;&nbsp;&nbsp; (Số ĐT: <b>[[${customer.phoneFormat}]] </b>)</label>
+        <label class="control-label col-md-5 text-align-left">CMND: <b>[[${customer.socialIdFormat}]]</b>&nbsp;&nbsp;&nbsp; Ngày Sinh: <b>[[${customer.birthday}]]</b></label>
+    </div>
+    <div class="row form-group">
+        <label class="control-label col-md-2">Nơi thường trú:</label>
+        <label class="control-label col-md-8 text-align-left">[[${customer.address}]]</label>
+    </div>
+    <div class="row form-group" style="padding-bottom: 10px; border-bottom: 1px solid #ddd;">
+        <label class="control-label col-md-2">Nơi tạm trú:</label>
+        <label class="control-label col-md-8 text-align-left">[[${customer.subAddress}]]</label>
+    </div>
+    <div class="row form-group">
+        <label class="control-label col-md-2"><span class="required" aria-required="true">* </span> NV Phụ Trách</label>
+        <div class="col-md-3">
+            <select class="form-control input-sm" name="staffUserNo">
+                <option value="">Chọn</option>
+                <option th:each="user : ${userList}" th:value="${user.userNo}" th:text="${user.name}" th:selected="${loan.staffUserNo == user.userNo}? 'selected'"></option>
+            </select>
+        </div>
+        <label class="control-label col-md-2"><span class="required" aria-required="true">* </span> Đại diện</label>
+        <div class="col-md-3">
+            <select class="form-control input-sm" name="dutyStaffNo">
+                <option value="">Chọn</option>
+                <option th:each="user : ${userList}" th:value="${user.userNo}" th:text="${user.name}" th:selected="${loan.dutyStaffNo == user.userNo}? 'selected'"></option>
+            </select>
+        </div>
+    </div>
+    <div class="row form-group">
+        <label class="control-label col-md-2"><span class="required" aria-required="true">* </span> Kỳ hạng vay</label>
+        <div class="col-md-3">
+            <select class="form-control input-sm" name="loanPeriod" th:data-loan-period="${loan.loanPeriod}">
+                <option value="">Chọn</option>
+                <option value="1">1 Tháng</option>
+                <option value="2">2 Tháng</option>
+                <option value="3">3 Tháng</option>
+                <option value="4">4 Tháng</option>
+                <option value="5">5 Tháng</option>
+                <option value="6">6 Tháng</option>
+                <option value="7">7 Tháng</option>
+                <option value="8">8 Tháng</option>
+                <option value="9">9 Tháng</option>
+                <option value="12">12 Tháng</option>
+                <option value="18">18 Tháng</option>
+                <option value="24">2 năm</option>
+                <option value="36">3 năm</option>
+            </select>
+        </div>
+    </div>
+    <div class="row form-group">
+        <label class="control-label col-md-2"><span class="required" aria-required="true">* </span> Thời gian vay</label>
+        <div class="col-md-5">
+            <div class="input-group" id="datepicker">
+                <span class="input-group-addon">Từ ngày</span>
+                <input type="text" class="input-sm form-control letter-spacing-2" name="startDate" th:value="${#dates.format(loan.startDate, 'dd/MM/yyyy')}"/>
+                <span class="input-group-addon">Đến</span>
+                <input type="text" class="input-sm form-control letter-spacing-2" readonly name="endDate" th:value="${#dates.format(loan.endDate, 'dd/MM/yyyy')}"/>
+            </div>
+        </div>
+        <label class="control-label col-md-2">Tổng số ngày vay:</label>
+        <label class="control-label col-md-2 text-align-left"><b id="label-loan-days"></b> </label>
+    </div>
+
+    <div class="row form-group" style="margin-bottom: 0px;">
+        <label class="control-label col-md-2"><span class="required" aria-required="true">* </span> Số tiền vay</label>
+        <div class="col-md-3">
+            <input type="text" class="form-control input-sm" name="loanAmount" th:value="${#numbers.formatInteger(loan.loanAmount,3,'COMMA')}"/>
+        </div>
+
+    </div>
+    <div class="row form-group">
+        <label class="control-label col-md-2 text-align-left"> </label>
+        <label id="label-read-currency" class="control-label col-md-7 text-align-left bold"></label>
+    </div>
+    <div class="row form-group">
+        <label class="control-label col-md-2"><span class="required" aria-required="true">* </span> Phương thức vay</label>
+        <div class="col-md-2">
+            <select class="form-control input-sm" name="loanType">
+                <option value="1">Góp đều</option>
+                <!--<option value="2">Dư nợ giảm dần</option>-->
+            </select>
+        </div>
+        <label class="control-label col-md-2"><span class="required" aria-required="true">* </span> Hình thức trả</label>
+        <div class="col-md-2" style="padding-right: 5px;">
+            <select class="form-control input-sm" name="loanPayType" >
+                <option value="">Chọn</option>
+                <option value="1" th:selected="${loan.loanPayType == '1'}? 'selected'">Hàng ngày</option>
+                <option value="2" th:selected="${loan.loanPayType == '2'}? 'selected'">Hàng tuần</option>
+                <!--<option value="3" th:selected="${loan.loanPayType == '3'}? 'selected'">Hàng Tháng</option>-->
+            </select>
+        </div>
+        <label class="control-label col-md-2"><span class="required" aria-required="true">* </span> Lãi suất</label>
+        <div class="col-md-2 input-icon input-icon-sm right" style="padding-right: 10px;width: 100px;">
+            <i class="fa">%</i>
+            <input type="text" class="form-control input-sm" name="loanInterest" th:value="${loan.loanInterest}"/>
+        </div>
+    </div>
+    <div class="row form-group" style="padding-bottom: 15px; border-bottom: 1px solid #ddd;">
+        <label class="control-label col-md-2">Tài sản đảm bảo</label>
+        <div class="col-md-10">
+            <textarea class="form-control" name="customerAsset">[[${loan.customerAsset}]]</textarea>
+        </div>
+    </div>
+    <div id="container-credit-info" class="row form-group" >
+
+    </div>
+
+</form>

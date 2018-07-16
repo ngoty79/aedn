@@ -1,0 +1,33 @@
+<div class="modal" id="modal-payment-detail" style="z-index: 10080;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-green bg-font-green">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title" style="text-align: left;">Lịch Trả Của Khách Hàng</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                    <div class="row form-group">
+                        <label class="control-label col-lg-2 col-md-3 col-sm-5">Trạng thái</label>
+                        <div class="col-lg-3 col-md-3 col-sm-5">
+                            <select class="form-control" name="status">
+                                <option value="">Tất cả</option>
+                                <option value="P">Đã Thu</option>
+                                <option value="WW">Đợi Khớp Quỹ</option>
+                                <option value="N">Chưa Thu</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </form>
+                <table id="table-loan-detail-list"></table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline green" data-dismiss="modal" aria-hidden="true">Thoát</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/assets/applications/siteadmin/scripts/customer/popupPaymentDetail.js" type="text/javascript"></script>

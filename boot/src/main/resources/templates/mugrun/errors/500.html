@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="'mugrun/errors/error_common_layout'">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+
+
+<head>
+    <title>500</title>
+</head>
+<!-- END HEAD -->
+
+<body class="page-500-full-page">
+<div layout:fragment="error-content" class="col-md-12 page-500">
+    <div class=" number font-red"> 500 </div>
+    <div class=" details">
+        <h3>Oops! Something went wrong.</h3>
+        <p> We are fixing it! Please come back in a while.
+            <br/> </p>
+        <p>
+            <a href="/" class="btn red btn-outline"> Return home </a>
+            <br/> </p>
+    </div>
+</div>
+</body>
+
+</html>

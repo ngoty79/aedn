@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="'siteadmin/layout/common_layout'">
+<head>
+    <link href="/assets/templates/admin/apps/css/inbox.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/templates/admin/global/plugins/jstree/dist/themes/default/style.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/templates/admin/global/plugins/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/vendors/bootstrap.table/1.9.1/bootstrap-table.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/vendors/jquery.loadmask/jquery.loadmask.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/vendors/icheck/skins/all.css" rel="stylesheet" type="text/css">
+    <link href="/assets/templates/admin/global/plugins/bootstrap-colorpicker/css/colorpicker.css" rel="stylesheet" type="text/css">
+    <link href="/assets/templates/admin/global/plugins/jquery-minicolors/jquery.minicolors.css" rel="stylesheet" type="text/css">
+    <link href="/assets/templates/admin/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" type="text/css">
+    <link href="/assets/applications/siteadmin/css/userpoint/index.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<!-- BEGIN CONTENT -->
+<div layout:fragment="page-content" class="page-content-wrapper">
+    <!-- BEGIN CONTENT BODY -->
+    <div class="page-content" id="container-userPointIndex">
+        <!-- BEGIN PAGE HEADER-->
+
+        <!-- BEGIN PAGE TITLE-->
+        <h3 class="page-title"> 포인트관리 <span class="page-description inline">회원별 포인트 관리를 할 수 있습니다.</span></h3>
+        <!-- END PAGE TITLE-->
+        <!-- END PAGE HEADER-->
+
+        <!--공지사항 테이블 시작-->
+        <div class="inbox">
+            <div class="row">
+                <div id="container-userPointIndex-contents">
+                    <div class="inbox-body" >
+                        <div class="inbox-content">
+                            <div id="container-userPointIndex-info">
+                                <div id="user-point-search">
+                                    <div class="col-md-4 col-sm-4" id="point-search-calculate">
+                                        <label class="control-label">
+                                            건수:
+                                        </label>
+                                        <label class="control-label" id="point-count">
+                                        </label>
+                                        <label class="control-label" id="point-user-id">
+                                        </label>
+                                        <label class="control-label" id="label-point-sum">
+                                        </label>
+                                        <label class="control-label" id="point-sum">
+                                        </label>
+                                        <label class="control-label">
+                                            point)
+                                        </label>
+                                    </div>
+                                    <span class="pull-right col-md-4 col-sm-4 col-xs-4" id="point-search-actions">
+                                        <div class="col-md-4 col-sm-4 col-xs-4" id="container-search">
+                                            <select class="form-control" name="fieldSearchUser">
+                                                <option value="searchAll">전체</option>
+                                                <option value="searchId">아이디</option>
+                                                <option value="searchName">이름</option>
+                                            </select>
+                                        </div>
+                                        <div class="input-group">
+                                            <input id="text-search-user-point" name="textSearchUser" type="text" class="form-control">
+                                            <span id="search-clear-user-point" class="glyphicon glyphicon-remove"></span>
+                                            <span class="input-group-addon">
+                                                <i  class="fa fa-search pointer-click-icon"></i>
+                                            </span>
+                                        </div>
+                                    </span>
+                                </div>
+                                <div id="user-point-actions">
+                                    <button type="button" id="btn-select-all-point" class="btn btn-sm btn-circle btn-outline green"><i class="fa fa-users"></i> 전체선택</button>
+                                    <button type="button" id="btn-delete-selected-point" class="btn btn-sm btn-circle btn-outline green"><i class="glyphicon glyphicon-remove"></i> 선택삭제</button>
+                                    <span class="pull-right">
+                                        <button type="button" id="btn-add-user-point" class="btn btn-sm btn-circle btn-outline green"><i class="fa fa-plus"></i> 선택회원 포인트 추가</button>
+                                    </span>
+                                </div>
+                                <div id="user-point-table">
+                                    <table id="table-user-point-list"></table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="modal-user-add-point" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header bg-green bg-font-green">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                        <h4 class="modal-title" style="text-align: left;">포인트 추가</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form id="form-user-add-point" class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-xs-3 control-label">회원아이디:</label>
+                                <div class="col-xs-4 controls">
+                                    <input name="userNo" class="display-none" type="text"/>
+                                    <input name="userID" class="form-control form-control-solid" type="text" disabled/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-3 control-label">포인트 내용:</label>
+                                <div class="col-xs-6 controls">
+                                    <input name="pointName" class="form-control form-control-solid" type="text" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-3 control-label">포인트:</label>
+                                <div class="col-xs-3 controls">
+                                    <input name="pointValue" class="form-control form-control-solid" type="text" />
+                                </div>
+                                <label class="col-xs-1 control-label reset-padding-left">point</label>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer text-center">
+                        <button type="button" class="btn green" id="btn-add-point-save">저장</button>
+                        <button type="button" class="btn btn-outline green" data-dismiss="modal">취소</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END CONTENT BODY -->
+</div>
+<!-- END CONTENT -->
+
+<div style="display: none;" layout:fragment="page-scripts">
+    <script src="/assets/vendors/bootstrap.table/1.9.1/bootstrap-table.min.js" type="text/javascript"></script>
+    <script src="/assets/vendors/bootstrap.table/1.9.1/locale/bootstrap-table-ko-KR.min.js" type="text/javascript"></script>
+    <script src="/assets/templates/admin/global/plugins/bootstrap-select/js/bootstrap-select.min.js" type="text/javascript"></script>
+    <script src="/assets/vendors/jquery.tmpl/1.4.2/jquery.tmpl.min.js" type="text/javascript"></script>
+    <script src="/assets/templates/admin/global/plugins/jstree/dist/jstree.min.js" type="text/javascript"></script>
+    <script src="/assets/vendors/icheck/icheck.min.js" type="text/javascript"></script>
+    <script src="/assets/vendors/smarteditor/2.0/js/HuskyEZCreator.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/assets/vendors/jquery.loadmask/jquery.loadmask.min.js" type="text/javascript"></script>
+    <script src="/assets/vendors/jquery-serialize-object/2.5.0/jquery.serialize-object.min.js" type="text/javascript"></script>
+    <script src="/assets/templates/admin/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js" type="text/javascript"></script>
+    <script type="text/javascript" src="https://spi.maps.daum.net/imap/map_js_init/postcode.v2.js"></script>
+    <script src="/assets/templates/admin/global/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js" type="text/javascript"></script>
+    <script src="/assets/templates/admin/global/plugins/jquery-minicolors/jquery.minicolors.min.js" type="text/javascript"></script>
+    <script src="/assets/applications/siteadmin/scripts/userpoint/index.js" type="text/javascript"></script>
+</div>
+</body>
+</html>

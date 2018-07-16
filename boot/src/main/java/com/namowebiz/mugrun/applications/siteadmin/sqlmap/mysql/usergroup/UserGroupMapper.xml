@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.namowebiz.mugrun.applications.siteadmin.dao.usergroup.UserGroupMapper">
+
+    <resultMap id="userGroup" type="com.namowebiz.mugrun.applications.siteadmin.models.usergroup.UserGroup">
+        <id column="user_group_no" property="userGroupNo"/>
+        <result column="user_group_name" property="userGroupName"/>
+        <result column="user_group_desc" property="userGroupDesc"/>
+        <result column="default_yn" property="defaultYn"/>
+        <result column="parent_user_group_no" property="parentUserGroupNo"/>
+        <result column="delete_yn" property="approveYn"/>
+        <result column="approve_yn" property="approveYn"/>
+        <result column="finish_yn" property="finishYn"/>
+        <result column="revenue_yn" property="revenueYn"/>
+        <result column="cost_yn" property="costYn"/>
+        <result column="capital_yn" property="capitalYn"/>
+        <result column="menus" property="menus"/>
+
+        <result column="reg_date" property="regDate"/>
+        <result column="reg_user_no" property="regUserNo"/>
+        <result column="mod_date" property="modDate"/>
+        <result column="mod_user_no" property="modUserNo"/>
+    </resultMap>
+
+    <update id="updateGroupPermission" parameterType="com.namowebiz.mugrun.applications.siteadmin.models.usergroup.UserGroup">
+        UPDATE user_group
+        SET
+            approve_yn = #{approveYn},
+            finish_yn = #{finishYn},
+            revenue_yn = #{revenueYn},
+            cost_yn = #{costYn},
+            capital_yn = #{capitalYn},
+            menus = #{menus},
+            mod_date = #{modDate},
+            mod_user_no = #{modUserNo}
+        WHERE user_group_no = #{userGroupNo}
+    </update>
+    
+	<select id="list" resultMap="userGroup" parameterType="map">
+		SELECT 
+			user_group_no AS userGroupNo
+			, user_group_name AS userGroupName
+			, user_group_desc AS userGroupDesc
+			, default_yn AS defaultYn
+			, parent_user_group_no AS parentUserGroupNo
+			, approve_yn
+			, finish_yn
+			, revenue_yn
+			, cost_yn
+			, capital_yn
+			, menus
+			, reg_date AS regDate
+			, reg_user_no AS regUserNo
+			, mod_date AS modDate
+			, mod_user_no AS modUserNo
+		FROM user_group A
+		WHERE delete_yn = 0
+        <if test="defaultYn != null">
+            AND default_yn = #{defaultYn}
+        </if>
+		<if test="query!=null">
+            <if test="fields==null">
+                AND (LOWER(A.user_group_name) LIKE CONCAT('%',LOWER(#{query}),'%') OR LOWER(A.user_group_no) LIKE CONCAT('%',LOWER(#{query}),'%'))
+            </if>
+            <if test="fields!=null">
+                AND
+                <foreach item="item" index="index" collection="fields" open="(" separator="OR" close=")"> 
+   					LOWER(A.${item}) LIKE CONCAT('%',LOWER(#{query}),'%')
+   	  			</foreach>
+            </if>
+        </if>
+
+        <choose>
+            <when test="orderGroupName != null">
+                ORDER BY A.user_group_name ASC
+            </when>
+            <otherwise>
+                ORDER BY A.user_group_no ASC
+            </otherwise>
+        </choose>
+
+		<if test="size!=null">
+            LIMIT #{size} OFFSET #{firstIndex}
+   		</if>
+	</select>
+
+
+    <select id="getByPK" parameterType="long" resultMap="userGroup" >
+         SELECT
+            A.*
+        FROM user_group A
+            WHERE A.user_group_no = #{userGroupNo}
+    </select>
+
+    <select id="getUserGroupListOfUser" parameterType="long" resultMap="userGroup" >
+        SELECT
+            A.*
+        FROM user_group A, user_group_users B
+            WHERE A.user_group_no = B.user_group_no AND B.user_no = #{userNo}
+        ORDER BY LOWER(A.user_group_name)
+    </select>
+
+
+    <insert id="insert" parameterType="com.namowebiz.mugrun.applications.siteadmin.models.usergroup.UserGroup"
+            useGeneratedKeys="true" keyColumn="user_group_no" keyProperty="userGroupNo">
+        INSERT INTO user_group
+        (
+            user_group_name,
+            user_group_desc,
+            default_yn,
+            parent_user_group_no,
+            reg_date,
+            reg_user_no
+        )
+        values
+        (
+            #{userGroupName},
+            #{userGroupDesc},
+            #{defaultYn},
+            #{parentUserGroupNo},
+            NOW(),
+            #{regUserNo}
+        )
+
+        <selectKey resultType="long" keyProperty="userGroupNo">
+            <![CDATA[
+            SELECT LAST_INSERT_ID() AS userGroupNo;
+          ]]>
+        </selectKey>
+    </insert>
+
+    <update id="update" parameterType="com.namowebiz.mugrun.applications.siteadmin.models.usergroup.UserGroup">
+        UPDATE user_group
+        SET
+        user_group_name = #{userGroupName},
+        user_group_desc = #{userGroupDesc},
+        default_yn = #{defaultYn},
+        parent_user_group_no = #{parentUserGroupNo},
+        mod_date = NOW(),
+        mod_user_no = #{modUserNo}
+        WHERE user_group_no = #{userGroupNo}
+    </update>
+
+    <select id="checkDuplicateName" resultMap="userGroup" parameterType="map">
+        SELECT *
+        FROM user_group
+        WHERE user_group_name LIKE #{userGroupName}
+        <if test="userGroupNo!=null">
+            AND user_group_no <![CDATA[<>]]> #{userGroupNo}
+        </if>
+        LIMIT 1
+    </select>
+
+    <delete id="deleteByPK" parameterType="long">
+        UPDATE user_group SET delete_yn = 1
+            WHERE user_group_no = #{userGroupNo}
+    </delete>
+
+    <select id="getDefaultUserGroup" resultMap="userGroup">
+        SELECT *
+        FROM user_group
+        WHERE default_yn = 1
+        LIMIT 1
+    </select>
+</mapper>
+ 

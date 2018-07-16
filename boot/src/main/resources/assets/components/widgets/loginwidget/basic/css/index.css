@@ -1,0 +1,60 @@
+.container-widget-login{
+    display: inline-block;
+    float: right;
+    height: 100%;
+    min-height: 30px!important;
+    background: #2b3540;
+}
+.container-widget-login .container-widget-login-content{
+    display: table;
+    height: 100%;
+    background: transparent;
+}
+.container-widget-login > .container-widget-login-content > ul {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.container-widget-login > .container-widget-login-content > ul > li {
+    float: left;
+}
+
+.container-widget-login > .container-widget-login-content > ul > li > a {
+    height: 30px;
+    line-height: 30px;
+    font-family: 'NanumGothic';
+    color: #fff;
+    display: block;
+    padding: 0 10px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+@media screen and (max-width: 460px){
+    .container-widget-login{
+        display: block;
+        float: inherit;
+        background: white;
+    }
+    .container-widget-login .container-widget-login-content{
+        display: block;
+        height: 100%;
+        background: transparent;
+    }
+    .container-widget-login > .container-widget-login-content > ul {
+        display: inherit;
+        vertical-align: inherit;
+    }
+
+    .container-widget-login > .container-widget-login-content > ul > li {
+        float: inherit;
+        display: list-item;
+    }
+
+    .container-widget-login > .container-widget-login-content > ul > li > a {
+        color: black;
+        padding: 0px;
+        font-size: 14px;
+    }
+}

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.namowebiz.mugrun.applications.siteadmin.dao.salary.SalaryDetailMapper">
+    <resultMap id="salaryDetail" type="com.namowebiz.mugrun.applications.siteadmin.models.salary.SalaryDetail">
+        <id column="salary_detail_no" property="salaryDetailNo"/>
+        <result column="user_no" property="userNo"/>
+        <result column="salary" property="salary"/>
+        <result column="allowance" property="allowance"/>
+        <result column="insurance" property="insurance"/>
+        <result column="extra_cost" property="extraCost"/>
+        <result column="month" property="month"/>
+        <result column="year" property="year"/>
+        <result column="status" property="status"/>
+        <result column="approve_date" property="approveDate"/>
+        <result column="approve_user_no" property="approveUserNo"/>
+
+        <result column="reg_date" property="regDate"/>
+        <result column="reg_user_no" property="regUserNo"/>
+        <result column="mod_date" property="modDate"/>
+        <result column="mod_user_no" property="modUserNo"/>
+    </resultMap>
+
+    <resultMap id="salaryDetailVO" extends="salaryDetail" type="com.namowebiz.mugrun.applications.siteadmin.models.salary.SalaryDetailVO">
+        <result column="reg_user_name" property="regUserName"/>
+        <result column="user_name" property="userName"/>
+        <result column="approveUserName" property="approveUserName"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="com.namowebiz.mugrun.applications.siteadmin.models.salary.SalaryDetail"
+            useGeneratedKeys="true" keyColumn="salary_detail_no" keyProperty="salaryDetailNo">
+        <bind name="currentDate" value="@com.namowebiz.mugrun.applications.framework.common.utils.DateUtil@getCurrentDate()"/>
+        insert into salary_detail(
+                  user_no,
+                  month,
+                year,
+                salary,
+                status,
+                <if test="allowance != null">
+                    allowance,
+                </if>
+                <if test="insurance != null">
+                    insurance,
+                </if>
+                <if test="extraCost != null">
+                    extra_cost,
+                </if>
+                reg_date,
+                reg_user_no)
+
+        VALUES(
+            #{userNo},
+            #{month},
+            #{year},
+            #{salary},
+            #{status},
+            <if test="allowance != null">
+                #{allowance},
+            </if>
+            <if test="insurance != null">
+                #{insurance},
+            </if>
+            <if test="extraCost != null">
+                #{extraCost},
+            </if>
+            #{currentDate},
+            #{userNo}
+        )
+    </insert>
+
+    <delete id="delete" parameterType="long">
+        DELETE FROM salary_detail
+          WHERE salary_detail_no = #{salaryDetailNo}
+    </delete>
+
+    <update id="update" parameterType="com.namowebiz.mugrun.applications.siteadmin.models.salary.SalaryDetail">
+        <bind name="currentDate" value="@com.namowebiz.mugrun.applications.framework.common.utils.DateUtil@getCurrentDate()"/>
+        UPDATE salary_detail
+            SET
+              month = #{month},
+              year = #{year},
+              salary = #{salary},
+              allowance = #{allowance},
+              insurance = #{insurance},
+              extra_cost = #{extraCost},
+              mod_user_no = #{modUserNo},
+              mod_date = #{currentDate}
+          WHERE salary_detail_no = #{salaryDetailNo}
+    </update>
+
+    <update id="approve" parameterType="com.namowebiz.mugrun.applications.siteadmin.models.salary.SalaryDetail">
+        <bind name="currentDate" value="@com.namowebiz.mugrun.applications.framework.common.utils.DateUtil@getCurrentDate()"/>
+          UPDATE salary_detail
+            SET
+              status = 'A',
+              approve_user_no = #{approveUserNo},
+              mod_user_no = #{modUserNo},
+              approve_date = #{currentDate}
+          WHERE salary_detail_no = #{salaryDetailNo}
+    </update>
+
+    <select id="list" resultMap="salaryDetailVO" parameterType="map">
+        SELECT
+            D.*
+            , (Select name from user_info Where user_no = D.reg_user_no) as reg_user_name
+            , (Select name from user_info Where user_no = D.approve_user_no) as approveUserName
+            , U.name as user_name
+        FROM salary_detail D
+            LEFT OUTER JOIN user_info U ON U.user_no = D.user_no
+        <include refid="whereClause"/>
+        ORDER BY reg_date DESC
+        <if test="pageSize != null">
+            LIMIT #{startIndex}, #{pageSize}
+        </if>
+    </select>
+
+    <select id="count" resultType="long" parameterType="map">
+        SELECT
+            COUNT(D.salary_detail_no)
+        FROM salary_detail D
+        LEFT OUTER JOIN user_info U ON U.user_no = D.user_no
+        <include refid="whereClause"/>
+    </select>
+
+
+    <select id="getByPK" resultMap="salaryDetailVO" parameterType="long">
+        SELECT D.*, U.name as user_name
+          FROM salary_detail D
+          LEFT OUTER JOIN user_info U ON U.user_no = D.user_no
+          WHERE D.salary_detail_no = #{salaryDetailNo}
+    </select>
+
+
+    <sql id="whereClause">
+        <where>
+            <if test="status != null">
+                AND D.status = #{status}
+            </if>
+            <if test="month != null">
+                AND D.month = #{month}
+            </if>
+            <if test="year != null">
+                AND D.year = #{year}
+            </if>
+            <if test="userNo != null">
+                AND D.user_no = #{userNo}
+            </if>
+            <if test="searchText != null">
+                AND U.name LIKE CONCAT('%', #{searchText}, '%')
+            </if>
+        </where>
+    </sql>
+
+    <select id="getTotalSalaryByMonth" resultMap="salaryDetailVO" parameterType="map">
+        SELECT
+            SUM(D.salary) salary,
+            SUM(D.allowance) allowance,
+            SUM(D.insurance) insurance,
+            SUM(D.extra_cost) extra_cost
+        FROM salary_detail D
+
+        WHERE
+            D.status = 'A'
+            AND D.month = MONTH(#{date})
+            AND D.year =  YEAR(#{date})
+    </select>
+</mapper>

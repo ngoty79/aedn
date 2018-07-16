@@ -1,0 +1,337 @@
+label {
+    font-weight: normal !important;
+}
+
+.display-none {
+    display: none;
+}
+
+.reset-margin-left {
+    margin-left: 0 !important;
+}
+
+.margin-left-10 {
+    margin-left: 10px;
+}
+
+.email-name-message, .email-region-message {
+    width: 170px;
+    float: left;
+}
+
+.pt-formset-term {
+    float: left;
+}
+
+.tel1-message{
+    /*width: 68px;*/
+    float: left;
+}
+
+.tel2-message, .tel3-message, .year-birthday-message, .month-birthday-message, .day-birthday-message{
+    width: 70px;
+    float: left;
+}
+
+.sub-address-message{
+    width: 320px;
+    float: left;
+}
+
+.address-message{
+    width: 220px;
+    float: left;
+    margin-left: 10px;
+}
+
+.reset-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.pt-module-registrationNamo-skin-basic {
+    color: #666666;
+    font-size: 12px;
+    position: static;
+    margin-top:30px;
+}
+
+.pt-module-registrationNamo-skin-basic .agree_msg {
+    border: 1px solid #f35a5a;
+    background: #ffe5e5;
+    height: 22px;
+    text-align: left;
+    width: 300px;
+    display: none;
+}
+
+.error_msg {
+    color: #d9534f !important;
+    padding-top: 4px !important;
+    display: inline-block;
+}
+
+.input-pnl-right{
+    width: 80%;
+}
+.pt-module-registrationNamo-skin-basic h1{
+    font-size: 22px;
+    font-weight: bold;
+    color: #5f7c2a;
+    margin-bottom: 15px;
+    margin-top: 20px;
+}
+.pt-module-registrationNamo-skin-basic h1:before{
+    font-size: 14px;
+    line-height: 20px;
+    margin-right: 5px;
+    vertical-align: text-bottom;
+}
+.pt-module-registrationNamo-skin-basic .error{
+    border: 1px solid #FE2E64;
+}
+
+.pt-module-registrationNamo-skin-basic .pt-module-registrationNamo-container {
+    width: 100%;
+    position: relative;
+    margin: 0 auto;
+}
+.pt-module-registrationNamo-skin-basic .pt-module-registrationNamo-steplist {
+    zoom: 1;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-align: center;
+    background-color: #fff;
+}
+.pt-module-registrationNamo-skin-basic .pt-module-registrationNamo-steplist:before {
+    content: '';
+    display: block;
+}
+.pt-module-registrationNamo-skin-basic .pt-module-registrationNamo-steplist:after {
+    content: '';
+    display: table;
+    clear: both;
+}
+.pt-module-registrationNamo-skin-basic .pt-module-registrationNamo-steplist .pt-module-registrationNamo-step {
+    float: left;
+    width: 25%;
+    *width: 19.8%;
+}
+.pt-module-registrationNamo-skin-basic .pt-module-registrationNamo-steplist .pt-module-registrationNamo-step:first-child .pt-module-registrationNamo-step-inner {
+    -webkit-border-top-left-radius: 4px;
+    -moz-border-top-left-radius: 4px;
+    border-top-left-radius: 4px;
+    -webkit-border-bottom-left-radius: 4px;
+    -moz-border-bottom-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    border-left: 1px solid #dfdfdf;
+}
+.pt-module-registrationNamo-skin-basic .pt-module-registrationNamo-steplist .pt-module-registrationNamo-step:last-child .pt-module-registrationNamo-step-inner {
+    -webkit-border-top-right-radius: 4px;
+    -moz-border-top-right-radius: 4px;
+    border-top-right-radius: 4px;
+    -webkit-border-bottom-right-radius: 4px;
+    -moz-border-bottom-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    border-right: 1px solid #dfdfdf;
+}
+.pt-module-registrationNamo-skin-basic .pt-module-registrationNamo-steplist .pt-module-registrationNamo-step .pt-module-registrationNamo-step-inner {
+    padding: 15px 0;
+    border: 1px solid #dfdfdf;
+    border-right: 0 none;
+}
+@media only all and (min-width: 320px) and (max-width: 719px) {
+    html:not(.pt-layout-fixed) .pt-module-registrationNamo-skin-basic .pt-module-registrationNamo-steplist .pt-module-registrationNamo-step .pt-module-registrationNamo-step-inner > span {
+        display: block;
+    }
+}
+.pt-module-registrationNamo-skin-basic .pt-module-registrationNamo-steplist .pt-module-registrationNamo-step.pt-module-registrationNamo-step-current {
+    color: #fff;
+    font-weight: bold;
+}
+.pt-module-registrationNamo-skin-basic .pt-module-registrationNamo-steplist .pt-module-registrationNamo-step.pt-module-registrationNamo-step-current .pt-module-registrationNamo-step-inner {
+    background-color: #567720 !important;
+    border-color: #567720 !important;
+    border-right: 1px solid #567720 !important;
+}
+.pt-module-registrationNamo-skin-basic .pt-module-registrationNamo-steplist .pt-module-registrationNamo-step.pt-module-registrationNamo-step-current strong {
+    color: #3a517d;
+    background-color: #fff;
+}
+.pt-module-registrationNamo-skin-basic .pt-module-registrationNamo-steplist .pt-module-registrationNamo-step strong {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    padding: 2px 3px;
+    margin-right: 6px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    color: #fff;
+    background-color: #dfdfdf;
+    font-size: 0.9em;
+}
+@media only all and (min-width: 720px) and (max-width: 1023px) {
+    html:not(.pt-layout-fixed) .pt-module-registrationNamo-skin-basic .pt-module-registrationNamo-steplist .pt-module-registrationNamo-step strong {
+        display: none;
+    }
+}
+@media only all and (min-width: 320px) and (max-width: 719px) {
+    html:not(.pt-layout-fixed) .pt-module-registrationNamo-skin-basic .pt-module-registrationNamo-steplist .pt-module-registrationNamo-step strong {
+        display: none;
+    }
+}
+.pt-module-registrationNamo-skin-basic .pt-module-registrationNamo-steplist .pt-module-registrationNamo-step > span {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+}
+.pt-module-registrationNamo-skin-basic .pt-module-registrationNamo-steplist .pt-module-registrationNamo-step-current + .pt-module-registrationNamo-step .pt-module-registrationNamo-step-inner {
+    border-left: 0 none;
+}
+.pt-module-registrationNamo-skin-basic .pt-module-registrationNamo-selectmenu {
+    padding: 30px 30px;
+    margin: 45px 0 10px;
+    background-color: #f5f5f5;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    font-size: 0;
+    text-align: center;
+}
+@media only all and (min-width: 320px) and (max-width: 719px) {
+    html:not(.pt-layout-fixed) .pt-module-registrationNamo-skin-basic .pt-module-registrationNamo-selectmenu {
+        padding: 15px 15px;
+    }
+}
+.pt-module-registrationNamo-skin-basic .pt-module-registrationNamo-selectmenu > .pt-btn {
+    padding: 10px 0;
+    margin: 0 1.5%;
+    padding-top: 45px;
+    vertical-align: middle;
+    height: 55px;
+    border: 0 none;
+    color: #666666;
+    -webkit-box-shadow: 0 1px 0 #d9d9d9;
+    -moz-box-shadow: 0 1px 0 #d9d9d9;
+    box-shadow: 0 1px 0 #d9d9d9;
+}
+@media only all and (min-width: 320px) and (max-width: 719px) {
+    html:not(.pt-layout-fixed) .pt-module-registrationNamo-skin-basic .pt-module-registrationNamo-selectmenu > .pt-btn {
+        display: block;
+        width: auto!important;
+        margin-left: 0;
+        margin-right: 0;
+        margin-top: 10px;
+        height: auto;
+        padding: 10px 0;
+    }
+    .pt-module-registrationNamo-skin-basic .pt-module-registrationNamo-selectmenu > .pt-btn:first-child {
+        margin-top: 0;
+    }
+}
+@media only all and (min-width: 720px) and (max-width: 1023px) {
+    html:not(.pt-layout-fixed) .pt-module-registrationNamo-skin-basic .pt-module-registrationNamo-selectmenu > .pt-btn > span {
+        display: block;
+        margin-top: -10px;
+    }
+}
+@media only all and (min-width: 320px) and (max-width: 719px) {
+    html:not(.pt-layout-fixed) .pt-module-registrationNamo-skin-basic .pt-module-registrationNamo-selectmenu {
+        margin-top: 10px;
+    }
+    .pt-module-registrationNamo-skin-basic .pt-module-registrationNamo-selectmenu:first-child {
+        margin-top: 0;
+    }
+}
+.pt-module-registrationNamo-skin-basic .pt-module-registrationNamo-selectmenu.pt-module-registrationNamo-selectmenu-col2 > .pt-btn {
+    width: 47%;
+    width: 46.6%;
+}
+.pt-module-registrationNamo-skin-basic .pt-module-registrationNamo-selectmenu.pt-module-registrationNamo-selectmenu-col3 > .pt-btn {
+    width: 30.33%;
+    width: 30.03%;
+}
+.pt-module-registrationNamo-skin-basic .pt-module-registrationNamo-selectmenu.pt-module-registrationNamo-selectmenu-col4 > .pt-btn {
+    width: 22%;
+    *width: 21.7%;
+}
+.pt-module-registrationNamo-skin-basic .pt-module-registrationNamo-selectmenu.pt-module-registrationNamo-selectmenu-col5 > .pt-btn {
+    width: 17%;
+    width: 16.7%;
+}
+.pt-module-registrationNamo-skin-basic .pt-module-registrationNamo-selectmenu.pt-module-registrationNamo-selectmenu-col5 > .pt-btn:hover {
+    background-color:#ddd;
+}
+
+.pt-module-registrationNamo-skin-basic .pt-module-registrationNamo-terms {
+    height: auto;
+}
+.pt-module-registrationNamo-skin-basic .pt-module-registrationNamo-terms .pt-module-registrationNamo-terms-inner {
+    height: 200px;
+    overflow: hidden;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+}
+.pt-module-registrationNamo-skin-basic .pt-module-registrationNamo-terms + .pt-form-chkbox {
+    margin-top: 5px;
+    padding-left: 30px;
+}
+
+#pt-module-auth-input{
+    max-width: 650px;
+}
+.error {
+    border: 1px solid red;
+}
+.auth-error {
+    font-size: 12px;
+    color: red;
+    display: inline-block;
+    text-align: center;
+    margin: 15px auto;
+    width: 100%;
+}
+.auth-mes{
+    font-size: 12px;
+    display: inline-block;
+    text-align: center;
+    margin: 15px auto;
+    width: 100%;
+}
+
+.ui-dialog .ui-dialog-buttonpane {
+    text-align: center !important;
+}
+.ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset {
+    float: none !important;
+}
+.auth-error-black {
+    font-size: 12px;
+    display: inline-block;
+    text-align: center;
+    margin: 15px auto;
+    width: 100%;
+}
+.underline:hover{text-decoration:underline}
+
+.pt-btn-primary{border-color:#567623 !important;background-color:#567623 !important;}
+
+
+
+
+/*게시판 타이틀 공통 */
+.container.member .page-header {
+    background: url(../images/header_member_bg.png) no-repeat right;
+    height:130px;
+    border-bottom:0;
+    margin-bottom:20px;
+    margin-top:20px;
+}
+.container.member .page-header h1{
+    padding-top:30px;
+    color:#545454;
+    font-weight:bold;
+    font-size:36px;
+}

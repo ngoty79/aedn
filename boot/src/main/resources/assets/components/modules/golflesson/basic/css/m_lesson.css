@@ -1,0 +1,280 @@
+/***
+Portlets
+***/
+/* Full Screen portlet mode */
+.lesson .page-header{
+  background:url(../images/header_lesson_bg.png) no-repeat right;
+  height: 130px;
+  border-bottom: 0 !important;
+  margin-top:20px;
+  margin-bottom:20px;
+}
+.page-portlet-fullscreen {
+  overflow: hidden; }
+
+/* Basic portlet */
+.portlet {
+  margin-top: 0px;
+  margin-bottom: 25px;
+  padding: 0px;
+}
+
+.portlet > .portlet-title {
+  border-bottom: 1px solid #eee;
+  padding: 0;
+  margin-bottom: 10px;
+  min-height: 41px;
+  -webkit-border-radius: 4px 4px 0 0;
+  -moz-border-radius: 4px 4px 0 0;
+  -ms-border-radius: 4px 4px 0 0;
+  -o-border-radius: 4px 4px 0 0;
+  border-radius: 4px 4px 0 0; }
+
+  .portlet > .portlet-title b{
+    color:#567623;
+  }
+
+.portlet > .portlet-body .picture{
+  border:1px solid #ccc;
+  float:left;
+}
+.portlet > .portlet-body .profile button{
+  margin-left:0px;
+}
+.portlet > .portlet-body ul{
+  max-height:120px;
+  overflow:hidden;
+  margin-left:0;
+  list-style: inherit !important;
+}
+.portlet > .portlet-body ul li{
+  line-height:24px;
+  margin-left: 20px;
+}
+
+/* Portlet background colors */
+/* Side bordered portlet */
+.portlet.bordered {
+  border-left: 2px solid #e6e9ec !important; }
+  .portlet.bordered > .portlet-title {
+    border-bottom: 0; }
+
+
+/* Solid bordered portlet */
+.portlet.solid.bordered > .portlet-title {
+  margin-bottom: 10px; }
+
+/* Box portlet */
+.portlet.box {
+  padding: 0px !important; }
+.portlet.box > .portlet-title {
+  border-bottom: 0;
+  padding: 0 10px;
+  margin-bottom: 0;
+  color: #545454; }
+.portlet.box > .portlet-body {
+  background-color: #fff;
+  padding: 15px;
+  font-size:14px;
+   }
+
+/* Light Portlet */
+.portlet.light {
+  padding: 12px 20px 15px 20px;
+  background-color: #fff; }
+.portlet.light.bordered {
+  border: 1px solid #e7ecf1 !important; }
+.portlet.light.bordered > .portlet-title {
+  border-bottom: 1px solid #eef1f5;
+  background:url(../images/lesson-vod-title.png) no-repeat 10px 10px #fafafa;
+  color:#333;
+  font-size:16px;
+  font-weight: 600;
+  padding-top:10px;
+  padding-left:40px;}
+
+.portlet.light > .portlet-title {
+  padding: 0;
+  min-height: 48px; }
+.portlet.light > .portlet-title > .nav-tabs > li {
+  margin: 0;
+  padding: 0; }
+.portlet.light > .portlet-title > .nav-tabs > li > a {
+  margin: 0;
+  padding: 12px 13px 13px 13px;
+  font-size: 13px;
+  color: #666; }
+.portlet.light > .portlet-title > .nav-tabs > li.active > a,
+.portlet.light > .portlet-title > .nav-tabs > li:hover > a {
+  margin: 0;
+  background: none;
+  color: #333; }
+.portlet.light.form-fit {
+  padding: 0; }
+.portlet.light.form-fit > .portlet-title {
+  padding: 17px 20px 10px 20px;
+  margin-bottom: 0; }
+.portlet.light .portlet-body {
+   }
+.portlet.light.portlet-fullscreen > .portlet-body {
+  padding: 8px 0; }
+.portlet.light.portlet-fit {
+  padding: 0; }
+.portlet.light.portlet-fit > .portlet-title {
+  padding: 17px 20px 10px 20px; }
+.portlet.light.portlet-fit > .portlet-body {
+  padding: 10px 20px 20px 20px; }
+.portlet.light.portlet-datatable.portlet-fit > .portlet-body {
+  padding-top: 10px;
+  padding-bottom: 25px; }
+.portlet-body{overflow: hidden;padding:15px;}
+.portlet-body .desc{width:auto;padding-left:200px;}
+.tab-pane > p:last-child {
+  margin-bottom: 0px; }
+
+/* Reverse aligned tabs */
+.tabs-reversed > li {
+  float: right;
+  margin-right: 0; }
+.tabs-reversed > li > a {
+  margin-right: 0; }
+
+/* jQuery UI Draggable Portlets */
+.portlet-sortable:not(.portlet-fullscreen) > .portlet-title {
+  cursor: move; }
+
+.portlet-sortable-placeholder {
+  border: 2px dashed #eee;
+  margin-bottom: 25px; }
+
+.portlet-sortable-empty {
+  box-shadow: none !important;
+  height: 45px; }
+
+
+.vod-list {
+  border-bottom:1px solid #ccc;
+  padding-top:20px;
+  padding-bottom:20px;
+  overflow:hidden;
+}
+.vod-list .vod-thumb{
+  padding-left:20px;
+  padding-right:20px;
+  float:left;
+}
+.vod-list .vod-desc{
+  padding-left:270px;
+}
+.vod-list .vod-desc .vod-tit{
+  font-size:16px;
+  font-weight: 600;
+}
+.vod-list .vod-desc .vod-tit a{
+  color:#333;
+}
+.vod-list .vod-desc ul{
+  margin-top:20px;
+  margin-left:20px;
+  list-style: initial !important;
+}
+.vod-list .vod-desc ul li{
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.vod-list .vod-desc .vod-txt{
+  word-break: keep-all;
+  white-space: pre-line;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  word-wrap: break-word;
+  max-height:20px;
+}
+.tabbable-custom .nav-tabs.borderd li{
+  width:25%;
+}
+.lesson .case-select{
+  margin-bottom:20px;
+  padding-bottom:20px;
+  border-bottom:2px solid #567623;
+}
+.lesson .case-select label, .lesson .case-select select{
+  display:inline-block;
+}
+.lesson .case-select select{
+  width:200px;
+}
+.lesson h3{
+  font-size: 22px;
+  font-weight: bold;
+  color: #5f7c2a;
+  margin-bottom: 15px;
+  border-bottom:2px solid #5f7c2a;
+  padding-bottom:15px;
+  display:block;
+}
+.lesson h3:before{
+  font-size: 14px;
+  line-height: 20px;
+  margin-right: 5px;
+  vertical-align: text-bottom;
+}
+.vod-view-content{
+  margin:0 auto;
+  width:80%;
+  padding-bottom:20px;
+}
+.vod-view-content video{
+  width:100%;
+  border:1px solid #ccc;
+}
+.vod-view-button{
+  border-top:1px solid #ccc;
+  padding:20px;
+  text-align:left;
+  margin-bottom:20px;
+}
+@media screen and (max-width:500px) {
+  .vod-list .vod-desc{
+    padding-left:200px;
+    font-size:14px;
+  }
+  .vod-list .vod-thumb{
+    text-align:center;
+    float:left;
+    margin-bottom:10px;
+    margin:0 auto;
+    padding-left:10px;
+    padding-right:10px;
+  }
+  .vod-list .vod-desc .vod-tit, .vod-list .vod-desc .vod-txt, .vod-list .vod-desc .vod-txt div{
+    text-align:left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .vod-list .vod-desc .vod-txt li{
+    font-size:14px;
+  }
+  .vod-list .vod-thumb img{
+    width:180px !important;
+    height:120px !important;
+    margin-bottom:20px;
+  }
+  #container-pro-vod-list .portlet-body .profile p{overflow:hidden;text-overflow:ellipsis;}
+  #container-pro-vod-list .portlet-body .profile{padding-left:190px;}
+}
+
+@media screen and (max-width: 528px){
+ .page-content-wrapper{padding-left:0 !important;padding-right:0 !important;}
+ #container-pro-list .portlet-body .profile{padding-left:190px;}
+ .portlet.box > .portlet-body{padding:7px;}
+ li.tab-lesson-program a{padding:5px 0;font-size:14px;}
+
+ /*#container-pro-list .portlet-body .profile p{white-space:normal !important;}*/
+
+}
+@media screen and (max-width: 770px){
+    .vod-view-content{width:100%;padding-left:0;padding-right:0;}
+    .vod-view-content iframe{width:100%;}
+}

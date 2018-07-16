@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8" />
+    <title>GIẤY ĐỀ NGHỊ MƯỢN TIỀN</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&amp;subset=all" rel="stylesheet" type="text/css" />
+    <link href="/assets/templates/admin/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/templates/admin/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/vendors/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/templates/admin/global/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/templates/admin/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/applications/siteadmin/css/common/common.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/applications/siteadmin/css/common/print.css" rel="stylesheet" type="text/css" />
+    <script src="/assets/applications/mugrun/scripts/utils.js" type="text/javascript"></script>
+
+</head>
+
+<body class="">
+    <div class="container print-layout">
+        <div class="row">
+            <img src="/assets/applications/siteadmin/images/logo.jpg" class="logo"/>
+        </div>
+        <div class="row">
+            <h2 class="text-align-center bold">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</h2>
+            <h2 class="text-align-center">Độc lập – Tự do – Hạnh phúc</h2>
+        </div>
+        <div class="row text-align-center" style="margin-top:10px;">
+            <label class="text-align-center">*****************</label>
+        </div>
+        <div class="row" style="margin-top: 20px;margin-bottom: 20px;">
+            <div class="row">
+                <p class="text-align-right">......................, ngày........tháng [[${month}]] năm [[${year}]]</p>
+            </div>
+        </div>
+        <div class="row">
+            <h2 class="text-align-center bold blue" style="margin-bottom: 10px;">GIẤY ĐỀ NGHỊ MƯỢN TIỀN</h2>
+        </div>
+
+        <div class="row">
+            <h2 class="bold">A/ Bên cho mượn tiền (Bên A)</h2>
+        </div>
+        <div class="row" style="margin-top: 15px;">
+            <div class="row">
+                <p><span class="inline-block width-80">Ông/Bà:</span> <span class="inline-block bold width-200">[[${user.name}]]</span>  Sinh ngày: [[${user.birthday}]]</p>
+                <p><span class="inline-block width-80">Số CMND:</span> <span class="inline-block width-200">[[${user.socialId}]]</span>  Cấp ngày: <span class="inline-block width-160">[[${#dates.format(user.issueDate, 'dd/MM/yyyy')}]]</span> tại: <span>[[${user.issuePlace}]]</span></p>
+                <p><span class="">Địa chỉ thường trú:</span> [[${user.address}]]</p>
+                <p><span class="">Tạm trú:</span> [[${user.subAddress}]]</p>
+                <p>Số điện thoại: [[${user.tel}]]</p>
+            </div>
+        </div>
+        <div class="row">
+            <h2 class="bold">B/ Bên mượn tiền (Bên B)</h2>
+        </div>
+        <div class="row" style="margin-top: 15px;">
+            <p><span class="inline-block width-80">Ông/Bà:</span> <span class="inline-block bold width-200">[[${customer.name}]]</span>  Sinh ngày: [[${customer.birthday}]]</p>
+            <p><span class="inline-block width-80">CMND số:</span> <span class="inline-block width-200">[[${customer.socialId}]]</span>  Cấp ngày: <span class="inline-block width-160">[[${#dates.format(customer.issueDate, 'dd/MM/yyyy')}]]</span> tại: <span>[[${customer.issuePlace}]]</span></p>
+            <p><span class="">Hộ khẩu thường trú:</span> [[${customer.address}]]</p>
+            <p><span class="">Chỗ ở hiện tại:</span> [[${customer.subAddress}]]</p>
+            <p>Số điện thoại liên lạc: [[${customer.phone}]]</p>
+        </div>
+        <div class="row">
+            <h2 class="bold">Thông tin người hôn phối:</h2>
+        </div>
+        <div class="row" style="margin-top: 15px;">
+            <p>Ông/bà:.....................................................................Ngày sinh :..........................................</p>
+            <p>Số CMND :..................................... do CA tỉnh.............................cấp ngày…....tháng........năm.........</p>
+            <p>Hộ khẩu thường trú .............................................................................................................................. </p>
+            <p>Chỗ ở hiện tại:....................................................................................................................................... </p>
+            <p>Số điện thoại liên lạc:........................................</p>
+            <p>Chúng tôi hiện là vợ chồng theo giấy chứng nhận đăng ký kết hôn </p>
+            <p>số:.......................................ngày...........................Nơi đăng ký......................................................... </p>
+            <p>Hiện tại chúng tôi đang kinh doanh:.............................................tại:.................................................</p>
+            <p>Hai bên thống nhất các nội dung như sau: </p>
+        </div>
+        <div class="row" style="margin-top: 15px;  margin-bottom: 10px;">
+            <b class="bold">1/ Tài sản đảm bảo và lãi suất mượn:</b>
+        </div>
+        <div class="row" >
+            <p>Bên B tự nguyện mượn của bên A Số tiền là : <b>[[${#numbers.formatInteger(loan.loanAmount,3,'POINT')}]] đồng</b>.      </p>
+            <p>Bằng chữ : <span class="inline-block min-width-400 bold" id="total-amount"></span></p>
+            <p>Với lãi suất : [[${loan.loanInterest}]] %/tháng, trong thời hạn [[${loan.loanPeriod}]] tháng (Từ ngày: [[${#dates.format(loan.startDate, 'dd/MM/yyyy')}]] đến [[${#dates.format(loan.endDate, 'dd/MM/yyyy')}]])                                                          </p>
+            <p>Thỏa thuận trả tiền: Bên mượn tiền đồng ý thanh toán số tiền gốc và lãi
+                <th:block th:if="${loan.loanPayType == '1'}">hàng ngày</th:block><th:block th:if="${loan.loanPayType == '2'}">hàng tuần</th:block>
+                (góp đều) với số tiền mỗi <th:block th:if="${loan.loanPayType == '1'}">ngày</th:block><th:block th:if="${loan.loanPayType == '2'}">tuần</th:block>
+
+                là: [[${#numbers.formatInteger(loan.payBySession,3,'POINT')}]] VNĐ, được chia thành [[${loan.totalPaySessions}]]
+                <th:block th:if="${loan.loanPayType == '1'}">kỳ (ngày)</th:block><th:block th:if="${loan.loanPayType == '2'}">kỳ (tuần)</th:block>
+                , bao gồm cả ngày nghĩ Lễ và thứ 7, chủ nhật.
+            </p>
+        </div>
+        <div class="row" style="height: 150px;"></div>
+        <div class="row print-footer">
+            <p class="text-align-right">Trang 1/2</p>
+        </div>
+        <div class="row" style="height: 200px;"></div>
+        <div class="row" style="margin-top: 10px;">
+            <p>Tài sản bảo đảm như sau:</p>
+        </div>
+        <div class="row">
+            <p>□ Tài sản thuộc sở hữu của bên mượn tiền:............................................................................................................</p>
+            <p>..................................................................................................................................................................................</p>
+            <p>..................................................................................................................................................................................</p>
+            <p>□ Tài sản thuộc sở hữu của bên thức 3:...................................................................................................................</p>
+            <p>..................................................................................................................................................................................</p>
+            <p>..................................................................................................................................................................................</p>
+            <p>+ Mối quan hệ với bên mượn tiền:............................................................................................................................</p>
+        </div>
+        <div class="row" style="margin-top: 15px;">
+            <p class="bold" style="margin-bottom: 10px;">2/ Mục đích mượn tiền:</p>
+            <p>Bên B cam kết sẽ thanh toán nợ gốc và lãi theo đúng nội dung đã thỏa thuận nêu trên. Nếu sai, bên B hoàn toàn chịu trách nhiệm trước pháp luật và sẵn sàng phát mãi tài sản do bên B làm chủ sở hữu để thanh toán cho bên A.</p>
+        </div>
+        <div class="row" style="margin-top: 30px;">
+            <div class="col-md-6">
+                <h2 class="text-align-center bold">BÊN CHO MƯỢN (BÊN A)</h2>
+                <p class="text-align-center bold italic">(Ký tên, ghi rõ họ tên)</p>
+            </div>
+            <div class="col-md-6">
+                <h2 class="text-align-center bold">BÊN MƯỢN (BÊN B)</h2>
+                <p class="text-align-center bold italic">(Ký tên, ghi rõ họ tên)</p>
+            </div>
+        </div>
+        <div class="row" style="height: 750px;"></div>
+        <div class="row print-footer">
+            <p class="text-align-right">Trang 2/2</p>
+        </div>
+    </div>
+</body>
+
+<script type="text/javascript" th:inline="javascript">
+    /*<![CDATA[*/
+    var amount = parseFloat([[${loan.loanAmount}]]);
+    var el = document.getElementById('total-amount');
+    el.innerHTML = DocTienBangChu(amount);
+    /*]]>*/
+</script>
+</html>

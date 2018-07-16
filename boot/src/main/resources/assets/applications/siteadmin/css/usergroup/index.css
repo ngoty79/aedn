@@ -1,0 +1,219 @@
+/*[Start] Left panel user group (page-usergroup-grouplist)*/
+#container-usergroup-grouplist .fixed-table-container {
+    border: none;
+}
+
+#container-usergroup-grouplist .bootstrap-table .table {
+    border-bottom: none;
+}
+
+#container-usergroup-grouplist .inbox-body,
+#container-usergroup-grouplist .inbox-sidebar {
+    padding: 10px 0px 0px 0px;
+}
+
+#container-usergroup-grouplist .table-list-header {
+    margin-bottom: 0px;
+}
+
+#container-usergroup-grouplist .table-list-header tr {
+    border-bottom: 1px solid #e7ecf1;
+}
+
+#container-usergroup-grouplist .search-clear {
+    position: relative;
+    margin-left: -18px;
+    z-index: 1001;
+    padding-top: 10px;
+    cursor: pointer;
+}
+
+#container-usergroup-grouplist table.table-list-header tbody tr td {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.p-left {
+    padding-left: 5px !important;
+}
+
+.p-right {
+    padding-right: 5px !important;
+}
+
+#container-usergroup-grouplist .btn-search {
+    cursor: pointer;
+}
+
+.row-selected {
+    background-color: #EEF4F7;
+}
+
+#container-usergroup-grouplist table.table-list-header .btn-add {
+    font-size: 13px;
+}
+/*[End] Left panel user group (page-usergroup-grouplist)*/
+#container-usergroup-grouplist .error-response {
+    color: #e73d4a;
+}
+
+/*[Start] right panel (page-usergroup-management)*/
+#container-usergroup-management .fixed-table-container {
+    border: none;
+}
+
+#container-usergroup-management .bootstrap-table .table {
+    border-bottom: none;
+}
+
+#container-usergroup-management .inbox-body,
+#container-usergroup-management .inbox-sidebar {
+    border: none;
+    padding: 10px 0px 0px 0px;
+}
+
+#container-usergroup-management .table-list-header {
+    margin-bottom: -7px;
+}
+
+#container-usergroup-management .table-list-header [class*="col-md-"] {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+#container-usergroup-management .table-list-header .btn {
+    margin-right: 0px;
+}
+
+#container-usergroup-management .table-list-header tr {
+    border: none;
+}
+
+#container-usergroup-management .search-clear {
+    position: relative;
+    margin-left: -18px;
+    z-index: 1001;
+    padding-top: 10px;
+    cursor: pointer;
+}
+
+#container-usergroup-management table.table-list-header tbody tr td {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+#container-usergroup-management .table th {
+    border: none;
+}
+
+#container-usergroup-management .table-list-content thead tr {
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+
+#container-usergroup-management .table-list-content tbody tr {
+    border-bottom: 1px solid #ddd;
+}
+
+#container-usergroup-management .fixed-table-container {
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-top: 10px;
+}
+
+#container-usergroup-management .btn-search {
+    cursor: pointer;
+}
+
+#container-usergroup-management .fixed-table-pagination .pagination-detail {
+    display: none;
+}
+
+#container-usergroup-management .fixed-table-pagination {
+    margin-top: 20px;
+    text-align: center;
+}
+
+/*[End] right panel  (page-usergroup-management)*/
+
+/*[Start] page-usergroup-add-groupuser*/
+#container-usergroup-add-groupuser .fixed-table-container {
+    border: none;
+}
+
+#container-usergroup-add-groupuser .bootstrap-table .table {
+    border-bottom: none;
+}
+
+#container-usergroup-add-groupuser .inbox-body,
+#container-usergroup-add-groupuser .inbox-sidebar {
+    border: none;
+    padding: 10px 0px 0px 0px;
+}
+
+#container-usergroup-add-groupuser .table-list-header {
+    margin-bottom: -7px;
+}
+
+#container-usergroup-add-groupuser .table-list-header [class*="col-md-"] {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+#container-usergroup-add-groupuser .table-list-header .btn {
+    margin-right: 0px;
+}
+
+#container-usergroup-add-groupuser .table-list-header tr {
+    border: none;
+}
+
+#container-usergroup-add-groupuser .search-clear {
+    position: relative;
+    margin-left: -18px;
+    z-index: 1001;
+    padding-top: 10px;
+    cursor: pointer;
+}
+
+#container-usergroup-add-groupuser table.table-list-header tbody tr td {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+#container-usergroup-add-groupuser .table th {
+    border: none;
+}
+
+#container-usergroup-add-groupuser .table-list-content thead tr {
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+
+#container-usergroup-add-groupuser .table-list-content tbody tr {
+    border-bottom: 1px solid #ddd;
+}
+
+#container-usergroup-add-groupuser .fixed-table-container {
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-top: 10px;
+}
+
+#container-usergroup-add-groupuser .btn-search {
+    cursor: pointer;
+}
+
+#container-usergroup-add-groupuser .fixed-table-pagination .pagination-detail {
+    display: none;
+}
+
+#container-usergroup-add-groupuser .fixed-table-pagination {
+    margin-top: 20px;
+    text-align: center;
+}
+#container-usergroup-add-groupuser table.table-list-header .btn-back {
+    font-size: 13px;
+}
+
+/*[End] right panel  page-usergroup-add-groupuser*/

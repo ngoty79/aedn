@@ -1,0 +1,329 @@
+@charset "UTF-8";
+
+
+.tabbable-custom{
+	margin-bottom:10px;
+}
+.tabbable-custom .nav-tabs.borderd{
+	border-bottom:2px solid #5f7c2a;
+	border-left:1px solid #ccc;
+	border-right:1px solid #ccc;
+	padding:0;
+	margin-bottom:40px;
+	border-top:1px solid #ccc;
+}
+.tabbable-custom .nav-tabs.borderd li{
+	width:16.6%;
+	border-right:1px solid #ccc;
+	text-align:center;
+	margin:0;
+	font-weight:bold;
+}
+.tabbable-custom .nav-tabs.borderd li.active{
+	border:0;
+}
+.tabbable-custom .nav-tabs.borderd li.active a{
+	background:url(img/tab_bg.png) repeat-x;
+	color:#fff;
+	width:100%;
+	border-radius: 0;
+	border:1px solid transparent;
+	border-top:1px solid #5f7c2a;
+}
+.tabbable-custom .nav-tabs.borderd li:last-child{
+	border-right:0;
+	width:17%;
+}
+
+.nav-tabs>li>a{
+	margin-right:0;
+	color:#545454;
+}
+.tab-pane .product-list div.item{
+	margin-bottom:30px;
+
+}
+.tab-pane .product-list div.item .portlet{
+	border:1px solid #ccc;
+	padding:10px;
+}
+.tab-pane .product-list div.item .title{
+	padding:15px 5px;
+	vertical-align: top;;
+}
+.tab-pane .product-list div.item .desc{
+	background:#f7f7f7;
+	padding:10px;
+	border:1px solid #ccc;
+	border-top:0;
+}
+.item .photo img{
+		background:#ccc;
+		height:300px;
+		border-radius:0 !important;
+}
+.item .title span, .item .title h4{
+	display:inline;
+}
+
+.tab-pane .product-list div.item:nth-child(2n-1){
+	width:auto;
+	display:inline-block;
+	padding-left:0;
+	padding-right:0;
+	margin-right:30px;
+	background:#fff;
+}
+
+.tab-pane .product-list div.item:nth-child(2n){
+	width:auto;
+	display:inline-block;
+	padding-left:0;
+	padding-right:0;
+}
+
+.package .tab-pane .product-list{
+	overflow:hidden;
+	text-align:center;
+	display:inline-block;
+	margin:0 auto;
+}
+
+@media screen and (max-width: 990px){
+	.tab-pane .product-list div.item:nth-child(2n-1){
+		margin-right:0;
+	}
+
+}
+@media (min-width: 991px) and (max-width: 1199px){
+	.tab-pane .product-list div.item:nth-child(2n-1){
+		margin-right:10px;
+		margin-left:30px;
+	}
+}	
+@media screen and (min-width: 1200px){
+	.tab-pane .product-list div.item:nth-child(2n-1){
+		margin-right:30px;
+		margin-left:90px;
+	}
+
+}
+/*=================== view ====================*/
+.item.view{
+	overflow:hidden;
+	border:1px solid #ccc;
+	background:#f8f8f8;
+	color:#545454;
+	margin-bottom:40px;
+}
+.item.view .product-list, .item.view .photo, .item.view .title{
+	padding:10px;
+
+}
+.item.view .product-list{
+	border-bottom:1px solid #ccc;
+	font-weight:bold;
+}
+.item.view .product-list a:link, .item.view .product-list a:active, .item.view .product-list a:visited, .item.view .product-list a:focus {
+	color:#545454;
+	text-decoration: none;
+}
+.item.view .product-list i{
+	margin-right:5px;
+}
+.item.view .photo{
+	height:100%;
+	border-right:1px solid #ccc;
+}
+
+.item.view .photo{
+	height:100%;
+	border-right:1px solid #ccc;
+}
+.item.view .title{
+	height:100%;
+}
+.item.view .thumnail-group{
+	text-align:center;
+}
+.item.view .thumnail-group img{
+	width:24.25%;
+	margin-right:1%;
+	height:75px;
+	margin-top:5px;
+}
+.item.view .thumnail-group img:last-child{
+	margin-right:0;
+}
+.photo .badge-event{
+	position:absolute;
+	top:11px;
+	left:11px;
+	background:url(img/badge_bg.png) no-repeat;
+	padding:8px 10px 0 12px;
+	width:60px;
+	height:70px;
+	color:white;
+	font-weight:bold;
+}
+.package.view .item .title{
+	padding:30px;
+}
+.package.view .item .title span:first-child{
+	display:inline-block;
+	margin-top:25px;
+}
+.package.view .item .title p{
+	margin:20px 0 40px;
+}
+.package.view .item .title h4{
+	display:block;
+	font-weight: bold;
+	margin-top:20px;
+	margin-bottom:20px;
+}
+.package.view span.product-price{
+	font-size:24px;
+	color:#ff4300;
+	font-weight: bold;
+}
+.btn-reservation{
+	width:calc(100% - 20px);
+	box-sizing:border-box;
+	margin-right:10px;
+	margin-left:10px;
+	bottom:-105px;
+	left:0;
+	position:absolute;
+}
+.btn-reservation .btn{
+	padding:15px;
+	border-radius: 0;
+	display:block;
+
+}
+.reservation-list .tabbable-custom .nav-tabs.borderd, .reservation-list .tabbable-custom .nav-tabs.borderd li.active a{
+	border-radius:0; 
+}
+.reservation-list .tabbable-custom .nav-tabs.borderd li{
+	width:50%;
+	border-radius: 0;
+}
+.reservation-list .tabbable-custom .nav-tabs.borderd li a{
+	padding:15px 0;
+}
+
+@media screen and (max-width: 991px){
+	.package.view .item .title span:first-child{
+	display:inline-block;
+	margin-top:0px;
+}
+.btn-reservation{
+	width:calc(100% - 20px);
+	box-sizing:border-box;
+	margin-right:10px;
+	margin-left:10px;
+	bottom:5px;
+	left:0;
+	position:absolute;
+}
+}
+
+.package.view .form-control {
+	width:20px;
+	height:20px;
+	background:none;
+	border-radius:0;
+	margin:0 auto;
+}
+.product-noti{
+	border-top:2px solid #93a564;
+	background:#f2f2f2;
+	padding:10px 20px;
+	font-size:13px;
+	margin-bottom: 30px;
+	min-height:200px;
+}
+.product-noti + .product-img{
+	border:1px solid #e5e5e5;
+	padding:10px;
+}
+
+@media screen and (max-width: 767px){
+ .package.view table, .package.view thead, .package.view tbody, .package.view th, .package.view td, .package.view tr,
+ .package.apply table, .package.apply thead, .package.apply tbody, .package.apply th, .package.apply td, .package.apply tr{
+    display: block;
+  }
+
+  .package.view thead tr, .package.apply thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  .package.view tr, .package.apply tr { 
+  	border: 1px solid #ccc; 
+  }
+
+  .package.view td , .package.apply td{
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 50%;
+  }
+
+  .package.view td:before , .package.apply td:before{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 30%;
+    padding-right: 10px;
+    white-space: nowrap;
+    height:100%;
+    line-height:40px;
+    background:#f8f8f8;
+  }
+  .package.apply .info-phone,.package.apply .info-member {
+  	padding-left:35%;
+  	text-align:left;
+  } 
+	.package.apply .info-phone:before, .package.apply .info-member:before{
+		text-align:center;
+	}
+
+  .package.view td:nth-of-type(1):before { content: "선택"; }
+  .package.view td:nth-of-type(2):before { content: "출발일"; }
+  .package.view td:nth-of-type(3):before { content: "도착일"; }
+  .package.view td:nth-of-type(4):before { content: "기간"; }
+  .package.view td:nth-of-type(5):before { content: "인원"; }
+  .package.view td:nth-of-type(6):before { content: "교통"; }
+  .package.view td:nth-of-type(7):before { content: "가격"; }
+  .package.view td:nth-of-type(8):before { content: "상태"; }
+
+
+  .package.apply .reserved-product td:nth-of-type(1):before { content: "출발일"; }
+  .package.apply .reserved-product td:nth-of-type(2):before { content: "도착일"; }
+  .package.apply .reserved-product td:nth-of-type(3):before { content: "기간"; }
+  .package.apply .reserved-product td:nth-of-type(4):before { content: "인원"; }
+  .package.apply .reserved-product td:nth-of-type(5):before { content: "교통"; }
+  .package.apply .reserved-product td:nth-of-type(6):before { content: "가격"; }
+  .package.apply .reserved-product td:nth-of-type(7):before { content: "상태"; }
+
+
+  .package.apply .reserved-info td:nth-of-type(1):before { content: "아이디"; }
+  .package.apply .reserved-info td:nth-of-type(2):before { content: "닉네임"; }
+  .package.apply .reserved-info td:nth-of-type(3):before { content: "연락처"; }
+  .package.apply .reserved-info td:nth-of-type(4):before { content: "인원선택"; }
+  .package.apply .reserved-info td:nth-of-type(5):before { content: "가격"; }
+
+}
+
+  }
+
+.package.apply .info-phone input{
+	width:100px;
+}
+.package.apply .info-member input{
+	width:80px;
+	border-radius: 0;
+}

@@ -1,0 +1,118 @@
+<div class="modal" id="modal-create-customer">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-green bg-font-green">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title" style="text-align: left;">Tạo/Chỉnh Sửa Khách hàng</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                    <input type="hidden" name="customerNo"/>
+                    <div class="row form-group">
+                        <label class="control-label col-md-2"><span class="required" aria-required="true">* </span> NV Phụ Trách</label>
+                        <div class="col-md-5">
+                            <select class="form-control input-sm input-sm" name="staffUserNo">
+                                <option value="">Chọn</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label class="control-label col-md-2"><span class="required" aria-required="true">* </span> Khu vực</label>
+                        <div class="col-md-3">
+                            <select class="form-control input-sm input-sm" name="provinceNo">
+                                <option value="1">Kiêng Giang</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <select class="form-control input-sm input-sm" name="districtNo">
+                                <option value="1">Phú Quốc</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <select class="form-control input-sm input-sm" name="townNo">
+                                <option value="">Chọn</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label class="control-label col-md-2"><span class="required" aria-required="true">* </span> Tên khách hàng</label>
+                        <div class="col-md-5">
+                            <input type="text" class="form-control input-sm input-sm" name="name" >
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label class="control-label col-md-2"><span class="required" aria-required="true">* </span> Số CMND</label>
+                        <div class="col-md-3">
+                            <input type="text" class="form-control input-sm input-sm" name="socialId" style="letter-spacing: 1.5px;font-weight: bold;">
+                        </div>
+                        <label class="control-label col-md-2">Ngày cấp:</label>
+                        <div class="col-md-3">
+                            <input type="text" class="form-control input-sm input-sm input-date"  data-inputmask="'alias': 'dd/mm/yyyy'" placeholder="dd/mm/yyyy" name="issueDate">
+                            <small id="date-issue-invalide-msg" class="help-block" style="display: none;">Nhập ngày không hợp lệ.</small>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label class="control-label col-md-2">Nơi Cấp</label>
+                        <div class="col-md-3">
+                            <input type="text" class="form-control input-sm input-sm" name="issuePlace">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label class="control-label col-md-2">Số Passport</label>
+                        <div class="col-md-3">
+                            <input type="text" class="form-control input-sm input-sm" name="passportNo" style="letter-spacing: 1.5px;font-weight: bold;">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label class="control-label col-md-2">Số điện thoại</label>
+                        <div class="col-md-3">
+                            <input type="text" class="form-control input-sm" name="phone">
+                        </div>
+                        <label class="control-label col-md-2">Email</label>
+                        <div class="col-md-3">
+                            <input type="text" class="form-control input-sm" name="email">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Ngày sinh</label>
+                        <div class="col-md-3">
+                            <input class="form-control input-sm input-date form-control-solid" data-inputmask="'alias': 'dd/mm/yyyy'" type="text" placeholder="dd/mm/yyyy" name="birthday"/>
+                            <small id="date-invalide-msg" class="help-block" style="display: none;">Nhập ngày không hợp lệ.</small>
+                        </div>
+                        <label class="control-label col-md-2"><span class="required" aria-required="true">* </span>Giới tính</label>
+                        <div class="col-md-4">
+                            <label class="col-md-5 radio-inline">
+                                <input type="radio" name="sex" value="M">
+                                Nam
+                            </label>
+                            <label class="col-md-5 radio-inline">
+                                <input type="radio" name="sex" value="F">
+                                Nữ
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2"><span class="required" aria-required="true">* </span> Nơi thường trú</label>
+                        <div class="col-md-9">
+                            <input class="form-control input-sm" type="text" name="address"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Nơi tạm trú</label>
+                        <div class="col-md-9">
+                            <input class="form-control input-sm" type="text" name="subAddress"/>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn green" id="btn-save-customer">Tạo/Chỉnh Sửa</button>
+                <button type="button" class="btn btn-outline green" data-dismiss="modal" aria-hidden="true">Hủy</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/assets/vendors/jquery.inputmask/jquery.inputmask.bundle.js" type="text/javascript"></script>
+<script src="/assets/applications/siteadmin/scripts/customer/popupCustomer.js" type="text/javascript"></script>

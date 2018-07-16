@@ -1,0 +1,9 @@
+#form-loan-search .form-group label{
+    margin-top: 8px;
+}
+.loan-detail{
+    margin-right: 10px;
+}
+.modal-open .colorpicker, .modal-open .datepicker, .modal-open .daterangepicker {
+    z-index: 10999!important;
+}

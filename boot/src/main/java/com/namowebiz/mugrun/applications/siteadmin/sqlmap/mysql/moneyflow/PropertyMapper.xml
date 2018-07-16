@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.namowebiz.mugrun.applications.siteadmin.dao.moenyflow.PropertyMapper">
+    <resultMap id="moneyFlow" type="com.namowebiz.mugrun.applications.siteadmin.models.moenyflow.Property">
+        <id column="property_no" property="propertyNo"/>
+        <result column="cash" property="cash"/>
+        <result column="delete_yn" property="deleteYn"/>
+    </resultMap>
+
+    <select id="get" resultMap="moneyFlow" parameterType="long">
+        SELECT * FROM property WHERE delete_yn = 0 LIMIT 0,1
+    </select>
+
+    <update id="addMoney" parameterType="long">
+        UPDATE property SET cash = cash + #{value}
+        WHERE delete_yn = 0
+    </update>
+
+</mapper>

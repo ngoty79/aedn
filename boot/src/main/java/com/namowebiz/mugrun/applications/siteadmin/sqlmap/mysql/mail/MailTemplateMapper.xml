@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.namowebiz.mugrun.applications.siteadmin.dao.mail.MailTemplateMapper">
+    <resultMap id="mailTemplate" type="com.namowebiz.mugrun.applications.siteadmin.models.mail.MailTemplate">
+        <id column="template_no" property="templateNo"/>
+        <result column="template_title" property="templateTitle"/>
+        <result column="template_content" property="templateContent"/>
+        <result column="image_path" property="imagePath"/>
+        <result column="template_type" property="templateType"/>
+        <result column="email_auto_yn" property="emailAutoYn"/>
+        <result column="sender_email" property="senderEmail"/>
+        <result column="use_yn" property="useYn"/>
+        <result column="reg_date" property="regDate"/>
+        <result column="reg_user_no" property="regUserNo"/>
+        <result column="mod_date" property="modDate"/>
+        <result column="mod_user_no" property="modUserNo"/>
+    </resultMap>
+
+    <select id="getByTemplateType" resultMap="mailTemplate" parameterType="string">
+        SELECT mailTemplate.*
+        FROM mail_template mailTemplate
+        WHERE mailTemplate.template_type = #{templateType}
+    </select>
+
+    <select id="getByPK" resultMap="mailTemplate" parameterType="long">
+        SELECT mailTemplate.*
+        FROM mail_template mailTemplate
+        WHERE  template_no = #{templateNo}
+    </select>
+
+    <insert id="insert"
+            useGeneratedKeys="true"
+            keyColumn="template_no"
+            keyProperty="templateNo"
+            parameterType="com.namowebiz.mugrun.applications.siteadmin.models.mail.MailTemplate">
+        INSERT INTO mail_template (
+            template_no,
+            template_title,
+            template_content,
+            image_path,
+            template_type,
+            email_auto_yn,
+            sender_email,
+            use_yn,
+            reg_date,
+            reg_user_no
+        ) VALUES (
+            #{templateNo},
+            #{templateTitle},
+            #{templateContent},
+            #{imagePath},
+            #{templateType},
+            #{emailAutoYn},
+            #{senderEmail},
+            #{useYn},
+            NOW(),
+            #{regUserNo}
+        )
+    </insert>
+
+    <update id="update" parameterType="com.namowebiz.mugrun.applications.siteadmin.models.mail.MailTemplate" >
+        UPDATE mail_template
+        SET
+            template_title      = #{templateTitle},
+            template_content    = #{templateContent},
+            image_path          = #{imagePath},
+            template_type       = #{templateType},
+            email_auto_yn       = #{emailAutoYn},
+            sender_email        = #{senderEmail},
+            use_yn              = #{useYn},
+            mod_date            = NOW(),
+            mod_user_no         = #{modUserNo}
+        WHERE template_no = #{templateNo}
+    </update>
+
+</mapper>

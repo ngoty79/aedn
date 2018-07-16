@@ -1,0 +1,18 @@
+#container-point-settings-mall .form-horizontal .radio {
+    padding-top: 2px;
+}
+
+.label-point-settings{
+    float: left;
+    padding: 10px;
+}
+
+#container-point-settings-mall .input-size-small {
+    float: left;
+    max-width : 60px;
+}
+
+#container-point-settings-mall .input-size-medium  {
+    max-width: 100px;
+    float: left;
+}

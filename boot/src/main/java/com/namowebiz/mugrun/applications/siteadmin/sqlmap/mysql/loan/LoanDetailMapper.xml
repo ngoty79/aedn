@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.namowebiz.mugrun.applications.siteadmin.dao.customer.LoanDetailDao">
+    <resultMap id="loanDetail" type="com.namowebiz.mugrun.applications.siteadmin.models.customer.LoanDetail">
+        <id column="loan_detail_no" property="loanDetailNo"/>
+        <result column="no" property="no"/>
+        <result column="loan_no" property="loanNo"/>
+        <result column="start_date" property="startDate"/>
+        <result column="end_date" property="endDate"/>
+        <result column="capital" property="capital"/>
+        <result column="profit" property="profit"/>
+        <result column="amount" property="amount"/>
+        <result column="status" property="status"/>
+        <result column="notice" property="notice"/>
+        <result column="finished" property="finished"/>
+        <result column="confirm_date" property="confirmDate"/>
+        <result column="confirm_user_no" property="confirmUserNo"/>
+        <result column="delete_yn" property="deleteYn"/>
+        <result column="customerName" property="customerName"/>
+        <result column="contract_code" property="contractCode"/>
+        <result column="mod_date" property="modDate"/>
+        <result column="mod_user_no" property="modUserNo"/>
+    </resultMap>
+
+
+    <insert id="insertList" parameterType="com.namowebiz.mugrun.applications.siteadmin.models.customer.LoanDetail">
+        insert into loan_detail(loan_no, start_date, end_date, capital, profit, amount, status, delete_yn, confirm_date, confirm_user_no)
+                VALUES 
+                <foreach collection="details" item="item" separator="," open="" close="" index="index">
+                    ( #{item.loanNo}, #{item.startDate}, #{item.endDate}, #{item.capital}, #{item.profit}, #{item.amount}, #{item.status}, 0 , #{item.confirmDate}, #{item.confirmUserNo})
+                </foreach>
+    </insert>
+
+    <update id="updateStatus" parameterType="com.namowebiz.mugrun.applications.siteadmin.models.customer.LoanDetail" >
+        UPDATE loan_detail
+        SET
+            status = #{status}
+        WHERE loan_detail_no = #{loanDetailNo}
+    </update>
+
+    <update id="confirm" parameterType="map" >
+        <bind name="currentDate" value="@com.namowebiz.mugrun.applications.framework.common.utils.DateUtil@getCurrentDate()"/>
+        UPDATE loan_detail
+        SET
+            confirm_date = #{currentDate},
+            confirm_user_no = #{userNo}
+        WHERE loan_detail_no IN
+        <foreach collection="loanDetailNoList" item="item" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </update>
+
+    <update id="confirmLoanDetail" parameterType="map" >
+        <bind name="currentDate" value="@com.namowebiz.mugrun.applications.framework.common.utils.DateUtil@getCurrentDate()"/>
+        UPDATE loan_detail
+        SET
+            confirm_date = #{currentDate},
+            confirm_user_no = #{userNo}
+        WHERE loan_detail_no IN
+        <foreach collection="detailNoList" item="item" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </update>
+
+    <update id="reject" parameterType="map" >
+        <bind name="currentDate" value="@com.namowebiz.mugrun.applications.framework.common.utils.DateUtil@getCurrentDate()"/>
+        UPDATE loan_detail
+        SET
+            status = 'N',
+            confirm_date = NULL,
+            confirm_user_no = NULL
+        WHERE loan_detail_no IN
+        <foreach collection="detailNoList" item="item" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </update>
+
+
+
+
+    <update id="deleteByLoanNo" parameterType="long" >
+        DELETE FROM loan_detail
+          WHERE loan_no = #{loanNo}
+    </update>
+
+    <update id="approveFinishedLoan" parameterType="map" >
+        <bind name="currentDate" value="@com.namowebiz.mugrun.applications.framework.common.utils.DateUtil@getCurrentDate()"/>
+        UPDATE loan_detail
+            SET
+                status = 'D',
+                confirm_date = #{currentDate},
+                confirm_user_no = #{userNo}
+          WHERE loan_no = #{loanNo} AND status != 'P'
+    </update>
+
+    <update id="pay" parameterType="map" >
+        <bind name="currentDate" value="@com.namowebiz.mugrun.applications.framework.common.utils.DateUtil@getCurrentDate()"/>
+        UPDATE loan_detail
+        SET
+            status = 'P',
+            mod_date = #{currentDate},
+            mod_user_no = #{modUserNo}
+        WHERE loan_detail_no IN
+            <foreach collection="detailNoList" item="item" open="(" close=")" separator=",">
+                #{item}
+            </foreach>
+
+    </update>
+
+    <select id="getByDetailNoList" resultMap="loanDetail" parameterType="map">
+        Select * from loan_detail
+        WHERE loan_detail_no IN
+        <foreach collection="detailNoList" item="item" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </select>
+
+    <select id="getByDays" resultMap="loanDetail" parameterType="map">
+        Select * from loan_detail where loan_no = #{loanNo} and status != 'P'
+        order by end_date
+        limit 0, #{days}
+    </select>
+
+    <select id="list" resultMap="loanDetail" parameterType="map">
+        SELECT
+            D.*
+            FROM loan_detail D
+        <include refid="whereClause"/>
+        ORDER BY end_date
+        <if test="pageSize != null">
+            LIMIT #{startIndex}, #{pageSize}
+        </if>
+    </select>
+
+    <select id="getByPK" resultMap="loanDetail" parameterType="long">
+        SELECT D.*, L.contract_code, cust.name customerName
+          FROM loan_detail D
+          LEFT OUTER JOIN Loan L ON L.loan_no = D.loan_no
+          LEFT OUTER JOIN customer cust ON cust.customer_no = L.customer_no
+          WHERE loan_detail_no = #{loanDetailNo}
+    </select>
+
+    <select id="count" resultType="long" parameterType="map">
+        SELECT COUNT(D.loan_detail_no)
+            FROM loan_detail D
+            <include refid="whereClause"/>
+    </select>
+
+    <sql id="whereClause">
+        <where>
+            AND D.delete_yn != 1
+            <if test="loanNo != null">
+                AND D.loan_no = #{loanNo}
+            </if>
+            <if test="status != null">
+                <if test="status != 'WW'">
+                    AND D.status = #{status}
+                </if>
+                <if test="status == 'WW'">
+                    AND D.status = 'P' AND D.confirm_date IS NULL
+                </if>
+            </if>
+        </where>
+    </sql>
+</mapper>

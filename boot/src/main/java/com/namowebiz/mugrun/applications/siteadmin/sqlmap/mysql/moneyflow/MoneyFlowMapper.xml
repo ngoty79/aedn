@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.namowebiz.mugrun.applications.siteadmin.dao.moenyflow.MoneyFlowMapper">
+    <resultMap id="moneyFlow" type="com.namowebiz.mugrun.applications.siteadmin.models.moenyflow.MoneyFlow">
+        <id column="money_flow_no" property="moneyFlowNo"/>
+        <result column="title" property="title"/>
+        <result column="type" property="type"/>
+        <result column="amount" property="amount"/>
+        <result column="refer_data" property="referData"/>
+        <result column="notice" property="notice"/>
+
+        <result column="reg_date" property="regDate"/>
+        <result column="reg_user_no" property="regUserNo"/>
+    </resultMap>
+
+    <resultMap id="moneyFlowVO" extends="moneyFlow" type="com.namowebiz.mugrun.applications.siteadmin.models.moenyflow.MoneyFlowVO">
+        <result column="reg_user_name" property="regUserName"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="com.namowebiz.mugrun.applications.siteadmin.models.moenyflow.MoneyFlow"
+            useGeneratedKeys="true" keyColumn="money_flow_no" keyProperty="moneyFlowNo">
+        <bind name="currentDate" value="@com.namowebiz.mugrun.applications.framework.common.utils.DateUtil@getCurrentDate()"/>
+        insert into money_flow
+        (
+            title,
+            type,
+            amount,
+            refer_data,
+            notice,
+            reg_date,
+            reg_user_no
+        )
+        VALUES(
+            #{title},
+            #{type},
+            #{amount},
+            #{referData},
+            #{notice},
+            #{currentDate},
+            #{regUserNo}
+        )
+    </insert>
+
+    
+
+    <select id="list" resultMap="moneyFlowVO" parameterType="map">
+        SELECT
+            flow.money_flow_no,
+            flow.title,
+            flow.type,
+            flow.amount,
+            flow.notice,
+            flow.reg_date,
+            (Select name from user_info Where user_no = flow.reg_user_no) as reg_user_name
+        FROM money_flow flow
+        <include refid="whereClause"/>
+        ORDER BY reg_date DESC
+        <if test="pageSize != null">
+            LIMIT #{startIndex}, #{pageSize}
+        </if>
+    </select>
+
+    <select id="count" resultType="long" parameterType="map">
+        SELECT
+            COUNT(flow.money_flow_no)
+        FROM money_flow flow
+        <include refid="whereClause"/>
+    </select>
+
+
+    <select id="getByPK" resultMap="moneyFlowVO" parameterType="long">
+        SELECT * FROM money_flow
+          WHERE money_flow_no = #{costDetailNo}
+    </select>
+
+    <sql id="whereClause">
+        <where>
+            <if test="startDate != null">
+                AND DATE(flow.reg_date) >= DATE(#{startDate})
+            </if>
+            <if test="endDate != null">
+                <![CDATA[ AND DATE(flow.reg_date) <= DATE(#{endDate}) ]]>
+            </if>
+
+            <if test="searchText != null">
+                AND flow.name LIKE CONCAT('%', #{searchText}, '%')
+            </if>
+        </where>
+    </sql>
+</mapper>

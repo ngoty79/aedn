@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.namowebiz.mugrun.applications.siteadmin.dao.common.TownDao">
+    <resultMap id="town" type="com.namowebiz.mugrun.applications.siteadmin.models.common.Town">
+        <id column="town_no" property="townNo"/>
+        <result column="district_no" property="districtNo"/>
+        <result column="name" property="name"/>
+        <result column="district_name" property="districtName"/>
+        <result column="province_name" property="provinceName"/>
+        <result column="delete_yn" property="deleteYn"/>
+    </resultMap>
+
+    <select id="getByPK" resultMap="town" parameterType="string">
+        SELECT * FROM town WHERE  town_no = #{townNo} AND delete_yn = 0
+    </select>
+
+
+    <insert id="insert" parameterType="com.namowebiz.mugrun.applications.siteadmin.models.common.Town"
+            useGeneratedKeys="true" keyColumn="customer_no" keyProperty="customerNo">
+        insert into town
+        (
+            name,
+            district_no,
+            delete_yn
+        )
+        values
+        (
+            #{name},
+            #{districtNo},
+            0
+        )
+    </insert>
+
+    <update id="update" parameterType="com.namowebiz.mugrun.applications.siteadmin.models.common.Town" >
+        UPDATE town
+        SET
+            name = #{name,jdbcType=VARCHAR},
+            district_no = #{districtNo}
+        WHERE town_no = #{townNo}
+    </update>
+
+    <delete id="delete" parameterType="map">
+        UPDATE town SET delete_yn = 1 WHERE
+        <if test="townNo != null">
+            town_no = #{townNo}
+        </if>
+        <if test="townNoList != null">
+            town_no IN
+            <foreach collection="townNoList" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+    </delete>
+
+
+    <select id="list" resultMap="town" parameterType="map">
+        SELECT A.*, B.name district_name, C.province_name province_name
+            FROM town A
+            INNER JOIN district B ON A.district_no = B.district_no
+            INNER JOIN province C ON C.province_no = B.province_no
+        <include refid="whereClause"/>
+        ORDER BY name ASC
+        <if test="pageSize != null">
+            LIMIT #{startIndex}, #{pageSize}
+        </if>
+    </select>
+
+    <select id="count" resultType="long" parameterType="map">
+        SELECT COUNT(A.town_no) FROM town A
+          <include refid="whereClause"/>
+    </select>
+
+
+
+    <sql id="whereClause">
+        <where>
+            delete_yn = 0
+            <if test="searchText != null">
+                AND A.name LIKE CONCAT('%', #{searchText}, '%')
+            </if>
+        </where>
+    </sql>
+</mapper>

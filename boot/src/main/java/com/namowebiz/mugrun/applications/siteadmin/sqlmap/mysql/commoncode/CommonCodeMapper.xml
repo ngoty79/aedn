@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.namowebiz.mugrun.applications.siteadmin.dao.commoncode.CommonCodeMapper">
+    <resultMap id="commonCode" type="com.namowebiz.mugrun.applications.siteadmin.models.commoncode.CommonCode">
+        <id column="common_code" property="commonCode"/>
+        <result column="group_code" property="groupCode"/>
+        <result column="common_code_name" property="commonCodeName"/>
+        <result column="common_code_desc" property="commonCodeDesc"/>
+        <result column="use_yn" property="useYn"/>
+        <result column="view_order" property="viewOrder"/>
+        <result column="reg_date" property="regDate"/>
+        <result column="reg_user_no" property="regUserNo"/>
+        <result column="mod_date" property="modDate"/>
+        <result column="mod_user_no" property="modUserNo"/>
+    </resultMap>
+
+
+    <resultMap id="commonCodeVO" extends="commonCode" type="com.namowebiz.mugrun.applications.siteadmin.models.commoncode.CommonCodeVO">
+
+    </resultMap>
+
+    <select id="list" resultMap="commonCodeVO" parameterType="map">
+        SELECT *
+        FROM common_code
+        <include refid="whereClause"/>
+        ORDER BY view_order DESC
+        <if test="pageSize != null">
+            LIMIT #{startIndex}, #{pageSize}
+        </if>
+    </select>
+
+    <select id="getByGroupCode" resultMap="commonCodeVO" parameterType="String">
+        SELECT *
+        FROM common_code
+        WHERE group_code = #{groupCode}
+        ORDER BY view_order
+    </select>
+
+    <sql id="whereClause">
+        <where>
+            1 = 1
+            <if test="useYn != null">
+                AND use_yn = #{useYn}
+            </if>
+            <if test="groupCode != null">
+                AND group_code = #{groupCode}
+            </if>
+
+        </where>
+    </sql>
+</mapper>

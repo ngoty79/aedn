@@ -1,0 +1,68 @@
+body.modal-open {
+    overflow: hidden;
+}
+#form-customer-search .form-group label{
+    margin-top: 8px;
+}
+#container-customer-detail{
+    padding-top: 5px;
+}
+#container-customer-detail .portlet.box>.portlet-body{
+    font-size: 14px!important;
+}
+.porlet-green{
+    background-color: #32c5d2 !important;
+}
+#container-customer-detail .portlet>.portlet-title {
+    min-height: 34px!important;
+}
+#container-customer-detail .portlet>.portlet-title>.tools {
+    float: right;
+    display: inline-block;
+    padding: 8px 0 0px;
+}
+.statusF, .statusC{
+    color: #ed6b75!important;
+    font-style: italic;
+}
+#container-customer-detail .portlet.box>.portlet-title>.caption {
+    font-size: 16px!important;
+    padding: 8px 0 0px;
+}
+
+.portlet.box.porlet-green {
+    border: 1px solid #dcdcdc;
+    margin-bottom: 20px!important;
+    border-top: 0;
+}
+.customer-detail{
+    margin-right: 10px;
+}
+
+#container-credit-info b{
+    letter-spacing: 1px;
+}
+#datepicker .input-group-addon{
+    background-color: rgba(218, 220, 235, 0.53);
+}
+.container-buttons{
+    /*margin: 10px 0 0 0;*/
+    padding: 20px 0 0 0;
+    border-top: 1px solid #dcdcdc;
+}
+.container-buttons button{
+    margin-left: 5px;
+}
+
+.tabbable-line>.nav-tabs>li.open.F, .tabbable-line>.nav-tabs>li.F:hover{
+    border-bottom: 4px solid #ed9091;
+}
+.tabbable-line>.nav-tabs>li.active.F{
+    border-bottom: 4px solid #ed6b75;
+}
+.tabbable-line>.nav-tabs>li.active.F:hover{
+    border-bottom: 4px solid #ed9091;
+}
+.modal-open .colorpicker, .modal-open .datepicker, .modal-open .daterangepicker {
+    z-index: 10999!important;
+}

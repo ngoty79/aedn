@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="'siteadmin/layout/common_layout'">
+<head>
+    <link href="/assets/templates/admin/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/templates/admin/apps/css/inbox.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/vendors/bootstrap.table/1.9.1/bootstrap-table.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/vendors/jquery.loadmask/jquery.loadmask.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<!-- BEGIN CONTENT -->
+<div layout:fragment="page-content" class="page-content-wrapper">
+    <!-- BEGIN CONTENT BODY -->
+    <div class="page-content" id="container-money-flow">
+        <div class="inbox">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="inbox-body">
+                        <div class="inbox-content">
+                            <div class="portlet-body" style="padding-left: 15px;">
+                                <div class="row form-inline form-group" >
+                                    <div class="form-group">
+                                        <span>Dư số tiền:</span>
+                                        <div class="input-group " style="padding-left: 15px;">
+                                            <input name="cash" type="text" class="form-control" readonly th:value="${property.cash}">
+                                            <div class="input-group-addon">$</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row div-line"></div>
+                                <div class="row form-inline form-group" style="margin-top: 20px;">
+                                    <div class="form-group">
+                                        <div class="input-group " >
+                                            <div class="input-group-addon"><i class="fa fa-calendar-check-o text-primary" aria-hidden="true"></i></div>
+                                            <input id="start-date" name="date" type="text" class="form-control" placeholder="Ngày bắt đầu">
+                                        </div>
+                                        <div class="input-group " >
+                                            <div class="input-group-addon"><i class="fa fa-calendar-check-o text-primary" aria-hidden="true"></i></div>
+                                            <input id="end-date" name="date" type="text" class="form-control" placeholder="Ngày kết thúc">
+                                        </div>
+                                    </div>
+                                    <button type="button" id="btn-search" class="btn green">
+                                        <i class="fa fa-search"></i> Xem lịch sử
+                                    </button>
+                                </div>
+                                <div class="row">
+                                    <table class="table-money-flow" ></table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <!-- END CONTENT BODY -->
+</div>
+<!-- END CONTENT -->
+
+<div style="display: none;" layout:fragment="page-scripts">
+    <script src="/assets/templates/admin/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
+    <script src="/assets/templates/admin/global/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.vi.min.js" type="text/javascript"></script>
+    <script src="/assets/vendors/bootstrap.table/1.9.1/bootstrap-table.min.js" type="text/javascript"></script>
+    <script src="/assets/vendors/bootstrap.table/1.9.1/locale/bootstrap-table-vi-VN.js" type="text/javascript"></script>
+    <script src="/assets/vendors/icheck/icheck.min.js" type="text/javascript"></script>
+    <script src="/assets/vendors/jquery.tmpl/1.4.2/jquery.tmpl.min.js" type="text/javascript"></script>
+    <script src="/assets/applications/siteadmin/scripts/report/moneyflow.js" type="text/javascript"></script>
+</div>
+</body>
+</html>

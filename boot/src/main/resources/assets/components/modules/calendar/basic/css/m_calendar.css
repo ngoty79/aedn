@@ -1,0 +1,74 @@
+#container-calendar table tr th.fc-day-header{
+	padding:15px 0;
+}
+#container-calendar .fc-view-container {
+	border-top:2px solid #93a564;
+	border-bottom:1px solid #a0a0a0;
+	margin-bottom:40px;
+}
+#container-calendar h2{
+	font-weight: 600;
+}
+td.fc-day-number.fc-sat{
+	color:#4978f0;
+}
+td.fc-day-number.fc-sun{
+	color:#f04949
+}
+.fc-day-grid-event .fc-content{
+	font-size:14px;
+	background-color:none;
+}
+.fc-event{
+	background:none;
+	color:#545454;
+	border:0;
+	list-style: circle;
+}
+.fc-day-grid-event .fc-content:before{
+	content: '\26AB';
+	color:#fff;
+	font-size:14px;
+
+}
+.fc-event:hover{
+	color:#545454;
+	text-decoration: underline;
+}
+
+
+@media screen and (max-width: 767px){
+	#container-calendar h2{display:block;font-size:24px;line-height:35px;}
+	#container-calendar table tr th.fc-day-header{
+		position:absolute;
+		top:-999px;
+		left:-999px;
+	}
+	.fc-content-skeleton table tr{display:inline-block;height:50px;}
+	.fc-ltr .fc-basic-view .fc-day-number{min-height:50px;display:block;text-align:left;position: relative;float: none;padding-top: 10px;box-sizing: border-box;}
+	.fc-row .fc-content-skeleton tbody td, .fc-row .fc-helper-skeleton tbody td{display:block;height: 50px;width: 100%;padding-top: 10px;box-sizing: border-box;}
+	.fc td, .fc th{display:block;border: 0;}
+	.fc-row .fc-content-skeleton{float:left;}
+	.fc-day-grid-event .fc-content{padding-left:3px;padding-right:3px;}
+	.fc th{display:none;border:0px;padding-top:20px;box-sizing:border-box}
+	.fc-unthemed thead{float:left;width: 10%;}
+	.fc-unthemed tbody{width: 80%;}
+	.fc-row .fc-content-skeleton table thead, .fc-row .fc-content-skeleton table tbody{float:left;}
+	.fc-day-grid .fc-row{z-index: inherit;height: 350px !important;}
+	.fc-row.fc-week.fc-widget-content .fc-basic-view .fc-body .fc-row{}
+	td.fc-day-number.fc-sun:after{content:"일";margin-left:5px}
+	td.fc-day-number.fc-mon:after{content:"월";margin-left:5px}
+	td.fc-day-number.fc-tue:after{content:"화";margin-left:5px}
+	td.fc-day-number.fc-wed:after{content:"수";margin-left:5px}
+	td.fc-day-number.fc-thu:after{content:"목";margin-left:5px}
+	td.fc-day-number.fc-fri:after{content:"금";margin-left:5px}
+	td.fc-day-number.fc-sat:after{content:"토";margin-left:5px}
+	.fc-day.fc-widget-content{display:block;height:50px;box-sizing:border-box;border-bottom:1px solid #dadada}
+
+}
+
+@media screen and (max-width: 528px){
+.fc-unthemed thead{width:20%;}
+ .page-content-wrapper{padding-left:0 !important;padding-right:0 !important;}
+
+}

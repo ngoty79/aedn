@@ -1,0 +1,354 @@
+
+#container-userIndex-info .form .form-actions {
+    padding: 10px !important;
+}
+
+.content {
+    padding-left: 25px;
+}
+
+.inbox-sidebar {
+    padding: 10px 0 0 0 !important;
+    border-bottom: none !important;
+}
+
+.table-fixed {
+    table-layout: fixed;
+    margin-bottom: 0px;
+}
+
+.border-bottom-user-list {
+    border-bottom: 1px solid #ddd;
+}
+
+#text-user-list {
+    color: #666;
+    font-weight: bold;
+}
+
+.pointer-click-icon {
+    cursor: pointer;
+}
+
+.inbox-sidebar .bootstrap-table .fixed-table-container .fixed-table-pagination .pull-left.pagination-detail {
+    display: none !important;
+}
+
+.inbox-sidebar .bootstrap-table .fixed-table-container .fixed-table-pagination {
+    text-align: center;
+    border-bottom: 1px solid #e7ecf1;
+    border-top: none;
+}
+
+#table-list-user tbody tr td:nth-child(3) {
+    display: none;
+}
+
+#table-list-user tbody tr {
+    border-bottom: 1px solid #e7ecf1;
+}
+
+#table-list-user tbody tr td.checkbox-item {
+    width: 10%;
+}
+
+.list-action-margin-left {
+    margin-left: 5px;
+}
+
+.list-action-margin-right {
+    margin-right: 5px;
+}
+
+.list-action-margin {
+    margin: 0 5px 0;
+}
+
+.fixed-table-container {
+    border: none !important;
+    border-top: 1px solid #ddd;
+}
+
+.inbox-actions {
+    margin-right: 15px;
+}
+
+#btn-change-password {
+    width: 100%;
+    overflow: auto;
+}
+
+.icon-at-email {
+    position: relative;
+    width: 16px;
+    float: left;
+    padding: 8px 0;
+    margin-left: -9px;
+}
+
+.text-birthday {
+    position: relative;
+    float: left;
+    padding: 0px 0px;
+    width: 40px;
+    line-height: 34px;
+}
+.sm-input{
+    width: 75px!important;
+}
+.icon-minus-tel {
+    position: relative;
+    width: 20px;
+    float: left;
+    padding: 10px 0;
+    margin-left: 8px;
+    opacity: 0.6;
+}
+
+.the-legend {
+    border-style: none;
+    border-width: 0;
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom: 0;
+}
+
+legend {
+    width: 120px !important;
+}
+
+.well {
+    background-color: #ffffff !important;
+    border: 1px solid #dae2ea !important;
+}
+
+#form-body-user-status {
+    padding-left: 30px;
+}
+
+.text-align-left {
+    text-align: left !important;
+}
+
+.text-align-center {
+    text-align: center;
+}
+
+#table-user-list-action tbody tr td {
+    padding: 8px 0 !important;
+}
+
+.bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
+    width: 101% !important;
+}
+
+.btn-events-disable {
+    pointer-events: none;
+}
+
+.email-region-column {
+    margin-left: -11px;
+}
+
+#upload-user-paragraph-second {
+    padding-top: 25px;
+}
+
+#upload-user-paragraph-third {
+    padding-top: 15px;
+}
+
+#row-upload-user-label {
+    padding-top: 5px;
+}
+
+.help-block{
+    color: #e73d4a !important;
+}
+
+#search-clear {
+    position: relative;
+    margin-left: -18px;
+    z-index: 1001;
+    padding-top: 10px;
+}
+
+#select-user-status {
+    padding-left: 10px;
+    width: 24%;
+}
+
+#form-create-user .well {
+    margin-bottom: 0 !important;
+}
+#form-create-user label{
+    text-align: left!important;
+}
+.input-change-password {
+    height: 34px;
+    padding: 6px 12px;
+    background-color: #fff;
+    border: 1px solid #c2cad8;
+    width: 270px;
+}
+
+.display-none {
+    display: none;
+}
+
+.user-detail-receive-type {
+    padding-top: 10px;
+}
+
+.user-create-margin-column {
+    margin-left: -25px;
+}
+
+.user-detail-margin-column {
+    margin-left: -25px;
+}
+
+#radio-create-user-sex {
+    padding-left: 0;
+}
+
+#container-create-user-add {
+    margin-top: 20px;
+}
+
+.form-control-template {
+    height: 34px;
+    background-color: #fff;
+    border: 1px solid #c2cad8;
+    float: left;
+    font-size: 14px;
+    line-height: 1.42857;
+    color: #4d6b8a;
+    display: block;
+    padding: 6px 12px;
+    outline: 0!important;
+}
+
+.form-control-tel1 {
+    width: 65px;
+}
+
+.form-control-tel23 {
+    width: 75px;
+}
+
+.message-validate-tel1 {
+    width: 80px;
+    padding-right: 0;
+}
+
+.message-validate-tel23 {
+    width: 75px;
+    padding: 0;
+}
+
+.message-validate-year-bd {
+    width: 90px;
+    padding-right: 0;
+}
+
+.form-control-year-bd {
+    width: 75px;
+}
+
+.message-validate-md-bd {
+    padding: 0;
+    width: 60px;
+}
+
+.form-control-md-bd {
+    width: 60px;
+}
+
+.margin-input-change-password {
+    margin-top: 4px;
+}
+
+.remove-padding-left {
+    padding-left: 0;
+}
+
+#margin-receive-type-sms {
+    margin-left: 20px;
+}
+#create_user_modal label{
+    text-align:right!important;
+}
+@media (min-width: 992px) and (max-width: 1500px) {
+
+    .btn-user-list-action {
+        width: 101%;
+        font-size: 13px;
+        height: 34px;
+        overflow: hidden;
+    }
+}
+
+@media (min-width: 1501px){
+
+    .btn-user-list-action {
+        width: 101%;
+        font-size: 13px;
+        height: 34px;
+    }
+}
+
+@media (max-width: 768px){
+
+    #form-user-detail .icon-at-email {
+        margin-left: 25px !important;
+    }
+
+    #form-user-detail .email-region-column {
+        margin-left: 30px !important;
+    }
+
+    #select-user-status {
+        padding-left: 16px !important;
+        width: 96% !important;
+    }
+
+    .user-detail-margin-column {
+        margin-left: 0px !important;
+    }
+
+    #text-user-group {
+        margin-left: -31px;
+    }
+
+    #select-user-group {
+        width: 96%;
+    }
+}
+
+@media (max-width: 992px) {
+
+    .btn-user-list-action {
+        width: 100%;
+    }
+
+    #container-userIndex-contents {
+        margin-top: 58px;
+    }
+
+}
+
+@media (min-width: 768px) {
+
+    #input-create-password .help-block {
+        width: 243px !important;
+    }
+
+    .text-help-msg {
+        padding-left: 0;
+    }
+
+
+
+}
+

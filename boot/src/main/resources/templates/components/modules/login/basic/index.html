@@ -1,0 +1,52 @@
+<div class="pt-module-userloginNamo-skin-basic" >
+        <div class="container member">
+            <div class="row">
+                <div class="page-header member align-left">
+                    <h1>로그인</h1>
+                    <p>골프야 놀자 회원님 로그인하시면 더 많은 컨텐츠를 보실수 있습니다.</p>
+                </div>
+            </div>
+        </div>
+    <div class="pt-module-userloginNamo-wrapper" th:if="${result.loginSuccess != true}">
+        <form class="pt-form pt-module-userloginNamo-form" id="userloginNamo-wrapper" action="/login" method="post">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+            <input type="hidden" name="loginType" value="user"/>
+            <input type="hidden" name="targetUri" th:value="${targetUri}"/>
+            <input type="hidden" name="loginUrl" th:value="${result.loginUrl}"/>
+            <input type="hidden" name="loginSuccess" th:value="${result.loginSuccess}"/>
+            <div class="pt-module-userloginNamo-body">
+                <div class="pt-module-userloginNamo-input">
+                    <div class="pt-module-userloginNamo-input-row">
+                        <label for="pt-module-login-id" class="pt-form-label">아이디</label>
+                        <input type="text" id="pt-module-login-id" name="userId" class="pt-form-control pt-form-box-sizing pt-form-input">
+                    </div>
+                    <div class="pt-module-userloginNamo-input-row">
+                        <label for="pt-module-login-pw" class="pt-form-label">비밀번호</label>
+                        <input type="password" id="pt-module-login-pw" name="password" class="pt-form-control pt-form-box-sizing pt-form-input">
+                    </div>
+                </div>
+                <div class="pt-module-userloginNamo-option">
+                    <label for="module-login-save-id" class="pt-form-label pt-form-chkbox">
+                        <input type="checkbox" id="module-login-save-id" class="pt-form-opt">아이디 저장
+                    </label>
+                    <label for="module-login-stay-login" class="pt-form-label pt-form-chkbox">
+                        <input type="checkbox" id="module-login-stay-login" name="remember-me" class="pt-form-opt">로그인상태 유지
+                    </label>
+                </div>
+                <input type="button" id="module-login-btn" value="로그인" class="pt-btn pt-btn-primary pt-module-userloginNamo-login-btn" nexturl="/site/patent/index.do">
+            </div>
+            <div class="pt-module-userloginNamo-link">
+                <a href="/site/signup" class="pt-module-userloginNamo-a">회원가입</a>
+                &nbsp;|&nbsp;
+                <a href="/site/findid" class="pt-module-userloginNamo-a">
+                    ID/PW 찾기
+                </a>
+            </div>
+            <div class="display_msg" id="module-login-errorMsg" th:if="${#strings.isEmpty(errorMessage) == false}" th:text="${#strings.isEmpty(errorMessage)}? '' : #{${errorMessage}}">Incorrect User or Password!</div>
+            <div class="display_msg" style="display: none;" id="module-login-emptyMsg"></div>
+        </form>
+    </div>
+
+</div>
+
+

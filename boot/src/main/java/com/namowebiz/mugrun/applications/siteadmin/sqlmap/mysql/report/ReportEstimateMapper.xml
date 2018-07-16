@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.namowebiz.mugrun.applications.siteadmin.dao.report.EstimateReportyMapper">
+    <resultMap id="estimateReport" type="com.namowebiz.mugrun.applications.siteadmin.models.report.EstimateReport">
+        <result column="loanRevenue" property="loanRevenue"/>
+        <result column="salaryCost" property="salaryCost"/>
+        <result column="loanProvide" property="loanProvide"/>
+        <result column="staffUserName" property="staffUserName"/>
+        <result column="townName" property="townName"/>
+        <result column="month" property="month"/>
+        <result column="year" property="year"/>
+        <result column="amount" property="amount"/>
+        <result column="date" property="date"/>
+        <result column="revenue" property="revenue"/>
+        <result column="profit" property="profit"/>
+        <result column="contract_code_List" property="contractCodeList"/>
+    </resultMap>
+
+
+    <select id="getEstimateReport" resultMap="estimateReport" parameterType="map">
+        <![CDATA[
+        SELECT * FROM (
+            (SELECT SUM(amount) loanRevenue FROM loan_detail WHERE delete_yn = 0 AND end_date >= DATE(#{startDate}) AND end_date <= DATE(#{endDate}) ) AS loanRevenue,
+            (SELECT (SUM(salary) + IFNULL(SUM(allowance),0) +  IFNULL(SUM(extra_cost), 0)) AS salaryCost FROM salary_mst WHERE delete_yn = 0 AND LAST_DAY(CURRENT_DATE()) BETWEEN DATE(#{startDate}) AND DATE(#{endDate}) ) AS salaryCost,
+            (SELECT SUM(loan_amount) loanProvide FROM loan WHERE delete_yn = 0 AND start_date >=  DATE(#{startDate}) AND start_date <= DATE(#{endDate}) ) AS loanProvide
+        )
+         ]]>
+    </select>
+
+    <select id="getLoanAmountByStaff" resultMap="estimateReport" parameterType="map">
+        SELECT U.name AS staffUserName, SUM(detail.capital) amount
+            FROM Loan L
+            INNER JOIN loan_detail detail ON L.loan_no = detail.loan_no
+            LEFT OUTER JOIN user_info U ON U.user_no = L.staff_user_no
+        WHERE
+            L.delete_yn = 0 AND L.status IN ('A', 'R')
+            AND (detail.delete_yn = 0 AND detail.status != 'P')
+            GROUP BY L.staff_user_no
+    </select>
+
+    <select id="getLoanAmountByLocation" resultMap="estimateReport" parameterType="map">
+        SELECT T.name townName, SUM(detail.capital) amount
+            FROM Loan L
+            INNER JOIN loan_detail detail ON L.loan_no = detail.loan_no
+            INNER JOIN customer C ON C.customer_no = L.customer_no
+            LEFT OUTER JOIN town T ON T.town_no = C.town_no
+        WHERE
+            L.delete_yn = 0 AND L.status IN ('A', 'R')
+            AND (detail.delete_yn = 0 AND detail.status != 'P')
+            GROUP BY C.town_no
+    </select>
+
+    <select id="getReportRevenueProfitByDay" resultMap="estimateReport" parameterType="map">
+        <![CDATA[
+        SELECT A.date, SUM(A.amount) AS revenue, SUM(A.profit) AS profit
+        FROM (
+            SELECT detail.confirm_date date, SUM(detail.amount) amount, SUM(detail.profit) profit
+                FROM Loan L
+                INNER JOIN loan_detail detail ON L.loan_no = detail.loan_no
+            WHERE
+                L.delete_yn = 0 AND L.status IN ('A', 'R')
+                AND (detail.delete_yn = 0 AND detail.status = 'P'  AND detail.confirm_date IS NOT NULL  AND detail.confirm_date <= CURRENT_DATE())
+                GROUP BY detail.confirm_date
+
+        UNION ALL
+
+            SELECT DATE(L.finish_date) date,
+                (IFNULL(L.finish_return_amount,0) + IFNULL(L.extra_amount, 0)) AS amount,
+                (IFNULL(L.finish_return_amount,0) + IFNULL(L.extra_amount, 0) - SUM(detail.capital)) AS profit
+                FROM Loan L
+                INNER JOIN loan_detail detail ON L.loan_no = detail.loan_no
+            WHERE
+                L.delete_yn = 0 AND L.status = 'F'
+                AND (detail.delete_yn = 0 AND detail.status != 'P')
+                GROUP BY DATE(L.finish_date)
+        ) A
+        WHERE A.date >= DATE(#{startDate}) AND A.date <= DATE(#{endDate})
+        GROUP BY A.date
+        ORDER BY A.date ASC
+        ]]>
+    </select>
+
+    <select id="getStopLoanRevenue" resultMap="estimateReport" parameterType="map">
+        <![CDATA[
+        SELECT IFNULL(B.revenue, 0) revenue,  IFNULL(B.profit, 0) profit FROM
+        (
+            SELECT SUM(A.amount) AS revenue, SUM(A.profit) AS profit
+            FROM (
+                SELECT DATE(L.finish_date) date,
+                    (IFNULL(L.finish_return_amount,0) + IFNULL(L.extra_amount, 0)) AS amount,
+                    (IFNULL(L.finish_return_amount,0) + IFNULL(L.extra_amount, 0) - SUM(detail.capital)) AS profit
+                    FROM Loan L
+                    INNER JOIN loan_detail detail ON L.loan_no = detail.loan_no
+                WHERE
+                    L.delete_yn = 0 AND L.status = 'F'
+                    AND (detail.delete_yn = 0 AND detail.status != 'P')
+                    GROUP BY DATE(L.finish_date)
+            ) A
+            WHERE A.date >= DATE(#{startDate}) AND A.date <= DATE(#{endDate})
+        ) B
+        ]]>
+    </select>
+
+    <select id="getLoanRevenue" resultMap="estimateReport" parameterType="map">
+        <![CDATA[
+        SELECT IFNULL(B.revenue, 0) revenue,  IFNULL(B.profit, 0) profit FROM
+        (
+            SELECT SUM(A.amount) AS revenue, SUM(A.profit) AS profit
+            FROM (
+                SELECT detail.confirm_date date, SUM(detail.amount) amount, SUM(detail.profit) profit
+                    FROM Loan L
+                    INNER JOIN loan_detail detail ON L.loan_no = detail.loan_no
+                WHERE
+                    L.delete_yn = 0 AND L.status IN ('A', 'R')
+                    AND (detail.delete_yn = 0 AND detail.status = 'P'  AND detail.confirm_date IS NOT NULL  AND detail.confirm_date <= CURRENT_DATE())
+                    GROUP BY detail.confirm_date
+            ) A
+            WHERE A.date >= DATE(#{startDate}) AND A.date <= DATE(#{endDate})
+        ) B
+        ]]>
+    </select>
+
+    <select id="getReportRevenueProfitByMonth" resultMap="estimateReport" parameterType="map">
+        <![CDATA[
+        SELECT A.month, A.year, SUM(A.amount) AS revenue, SUM(A.profit) AS profit
+        FROM (
+              SELECT MONTH(detail.confirm_date) month, YEAR(detail.confirm_date) year, SUM(detail.amount) amount, SUM(detail.profit) profit
+                    FROM Loan L
+                    INNER JOIN loan_detail detail ON L.loan_no = detail.loan_no
+              WHERE
+                    L.delete_yn = 0 AND L.status IN ('A', 'R')
+                    AND (detail.delete_yn = 0 AND detail.status = 'P'  AND detail.confirm_date IS NOT NULL  AND detail.confirm_date <= CURRENT_DATE())
+                    GROUP BY MONTH(detail.confirm_date), YEAR(detail.confirm_date)
+
+              UNION ALL
+                SELECT MONTH(L.finish_date) month, YEAR(L.finish_date) year,
+                    (IFNULL(L.finish_return_amount,0) + IFNULL(L.extra_amount, 0)) AS amount,
+                    (IFNULL(L.finish_return_amount,0) + IFNULL(L.extra_amount, 0) - SUM(detail.capital)) AS profit
+                    FROM Loan L
+                    INNER JOIN loan_detail detail ON L.loan_no = detail.loan_no
+                WHERE
+                    L.delete_yn = 0 AND L.status IN ('F') AND IFNULL(L.finish_return_amount,0)>0
+                    AND (detail.delete_yn = 0 AND detail.status != 'P')
+                    GROUP BY MONTH(L.finish_date), YEAR(L.finish_date)
+        ) A
+        GROUP BY A.month, A.year
+        ORDER BY A.year, A.month
+        ]]>
+    </select>
+
+
+
+</mapper>
