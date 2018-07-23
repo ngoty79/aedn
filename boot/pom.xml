@@ -4,12 +4,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.namowebiz.mugrun</groupId>
-    <artifactId>sunflower</artifactId>
+    <artifactId>aedn</artifactId>
     <version>1.0.0-RELEASE</version>
     <packaging>jar</packaging>
 
     <name>sunflower</name>
-    <description>Sunflower Project</description>
+    <description>AEDN Project</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>

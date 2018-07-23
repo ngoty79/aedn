@@ -20,47 +20,41 @@
                     <div class="inbox-body">
                         <div class="inbox-content">
                             <div class="portlet-body">
-                                <div class="row">
-                                    <table class="table table-fixed table-list-header">
-                                        <tbody>
-                                        <tr class="table-header-title">
-                                            <td class="p-left p-right">
-                                                <label class="control-label col-md-2" style="width: 90px;margin-top:10px;">Từ Ngày</label>
-                                                <div  class="col-md-2" style="padding-left: 0px;">
-                                                    <div class="input-group " >
-                                                        <div class="input-group-addon"><i class="fa fa-calendar-check-o text-primary" aria-hidden="true"></i></div>
-                                                        <input id="start-date" name="date" type="text" class="form-control" placeholder="Ngày tháng">
-                                                    </div>
-                                                </div>
-                                                <label class="control-label col-md-2" style="width: 120px;margin-top:10px;">Đến Ngày</label>
-                                                <div  class="col-md-2" >
-                                                    <div class="input-group ">
-                                                        <div class="input-group-addon"><i class="fa fa-calendar-check-o text-primary" aria-hidden="true"></i></div>
-                                                        <input id="end-date" name="date" type="text" class="form-control" placeholder="Ngày tháng">
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr class="table-header-title">
-                                            <td class="p-left p-right">
-                                                <label class="control-label col-md-2" style="width: 90px;margin-top:10px;">Tìm kiếm</label>
-                                                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-6 input-group">
-                                                    <input name="searchText" type="text" class="form-control text-search">
-                                                                <span class="input-group-addon btn-search">
-                                                                    <i class="fa fa-search"></i>
-                                                                </span>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                    <div class="row" style="margin-top: 10px; margin-bottom: 10px; padding-left: 15px; padding-right: 15px;">
-                                        <button type="button" class="btn btn-sm btn-circle btn-outline green btn-delete"><i class="glyphicon glyphicon-remove"></i> Xóa Dữ Liệu</button>
-                                        <button type="button" class="btn btn-sm btn-circle btn-outline green pull-right btn-add"><i class="fa fa-plus"></i> Tạo mới</button>
+                                <div class="row form-group">
+                                    <label class="control-label col-lg-2 col-md-3 col-sm-4" style="width: 90px;margin-top:10px;">Từ Ngày</label>
+                                    <div class=" col-lg-2 col-md-3 col-sm-4">
+                                        <div class="input-group">
+                                            <div class="input-group " >
+                                                <div class="input-group-addon"><i class="fa fa-calendar-check-o text-primary" aria-hidden="true"></i></div>
+                                                <input id="start-date" name="date" type="text" class="form-control" placeholder="Ngày tháng">
+                                            </div>
+                                        </div>
                                     </div>
-                                    <table class="table-cost-detail"></table>
+                                    <div class=" col-lg-2 col-md-3 col-sm-4">
+                                        <div class="input-group">
+                                            <div class="input-group " >
+                                                <div class="input-group-addon"><i class="fa fa-calendar-check-o text-primary" aria-hidden="true"></i></div>
+                                                <input id="end-date" name="date" type="text" class="form-control" placeholder="Ngày tháng">
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-
+                                <div class="row form-group">
+                                    <label class="control-label col-lg-2 col-md-3 col-sm-4" style="width: 90px;margin-top:10px;">Tìm kiếm</label>
+                                    <div class="col-lg-4 col-md-5 col-sm-6">
+                                        <div class="input-group">
+                                            <input name="searchText" type="text" class="form-control text-search">
+                                            <span class="input-group-addon btn-search">
+                                                <i class="fa fa-search"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-top: 10px; margin-bottom: 10px; padding-left: 15px; padding-right: 15px;">
+                                    <button type="button" class="btn btn-sm btn-circle btn-outline green btn-delete"><i class="glyphicon glyphicon-remove"></i> Xóa Dữ Liệu</button>
+                                    <button type="button" class="btn btn-sm btn-circle btn-outline green pull-right btn-add"><i class="fa fa-plus"></i> Tạo mới</button>
+                                </div>
+                                <table class="table-cost-detail"></table>
                             </div>
                         </div>
                     </div>
@@ -81,15 +75,26 @@
                                 <div class="change-password-group">
                                     <div class="control-group">
                                         <div class="row form-group">
-                                            <label class="control-label col-md-4">Loại chi phí</label>
-                                            <div class="col-md-8">
-                                                <input type="text" class="form-control" name="name"/>
+                                            <label class="control-label col-md-4"><span class="required" aria-required="true"> * </span> Loại chi phí</label>
+                                            <div class="col-md-5">
+                                                <select class="form-control" id="costType" name="costType">
+                                                    <option th:each="cost : ${otherCosts}" th:value="${cost.commonCode}">[[${cost.commonCodeName}]]</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="control-group">
                                         <div class="row form-group">
-                                            <label class="control-label col-md-4">Ngày tháng</label>
+                                            <label class="control-label col-md-4"><span class="required" aria-required="true"> * </span> Tiêu đề</label>
+                                            <div class="col-md-8">
+                                                <input type="text" class="form-control" name="name"/>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group">
+                                        <div class="row form-group">
+                                            <label class="control-label col-md-4"><span class="required" aria-required="true"> * </span> Ngày tháng</label>
                                             <div id="cost-date" class="col-md-5">
                                                 <div class="input-group dr-book-date">
                                                     <div class="input-group-addon"><i class="fa fa-calendar-check-o text-primary" aria-hidden="true"></i></div>
@@ -100,7 +105,7 @@
                                     </div>
                                     <div class="control-group">
                                         <div class="row form-group">
-                                            <label class="control-label col-md-4">Số tiền</label>
+                                            <label class="control-label col-md-4"><span class="required" aria-required="true"> * </span> Số tiền</label>
                                             <div class="col-md-5">
                                                 <input class="form-control currency" name="amount"/>
                                             </div>

@@ -9,6 +9,7 @@
         <result column="status" property="status"/>
         <result column="date" property="date"/>
         <result column="notice" property="notice"/>
+        <result column="cost_type" property="costType"/>
         <result column="approve_date" property="approveDate"/>
         <result column="approve_user_no" property="approveUserNo"/>
         <result column="reg_date" property="regDate"/>
@@ -20,6 +21,7 @@
     <resultMap id="costDetailVO" extends="costDetail" type="com.namowebiz.mugrun.applications.siteadmin.models.cost.CostDetailVO">
         <result column="reg_user_name" property="regUserName"/>
         <result column="approveUserName" property="approveUserName"/>
+        <result column="costTypeName" property="costTypeName"/>
     </resultMap>
 
     <insert id="insert" parameterType="com.namowebiz.mugrun.applications.siteadmin.models.cost.CostDetail"
@@ -30,7 +32,8 @@
             name,
             amount,
             date,
-        notice,
+            notice,
+            cost_type,
             reg_date,
             reg_user_no
         )
@@ -40,6 +43,7 @@
             #{amount},
             #{date},
             #{notice},
+            #{costType},
             #{currentDate},
             #{regUserNo}
         )
@@ -58,6 +62,7 @@
               amount = #{amount},
               date = #{date},
               notice = #{notice},
+              cost_type = #{costType},
               mod_user_no = #{modUserNo},
               mod_date = #{currentDate}
           WHERE cost_detail_no = #{costDetailNo}
@@ -77,6 +82,7 @@
     <select id="list" resultMap="costDetailVO" parameterType="map">
         SELECT
             cost.*
+            , (Select common_code_name from common_code Where common_code = cost.cost_type AND group_code = 'OtherCost') as costTypeName
             , (Select name from user_info Where user_no = cost.reg_user_no) as reg_user_name
             , (Select name from user_info Where user_no = cost.approve_user_no) as approveUserName
         FROM cost_detail cost

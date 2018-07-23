@@ -18,7 +18,11 @@ public class CommonCodeService {
     private CommonCodeMapper commonCodeMapper;
 
 
-    public List<CommonCodeVO> list(Map<String, Object> params){
+    public List<CommonCodeVO> list(Map<String, Object> params) {
         return commonCodeMapper.list(params);
+    }
+
+    public List<CommonCodeVO> getByCodeGroup(String groupCode) {
+        return commonCodeMapper.getByGroupCode(groupCode);
     }
 }

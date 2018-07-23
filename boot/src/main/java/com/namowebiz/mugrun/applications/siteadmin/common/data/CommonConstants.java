@@ -39,38 +39,7 @@ public class CommonConstants {
     public static final int MODULE_SIGNUP_PROVISION_AGREE_YN = 1;
 
     public static final int COMMON_CODE_USE_YN = 1;
-    public static final String COMMON_CODE_GROUP_CODE_CERT_TYPE = "CertType";
-    public static final String COMMON_CODE_CERT_TYPE_IPIN = "I";
-    public static final String COMMON_CODE_CERT_TYPE_PHONE = "S";
+    public static final String COMMON_CODE_OTHER_COST = "OtherCost";
+    public static final String COMMON_CODE_OTHER_INCOME = "OtherIncome";
 
-
-    public static final int MODULE_ATTEND_CHECK_TOP_GRADE_VALUE = 1;
-
-    public static final String GROUP_CODE_CLUB_FACILITY_TYPE = "ClubFacilityType";
-    public static final String CLUB_FACILITY_TYPE_GOLF = "1";
-    public static final String CLUB_FACILITY_TYPE_PRACTICE = "2";
-
-    public static final String CLUB_EVENT_STATUS_ONGOING = "10";
-    public static final String CLUB_EVENT_STATUS_CLOSE = "20";
-
-    public static final String CLUB_APPLY_STATUS_APPLY = "10";
-    public static final String CLUB_APPLY_STATUS_COMPLETE = "20";
-    public static final String CLUB_APPLY_STATUS_CANCEL = "30";
-
-    public static final int GOLF_PACKAGE_USE_YN = 1;
-    public static final int GOLF_PACKAGE_CATEGORY_SHOW_YN_0 = 0;
-    public static final int GOLF_PACKAGE_CATEGORY_SHOW_YN_1 = 1;
-    public static final int GOLF_PACKAGE_PRODUCT_STATUS_ACTIVE = 1;
-    public static final int GOLF_PACKAGE_PRODUCT_USE_YN = 1;
-    public static final int GOLF_PACKAGE_OPTION_USE_YN = 1;
-
-    public static final int GOLF_PACKAGE_RESERVE_STATUS_APPLY = 10;
-    public static final int GOLF_PACKAGE_RESERVE_STATUS_COMPLETE = 20;
-    public static final int GOLF_PACKAGE_RESERVE_STATUS_CLOSE = 30;
-    public static final int GOLF_PACKAGE_RESERVE_STATUS_CANCEL = 40;
-
-    public static final String PACKAGE_OPTION_STATUS_SUBSCRIBE = "10";
-    public static final String PACKAGE_OPTION_STATUS_BOOKABLE = "20";
-    public static final String PACKAGE_OPTION_STATUS_CLOSE = "30";
-    public static final String PACKAGE_OPTION_STATUS_CANCELED = "40";
 }

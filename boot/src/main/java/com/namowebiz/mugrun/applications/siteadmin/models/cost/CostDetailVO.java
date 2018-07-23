@@ -12,6 +12,7 @@ import lombok.Setter;
 public class CostDetailVO extends CostDetail {
     private String regUserName;
     private String approveUserName;
+    private String costTypeName;
 
     public String getAmountFormat(){
         if(getAmount() != null){

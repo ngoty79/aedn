@@ -12,7 +12,7 @@ import java.util.Map;
 @Component
 public interface CommonCodeMapper {
 
-    public List<CommonCodeVO> list(Map<String, Object> params);
+    List<CommonCodeVO> list(Map<String, Object> params);
 
     List<CommonCodeVO> getByGroupCode(String groupCode);
 }

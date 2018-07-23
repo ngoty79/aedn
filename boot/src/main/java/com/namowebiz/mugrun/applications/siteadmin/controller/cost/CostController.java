@@ -3,7 +3,9 @@ package com.namowebiz.mugrun.applications.siteadmin.controller.cost;
 import com.namowebiz.mugrun.applications.framework.common.utils.JsonResponse;
 import com.namowebiz.mugrun.applications.framework.common.utils.PaginationList;
 import com.namowebiz.mugrun.applications.framework.common.utils.RequestUtil;
+import com.namowebiz.mugrun.applications.siteadmin.common.data.CommonConstants;
 import com.namowebiz.mugrun.applications.siteadmin.models.cost.CostDetailVO;
+import com.namowebiz.mugrun.applications.siteadmin.service.commoncode.CommonCodeService;
 import com.namowebiz.mugrun.applications.siteadmin.service.cost.CostDetailService;
 import com.namowebiz.mugrun.applications.siteadmin.service.user.UserService;
 import lombok.extern.apachecommons.CommonsLog;
@@ -26,7 +28,8 @@ import java.util.*;
 @Controller
 @CommonsLog
 public class CostController {
-
+    @Autowired
+    private CommonCodeService commonCodeService;
     @Autowired
     private UserService userService;
     @Autowired
@@ -34,10 +37,12 @@ public class CostController {
 
 
 
+
     @RequestMapping(value = "/admin/cost/other/index", method = RequestMethod.GET)
     public String payment(Map<String, Object> map, HttpServletRequest request) throws Exception {
         Calendar now = Calendar.getInstance();
         map.put("user", RequestUtil.getUserInfoInSession(request));
+        map.put("otherCosts", commonCodeService.getByCodeGroup(CommonConstants.COMMON_CODE_OTHER_COST));
         map.put("currentMonth", now.get(Calendar.MONTH) + 1);
         map.put("currentYear", now.get(Calendar.YEAR));
         return "siteadmin/cost/cost";

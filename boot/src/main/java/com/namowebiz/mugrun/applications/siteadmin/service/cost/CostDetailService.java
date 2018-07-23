@@ -116,6 +116,7 @@ public class CostDetailService {
                 CostDetailVO model = costDetailMapper.getByPK(costDetail.getCostDetailNo());
                 if(model != null){
                     model.setModUserNo(user.getUserNo());
+                    model.setCostType(costDetail.getCostType());
                     model.setName(costDetail.getName());
                     model.setDate(costDetail.getDate());
                     model.setAmount(costDetail.getAmount());

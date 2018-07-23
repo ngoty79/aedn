@@ -16,7 +16,8 @@
     </resultMap>
 
 
-    <resultMap id="commonCodeVO" extends="commonCode" type="com.namowebiz.mugrun.applications.siteadmin.models.commoncode.CommonCodeVO">
+    <resultMap id="commonCodeVO" extends="commonCode"
+               type="com.namowebiz.mugrun.applications.siteadmin.models.commoncode.CommonCodeVO">
 
     </resultMap>
 
@@ -24,7 +25,7 @@
         SELECT *
         FROM common_code
         <include refid="whereClause"/>
-        ORDER BY view_order DESC
+        ORDER BY view_order ASC, common_code ASC
         <if test="pageSize != null">
             LIMIT #{startIndex}, #{pageSize}
         </if>
@@ -34,7 +35,7 @@
         SELECT *
         FROM common_code
         WHERE group_code = #{groupCode}
-        ORDER BY view_order
+        ORDER BY view_order ASC, common_code ASC
     </select>
 
     <sql id="whereClause">

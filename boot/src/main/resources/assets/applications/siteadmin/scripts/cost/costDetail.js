@@ -16,6 +16,7 @@ $.extend(CostDetailController.prototype, {
         me.$textSearch                 = me.$container.find('.text-search');
         me.$startDate                 = me.$container.find('#start-date');
         me.$endDate                 = me.$container.find('#end-date');
+        me.$costType                 = me.$container.find('#costType');
         me.$btnSearch               = me.$container.find('.btn-search');
         me.$btnAdd                  = me.$container.find('.btn-add');
         me.$btnDelete               = me.$container.find('.btn-delete');
@@ -23,6 +24,7 @@ $.extend(CostDetailController.prototype, {
         me.$modalCostDetail       = $('#modal-cost-detail');
         me.$modalApprove            = $('#modal-approve-salary');
         me.$form                    = me.$modalCostDetail.find('form');
+        me.$name                    = me.$form.find('[name="name"]');
         me.$btnSave                 = me.$modalCostDetail.find('#btn-save-cost-detail');
 
         me.initUi();
@@ -67,10 +69,18 @@ $.extend(CostDetailController.prototype, {
 
                     }
                 },{
-                    field: 'name',
+                    field: 'costTypeName',
                     title: 'Loại Chi Phí',
                     sortable: true,
-                    align: 'left'
+                    align: 'left',
+                    formatter: function(value, row){
+                        if(!!value){
+                            return row.costType != '13'? value : value + ' (' + row.name + ')';
+                        }else{
+                            return row.name;
+                        }
+
+                    }
                 },{
                     field: 'date',
                     title: 'Ngày tháng',
@@ -134,6 +144,13 @@ $.extend(CostDetailController.prototype, {
             me.approve(row);
         });
 
+        me.$costType.change(function(e){
+            var title = me.$costType.find('option:selected').text();
+            if(me.$costType.val() == '13'){
+                title = '';
+            }
+            me.$name.val(title);
+        });
 
 
         me.$form.formValidation({
@@ -272,15 +289,18 @@ $.extend(CostDetailController.prototype, {
     showCreateCostDetailModal: function() {
         var me = this;
         me.$form.find('input,textarea').val('');
+        me.$costType.trigger('change');
         me.$modalCostDetail.modal('show');
     },
     editCostDetailModal: function(row){
         var me = this;
         me.$form.find('input:hidden[name="costDetailNo"]').val(row.costDetailNo);
+        me.$costType.val(row.costType);
         me.$form.find('input[name="name"]').val(row.name);
         me.$form.find('textarea[name="notice"]').val(row.notice);
         me.$form.find('input[name="date"]').val(mugrunApp.formatDate(row.date, 'DD/MM/YYYY'));
         me.$form.find('input[name="amount"]').val(mugrunApp.formatCurrency(row.amount));
+
         me.$modalCostDetail.modal('show');
     },
     addOrEditCostDetail: function(){
