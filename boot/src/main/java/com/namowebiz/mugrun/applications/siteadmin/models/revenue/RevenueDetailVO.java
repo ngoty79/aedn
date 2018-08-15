@@ -12,6 +12,7 @@ import lombok.Setter;
 public class RevenueDetailVO extends RevenueDetail {
     private String regUserName;
     private String approveUserName;
+    private String revenueTypeName;
 
     public String getAmountFormat(){
         if(getAmount() != null){

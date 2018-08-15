@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="'siteadmin/layout/common_layout'">
+<head>
+    <link href="/assets/templates/admin/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css" />
+    <!--<link href="/assets/templates/admin/apps/css/inbox.min.css" rel="stylesheet" type="text/css" />-->
+    <link href="/assets/vendors/jquery.loadmask/jquery.loadmask.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/applications/siteadmin/css/report/style.css" rel="stylesheet" type="text/css" />
+
+</head>
+<body>
+
+<!-- BEGIN CONTENT -->
+<div layout:fragment="page-content" class="page-content-wrapper">
+    <!-- BEGIN CONTENT BODY -->
+    <div class="page-content" id="container-biz-report">
+        <div class="inbox">
+            <div class="form-horizontal">
+                <div class="row form-group">
+                    <div class="col-md-12 report-page-title">
+                        <label class="">BÁO CÁO TÌNH HÌNH KINH DOANH</label>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label class="col-lg-2 col-md-2 col-sm-3 control-label">Kỳ báo cáo:</label>
+                    <div class="col-lg-2 col-md-3 col-sm-4">
+                        <select name="viewType" class="form-control">
+                            <option value="3">3 tháng gần nhất</option>
+                            <option value="6" selected>6 tháng gần nhất</option>
+                            <option value="9">9 tháng gần nhất</option>
+                            <option value="12">12 tháng gần nhất</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-1 col-md-1 col-sm-2">
+                        <button id="btn-search" type="button" class="btn green">Xem</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Khoản mục</th>
+                                <th th:each="reportView : ${reports}">[[${reportView.monthYear}]]</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>Thu lãi</th>
+                                <td th:each="reportView : ${reports}">[[${#numbers.formatInteger(reportView.loanProfit, 3,'POINT')}]] </td>
+                            </tr>
+                            <tr>
+                                <th>Tiền Lẻ</th>
+                                <td th:each="reportView : ${reports}">[[${reportView.cash}]]</td>
+                            </tr>
+                            <tr>
+                                <th>Phí làm hồ sơ</th>
+                                <td th:each="reportView : ${reports}">[[${reportView.profileCost}]]</td>
+                            </tr>
+                            <tr>
+                                <th>Thu khác</th>
+                                <td th:each="reportView : ${reports}">[[${reportView.otherRevenue}]]</td>
+                            </tr>
+                            <tr>
+                                <th>Lãi tiền gửi NH</th>
+                                <td th:each="reportView : ${reports}">[[${reportView.bankInterest}]]</td>
+                            </tr>
+                            <tr class="sumary-row">
+                                <th>Tổng thu</th>
+                                <td th:each="reportView : ${reports}">[[${reportView.bankInterest}]]</td>
+                            </tr>
+                            <tr>
+                                <th><br> </th>
+                            </tr>
+                            <tr>
+                                <th>Văn phòng phẩm </th>
+                                <td th:each="reportView : ${reports}">[[${reportView.bankInterest}]]</td>
+                            </tr>
+                            <tr>
+                                <th>Phí rút tiền mặt</th>
+                                <td th:each="reportView : ${reports}">[[${reportView.bankInterest}]]</td>
+                            </tr>
+                            <tr>
+                                <th>Chi lương</th>
+                                <td th:each="reportView : ${reports}">[[${reportView.bankInterest}]]</td>
+                            </tr>
+                            <tr>
+                                <th>Chi thưởng</th>
+                                <td th:each="reportView : ${reports}">[[${reportView.bankInterest}]]</td>
+                            </tr>
+                            <tr>
+                                <th>Chi khác</th>
+                                <td th:each="reportView : ${reports}">[[${reportView.bankInterest}]]</td>
+                            </tr>
+                            <tr>
+                                <th>Chi trả tiền lãi vay</th>
+                                <td th:each="reportView : ${reports}">[[${reportView.bankInterest}]]</td>
+                            </tr>
+                            <tr>
+                                <th>Chi hoạt động </th>
+                                <td th:each="reportView : ${reports}">[[${reportView.bankInterest}]]</td>
+                            </tr>
+                            <tr>
+                                <th>Chi giảm lãi </th>
+                                <td th:each="reportView : ${reports}">[[${reportView.bankInterest}]]</td>
+                            </tr>
+                            <tr>
+                                <th>Sinh nhật </th>
+                                <td th:each="reportView : ${reports}">[[${reportView.bankInterest}]]</td>
+                            </tr>
+                            <tr>
+                                <th>Đồng phục </th>
+                                <td th:each="reportView : ${reports}">[[${reportView.bankInterest}]]</td>
+                            </tr>
+                            <tr>
+                                <th>Bảo hiểm </th>
+                                <td th:each="reportView : ${reports}">[[${reportView.bankInterest}]]</td>
+                            </tr>
+                            <tr>
+                                <th>Tiền xăng </th>
+                                <td th:each="reportView : ${reports}">[[${reportView.bankInterest}]]</td>
+                            </tr>
+                            <tr>
+                                <th>Card điện thoại </th>
+                                <td th:each="reportView : ${reports}">[[${reportView.bankInterest}]]</td>
+                            </tr>
+                            <tr class="sumary-row">
+                                <th>Tổng chi </th>
+                                <td th:each="reportView : ${reports}">[[${reportView.bankInterest}]]</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- END CONTENT BODY -->
+</div>
+<!-- END CONTENT -->
+
+<div style="display: none;" layout:fragment="page-scripts">
+    <script src="/assets/templates/admin/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
+    <script src="/assets/templates/admin/global/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.vi.min.js" type="text/javascript"></script>
+    <script src="/assets/vendors/jquery.tmpl/1.4.2/jquery.tmpl.min.js" type="text/javascript"></script>
+    <script src="/assets/applications/siteadmin/scripts/report/bizReport.js" type="text/javascript"></script>
+</div>
+</body>
+</html>

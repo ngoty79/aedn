@@ -69,18 +69,10 @@ $.extend(CostDetailController.prototype, {
 
                     }
                 },{
-                    field: 'costTypeName',
+                    field: 'name',
                     title: 'Loại Chi Phí',
                     sortable: true,
-                    align: 'left',
-                    formatter: function(value, row){
-                        if(!!value){
-                            return row.costType != '13'? value : value + ' (' + row.name + ')';
-                        }else{
-                            return row.name;
-                        }
-
-                    }
+                    align: 'left'
                 },{
                     field: 'date',
                     title: 'Ngày tháng',
@@ -300,7 +292,7 @@ $.extend(CostDetailController.prototype, {
         me.$form.find('textarea[name="notice"]').val(row.notice);
         me.$form.find('input[name="date"]').val(mugrunApp.formatDate(row.date, 'DD/MM/YYYY'));
         me.$form.find('input[name="amount"]').val(mugrunApp.formatCurrency(row.amount));
-
+        me.$form.find('[name="date"]').datepicker('setDate', mugrunApp.formatDate(row.date, 'DD/MM/YYYY'));
         me.$modalCostDetail.modal('show');
     },
     addOrEditCostDetail: function(){

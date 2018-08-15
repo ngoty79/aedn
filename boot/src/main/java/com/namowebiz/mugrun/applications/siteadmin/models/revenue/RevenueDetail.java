@@ -24,4 +24,5 @@ public class RevenueDetail extends BaseObject {
     private Date approveDate;
     private Long approveUserNo;
     private String notice;
+    private String revenueType;
 }

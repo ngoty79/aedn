@@ -13,16 +13,18 @@ $.extend(RevenueDetailController.prototype, {
         me.tmplRevenueDetail = $('#tmplRevenueDetail');
         
         me.revenueYn                 = me.$container.data('revenueYn') == true;
-        me.$tableRevenueDetail                 = me.$container.find('.table-revenue-detail');
+        me.$tableRevenueDetail       = me.$container.find('.table-revenue-detail');
 
-        me.$textSearch                 = me.$container.find('.text-search');
-        me.$startDate                 = me.$container.find('#start-date');
+        me.$textSearch              = me.$container.find('.text-search');
+        me.$startDate               = me.$container.find('#start-date');
         me.$endDate                 = me.$container.find('#end-date');
         me.$btnSearch               = me.$container.find('.btn-search');
+        me.$revenueType             = me.$container.find('#revenueType');
+        me.$name                    = me.$container.find('input[name="name"]');
         me.$btnAdd                  = me.$container.find('.btn-add');
         me.$btnDelete               = me.$container.find('.btn-delete');
         
-        me.$modalRevenueDetail       = $('#modal-revenue-detail');
+        me.$modalRevenueDetail      = $('#modal-revenue-detail');
         me.$modalApprove            = $('#modal-approve-salary');
         me.$form                    = me.$modalRevenueDetail.find('form');
         me.$btnSave                 = me.$modalRevenueDetail.find('#btn-save-revenue-detail');
@@ -138,6 +140,13 @@ $.extend(RevenueDetailController.prototype, {
         });
 
 
+        me.$revenueType.change(function(e){
+            var title = me.$revenueType.find('option:selected').text();
+            if(me.$revenueType.val() == '04'){
+                title = '';
+            }
+            me.$name.val(title);
+        });
 
         me.$form.formValidation({
             framework: 'bootstrap',
@@ -282,15 +291,18 @@ $.extend(RevenueDetailController.prototype, {
     showCreateRevenueDetailModal: function() {
         var me = this;
         me.$form.find('input,textarea').val('');
+        me.$revenueType.trigger('change');
         me.$modalRevenueDetail.modal('show');
     },
     editRevenueDetailModal: function(row){
         var me = this;
         me.$form.find('input:hidden[name="revenueDetailNo"]').val(row.revenueDetailNo);
+        me.$revenueType.val(row.revenueType);
         me.$form.find('input[name="name"]').val(row.name);
         me.$form.find('textarea[name="notice"]').val(row.notice);
         me.$form.find('input[name="date"]').val(mugrunApp.formatDate(row.date, 'DD/MM/YYYY'));
         me.$form.find('input[name="amount"]').val(mugrunApp.formatCurrency(row.amount));
+        me.$form.find('[name="date"]').datepicker('setDate', mugrunApp.formatDate(row.date, 'DD/MM/YYYY'));
         me.$modalRevenueDetail.modal('show');
     },
     addOrEditRevenueDetail: function(){

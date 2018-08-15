@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
-<mapper namespace="com.namowebiz.mugrun.applications.siteadmin.dao.report.EstimateReportyMapper">
+<mapper namespace="com.namowebiz.mugrun.applications.siteadmin.dao.report.EstimateReportMapper">
     <resultMap id="estimateReport" type="com.namowebiz.mugrun.applications.siteadmin.models.report.EstimateReport">
         <result column="loanRevenue" property="loanRevenue"/>
         <result column="salaryCost" property="salaryCost"/>
@@ -15,7 +15,9 @@
         <result column="revenue" property="revenue"/>
         <result column="profit" property="profit"/>
         <result column="contract_code_List" property="contractCodeList"/>
+
     </resultMap>
+
 
 
     <select id="getEstimateReport" resultMap="estimateReport" parameterType="map">
@@ -120,6 +122,69 @@
         ) B
         ]]>
     </select>
+
+    <resultMap id="reportData" type="com.namowebiz.mugrun.applications.siteadmin.models.report.ReportData">
+        <result column="amount" property="amount"/>
+        <result column="revenue" property="revenue"/>
+        <result column="profit" property="profit"/>
+        <result column="month" property="month"/>
+        <result column="commonCode" property="commonCode"/>
+        <result column="commonCodeName" property="commonCodeName"/>
+    </resultMap>
+
+
+    <select id="getLoanRevenueByMonth" resultMap="reportData" parameterType="map">
+        <![CDATA[
+          SELECT A.ym AS month, SUM(A.amount) AS revenue, SUM(A.profit) AS profit
+            FROM (
+                SELECT detail.confirm_date date, DATE_FORMAT(detail.confirm_date, '%Y-%m') ym, SUM(detail.amount) amount, SUM(detail.profit) profit
+                    FROM Loan L
+                    INNER JOIN loan_detail detail ON L.loan_no = detail.loan_no
+                WHERE
+                    L.delete_yn = 0 AND L.status != 'N'
+                    AND (detail.delete_yn = 0 AND detail.status = 'P'  AND detail.confirm_date IS NOT NULL)
+                    GROUP BY detail.confirm_date
+            ) A
+          GROUP BY A.ym
+          ORDER BY A.ym desc
+          Limit 0, #{limit}
+        ]]>
+    </select>
+
+    <select id="getOtherRevenueReport" resultMap="reportData" parameterType="map">
+        <![CDATA[
+          SELECT
+            B.ym AS month, B.revenue_type commonCode, SUM(B.amount) as amount
+            , (select common_code_name FROM common_code WHERE common_code = B.revenue_type AND group_code = 'OtherIncome') commonCodeName
+            FROM
+                (
+                    SELECT IFNULL(A.revenue_type, '99') revenue_type, A.amount, A.approve_date, DATE_FORMAT(A.approve_date, '%Y-%m') ym
+                    FROM revenue_detail A
+                    WHERE A.status = 'A'
+                ) B
+            WHERE B.ym >= #{startMonthYear} AND B.ym <= #{endMonthYear}
+            GROUP BY B.ym, B.revenue_type
+        ]]>
+    </select>
+
+    <select id="getOtherCostReport" resultMap="reportData" parameterType="map">
+        <![CDATA[
+          SELECT
+                B.ym as month, B.cost_type commonCode, SUM(B.amount) as amount
+                , (select common_code_name FROM common_code WHERE common_code = B.cost_type AND group_code = 'OtherCost') commonCodeName
+          FROM
+            (
+                    SELECT IFNULL(A.cost_type, '13') cost_type, A.amount, A.approve_date, DATE_FORMAT(A.approve_date, '%Y-%m') ym
+                    FROM cost_detail A
+                    WHERE A.status = 'A'
+            ) B
+            WHERE B.ym >= #{startMonthYear} AND B.ym <= #{endMonthYear}
+            GROUP BY B.ym, B.cost_type
+        ]]>
+    </select>
+
+
+
 
     <select id="getReportRevenueProfitByMonth" resultMap="estimateReport" parameterType="map">
         <![CDATA[

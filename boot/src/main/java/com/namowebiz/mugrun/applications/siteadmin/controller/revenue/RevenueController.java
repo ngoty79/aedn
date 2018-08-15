@@ -3,9 +3,12 @@ package com.namowebiz.mugrun.applications.siteadmin.controller.revenue;
 import com.namowebiz.mugrun.applications.framework.common.utils.JsonResponse;
 import com.namowebiz.mugrun.applications.framework.common.utils.PaginationList;
 import com.namowebiz.mugrun.applications.framework.common.utils.RequestUtil;
+import com.namowebiz.mugrun.applications.siteadmin.common.data.CommonConstants;
 import com.namowebiz.mugrun.applications.siteadmin.models.customer.LoanPayment;
 import com.namowebiz.mugrun.applications.siteadmin.models.customer.LoanPaymentVO;
 import com.namowebiz.mugrun.applications.siteadmin.models.revenue.RevenueDetailVO;
+import com.namowebiz.mugrun.applications.siteadmin.service.commoncode.CommonCodeService;
+import com.namowebiz.mugrun.applications.siteadmin.service.cost.CostDetailService;
 import com.namowebiz.mugrun.applications.siteadmin.service.customer.LoanDetailService;
 import com.namowebiz.mugrun.applications.siteadmin.service.customer.LoanPaymentService;
 import com.namowebiz.mugrun.applications.siteadmin.service.customer.LoanService;
@@ -34,14 +37,13 @@ public class RevenueController {
     @Autowired
     private RevenueDetailService revenueDetailService;
     @Autowired
-    private LoanService loanService;
-    @Autowired
     private LoanDetailService loanDetailService;
     @Autowired
     private LoanPaymentService loanPaymentService;
     @Autowired
     private UserService userService;
-
+    @Autowired
+    private CommonCodeService commonCodeService;
 
     @RequestMapping(value = "/admin/revenue/index", method = RequestMethod.GET)
     public String revenue(Map<String, Object> map, HttpServletRequest request) throws Exception {
@@ -49,6 +51,7 @@ public class RevenueController {
         map.put("user", RequestUtil.getUserInfoInSession(request));
         map.put("currentMonth", now.get(Calendar.MONTH) + 1);
         map.put("currentYear", now.get(Calendar.YEAR));
+        map.put("otherRevenues", commonCodeService.getByCodeGroup(CommonConstants.COMMON_CODE_OTHER_INCOME));
         return "siteadmin/revenue/index";
     }
 

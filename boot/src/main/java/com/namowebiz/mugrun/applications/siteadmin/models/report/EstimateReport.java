@@ -23,6 +23,8 @@ public class EstimateReport {
     private String year;
     private String contractCodeList;
     private String staffUserName;
+    private String costName;
+    private String revenueName;
     private Date date;
 
 
