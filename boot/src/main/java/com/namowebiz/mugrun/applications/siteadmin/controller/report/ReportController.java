@@ -73,6 +73,21 @@ public class ReportController {
             reportView.setProfileCost(getAmountBy(otherRevenueReports, monthYear, "02"));
             reportView.setBankInterest(getAmountBy(otherRevenueReports, monthYear, "03"));
             reportView.setOtherRevenue(getAmountBy(otherRevenueReports, monthYear, "99"));
+
+            reportView.setOfficeStuff(getAmountBy(otherCostReports, monthYear, "01"));
+            reportView.setWithdrawFee(getAmountBy(otherCostReports, monthYear, "02"));
+            reportView.setBonus(getAmountBy(otherCostReports, monthYear, "03"));
+            reportView.setSalary13th(getAmountBy(otherCostReports, monthYear, "04"));
+            reportView.setInterestCost(getAmountBy(otherCostReports, monthYear, "05"));
+            reportView.setOperatingCost(getAmountBy(otherCostReports, monthYear, "06"));
+            reportView.setGiamLai(getAmountBy(otherCostReports, monthYear, "07"));
+            reportView.setBirthdayCost(getAmountBy(otherCostReports, monthYear, "08"));
+            reportView.setUniformCost(getAmountBy(otherCostReports, monthYear, "09"));
+            reportView.setInsuranceCost(getAmountBy(otherCostReports, monthYear, "10"));
+            reportView.setOilCost(getAmountBy(otherCostReports, monthYear, "11"));
+            reportView.setTelCardCost(getAmountBy(otherCostReports, monthYear, "12"));
+            reportView.setOtherCost(getAmountBy(otherCostReports, monthYear, "13"));
+
             reports.add(reportView);
 
         }

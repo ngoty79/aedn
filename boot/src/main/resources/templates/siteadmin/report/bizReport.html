@@ -39,96 +39,100 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <table class="table table-bordered">
+                    <table class="table table-bordered table-report">
                         <thead>
                             <tr>
-                                <th>Khoản mục</th>
-                                <th th:each="reportView : ${reports}">[[${reportView.monthYear}]]</th>
+                                <th class="cell-header">Khoản mục</th>
+                                <th class="text-center" th:each="reportView : ${reports}">[[${reportView.monthYear}]]</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <th>Thu lãi</th>
-                                <td th:each="reportView : ${reports}">[[${#numbers.formatInteger(reportView.loanProfit, 3,'POINT')}]] </td>
+                                <td th:each="reportView : ${reports}">[[${#numbers.formatInteger(reportView.loanProfit, 0,'COMMA')}]] </td>
                             </tr>
                             <tr>
                                 <th>Tiền Lẻ</th>
-                                <td th:each="reportView : ${reports}">[[${reportView.cash}]]</td>
+                                <td th:each="reportView : ${reports}">[[${#numbers.formatInteger(reportView.cash, 0,'COMMA')}]] </td>
                             </tr>
                             <tr>
                                 <th>Phí làm hồ sơ</th>
-                                <td th:each="reportView : ${reports}">[[${reportView.profileCost}]]</td>
+                                <td th:each="reportView : ${reports}">[[${#numbers.formatInteger(reportView.profileCost, 0,'COMMA')}]] </td>
                             </tr>
                             <tr>
                                 <th>Thu khác</th>
-                                <td th:each="reportView : ${reports}">[[${reportView.otherRevenue}]]</td>
+                                <td th:each="reportView : ${reports}">[[${#numbers.formatInteger(reportView.otherRevenue, 0,'COMMA')}]] </td>
                             </tr>
                             <tr>
                                 <th>Lãi tiền gửi NH</th>
-                                <td th:each="reportView : ${reports}">[[${reportView.bankInterest}]]</td>
+                                <td th:each="reportView : ${reports}">[[${#numbers.formatInteger(reportView.bankInterest, 0,'COMMA')}]] </td>
                             </tr>
                             <tr class="sumary-row">
                                 <th>Tổng thu</th>
-                                <td th:each="reportView : ${reports}">[[${reportView.bankInterest}]]</td>
+                                <td th:each="reportView : ${reports}">[[${#numbers.formatInteger(reportView.totalRevenue, 0,'COMMA')}]] </td>
                             </tr>
                             <tr>
                                 <th><br> </th>
                             </tr>
                             <tr>
                                 <th>Văn phòng phẩm </th>
-                                <td th:each="reportView : ${reports}">[[${reportView.bankInterest}]]</td>
+                                <td th:each="reportView : ${reports}">[[${#numbers.formatInteger(reportView.officeStuff, 0,'COMMA')}]] </td>
                             </tr>
                             <tr>
                                 <th>Phí rút tiền mặt</th>
-                                <td th:each="reportView : ${reports}">[[${reportView.bankInterest}]]</td>
+                                <td th:each="reportView : ${reports}">[[${#numbers.formatInteger(reportView.withdrawFee, 0,'COMMA')}]] </td>
                             </tr>
                             <tr>
                                 <th>Chi lương</th>
-                                <td th:each="reportView : ${reports}">[[${reportView.bankInterest}]]</td>
+                                <td th:each="reportView : ${reports}">[[${#numbers.formatInteger(reportView.officeStuff, 0,'COMMA')}]] </td>
                             </tr>
                             <tr>
                                 <th>Chi thưởng</th>
-                                <td th:each="reportView : ${reports}">[[${reportView.bankInterest}]]</td>
+                                <td th:each="reportView : ${reports}">[[${#numbers.formatInteger(reportView.bonus, 0,'COMMA')}]] </td>
+                            </tr>
+                            <tr>
+                                <th>Trích lương tháng 13</th>
+                                <td th:each="reportView : ${reports}">[[${#numbers.formatInteger(reportView.salary13th, 0,'COMMA')}]] </td>
                             </tr>
                             <tr>
                                 <th>Chi khác</th>
-                                <td th:each="reportView : ${reports}">[[${reportView.bankInterest}]]</td>
+                                <td th:each="reportView : ${reports}">[[${#numbers.formatInteger(reportView.otherCost, 0,'COMMA')}]] </td>
                             </tr>
                             <tr>
                                 <th>Chi trả tiền lãi vay</th>
-                                <td th:each="reportView : ${reports}">[[${reportView.bankInterest}]]</td>
+                                <td th:each="reportView : ${reports}">[[${#numbers.formatInteger(reportView.interestCost, 0,'COMMA')}]] </td>
                             </tr>
                             <tr>
                                 <th>Chi hoạt động </th>
-                                <td th:each="reportView : ${reports}">[[${reportView.bankInterest}]]</td>
+                                <td th:each="reportView : ${reports}">[[${#numbers.formatInteger(reportView.operatingCost, 0,'COMMA')}]] </td>
                             </tr>
                             <tr>
                                 <th>Chi giảm lãi </th>
-                                <td th:each="reportView : ${reports}">[[${reportView.bankInterest}]]</td>
+                                <td th:each="reportView : ${reports}">[[${#numbers.formatInteger(reportView.giamLai, 0,'COMMA')}]] </td>
                             </tr>
                             <tr>
                                 <th>Sinh nhật </th>
-                                <td th:each="reportView : ${reports}">[[${reportView.bankInterest}]]</td>
+                                <td th:each="reportView : ${reports}">[[${#numbers.formatInteger(reportView.birthdayCost, 0,'COMMA')}]] </td>
                             </tr>
                             <tr>
                                 <th>Đồng phục </th>
-                                <td th:each="reportView : ${reports}">[[${reportView.bankInterest}]]</td>
+                                <td th:each="reportView : ${reports}">[[${#numbers.formatInteger(reportView.uniformCost, 0,'COMMA')}]] </td>
                             </tr>
                             <tr>
                                 <th>Bảo hiểm </th>
-                                <td th:each="reportView : ${reports}">[[${reportView.bankInterest}]]</td>
+                                <td th:each="reportView : ${reports}">[[${#numbers.formatInteger(reportView.insuranceCost, 0,'COMMA')}]] </td>
                             </tr>
                             <tr>
                                 <th>Tiền xăng </th>
-                                <td th:each="reportView : ${reports}">[[${reportView.bankInterest}]]</td>
+                                <td th:each="reportView : ${reports}">[[${#numbers.formatInteger(reportView.oilCost, 0,'COMMA')}]] </td>
                             </tr>
                             <tr>
                                 <th>Card điện thoại </th>
-                                <td th:each="reportView : ${reports}">[[${reportView.bankInterest}]]</td>
+                                <td th:each="reportView : ${reports}">[[${#numbers.formatInteger(reportView.telCardCost, 0,'COMMA')}]] </td>
                             </tr>
                             <tr class="sumary-row">
                                 <th>Tổng chi </th>
-                                <td th:each="reportView : ${reports}">[[${reportView.bankInterest}]]</td>
+                                <td th:each="reportView : ${reports}">[[${#numbers.formatInteger(reportView.totalCost, 0,'COMMA')}]] </td>
                             </tr>
                         </tbody>
                     </table>

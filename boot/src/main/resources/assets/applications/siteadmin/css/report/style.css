@@ -4,4 +4,11 @@
 }
 .sumary-row{
     background-color: #ffffe0;
+    font-weight: bold;
+}
+.table-report .cell-header{
+    width: 160px;
+}
+.table-report td{
+    text-align: right;
 }
