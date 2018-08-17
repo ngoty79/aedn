@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import com.namowebiz.mugrun.applications.siteadmin.models.report.EstimateReport;
 import com.namowebiz.mugrun.applications.siteadmin.models.report.ReportData;
 import com.namowebiz.mugrun.applications.siteadmin.models.report.ReportView;
+import com.namowebiz.mugrun.applications.siteadmin.service.commoncode.CommonCodeService;
 import com.namowebiz.mugrun.applications.siteadmin.service.moenyflow.MoneyFlowService;
 import com.namowebiz.mugrun.applications.siteadmin.service.moenyflow.PropertyService;
 import com.namowebiz.mugrun.applications.siteadmin.service.report.EstimateReportService;
@@ -29,6 +30,9 @@ public class ReportController {
     private MoneyFlowService moneyFlowService;
     @Autowired
     private EstimateReportService estimateReportService;
+    @Autowired
+    private CommonCodeService commonCodeService;
+
 
 
     @RequestMapping(value = "/admin/report/index", method = RequestMethod.GET)
@@ -49,6 +53,8 @@ public class ReportController {
     @RequestMapping(value = "/admin/bizreport/index", method = RequestMethod.GET)
     public String bizreport(Map<String, Object> map, HttpServletRequest request) throws Exception {
         buildReport(map);
+        map.put("revenues", commonCodeService.getByCodeGroup("OtherIncome"));
+        map.put("costs", commonCodeService.getByCodeGroup("OtherCost"));
         return "siteadmin/report/bizReport";
     }
 
@@ -69,10 +75,10 @@ public class ReportController {
             Double loanProfit = getLoanProfit(data, monthYear);
             reportView.setMonthYear(monthYear);
             reportView.setLoanProfit(loanProfit);
-            reportView.setCash(getAmountBy(otherRevenueReports, monthYear, "01"));
-            reportView.setProfileCost(getAmountBy(otherRevenueReports, monthYear, "02"));
-            reportView.setBankInterest(getAmountBy(otherRevenueReports, monthYear, "03"));
-            reportView.setOtherRevenue(getAmountBy(otherRevenueReports, monthYear, "99"));
+            reportView.setCash(getAmountBy(otherRevenueReports, monthYear, ReportView.REVENUE_CASH));
+            reportView.setProfileCost(getAmountBy(otherRevenueReports, monthYear, ReportView.REVENUE_PROFILE_COST));
+            reportView.setBankInterest(getAmountBy(otherRevenueReports, monthYear, ReportView.REVENUE_BANK_INTEREST));
+            reportView.setOtherRevenue(getAmountBy(otherRevenueReports, monthYear, ReportView.REVENUE_OTHER));
 
             reportView.setOfficeStuff(getAmountBy(otherCostReports, monthYear, "01"));
             reportView.setWithdrawFee(getAmountBy(otherCostReports, monthYear, "02"));

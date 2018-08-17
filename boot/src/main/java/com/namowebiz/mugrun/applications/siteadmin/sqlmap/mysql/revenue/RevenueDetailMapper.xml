@@ -119,7 +119,14 @@
             <if test="startDate != null">
                 AND revenue.date >= DATE(#{startDate})
             </if>
-
+            <if test="revenueType != null">
+              <if test="revenueType != '99'">
+                  AND revenue.revenue_type = #{revenueType}
+              </if>
+              <if test="revenueType == '99'">
+                AND (revenue.revenue_type = '99' OR revenue.revenue_type IS NULL)
+              </if>
+            </if>
             <if test="endDate != null">
                 <![CDATA[ AND revenue.date <= DATE(#{endDate}) ]]>
             </if>

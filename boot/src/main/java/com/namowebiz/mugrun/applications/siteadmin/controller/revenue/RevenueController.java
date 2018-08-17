@@ -16,6 +16,7 @@ import com.namowebiz.mugrun.applications.siteadmin.service.revenue.RevenueDetail
 import com.namowebiz.mugrun.applications.siteadmin.service.user.UserService;
 import lombok.extern.apachecommons.CommonsLog;
 import org.apache.commons.lang.StringUtils;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
@@ -60,11 +61,15 @@ public class RevenueController {
     public PaginationList<RevenueDetailVO> getRevenueList(String searchText,
                                                           @DateTimeFormat(pattern = "dd/MM/yyyy") Date startDate,
                                                           @DateTimeFormat(pattern = "dd/MM/yyyy") Date endDate,
+                                                          String commonCode,
                                                         int pageNumber, int pageSize) throws Exception {
 
         Map<String, Object> params = new HashMap<>();
         if(!StringUtils.isEmpty(searchText)) {
             params.put("searchText", searchText);
+        }
+        if(!StringUtils.isEmpty(commonCode)) {
+            params.put("revenueType", commonCode);
         }
         if(startDate != null){
             params.put("startDate", startDate);
@@ -72,6 +77,7 @@ public class RevenueController {
         if(endDate != null){
             params.put("endDate", endDate);
         }
+
 
         int startIndex = (pageNumber-1)*pageSize;
         params.put("startIndex", startIndex);

@@ -53,11 +53,15 @@ public class CostController {
     public PaginationList<CostDetailVO> getSalaryMstList(String searchText,
                                                          @DateTimeFormat(pattern = "dd/MM/yyyy") Date startDate,
                                                          @DateTimeFormat(pattern = "dd/MM/yyyy") Date endDate,
+                                                         String commonCode,
                                                         int pageNumber, int pageSize) throws Exception {
 
         Map<String, Object> params = new HashMap<>();
         if(!StringUtils.isEmpty(searchText)) {
             params.put("searchText", searchText);
+        }
+        if(!StringUtils.isEmpty(commonCode)) {
+            params.put("costType", commonCode);
         }
         if(startDate != null){
             params.put("startDate", startDate);

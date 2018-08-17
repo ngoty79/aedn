@@ -4,7 +4,7 @@
       layout:decorate="'siteadmin/layout/common_layout'">
 <head>
     <link href="/assets/templates/admin/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css" />
-    <!--<link href="/assets/templates/admin/apps/css/inbox.min.css" rel="stylesheet" type="text/css" />-->
+    <link href="/assets/vendors/bootstrap.table/1.9.1/bootstrap-table.min.css" rel="stylesheet" type="text/css" />
     <link href="/assets/vendors/jquery.loadmask/jquery.loadmask.css" rel="stylesheet" type="text/css" />
     <link href="/assets/applications/siteadmin/css/report/style.css" rel="stylesheet" type="text/css" />
 
@@ -42,8 +42,8 @@
                     <table class="table table-bordered table-report">
                         <thead>
                             <tr>
-                                <th class="cell-header">Khoản mục</th>
-                                <th class="text-center" th:each="reportView : ${reports}">[[${reportView.monthYear}]]</th>
+                                <th class="header-first cell-header">Khoản mục</th>
+                                <th class="cell-header text-center" th:each="reportView : ${reports}">[[${reportView.monthYear}]]</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -53,26 +53,34 @@
                             </tr>
                             <tr>
                                 <th>Tiền Lẻ</th>
-                                <td th:each="reportView : ${reports}">[[${#numbers.formatInteger(reportView.cash, 0,'COMMA')}]] </td>
+                                <td th:each="reportView : ${reports}" data-type="revenue" th:data-month-year="${reportView.monthYear}" th:data-common-code="${reportView.REVENUE_CASH}">
+                                    <a href="javascript: void(0);" data-toggle="tooltip" title="Cick vào để xem chi tiết"> [[${#numbers.formatInteger(reportView.cash, 0,'COMMA')}]] </a>
+                                </td>
                             </tr>
                             <tr>
                                 <th>Phí làm hồ sơ</th>
-                                <td th:each="reportView : ${reports}">[[${#numbers.formatInteger(reportView.profileCost, 0,'COMMA')}]] </td>
+                                <td th:each="reportView : ${reports}" data-type="revenue" th:data-month-year="${reportView.monthYear}" th:data-common-code="${reportView.REVENUE_PROFILE_COST}">
+                                    <a href="javascript: void(0);" data-toggle="tooltip" title="Cick vào để xem chi tiết"> [[${#numbers.formatInteger(reportView.profileCost, 0,'COMMA')}]] </a>
+                                </td>
                             </tr>
                             <tr>
                                 <th>Thu khác</th>
-                                <td th:each="reportView : ${reports}">[[${#numbers.formatInteger(reportView.otherRevenue, 0,'COMMA')}]] </td>
+                                <td th:each="reportView : ${reports}" data-type="revenue" th:data-month-year="${reportView.monthYear}" th:data-common-code="${reportView.REVENUE_OTHER}">
+                                    <a href="javascript: void(0);" data-toggle="tooltip" title="Cick vào để xem chi tiết"> [[${#numbers.formatInteger(reportView.otherRevenue, 0,'COMMA')}]] </a>
+                                </td>
                             </tr>
                             <tr>
                                 <th>Lãi tiền gửi NH</th>
-                                <td th:each="reportView : ${reports}">[[${#numbers.formatInteger(reportView.bankInterest, 0,'COMMA')}]] </td>
+                                <td th:each="reportView : ${reports}" data-type="revenue" th:data-month-year="${reportView.monthYear}" th:data-common-code="${reportView.REVENUE_BANK_INTEREST}">
+                                    <a href="javascript: void(0);" data-toggle="tooltip" title="Cick vào để xem chi tiết"> [[${#numbers.formatInteger(reportView.bankInterest, 0,'COMMA')}]] </a>
+                                </td>
                             </tr>
                             <tr class="sumary-row">
                                 <th>Tổng thu</th>
                                 <td th:each="reportView : ${reports}">[[${#numbers.formatInteger(reportView.totalRevenue, 0,'COMMA')}]] </td>
                             </tr>
                             <tr>
-                                <th><br> </th>
+                                <th th:colspan="${reports.size() + 1}"><br> </th>
                             </tr>
                             <tr>
                                 <th>Văn phòng phẩm </th>
@@ -138,6 +146,53 @@
                     </table>
                 </div>
             </div>
+
+            <div class="modal fade" id="modal-detail" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-md" role="document" style="width: 700px;">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Chi tiết</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row form-group">
+                                <label class="control-label col-md-2 " style="width: 90px;margin-top:10px;">Thời gian</label>
+                                <div class=" col-md-3 ">
+                                    <div class="input-group">
+                                        <div class="input-group ">
+                                            <div class="input-group-addon"><i class="fa fa-calendar-check-o text-primary" aria-hidden="true"></i></div>
+                                            <input id="start-date" name="date" type="text" class="form-control" placeholder="ngày bắt đầu">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class=" col-md-3 ">
+                                    <div class="input-group">
+                                        <div class="input-group ">
+                                            <div class="input-group-addon"><i class="fa fa-calendar-check-o text-primary" aria-hidden="true"></i></div>
+                                            <input id="end-date" name="date" type="text" class="form-control" placeholder="Ngày kết thúc">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class=" col-md-4 ">
+                                    <select class="form-control" id="select-common-code">
+                                        <option th:each="code : ${revenues}" th:value="${code.commonCode}" th:text="${code.commonCodeName}"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class=" col-md-12 ">
+                                    <table id="table-detail"></table>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
     </div>
@@ -149,6 +204,9 @@
     <script src="/assets/templates/admin/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
     <script src="/assets/templates/admin/global/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.vi.min.js" type="text/javascript"></script>
     <script src="/assets/vendors/jquery.tmpl/1.4.2/jquery.tmpl.min.js" type="text/javascript"></script>
+    <script src="/assets/vendors/bootstrap.table/1.9.1/bootstrap-table.min.js" type="text/javascript"></script>
+    <script src="/assets/vendors/bootstrap.table/1.9.1/locale/bootstrap-table-vi-VN.js" type="text/javascript"></script>
+    <script src="/assets/vendors/numeral/numeral.min.js" type="text/javascript"></script>
     <script src="/assets/applications/siteadmin/scripts/report/bizReport.js" type="text/javascript"></script>
 </div>
 </body>

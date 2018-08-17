@@ -6,6 +6,11 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ReportView {
+    public static final String REVENUE_CASH = "01";
+    public static final String REVENUE_PROFILE_COST = "02";
+    public static final String REVENUE_BANK_INTEREST = "03";
+    public static final String REVENUE_OTHER = "99";
+
     private String monthYear;
     private Double loanProfit;
     private Double loanRevenue;
