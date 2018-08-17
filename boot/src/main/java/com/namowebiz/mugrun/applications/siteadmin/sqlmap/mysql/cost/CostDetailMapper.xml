@@ -115,11 +115,11 @@
                 AND cost.date >= DATE(#{startDate})
             </if>
             <if test="costType != null">
-                <if test="costType != '99'">
-                    AND revenue.cost_type = #{costType}
+                <if test="costType != '13'">
+                    AND cost.cost_type = #{costType}
                 </if>
-                <if test="costType == '99'">
-                    AND (revenue.cost_type = '99' OR revenue.cost_type IS NULL)
+                <if test="costType == '13'">
+                    AND (cost.cost_type = '13' OR cost.cost_type IS NULL)
                 </if>
             </if>
             <if test="endDate != null">

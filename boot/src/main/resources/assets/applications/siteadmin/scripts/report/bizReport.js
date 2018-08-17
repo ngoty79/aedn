@@ -13,7 +13,8 @@ $.extend(BizReportController.prototype, {
         me.$table                   = $('#table-detail');
         me.$startDate               = me.$container.find('#start-date');
         me.$endDate                 = me.$container.find('#end-date');
-        me.$selectCode              = me.$modal.find('#select-common-code');
+        me.$selectRevenue              = me.$modal.find('#select-revenue');
+        me.$selectCost              = me.$modal.find('#select-cost');
         me.$btnSearch               = me.$container.find('#btn-search');
         me.$selectViewType          = me.$container.find('select[name="viewType"]');
 
@@ -100,20 +101,27 @@ $.extend(BizReportController.prototype, {
     },
     showDetail: function(data){
         var me = this;
-
-        var url = '/admin/revenue/list.json';
-        if(data.type != 'revenue'){
-            url = '/admin/cost/other/list.json';
-        }
         me.commonCode = data.commonCode;
         me.year = data.monthYear.split('-')[0];
         me.month = parseInt(data.monthYear.split('-')[1]);
 
         me.startDate = moment().year(me.year).month(me.month - 1).date(1).format('DD/MM/YYYY');
         me.endDate = moment().year(me.year).month(me.month - 1).date(1).endOf('month').format('DD/MM/YYYY');
+
+        var url = '/admin/revenue/list.json';
+        if(data.type != 'revenue'){
+            url = '/admin/cost/other/list.json';
+            me.$selectRevenue.hide();
+            me.$selectCost.show();
+            me.$selectCost.val(me.commonCode);
+        }else{
+            me.$selectRevenue.show();
+            me.$selectCost.hide();
+            me.$selectRevenue.val(me.commonCode);
+        }
+
         me.$startDate.datepicker('setDate',  me.startDate);
         me.$endDate.datepicker('setDate',  me.endDate);
-        me.$selectCode.val(me.commonCode);
         me.$table.bootstrapTable('refresh', {url: url});
 
         me.$modal.modal('show');
