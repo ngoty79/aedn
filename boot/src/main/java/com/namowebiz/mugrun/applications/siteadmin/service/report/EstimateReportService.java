@@ -56,6 +56,11 @@ public class EstimateReportService {
         return Lists.reverse(list);
     }
 
+    public List<ReportData> getReportSalary(int limit){
+        List<ReportData> list = estimateReportyMapper.getReportSalary(limit);
+        return list;
+    }
+
     public List<ReportData> getOtherRevenueReport(String startMonthYear, String endMonthYear){
         return estimateReportyMapper.getOtherRevenueReport(startMonthYear, endMonthYear);
     }

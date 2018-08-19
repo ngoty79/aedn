@@ -19,6 +19,7 @@ $.extend(BizReportController.prototype, {
         me.$selectViewType          = me.$container.find('select[name="viewType"]');
 
         me.initUi();
+        me.search();
     },
     initUi : function(){
         var me = this;
@@ -37,13 +38,6 @@ $.extend(BizReportController.prototype, {
             keepEmptyValues: true
         }).on('changeDate', function(e) {
             me.$startDate.datepicker('setEndDate', e.date);
-        });
-
-        $('[data-toggle="tooltip"]').tooltip();
-
-        $('[data-toggle="tooltip"]').click(function(e){
-            var data = $(this).closest('td').data();
-            me.showDetail(data);
         });
 
         me.$table.bootstrapTable({
@@ -87,17 +81,20 @@ $.extend(BizReportController.prototype, {
             ]
         });
 
-
-        me.$selectViewType.change(function(){
-            me.search();
-        });
         me.$btnSearch.click(function(){
             me.search();
         });
     },
     search: function(){
         var me = this;
+        $('#container-report-view').load('/admin/bizreport/get.html?month=' + me.$selectViewType.val(), function(){
+            $('[data-toggle="tooltip"]').tooltip();
 
+            $('[data-toggle="tooltip"]').click(function(e){
+                var data = $(this).closest('td').data();
+                me.showDetail(data);
+            });
+        });
     },
     showDetail: function(data){
         var me = this;

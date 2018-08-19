@@ -52,20 +52,26 @@ public class ReportController {
 
     @RequestMapping(value = "/admin/bizreport/index", method = RequestMethod.GET)
     public String bizreport(Map<String, Object> map, HttpServletRequest request) throws Exception {
-        buildReport(map);
         map.put("revenues", commonCodeService.getByCodeGroup("OtherIncome"));
         map.put("costs", commonCodeService.getByCodeGroup("OtherCost"));
         return "siteadmin/report/bizReport";
     }
 
+    @RequestMapping(value = "/admin/bizreport/get.html", method = RequestMethod.GET)
+    public String getBizreport(Map<String, Object> map, HttpServletRequest request, Integer month) throws Exception {
+        buildReport(map, month);
+        return "siteadmin/report/reportview";
+    }
 
-    private void buildReport(Map<String, Object> map){
-        int month = 6;
+
+    private void buildReport(Map<String, Object> map, Integer count){
+        int month = count == null? 6 : count;
         DateTime endDate = DateTime.now();
         DateTime startDate = DateTime.now().minusMonths(month);
         String startMonthYear = startDate.toString("yyyy-MM");
         String endMonthYear = endDate.toString("yyyy-MM");
         List<ReportData> data = estimateReportService.getLoanRevenueByMonth(month);
+        List<ReportData> reportSalary = estimateReportService.getReportSalary(month);
         List<ReportData> otherRevenueReports = estimateReportService.getOtherRevenueReport(startMonthYear, endMonthYear);
         List<ReportData> otherCostReports = estimateReportService.getOtherCostReport(startMonthYear, endMonthYear);
         List<ReportView> reports = new ArrayList<>(month);
@@ -73,8 +79,10 @@ public class ReportController {
             ReportView reportView = new ReportView();
             String monthYear = DateTime.now().minusMonths(i).toString("yyyy-MM");
             Double loanProfit = getLoanProfit(data, monthYear);
+            Double salary = getAmount(reportSalary, monthYear);
             reportView.setMonthYear(monthYear);
             reportView.setLoanProfit(loanProfit);
+            reportView.setSalary(salary);
             reportView.setCash(getAmountBy(otherRevenueReports, monthYear, ReportView.REVENUE_CASH));
             reportView.setProfileCost(getAmountBy(otherRevenueReports, monthYear, ReportView.REVENUE_PROFILE_COST));
             reportView.setBankInterest(getAmountBy(otherRevenueReports, monthYear, ReportView.REVENUE_BANK_INTEREST));
@@ -107,6 +115,17 @@ public class ReportController {
         for (ReportData reportData : list) {
             if(monthYear.equals(reportData.getMonth())){
                 d = reportData.getProfit();
+                break;
+            }
+        }
+        return d;
+    }
+
+    private Double getAmount(List<ReportData> list, String monthYear){
+        Double d = 0D;
+        for (ReportData reportData : list) {
+            if(monthYear.equals(reportData.getMonth())){
+                d = reportData.getAmount();
                 break;
             }
         }

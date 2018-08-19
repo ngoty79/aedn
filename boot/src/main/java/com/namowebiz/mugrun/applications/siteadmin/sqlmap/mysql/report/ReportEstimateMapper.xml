@@ -151,6 +151,24 @@
         ]]>
     </select>
 
+
+    <select id="getReportSalary" resultMap="reportData" parameterType="map">
+        <![CDATA[
+          SELECT CONCAT(A.year, '-', A.month) month, A.amount FROM (
+                SELECT detail.year
+                , IF(detail.month < 10, CONCAT('0', detail.month), detail.month) month
+                , SUM(detail.salary) + SUM(detail.extra_cost) as amount
+                        FROM salary_detail detail
+                WHERE
+                        detail.status = 'A'
+                        GROUP BY detail.year, detail.month
+                ORDER BY detail.year DESC, detail.month DESC
+            ) A
+            ORDER BY A.year, A.month
+            limit 0,#{limit}
+        ]]>
+    </select>
+
     <select id="getOtherRevenueReport" resultMap="reportData" parameterType="map">
         <![CDATA[
           SELECT

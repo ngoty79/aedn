@@ -29,6 +29,8 @@ public interface EstimateReportMapper {
 
     List<ReportData> getLoanRevenueByMonth(@Param("limit") int limit);
 
+    List<ReportData> getReportSalary(@Param("limit") int limit);
+
     List<ReportData> getOtherRevenueReport(@Param("startMonthYear") String startMonthYear, @Param("endMonthYear") String endMonthYear);
 
     List<ReportData> getOtherCostReport(@Param("startMonthYear") String startMonthYear, @Param("endMonthYear") String endMonthYear);
