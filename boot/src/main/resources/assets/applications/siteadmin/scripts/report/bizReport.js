@@ -51,8 +51,8 @@ $.extend(BizReportController.prototype, {
             paginationHAlign: 'center',
             queryParams: function(params) {
                 params['commonCode'] = me.commonCode;
-                params['startDate'] = me.startDate;
-                params['endDate'] = me.endDate;
+                params['startApproveDate'] = me.startDate;
+                params['endApproveDate'] = me.endDate;
                 return params;
             },
             columns: [
@@ -66,6 +66,15 @@ $.extend(BizReportController.prototype, {
                     formatter: function(value, row){
                         return numeral(value).format('0,0');
                     }
+                },{
+                    field: 'date',
+                    title: 'Ngày lập',
+                    sortable: true,
+                    align: 'center',
+                    formatter: function(value, row){
+                        return mugrunApp.formatDate(value, 'DD/MM/YYYY');
+                    }
+
                 },{
                     field: 'approveDate',
                     title: 'Ngày duyệt',

@@ -75,7 +75,16 @@ $.extend(CostDetailController.prototype, {
                     align: 'left'
                 },{
                     field: 'date',
-                    title: 'Ngày tháng',
+                    title: 'Ngày lập',
+                    sortable: true,
+                    align: 'right',
+                    formatter: function(value, row){
+                        return mugrunApp.formatDate(value, 'DD/MM/YYYY');
+                    }
+
+                },{
+                    field: 'approveDate',
+                    title: 'Ngày duyệt',
                     sortable: true,
                     align: 'right',
                     formatter: function(value, row){

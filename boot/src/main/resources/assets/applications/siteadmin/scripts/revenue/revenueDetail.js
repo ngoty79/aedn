@@ -77,7 +77,16 @@ $.extend(RevenueDetailController.prototype, {
                     align: 'left'
                 },{
                     field: 'date',
-                    title: 'Ngày tháng',
+                    title: 'Ngày lập',
+                    sortable: true,
+                    align: 'center',
+                    formatter: function(value, row){
+                        return mugrunApp.formatDate(value, 'DD/MM/YYYY');
+                    }
+
+                },{
+                    field: 'date',
+                    title: 'Ngày duyệt',
                     sortable: true,
                     align: 'center',
                     formatter: function(value, row){

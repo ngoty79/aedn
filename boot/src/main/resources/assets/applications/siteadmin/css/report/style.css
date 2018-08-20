@@ -5,10 +5,13 @@
 .sumary-row{
     background-color: #daeef3;
     font-weight: 600;
-
+}
+.profit-row{
+    background-color: #f5ffd7;
+    font-weight: 600;
 }
 .table-report .header-first{
-    width: 160px;
+    width: 140px;
 }
 .table-report .cell-header{
     /*background-color: #ebf1de;*/

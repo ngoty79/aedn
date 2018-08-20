@@ -64,7 +64,7 @@
         </td>
     </tr>
     <tr>
-        <th>Trích lương tháng 13</th>
+        <th>Trích lương T.13</th>
         <td th:each="reportView : ${reports}" data-type="cost" th:data-month-year="${reportView.monthYear}" th:data-common-code="${reportView.COST_13TH_SALARY}">
             <a href="javascript: void(0);" data-toggle="tooltip" title="Cick vào để xem chi tiết"> [[${#numbers.formatInteger(reportView.salary13th, 0,'COMMA')}]] </a>
         </td>
@@ -127,7 +127,7 @@
         <th>Tổng chi </th>
         <td th:each="reportView : ${reports}">[[${#numbers.formatInteger(reportView.totalCost, 0,'COMMA')}]] </td>
     </tr>
-    <tr class="sumary-row">
+    <tr class="profit-row">
         <th>Lợi nhuận</th>
         <td th:each="reportView : ${reports}">[[${#numbers.formatInteger(reportView.totalRevenue - reportView.totalCost, 0,'COMMA')}]] </td>
     </tr>

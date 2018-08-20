@@ -53,6 +53,8 @@ public class CostController {
     public PaginationList<CostDetailVO> getSalaryMstList(String searchText,
                                                          @DateTimeFormat(pattern = "dd/MM/yyyy") Date startDate,
                                                          @DateTimeFormat(pattern = "dd/MM/yyyy") Date endDate,
+                                                         @DateTimeFormat(pattern = "dd/MM/yyyy") Date startApproveDate,
+                                                         @DateTimeFormat(pattern = "dd/MM/yyyy") Date endApproveDate,
                                                          String commonCode,
                                                         int pageNumber, int pageSize) throws Exception {
 
@@ -68,6 +70,12 @@ public class CostController {
         }
         if(endDate != null){
             params.put("endDate", endDate);
+        }
+        if(startApproveDate != null){
+            params.put("startApproveDate", startApproveDate);
+        }
+        if(endApproveDate != null){
+            params.put("endApproveDate", endApproveDate);
         }
 
         int startIndex = (pageNumber-1)*pageSize;
