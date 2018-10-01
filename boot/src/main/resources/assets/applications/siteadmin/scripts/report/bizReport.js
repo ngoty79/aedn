@@ -16,6 +16,7 @@ $.extend(BizReportController.prototype, {
         me.$selectRevenue              = me.$modal.find('#select-revenue');
         me.$selectCost              = me.$modal.find('#select-cost');
         me.$btnSearch               = me.$container.find('#btn-search');
+        me.$btnDownload               = me.$container.find('#btn-download-excel');
         me.$selectViewType          = me.$container.find('select[name="viewType"]');
 
         me.initUi();
@@ -92,6 +93,10 @@ $.extend(BizReportController.prototype, {
 
         me.$btnSearch.click(function(){
             me.search();
+        });
+
+        me.$btnDownload.click(function(){
+            window.location.href = '/admin/bizreport/download?month=' + me.$selectViewType.val();
         });
     },
     search: function(){

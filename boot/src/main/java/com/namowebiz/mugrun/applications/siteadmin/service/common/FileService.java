@@ -11,6 +11,7 @@ import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -27,24 +28,15 @@ import java.util.List;
 
 /**
  * Service class for file related tasks.
- *
+ * <p>
  * Created by NgocSon on 2/19/2016.
  */
 @CommonsLog
-@Component
+@Service
 public class FileService {
-    public static final String TEMP_DIRECTORY_NAME = "temp";
-    public static final String MODULE_DIRECTORY_NAME = "components/module";
+    public static final String MODULE_DIRECTORY_NAME = "files/modules";
 
-    public static final String WIDGETS_DIRECTORY_NAME = "components/widgets";
-    public static final String BOARD_DIRECTORY_NAME = "board";
-    public static final String SHOP_DIRECTORY_NAME = "shop";
-    public static final String GOLF_LESSON_DIRECTORY_NAME = "golflesson";
-    public static final String CALENDAR_DIRECTORY_NAME = "calendar";
-    public static final String GOLF_PACKAGE_DIRECTORY_NAME = "golfpackage";
-    public static final String BANNER_DIRECTORY_NAME = "banner";
-    public static final String MODULE_FILE_NO_IMAGE = "common/no-image.png";
-
+    public static final String WIDGETS_DIRECTORY_NAME = "files/widgets";
 
 
     @Value("${mugrun.storage-base-path}")
@@ -61,64 +53,27 @@ public class FileService {
         if (!path.endsWith("/")) {
             path = path + "/";
         }
-        if(!StringUtil.isEmpty(relPath)){
+        if (!StringUtil.isEmpty(relPath)) {
             return path + relPath;
         }
         return path;
     }
 
-    public String getNoImagePath() {
-        String path = baseDirectory;
-        if (!path.endsWith("/")) {
-            path = path + "/";
-        }
-        return path+MODULE_DIRECTORY_NAME+"/"+MODULE_FILE_NO_IMAGE;
+
+
+    public String getRelativePath(String moduleName) {
+        return MODULE_DIRECTORY_NAME + "/" + moduleName + "/";
     }
 
-    public String getTempDirectory() {
-        if (baseDirectory.endsWith("/")) {
-            return baseDirectory + TEMP_DIRECTORY_NAME + "/";
-        }
-        return baseDirectory + "/" + TEMP_DIRECTORY_NAME + "/";
-    }
-
-//    public String getModuleDirectory() {
-//        if (baseDirectory.endsWith("/")) {
-//            return baseDirectory + MODULE_DIRECTORY_NAME + "/";
-//        }
-//        return baseDirectory + "/" + MODULE_DIRECTORY_NAME + "/";
-//    }
-
-    public String getBoardRelativePath() {
-        return MODULE_DIRECTORY_NAME + "/" + BOARD_DIRECTORY_NAME + "/";
-    }
-
-    public String getShopRelativePath() {
-        return MODULE_DIRECTORY_NAME + "/" + SHOP_DIRECTORY_NAME + "/";
-    }
-
-
-    public String getGolfLessonRelativePath() {
-        return MODULE_DIRECTORY_NAME + "/" + GOLF_LESSON_DIRECTORY_NAME + "/";
-    }
-
-    public String getGolfPackageRelativePath() {
-        return MODULE_DIRECTORY_NAME + "/" + GOLF_PACKAGE_DIRECTORY_NAME + "/";
-    }
-
-    public String getBannerRelativePath() {
-        return WIDGETS_DIRECTORY_NAME + "/" + BANNER_DIRECTORY_NAME + "/";
-    }
-
-    public String getCalendarRelativePath() {
-        return MODULE_DIRECTORY_NAME + "/" + CALENDAR_DIRECTORY_NAME + "/";
+    public String getWidgetsRelativePath(String widgetsName) {
+        return WIDGETS_DIRECTORY_NAME + "/" + widgetsName + "/";
     }
 
     public FileInfo upload(HttpServletRequest request, String relativePath) throws Exception {
         FileInfo fileInfo = null;
         MultipartHttpServletRequest mpRequest = null;
         if (request instanceof MultipartHttpServletRequest) {
-            mpRequest = (MultipartHttpServletRequest)request;
+            mpRequest = (MultipartHttpServletRequest) request;
         }
 
         if (mpRequest == null) {
@@ -128,7 +83,7 @@ public class FileService {
         Iterator fileIter = mpRequest.getFileNames();
 
         while (fileIter.hasNext()) {
-            MultipartFile mFile = mpRequest.getFile((String)fileIter.next());
+            MultipartFile mFile = mpRequest.getFile((String) fileIter.next());
             if (mFile.getSize() > 0) {
                 fileInfo = processUploadFile(relativePath, mFile);
             } else {
@@ -178,21 +133,20 @@ public class FileService {
         return fileInfo;
     }
 
-    private String getOriginalFilename(MultipartFile mFile){
+    private String getOriginalFilename(MultipartFile mFile) {
         String fileName = mFile.getOriginalFilename();
-        if(fileName.indexOf(":\\") > 0){
-            fileName = fileName.substring(fileName.lastIndexOf("\\")+ 1);
+        if (fileName.indexOf(":\\") > 0) {
+            fileName = fileName.substring(fileName.lastIndexOf("\\") + 1);
         }
         return fileName;
     }
-
 
 
     public FileInfo uploadFile(HttpServletRequest request, String absolutePath) throws Exception {
         FileInfo fileInfo = null;
         MultipartHttpServletRequest mpRequest = null;
         if (request instanceof MultipartHttpServletRequest) {
-            mpRequest = (MultipartHttpServletRequest)request;
+            mpRequest = (MultipartHttpServletRequest) request;
         }
 
         if (mpRequest == null) {
@@ -202,7 +156,7 @@ public class FileService {
         Iterator fileIter = mpRequest.getFileNames();
 
         while (fileIter.hasNext()) {
-            MultipartFile mFile = mpRequest.getFile((String)fileIter.next());
+            MultipartFile mFile = mpRequest.getFile((String) fileIter.next());
             if (mFile.getSize() > 0) {
                 fileInfo = processUploadingFile(absolutePath, mFile, true, 0);
             } else {
@@ -214,10 +168,10 @@ public class FileService {
     }
 
     public List<FileInfo> uploadFiles(HttpServletRequest request, String absolutePath) throws Exception {
-        List<FileInfo> fileList = new ArrayList();
+        List<FileInfo> fileList = new ArrayList<>();
         MultipartHttpServletRequest mpRequest = null;
         if (request instanceof MultipartHttpServletRequest) {
-            mpRequest = (MultipartHttpServletRequest)request;
+            mpRequest = (MultipartHttpServletRequest) request;
         }
 
         if (mpRequest == null) {
@@ -227,7 +181,7 @@ public class FileService {
         Iterator fileIter = mpRequest.getFileNames();
 
         while (fileIter.hasNext()) {
-            MultipartFile mFile = mpRequest.getFile((String)fileIter.next());
+            MultipartFile mFile = mpRequest.getFile((String) fileIter.next());
             if (mFile.getSize() > 0) {
                 // temporary no need create thumbnail
                 //FileInfo fileInfo = processUploadingFile(absolutePath, mFile, true, 0);
@@ -246,8 +200,8 @@ public class FileService {
      * Perform downloading process of a http request for download file using its relative path
      *
      * @param relativeFilePath the relative path of the file
-     * @param request the HttpServletRequest of the http request
-     * @param response the HttpServletResponse of the http request
+     * @param request          the HttpServletRequest of the http request
+     * @param response         the HttpServletResponse of the http request
      * @throws Exception
      */
     public void downloadFileByRelativePath(String relativeFilePath, HttpServletRequest request,
@@ -255,7 +209,7 @@ public class FileService {
             throws Exception {
         File file = new File(getBasePath(relativeFilePath));
 
-        if(file.exists()){
+        if (file.exists()) {
             performDownload(request, response, file, relativeFilePath);
         }
     }
@@ -264,16 +218,16 @@ public class FileService {
      * Process uploading a single file and return uploaded information of the file.
      *
      * @param uploadRealPath the path to upload file
-     * @param mFile the MultipartFile object of the upload file
+     * @param mFile          the MultipartFile object of the upload file
      * @return the FileInfo object containing uploaded information of the file
      * @throws java.io.IOException
      */
     public FileInfo processUploadingFile(String uploadRealPath, MultipartFile mFile,
-                                          boolean shouldCreateThumbnail, int thumbnailSize)
+                                         boolean shouldCreateThumbnail, int thumbnailSize)
             throws IOException {
         String normalizeUploadRealPath = uploadRealPath;
         if (uploadRealPath.endsWith("/")) {
-            normalizeUploadRealPath = uploadRealPath.substring(0, uploadRealPath.length()-1);
+            normalizeUploadRealPath = uploadRealPath.substring(0, uploadRealPath.length() - 1);
         }
 
         FileType fileType = FileUtil.getFileViewTypeByStream(mFile.getInputStream());
@@ -305,7 +259,7 @@ public class FileService {
 
         mFile.transferTo(file);
 
-        if(FileType.IMAGE.equals(fileType)) {
+        if (FileType.IMAGE.equals(fileType)) {
             String fileAbsolutePath = normalizeUploadRealPath + "/" + fileNm;
             String fileAbsolutePathWithoutExt = normalizeUploadRealPath + "/" + fileNmWithoutExt;
 
@@ -330,28 +284,27 @@ public class FileService {
     /**
      * Perform the download process of a file
      *
-     * @param request the HttpServletRequest of the http request
-     * @param response the HttpServletResponse of the http request
-     * @param file the File object to download
+     * @param request          the HttpServletRequest of the http request
+     * @param response         the HttpServletResponse of the http request
+     * @param file             the File object to download
      * @param relativeFilePath the relative path of the file
      * @throws java.net.URISyntaxException
-     * @throws IOException
+     * @throws java.io.IOException
      */
     private void performDownload(HttpServletRequest request, HttpServletResponse response,
                                  File file, String relativeFilePath)
             throws Exception {
         String fileName = FileUtil.getFileNameWithExt(relativeFilePath.startsWith("/") ?
-                relativeFilePath : "/"+relativeFilePath);
+                relativeFilePath : "/" + relativeFilePath);
         URI uri = new URI(null, null, fileName, null);
         fileName = uri.toASCIIString();
 
         response.setContentType("application/octet-stream;charset=UTF-8");
-        String userAgent  = request.getHeader("User-Agent").toLowerCase();
-        if(userAgent.contains("firefox")){
-            response.setHeader("Content-Disposition","attachment; filename*=UTF-8''"+fileName);
-        }
-        else{
-            response.setHeader("Content-Disposition","attachment; filename="+fileName);
+        String userAgent = request.getHeader("User-Agent").toLowerCase();
+        if (userAgent.contains("firefox")) {
+            response.setHeader("Content-Disposition", "attachment; filename*=UTF-8''" + fileName);
+        } else {
+            response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
         }
         response.setCharacterEncoding("UTF-8");
         ServletOutputStream out = response.getOutputStream();
@@ -369,7 +322,7 @@ public class FileService {
                 out.flush();
             }
         } catch (Exception e) {
-            log.error(e.getMessage(),e);
+            log.error(e.getMessage(), e);
             throw new IOException(e);
         } finally {
             fileIn.close();
@@ -378,21 +331,11 @@ public class FileService {
 
     }
 
-    public String getBase64NoImage() {
-        try {
-            File noImageFile = new File(getNoImagePath());
-            return Base64.encodeBase64String(FileUtil.getByteFromFile(noImageFile));
-        } catch (Exception e) {
-            log.error(e.getMessage(), e);
-        }
-        return "";
-    }
-
     public String getImageEncodeBase64(String filePath) {
-        if(StringUtils.isNotEmpty(filePath)) {
+        if (StringUtils.isNotEmpty(filePath)) {
             try {
                 File imageFile = new File(getBasePath(filePath));
-                if(imageFile != null && imageFile.exists() && !imageFile.isDirectory()){
+                if (imageFile != null && imageFile.exists() && !imageFile.isDirectory()) {
                     return Base64.encodeBase64String(FileUtil.getByteFromFile(imageFile));
                 }
             } catch (Exception e) {
@@ -400,5 +343,12 @@ public class FileService {
             }
         }
         return "";
+    }
+
+    public void deleteFile(String realPath) {
+        File file = new File(getBasePath(realPath));
+        if (file.exists()) {
+            file.delete();
+        }
     }
 }

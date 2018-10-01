@@ -8,6 +8,7 @@ import com.namowebiz.mugrun.applications.siteadmin.service.commoncode.CommonCode
 import com.namowebiz.mugrun.applications.siteadmin.service.moenyflow.MoneyFlowService;
 import com.namowebiz.mugrun.applications.siteadmin.service.moenyflow.PropertyService;
 import com.namowebiz.mugrun.applications.siteadmin.service.report.EstimateReportService;
+import com.namowebiz.mugrun.applications.siteadmin.service.report.ReportExcelService;
 import lombok.extern.apachecommons.CommonsLog;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 
 /**
@@ -25,9 +27,7 @@ import java.util.*;
 @CommonsLog
 public class ReportController {
     @Autowired
-    private PropertyService propertyService;
-    @Autowired
-    private MoneyFlowService moneyFlowService;
+    private ReportExcelService reportExcelService;
     @Autowired
     private EstimateReportService estimateReportService;
     @Autowired
@@ -58,13 +58,19 @@ public class ReportController {
     }
 
     @RequestMapping(value = "/admin/bizreport/get.html", method = RequestMethod.GET)
-    public String getBizreport(Map<String, Object> map, HttpServletRequest request, Integer month) throws Exception {
+    public String getBizreport(Map<String, Object> map, HttpServletResponse response, HttpServletRequest request, Integer month) throws Exception {
         buildReport(map, month);
         return "siteadmin/report/reportview";
     }
 
+    @RequestMapping(value = "/admin/bizreport/download", method = RequestMethod.GET)
+    public void download(Map<String, Object> map, HttpServletResponse response, Integer month) throws Exception {
+        response.setContentType("application/vnd.ms-excel");
+        response.addHeader("Content-Disposition", "attachment; filename=kqkd_" + month + "_qui_gan_nhat.xlsx");
+        downloadExcel(map, response, month);
+    }
 
-    private void buildReport(Map<String, Object> map, Integer count){
+    private void downloadExcel(Map<String, Object> map, HttpServletResponse response, Integer count) throws Exception{
         int month = count == null? 6 : count;
         DateTime endDate = DateTime.now();
         DateTime startDate = DateTime.now().minusMonths(month);
@@ -108,6 +114,56 @@ public class ReportController {
         reports = Lists.reverse(reports);
         map.put("reports", reports);
         map.put("revenueList", data);
+        reportExcelService.export(response.getOutputStream(), month, reports, data);
+    }
+
+
+
+    private void buildReport(Map<String, Object> map, Integer count) throws Exception{
+        int month = count == null? 6 : count;
+        DateTime endDate = DateTime.now();
+        DateTime startDate = DateTime.now().minusMonths(month);
+        String startMonthYear = startDate.toString("yyyy-MM");
+        String endMonthYear = endDate.toString("yyyy-MM");
+        List<ReportData> data = estimateReportService.getLoanRevenueByMonth(month);
+        List<ReportData> reportSalary = estimateReportService.getReportSalary(month);
+        List<ReportData> otherRevenueReports = estimateReportService.getOtherRevenueReport(startMonthYear, endMonthYear);
+        List<ReportData> otherCostReports = estimateReportService.getOtherCostReport(startMonthYear, endMonthYear);
+        List<ReportView> reports = new ArrayList<>(month);
+        for (int i = 0; i < month; i++) {
+            ReportView reportView = new ReportView();
+            String monthYear = DateTime.now().minusMonths(i).toString("yyyy-MM");
+            Double loanProfit = getLoanProfit(data, monthYear);
+            Double salary = getAmount(reportSalary, monthYear);
+            reportView.setMonthYear(monthYear);
+            reportView.setLoanProfit(loanProfit);
+            reportView.setSalary(salary);
+            reportView.setCash(getAmountBy(otherRevenueReports, monthYear, ReportView.REVENUE_CASH));
+            reportView.setProfileCost(getAmountBy(otherRevenueReports, monthYear, ReportView.REVENUE_PROFILE_COST));
+            reportView.setBankInterest(getAmountBy(otherRevenueReports, monthYear, ReportView.REVENUE_BANK_INTEREST));
+            reportView.setOtherRevenue(getAmountBy(otherRevenueReports, monthYear, ReportView.REVENUE_OTHER));
+
+            reportView.setOfficeStuff(getAmountBy(otherCostReports, monthYear, "01"));
+            reportView.setWithdrawFee(getAmountBy(otherCostReports, monthYear, "02"));
+            reportView.setBonus(getAmountBy(otherCostReports, monthYear, "03"));
+            reportView.setSalary13th(getAmountBy(otherCostReports, monthYear, "04"));
+            reportView.setInterestCost(getAmountBy(otherCostReports, monthYear, "05"));
+            reportView.setOperatingCost(getAmountBy(otherCostReports, monthYear, "06"));
+            reportView.setGiamLai(getAmountBy(otherCostReports, monthYear, "07"));
+            reportView.setBirthdayCost(getAmountBy(otherCostReports, monthYear, "08"));
+            reportView.setUniformCost(getAmountBy(otherCostReports, monthYear, "09"));
+            reportView.setInsuranceCost(getAmountBy(otherCostReports, monthYear, "10"));
+            reportView.setOilCost(getAmountBy(otherCostReports, monthYear, "11"));
+            reportView.setTelCardCost(getAmountBy(otherCostReports, monthYear, "12"));
+            reportView.setOtherCost(getAmountBy(otherCostReports, monthYear, "13"));
+
+            reports.add(reportView);
+
+        }
+        reports = Lists.reverse(reports);
+        map.put("reports", reports);
+        map.put("revenueList", data);
+
     }
 
     private Double getLoanProfit(List<ReportData> list, String monthYear){

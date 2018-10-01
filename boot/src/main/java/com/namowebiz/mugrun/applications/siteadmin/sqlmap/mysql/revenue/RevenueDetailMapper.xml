@@ -128,13 +128,13 @@
                 AND revenue.date >= DATE(#{startDate})
             </if>
             <if test="endDate != null">
-                <![CDATA[ AND revenue.date <= DATE(#{endDate}) ]]>
+                <![CDATA[ AND DATE(revenue.date) <= DATE(#{endDate}) ]]>
             </if>
             <if test="startApproveDate != null">
                 AND revenue.approve_date >= DATE(#{startApproveDate})
             </if>
             <if test="endApproveDate != null">
-                <![CDATA[ AND revenue.approve_date <= DATE(#{endApproveDate}) ]]>
+                <![CDATA[ AND DATE(revenue.approve_date) <= DATE(#{endApproveDate}) ]]>
             </if>
             <if test="searchText != null">
                 AND revenue.name LIKE CONCAT('%', #{searchText}, '%')

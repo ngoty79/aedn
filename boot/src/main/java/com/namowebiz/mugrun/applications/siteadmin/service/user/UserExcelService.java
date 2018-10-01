@@ -96,7 +96,7 @@ public class UserExcelService {
 
         CellStyle redCellStyle = workbook.createCellStyle();
         redCellStyle.setFillForegroundColor(IndexedColors.RED.getIndex());
-        redCellStyle.setFillPattern(CellStyle.SOLID_FOREGROUND);
+//        redCellStyle.setFillPattern(CellStyle.SOLID_FOREGROUND);
 
         CreationHelper createHelper = workbook.getCreationHelper();
         CellStyle textCellStyle = workbook.createCellStyle();
@@ -215,7 +215,7 @@ public class UserExcelService {
 
     private String getValueCellByIndex(Row row, int index) {
         Cell cell = row.getCell(index);
-        cell.setCellType(Cell.CELL_TYPE_STRING);
+//        cell.setCellType(Cell.CELL_TYPE_STRING);
         //return cell.getRichStringCellValue().getString();
         return cell.getStringCellValue();
     }

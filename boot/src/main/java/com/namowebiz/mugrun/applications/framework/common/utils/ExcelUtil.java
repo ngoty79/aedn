@@ -110,13 +110,13 @@ public class ExcelUtil {
         font.setFontHeightInPoints((short) 10);
         font.setFontName("Arial");
         font.setColor(IndexedColors.WHITE.getIndex());
-        font.setBoldweight(Font.BOLDWEIGHT_BOLD);
+//        font.setBoldweight(Font.BOLDWEIGHT_BOLD);
         font.setItalic(false);
 
         CellStyle style = workbook.createCellStyle();
         style.setFillBackgroundColor(IndexedColors.DARK_BLUE.getIndex());
-        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-        style.setAlignment(CellStyle.ALIGN_CENTER);
+//        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
+//        style.setAlignment(CellStyle.ALIGN_CENTER);
         style.setFont(font);
 
         return style;
