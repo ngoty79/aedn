@@ -93,17 +93,22 @@
                                                         <tr>
                                                             <td style="width: 5%;"> 1 </td>
                                                             <td>Dự thu tín dụng</td>
-                                                            <td class="text-right"> [[${estimate.loanRevenueFormat}]] </td>
+                                                            <td class="text-right"> [[${estimate.loanRevenueFormat}]]</td>
                                                         </tr>
                                                         <tr>
-                                                            <td style="width: 5%;"> 1 </td>
+                                                            <td style="width: 5%;"> 2 </td>
+                                                            <td>Dự thu lãi</td>
+                                                            <td class="text-right"> [[${estimate.profitFormat}]]</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width: 5%;"> 3 </td>
                                                             <td>Dự thu khác</td>
-                                                            <td class="text-right"> 0 VNĐ</td>
+                                                            <td class="text-right"> 0</td>
                                                         </tr>
                                                         <tr>
-                                                            <th style="width: 5%;"> 3 </th>
-                                                            <th>Tổng dự chi</th>
-                                                            <th class="text-right">[[${estimate.loanRevenueFormat}]]</th>
+                                                            <th style="width: 5%;"> 4 </th>
+                                                            <th>Tổng thu</th>
+                                                            <th class="text-right">[[${#numbers.formatInteger(estimate.loanRevenue + estimate.profit, 3, 'COMMA')}]]</th>
                                                         </tr>
                                                         </tbody>
                                                     </table>

@@ -28,9 +28,14 @@ public class EstimateReport {
     private Date date;
 
 
+    public String getProfitFormat(){
+        Double value = profit != null? profit : 0d;
+        return NumberFormatUtil.formatNumber(NumberFormatUtil.round(value));
+    }
+
     public String getLoanRevenueFormat(){
         Double value = getLoanRevenue() != null? getLoanRevenue() : 0d;
-        return NumberFormatUtil.formatCurrency(NumberFormatUtil.round(value));
+        return NumberFormatUtil.formatNumber(NumberFormatUtil.round(value));
     }
 
     public String getSalaryCostFormat(){

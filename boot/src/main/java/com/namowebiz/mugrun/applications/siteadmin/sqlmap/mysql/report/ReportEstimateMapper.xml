@@ -23,7 +23,29 @@
     <select id="getEstimateReport" resultMap="estimateReport" parameterType="map">
         <![CDATA[
         SELECT * FROM (
-            (SELECT SUM(amount) loanRevenue FROM loan_detail WHERE delete_yn = 0 AND end_date >= DATE(#{startDate}) AND end_date <= DATE(#{endDate}) ) AS loanRevenue,
+            (
+              SELECT
+                    SUM(D.amount) loanRevenue
+                FROM loan_detail D
+                INNER JOIN Loan L ON L.loan_no = D.loan_no
+                WHERE L.delete_yn = 0 AND L.status IN ('A', 'R')
+                    AND D.delete_yn = 0
+                    AND D.confirm_date IS NULL
+                    AND D.end_date >= DATE(#{startDate})
+                    AND D.end_date <= DATE(#{endDate})
+            ) AS loanRevenue,
+            (
+              SELECT
+                    SUM(D.profit) profit
+                FROM loan_detail D
+                INNER JOIN Loan L ON L.loan_no = D.loan_no
+                WHERE L.delete_yn = 0 AND L.status IN ('A', 'R')
+                    AND D.delete_yn = 0
+                    AND D.confirm_date IS NULL
+                    AND D.end_date >= DATE(#{startDate})
+                    AND D.end_date <= DATE(#{endDate})
+            ) AS profit,
+
             (SELECT (SUM(salary) + IFNULL(SUM(allowance),0) +  IFNULL(SUM(extra_cost), 0)) AS salaryCost FROM salary_mst WHERE delete_yn = 0 AND LAST_DAY(CURRENT_DATE()) BETWEEN DATE(#{startDate}) AND DATE(#{endDate}) ) AS salaryCost,
             (SELECT SUM(loan_amount) loanProvide FROM loan WHERE delete_yn = 0 AND start_date >=  DATE(#{startDate}) AND start_date <= DATE(#{endDate}) ) AS loanProvide
         )
@@ -164,7 +186,7 @@
                         GROUP BY detail.year, detail.month
                 ORDER BY detail.year DESC, detail.month DESC
             ) A
-            ORDER BY A.year, A.month
+            ORDER BY A.year DESC, A.month DESC
             limit 0,#{limit}
         ]]>
     </select>

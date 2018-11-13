@@ -89,7 +89,8 @@ public class ReportExcelService {
                 Cell cellChiKhac = rowChiKhac.getCell(i + 1);
                 cellChiKhac.setCellValue(reports.get(i).getOtherCost());
                 Cell cellTraLai = rowTraLai.getCell(i + 1);
-                cellTraLai.setCellValue(reports.get(i).getInsuranceCost());
+                cellTraLai.setCellValue(reports.get(i).getInterestCost());
+//                cellTraLai.setCellValue(reports.get(i).getInsuranceCost());
                 Cell cellChiHoatDong = rowChiHoatDong.getCell(i + 1);
                 cellChiHoatDong.setCellValue(reports.get(i).getOperatingCost());
                 Cell cellGiamLai = rowGiamLai.getCell(i + 1);
