@@ -69,10 +69,4 @@ public class PermissionController {
         return jsonResponse;
     }
 
-
-
-
-
-
-
 }
