@@ -38,6 +38,12 @@ public class EstimateReport {
         return NumberFormatUtil.formatNumber(NumberFormatUtil.round(value));
     }
 
+    public String getTotalRevenueEst(){
+        Double v1 = getLoanRevenue() != null? getLoanRevenue() : 0d;
+        Double v2 = profit != null? profit : 0d;
+        return NumberFormatUtil.formatNumber(v1 + v2);
+    }
+
     public String getSalaryCostFormat(){
         Double value = getSalaryCost() != null? getSalaryCost() : 0d;
         return NumberFormatUtil.formatCurrency(NumberFormatUtil.round(value));
