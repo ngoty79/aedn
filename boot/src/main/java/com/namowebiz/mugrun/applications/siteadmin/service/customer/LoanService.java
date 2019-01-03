@@ -59,7 +59,14 @@ public class LoanService {
         return sucess;
     }
 
+    public List<LoanVO> getLoanPlan(Map<String, Object> params){
+        return loanDao.getLoanPlan(params);
+    }
 
+    public Integer getCountLoanPlan(Map<String, Object> params){
+        Integer count = loanDao.getCountLoanPlan(params);
+        return count == null? 0 : count;
+    }
 
     public List<LoanVO> list(Map<String, Object> params){
         return loanDao.list(params);

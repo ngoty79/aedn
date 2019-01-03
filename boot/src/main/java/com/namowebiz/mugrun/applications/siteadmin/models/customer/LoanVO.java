@@ -30,6 +30,7 @@ public class LoanVO extends Loan {
     private Double returnCapital;
     private Integer currentDebt;
     private Integer remainProfit;
+    private Integer estimateDays;
 
 
     public int getTotalDays(){

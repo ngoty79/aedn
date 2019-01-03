@@ -63,6 +63,7 @@
         <result column="remainProfit" property="remainProfit"/>
         <result column="regUserName" property="regUserName"/>
         <result column="returnCapital" property="returnCapital"/>
+        <result column="estimateDays" property="estimateDays"/>
     </resultMap>
     <select id="getByPK" resultMap="loanVO" parameterType="long">
         SELECT loan.*
@@ -224,6 +225,60 @@
         ORDER BY reg_date DESC
         ]]>
     </select>
+
+    <select id="getCountLoanPlan" resultType="int" parameterType="map">
+        SELECT
+            COUNT(L.loan_no)
+        FROM loan L
+            LEFT OUTER JOIN customer cust ON cust.customer_no = L.customer_no
+            LEFT OUTER JOIN user_info U ON U.user_no = L.staff_user_no
+        WHERE (L.delete_yn IS NULL OR L.delete_yn = 0)
+          AND L.status = 'A'
+        <if test="staffUserNo != null">
+            AND L.staff_user_no = #{staffUserNo}
+        </if>
+    </select>
+
+    <select id="getLoanPlan" resultMap="loanVO" parameterType="map">
+        <bind name="currentDate" value="@com.namowebiz.mugrun.applications.framework.common.utils.DateUtil@getCurrentDate()"/>
+
+        SELECT * FROM (
+            SELECT
+                L.*
+                , U.name staff_user_name
+                , cust.name customerName
+                , cust.customer_code
+                , cust.town_no town_no
+                , cust.district_no
+                , cust.province_no
+                , (select COUNT(loan_no) from loan_detail where loan_no = L.loan_no) as totalSession
+        <![CDATA[ , IFNULL((select COUNT(loan_no)  from loan_detail where loan_no = L.loan_no and confirm_date IS NULL and end_date < DATE(#{currentDate}) and L.status != 'F'), 0) as delay_days ]]>
+                , IFNULL((select COUNT(loan_no)  from loan_detail D
+                      where loan_no = L.loan_no and D.status = 'N'
+                      <if test="endDate != null">
+        <![CDATA[ and D.start_date <= DATE(#{endDate}) ]]>
+                      </if>
+                      <if test="startDate != null">
+                        and D.start_date >=  DATE(#{startDate})
+                      </if>
+                      ), 0) as estimateDays
+            FROM loan L
+                LEFT OUTER JOIN customer cust ON cust.customer_no = L.customer_no
+                LEFT OUTER JOIN user_info U ON U.user_no = L.staff_user_no
+            WHERE (L.delete_yn IS NULL OR L.delete_yn = 0)
+                AND L.status = 'A'
+
+                <if test="staffUserNo != null">
+                    AND L.staff_user_no = #{staffUserNo}
+                </if>
+
+            ORDER BY L.reg_date DESC
+            <if test="pageSize != null and pageSize > 0">
+                LIMIT #{startIndex}, #{pageSize}
+            </if>
+        ) V
+    </select>
+
 
     <select id="list" resultMap="loanVO" parameterType="map">
         <bind name="currentDate" value="@com.namowebiz.mugrun.applications.framework.common.utils.DateUtil@getCurrentDate()"/>

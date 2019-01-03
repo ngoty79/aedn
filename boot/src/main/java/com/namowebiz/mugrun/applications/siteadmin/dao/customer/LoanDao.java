@@ -26,6 +26,10 @@ public interface LoanDao {
 
     void delete(Long customerNo);
 
+    List<LoanVO> getLoanPlan(Map<String, Object> params);
+
+    public Integer getCountLoanPlan(Map<String, Object> params);
+
     List<LoanVO> list(Map<String, Object> params);
 
     List<LoanVO> getPayment(Map<String, Object> params);
