@@ -64,13 +64,10 @@ public class PlanController {
         int startIndex = (pageNumber-1)*pageSize;
         params.put("startIndex", startIndex);
         params.put("pageSize", pageSize);
-        PaginationList<LoanVO> paging = new PaginationList<>(pageNumber, pageSize);
+        PaginationList<LoanVO> paging = new PaginationList<>(pageNumber, 1000);
 
         List<LoanVO> loans = loanService.getLoanPlan(params);
-        Integer count = loanService.getCountLoanPlan(params);
         paging.setRows(loans);
-        paging.setTotal(count);
-
         return paging;
     }
 }

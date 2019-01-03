@@ -227,16 +227,36 @@
     </select>
 
     <select id="getCountLoanPlan" resultType="int" parameterType="map">
-        SELECT
-            COUNT(L.loan_no)
-        FROM loan L
-            LEFT OUTER JOIN customer cust ON cust.customer_no = L.customer_no
-            LEFT OUTER JOIN user_info U ON U.user_no = L.staff_user_no
-        WHERE (L.delete_yn IS NULL OR L.delete_yn = 0)
-          AND L.status = 'A'
-        <if test="staffUserNo != null">
-            AND L.staff_user_no = #{staffUserNo}
-        </if>
+        SELECT COUNT(V.loan_no) FROM (
+            SELECT
+                L.loan_no
+                , U.name staff_user_name
+                , cust.name customerName
+                , cust.customer_code
+                , cust.town_no town_no
+                , cust.district_no
+                , cust.province_no
+                , (select COUNT(loan_no) from loan_detail where loan_no = L.loan_no) as totalSession
+                <![CDATA[ , IFNULL((select COUNT(loan_no)  from loan_detail where loan_no = L.loan_no and confirm_date IS NULL and end_date < DATE(#{currentDate}) and L.status != 'F'), 0) as delay_days ]]>
+                , IFNULL((select COUNT(loan_no)  from loan_detail D
+                    where loan_no = L.loan_no and D.status = 'N'
+                    <if test="endDate != null">
+                        <![CDATA[ and D.start_date <= DATE(#{endDate}) ]]>
+                    </if>
+                    <if test="startDate != null">
+                        and D.start_date >=  DATE(#{startDate})
+                    </if>
+                    ), 0) as estimateDays
+            FROM loan L
+                LEFT OUTER JOIN customer cust ON cust.customer_no = L.customer_no
+                LEFT OUTER JOIN user_info U ON U.user_no = L.staff_user_no
+            WHERE (L.delete_yn IS NULL OR L.delete_yn = 0)
+                AND L.status = 'A'
+            <if test="staffUserNo != null">
+                AND L.staff_user_no = #{staffUserNo}
+            </if>
+        ) V
+        WHERE V.estimateDays > 0 OR V.delay_days > 0
     </select>
 
     <select id="getLoanPlan" resultMap="loanVO" parameterType="map">
@@ -252,11 +272,11 @@
                 , cust.district_no
                 , cust.province_no
                 , (select COUNT(loan_no) from loan_detail where loan_no = L.loan_no) as totalSession
-        <![CDATA[ , IFNULL((select COUNT(loan_no)  from loan_detail where loan_no = L.loan_no and confirm_date IS NULL and end_date < DATE(#{currentDate}) and L.status != 'F'), 0) as delay_days ]]>
+                <![CDATA[ , IFNULL((select COUNT(loan_no)  from loan_detail where loan_no = L.loan_no and confirm_date IS NULL and end_date < DATE(#{currentDate}) and L.status != 'F'), 0) as delay_days ]]>
                 , IFNULL((select COUNT(loan_no)  from loan_detail D
                       where loan_no = L.loan_no and D.status = 'N'
                       <if test="endDate != null">
-        <![CDATA[ and D.start_date <= DATE(#{endDate}) ]]>
+                        <![CDATA[ and D.start_date <= DATE(#{endDate}) ]]>
                       </if>
                       <if test="startDate != null">
                         and D.start_date >=  DATE(#{startDate})
@@ -272,11 +292,9 @@
                     AND L.staff_user_no = #{staffUserNo}
                 </if>
 
-            ORDER BY L.reg_date DESC
-            <if test="pageSize != null and pageSize > 0">
-                LIMIT #{startIndex}, #{pageSize}
-            </if>
         ) V
+        WHERE V.estimateDays > 0 OR V.delay_days > 0
+        ORDER BY V.reg_date DESC
     </select>
 
 

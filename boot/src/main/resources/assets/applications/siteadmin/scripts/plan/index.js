@@ -9,25 +9,25 @@ $.extend(PlanController.prototype, {
         var me = this;
 
         me.$container = $(selector);
-        me.table       = me.$container.find('.table-plan');
+        me.$table       = me.$container.find('.table-plan');
         
         me.$btnSearch           = me.$container.find('#btn-search');
+        me.$btnPrint            = me.$container.find('#btn-print');
         me.$startDate           = me.$container.find('#start-date');
         me.$endDate             = me.$container.find('#end-date');
         me.$staffUserNo         = me.$container.find('select[name="staffUserNo"]');
 
-        me.initUi();
         me.initEventHandlers();
+        me.initUi();
     },
     initUi : function(){
         var me = this;
 
-        me.table.bootstrapTable({
+        me.$table.bootstrapTable({
             url: '/admin/plan/pagination.json',
             smartDisplay: false,
             showHeader:true,
-            pageSize: 20,
-            pagination: true,
+            pagination: false,
             uniqueId: 'costDetailNo',
             sidePagination: 'server',
             queryParamsType: '',
@@ -60,6 +60,7 @@ $.extend(PlanController.prototype, {
                 },{
                     field: 'customerCode',
                     title: 'Mã KH',
+                    class: 'no-print',
                     sortable: false,
                     width: '10%',
                     align: 'center'
@@ -121,13 +122,21 @@ $.extend(PlanController.prototype, {
     },
     refreshList: function(){
         var me = this;
-        me.table.bootstrapTable("refresh");
+        me.$table.bootstrapTable("refresh");
     },
     initEventHandlers:function() {
         var me = this;
 
         me.$btnSearch.click(function(){
-            me.table.bootstrapTable("refresh");
+            me.$table.bootstrapTable("refresh");
+        });
+
+        me.$btnPrint.click(function(){
+            me.$table.print({
+                title: 'Danh Sach Thu No',
+                noPrintSelector: '.no-print',
+                timeout: 10000
+            });
         });
 
         me.$startDate.datepicker({
@@ -148,6 +157,9 @@ $.extend(PlanController.prototype, {
         }).on('changeDate', function(e) {
             me.$startDate.datepicker('setEndDate', e.date);
         });
+
+        me.$startDate.datepicker('setDate', new Date());
+        me.$endDate.datepicker('setDate', new Date());
     }
 });
 
