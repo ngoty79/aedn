@@ -7,6 +7,7 @@
         <result column="title" property="title"/>
         <result column="type" property="type"/>
         <result column="amount" property="amount"/>
+        <result column="remain_cash" property="remainCash"/>
         <result column="refer_data" property="referData"/>
         <result column="notice" property="notice"/>
 
@@ -26,6 +27,7 @@
             title,
             type,
             amount,
+            remain_cash,
             refer_data,
             notice,
             reg_date,
@@ -35,6 +37,7 @@
             #{title},
             #{type},
             #{amount},
+            #{remainCash},
             #{referData},
             #{notice},
             #{currentDate},
@@ -50,6 +53,7 @@
             flow.title,
             flow.type,
             flow.amount,
+            flow.remain_cash,
             flow.notice,
             flow.reg_date,
             (Select name from user_info Where user_no = flow.reg_user_no) as reg_user_name

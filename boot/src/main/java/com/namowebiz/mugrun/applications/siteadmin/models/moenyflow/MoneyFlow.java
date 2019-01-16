@@ -24,6 +24,7 @@ public class MoneyFlow extends BaseObject {
     private String title;
     private String type;
     private Long amount;
+    private Double remainCash;
     private String referData;
     private String notice;
 }

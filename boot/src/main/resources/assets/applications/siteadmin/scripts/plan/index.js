@@ -13,6 +13,7 @@ $.extend(PlanController.prototype, {
         
         me.$btnSearch           = me.$container.find('#btn-search');
         me.$btnPrint            = me.$container.find('#btn-print');
+        me.$btnExcel            = me.$container.find('#btn-excel');
         me.$startDate           = me.$container.find('#start-date');
         me.$endDate             = me.$container.find('#end-date');
         me.$staffUserNo         = me.$container.find('select[name="staffUserNo"]');
@@ -22,7 +23,6 @@ $.extend(PlanController.prototype, {
     },
     initUi : function(){
         var me = this;
-
         me.$table.bootstrapTable({
             url: '/admin/plan/pagination.json',
             smartDisplay: false,
@@ -126,6 +126,14 @@ $.extend(PlanController.prototype, {
     },
     initEventHandlers:function() {
         var me = this;
+
+        me.$btnExcel.click(function(){
+            var downloadUrl = '/admin/plan/download?';
+            downloadUrl += 'userNo=' + me.$staffUserNo.val();
+            downloadUrl += '&startDate=' + $.trim(me.$startDate.val());
+            downloadUrl += '&endDate=' + $.trim(me.$endDate.val());
+            window.location.href = downloadUrl;
+        });
 
         me.$btnSearch.click(function(){
             me.$table.bootstrapTable("refresh");

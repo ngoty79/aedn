@@ -63,13 +63,11 @@ $.extend(MoenyFlowController.prototype, {
                 {
                     field: 'title',
                     title: 'Tiêu đề',
-                    sortable: true,
                     align: 'left',
-                    width: '30%'
+                    width: '20%'
                 },{
                     field: 'type',
                     title: 'Phân Loại',
-                    sortable: true,
                     align: 'left',
                     width: '15%',
                     formatter: function(value, row){
@@ -78,19 +76,27 @@ $.extend(MoenyFlowController.prototype, {
                 },{
                     field: 'regUserName',
                     title: 'N.sự duyệt',
-                    sortable: true,
-                    align: 'left',
+                    align: 'center',
                     width: '10%'
                 },{
-                    field: 'amountFormat',
+                    field: 'amount',
                     title: 'Số tiền',
-                    sortable: true,
                     align: 'right',
-                    width: '10%'
+                    width: '10%',
+                    formatter: function(value, row){
+                        return value? numeral(value).format("0,0") : '-';
+                    }
+                },{
+                    field: 'remainCash',
+                    title: 'Dư Số',
+                    align: 'right',
+                    width: '10%',
+                    formatter: function(value, row){
+                        return value? numeral(value).format("0,0") : '-';
+                    }
                 },{
                     field: 'regDate',
                     title: 'Ngày Tháng',
-                    sortable: true,
                     align: 'center',
                     width: '10%',
                     formatter: function(value, row){

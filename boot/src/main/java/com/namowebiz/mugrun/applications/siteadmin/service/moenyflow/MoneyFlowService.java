@@ -9,6 +9,7 @@ import com.namowebiz.mugrun.applications.siteadmin.models.customer.LoanPaymentVO
 import com.namowebiz.mugrun.applications.siteadmin.models.customer.LoanVO;
 import com.namowebiz.mugrun.applications.siteadmin.models.moenyflow.MoneyFlow;
 import com.namowebiz.mugrun.applications.siteadmin.models.moenyflow.MoneyFlowVO;
+import com.namowebiz.mugrun.applications.siteadmin.models.moenyflow.Property;
 import com.namowebiz.mugrun.applications.siteadmin.models.revenue.RevenueDetailVO;
 import com.namowebiz.mugrun.applications.siteadmin.models.salary.SalaryDetailVO;
 import org.apache.commons.lang.StringUtils;
@@ -41,6 +42,9 @@ public class MoneyFlowService {
     }
     @Transactional
     public void insert(MoneyFlow data){
+        Property property = propertyService.get();
+        double remainCash = property.getCash() + data.getAmount();
+        data.setRemainCash(remainCash);
         moneyFlowMapper.insert(data);
         propertyService.addMoney(data.getAmount());
     }
