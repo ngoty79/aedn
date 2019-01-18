@@ -40,6 +40,11 @@ public class MoneyFlowService {
         Long count = moneyFlowMapper.count(params);
         return count == null? 0L : count;
     }
+
+    public void updateRemainCash(MoneyFlow data){
+        moneyFlowMapper.updateRemainCash(data);
+    }
+
     @Transactional
     public void insert(MoneyFlow data){
         Property property = propertyService.get();

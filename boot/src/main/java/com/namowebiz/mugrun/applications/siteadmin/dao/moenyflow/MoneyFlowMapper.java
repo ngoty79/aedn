@@ -18,6 +18,8 @@ public interface MoneyFlowMapper {
 
     void insert(MoneyFlow data);
 
+    void updateRemainCash(MoneyFlow data);
+
     MoneyFlowVO getByPK(Long MoneyFlowNo);
 
 

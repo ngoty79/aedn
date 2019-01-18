@@ -2,6 +2,7 @@ package com.namowebiz.mugrun.applications.siteadmin.controller.report;
 
 import com.namowebiz.mugrun.applications.framework.common.utils.PaginationList;
 import com.namowebiz.mugrun.applications.siteadmin.models.moenyflow.MoneyFlowVO;
+import com.namowebiz.mugrun.applications.siteadmin.models.moenyflow.Property;
 import com.namowebiz.mugrun.applications.siteadmin.service.moenyflow.MoneyFlowService;
 import com.namowebiz.mugrun.applications.siteadmin.service.moenyflow.PropertyService;
 import lombok.extern.apachecommons.CommonsLog;
@@ -9,6 +10,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -32,8 +34,31 @@ public class MoneyFlowController {
 
 
     @RequestMapping(value = "/admin/moneyflow/index", method = RequestMethod.GET)
-    public String revenue(Map<String, Object> map, HttpServletRequest request) throws Exception {
+    public String moneyFlowIndex(Map<String, Object> map, HttpServletRequest request) throws Exception {
         map.put("property", propertyService.get());
+        return "siteadmin/report/moneyflow";
+    }
+
+    @RequestMapping(value = "/admin/moneyflow/calculate", method = RequestMethod.GET)
+    @Transactional
+    public String calculate(Map<String, Object> map, HttpServletRequest request) throws Exception {
+        Property property = propertyService.get();
+        Map<String, Object> params = new HashMap<>();
+        List<MoneyFlowVO> list = moneyFlowService.list(params);
+        for (int i = 0; i < list.size(); i++) {
+            MoneyFlowVO record = list.get(i);
+            if(i == 0){
+                record.setRemainCash(property.getCash().doubleValue());
+                moneyFlowService.updateRemainCash(record);
+            }else{
+                MoneyFlowVO prev = list.get(i - 1);
+                record.setRemainCash(prev.getRemainCash() - prev.getAmount());
+                moneyFlowService.updateRemainCash(record);
+            }
+        }
+
+
+        map.put("property", property);
         return "siteadmin/report/moneyflow";
     }
 

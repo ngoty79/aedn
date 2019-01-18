@@ -72,6 +72,13 @@
         <include refid="whereClause"/>
     </select>
 
+    <update id="updateRemainCash" parameterType="com.namowebiz.mugrun.applications.siteadmin.models.moenyflow.MoneyFlow">
+        UPDATE money_flow
+        SET
+          remain_cash = #{remainCash}
+        WHERE money_flow_no = #{moneyFlowNo}
+    </update>
+
 
     <select id="getByPK" resultMap="moneyFlowVO" parameterType="long">
         SELECT * FROM money_flow

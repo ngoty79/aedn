@@ -61,18 +61,18 @@ $.extend(MoenyFlowController.prototype, {
             },
             columns: [
                 {
+                    field: 'regDate',
+                    title: 'Ngày Tháng',
+                    align: 'center',
+                    width: '15%',
+                    formatter: function(value, row){
+                        return mugrunApp.formatDate(value, 'DD/MM/YYYY HH:mm');
+                    }
+                },{
                     field: 'title',
                     title: 'Tiêu đề',
                     align: 'left',
                     width: '20%'
-                },{
-                    field: 'type',
-                    title: 'Phân Loại',
-                    align: 'left',
-                    width: '15%',
-                    formatter: function(value, row){
-                        return me.getType(value);
-                    }
                 },{
                     field: 'regUserName',
                     title: 'N.sự duyệt',
@@ -95,14 +95,6 @@ $.extend(MoenyFlowController.prototype, {
                         return value? numeral(value).format("0,0") : '-';
                     }
                 },{
-                    field: 'regDate',
-                    title: 'Ngày Tháng',
-                    align: 'center',
-                    width: '10%',
-                    formatter: function(value, row){
-                        return mugrunApp.formatDate(value, 'DD/MM/YYYY HH:mm');
-                    }
-                }, {
                     field: 'notice',
                     title: 'Ghi chú',
                     sortable: true,
