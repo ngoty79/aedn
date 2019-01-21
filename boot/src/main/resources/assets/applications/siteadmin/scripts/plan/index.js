@@ -53,7 +53,7 @@ $.extend(PlanController.prototype, {
                     title: 'Mã Hợp Đồng',
                     sortable: false,
                     align: 'center',
-                    width: '12%',
+                    width: '10%',
                     formatter: function(value,object){
                         return '<span class="">' + value + '</span>';
                     }
@@ -71,10 +71,21 @@ $.extend(PlanController.prototype, {
                     width: '10%',
                     align: 'center'
                 },{
-                    field: 'loanAmountFormat',
+                    field: 'loanAmount',
                     align: 'right',
                     width: '10%',
-                    title: 'Số tiền vay'
+                    title: 'Số tiền vay',
+                    formatter: function(value, row){
+                        return value? numeral(value).format("0,0") : '-';
+                    }
+                },{
+                    field: 'currentDebt',
+                    align: 'right',
+                    width: '10%',
+                    title: 'Dư Nợ',
+                    formatter: function(value, row){
+                        return value? numeral(value).format("0,0") : '-';
+                    }
                 },{
                     field: 'startDate',
                     title: 'Ngày Vay',
@@ -95,14 +106,14 @@ $.extend(PlanController.prototype, {
                     }
                 },{
                     field: 'delayDays',
-                    title: 'Ngày Trễ Hạn',
+                    title: 'Trễ Hạn',
                     align: 'center',
-                    width: '10%'
+                    width: '7%'
                 },{
                     field: 'estimateDays',
                     title: 'Ngày Dự Thu',
                     align: 'center',
-                    width: '10%'
+                    width: '7%'
                 },{
                     field: 'total',
                     title: 'Tổng',

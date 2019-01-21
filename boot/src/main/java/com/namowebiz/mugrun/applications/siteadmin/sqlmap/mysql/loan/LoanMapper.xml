@@ -236,7 +236,6 @@
                 , cust.town_no town_no
                 , cust.district_no
                 , cust.province_no
-                , (select COUNT(loan_no) from loan_detail where loan_no = L.loan_no) as totalSession
                 <![CDATA[ , IFNULL((select COUNT(loan_no)  from loan_detail where loan_no = L.loan_no and confirm_date IS NULL and end_date < DATE(#{currentDate}) and L.status != 'F'), 0) as delay_days ]]>
                 , IFNULL((select COUNT(loan_no)  from loan_detail D
                     where loan_no = L.loan_no and D.status = 'N'
@@ -271,7 +270,7 @@
                 , cust.town_no town_no
                 , cust.district_no
                 , cust.province_no
-                , (select COUNT(loan_no) from loan_detail where loan_no = L.loan_no) as totalSession
+                , (select SUM(capital)  from loan_detail where loan_no = L.loan_no and confirm_date IS NULL) as currentDebt
                 <![CDATA[ , IFNULL((select COUNT(loan_no)  from loan_detail where loan_no = L.loan_no and confirm_date IS NULL and end_date < DATE(#{currentDate}) and L.status != 'F'), 0) as delay_days ]]>
                 , IFNULL((select COUNT(loan_no)  from loan_detail D
                       where loan_no = L.loan_no and D.status = 'N'
@@ -341,7 +340,7 @@
                 </choose>
             </if>
             <if test="searchText != null">
-                AND CONCAT(L.customerName ,L.customer_code, L.contract_code) LIKE CONCAT('%',#{searchText},'%')
+                AND CONCAT(cust.name ,cust.customer_code, L.contract_code) LIKE CONCAT('%',#{searchText},'%')
             </if>
         </where>
         ORDER BY L.reg_date DESC
@@ -385,7 +384,7 @@
                 </choose>
             </if>
             <if test="searchText != null">
-                AND CONCAT(L.customerName ,L.customer_code, L.contract_code) LIKE CONCAT('%',#{searchText},'%')
+                AND CONCAT(cust.name , cust.customer_code, L.contract_code) LIKE CONCAT('%',#{searchText},'%')
             </if>
         </where>
     </select>

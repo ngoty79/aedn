@@ -142,23 +142,27 @@ public class PlanController {
                 cLoanAmountFormat.setCellStyle(cellStyleRight);
                 cLoanAmountFormat.setCellValue(data.getLoanAmountFormat());
 
-                Cell cLoanStartDate = row.createCell(5);
+                Cell cDebtFormat = row.createCell(5);
+                cDebtFormat.setCellStyle(cellStyleRight);
+                cDebtFormat.setCellValue(data.getCurrentDebtFormat());
+
+                Cell cLoanStartDate = row.createCell(6);
                 cLoanStartDate.setCellStyle(cellStyle);
                 cLoanStartDate.setCellValue(sdf.format(data.getStartDate()));
 
-                Cell cLoanEndDate = row.createCell(6);
+                Cell cLoanEndDate = row.createCell(7);
                 cLoanEndDate.setCellStyle(cellStyle);
                 cLoanEndDate.setCellValue(sdf.format(data.getEndDate()));
 
-                Cell cDelayDay = row.createCell(7);
+                Cell cDelayDay = row.createCell(8);
                 cDelayDay.setCellStyle(cellStyle);
                 cDelayDay.setCellValue(data.getDelayDays());
 
-                Cell cDay = row.createCell(8);
+                Cell cDay = row.createCell(9);
                 cDay.setCellStyle(cellStyle);
                 cDay.setCellValue(data.getEstimateDays());
 
-                Cell cTotal = row.createCell(9);
+                Cell cTotal = row.createCell(10);
                 int total = data.getDelayDays() + data.getEstimateDays();
                 cTotal.setCellStyle(cellStyle);
                 cTotal.setCellValue(total);

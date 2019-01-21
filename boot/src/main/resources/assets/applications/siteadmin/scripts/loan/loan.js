@@ -11,17 +11,16 @@ $.extend(LoanController.prototype, {
         me.$container = $(selector);
         me.approve = me.$container.find('#container-userIndex-contents').data("approveYn");
         me.finish =  me.$container.find('#container-userIndex-contents').data("approveYn");
-        me.$cboTown                  = me.$container.find('select[name="townNo"]');
-        me.$cboUser                  = me.$container.find('select[name="staffUserNo"]');
-        me.$cboDelayType                  = me.$container.find('select[name="delayType"]');
-        me.$cboStatus                  = me.$container.find('select[name="status"]');
-        me.$cboLoanPayType                  = me.$container.find('select[name="loanPayType"]');
+        me.$cboTown                 = me.$container.find('select[name="townNo"]');
+        me.$cboUser                 = me.$container.find('select[name="staffUserNo"]');
+        me.$cboStatus               = me.$container.find('select[name="status"]');
         me.$btnAdd                  = me.$container.find('.btn-add');
         me.$textSearch              = me.$container.find('.text-search');
-        me.$btnSearch              = me.$container.find('.btn-search');
+        me.$btnSearch               = me.$container.find('.btn-search');
         me.$btnDelete               = me.$container.find('.btn-delete');
+        me.$btnExcel                = me.$container.find('#btn-excel');
 
-        me.$tableLoan           = me.$container.find('.table-loan-list');
+        me.$tableLoan               = me.$container.find('.table-loan-list');
         me.initUi();
         me.initEventHandlers();
     },
@@ -43,9 +42,7 @@ $.extend(LoanController.prototype, {
                 params['searchText'] = $.trim(me.$textSearch.val());
                 params['townNo'] = me.$cboTown.val();
                 params['staffUserNo'] = me.$cboUser.val();
-                params['delayType'] = me.$cboDelayType.val();
                 params['status'] = me.$cboStatus.val();
-                params['loanPayType'] = me.$cboLoanPayType.val();
                 return params;
             },
             columns: [
@@ -216,18 +213,20 @@ $.extend(LoanController.prototype, {
         me.$cboUser.change(function(){
             me.refreshList();
         });
-        me.$cboDelayType.change(function(){
-            me.refreshList();
-        });
         me.$cboStatus.change(function(){
-            me.refreshList();
-        });
-        me.$cboLoanPayType.change(function(){
             me.refreshList();
         });
         me.$btnSearch.on('click', function (e) {
             e.preventDefault();
             me.refreshList();
+        });
+        me.$btnExcel.click(function(){
+            var downloadUrl = '/admin/loan/download?';
+            downloadUrl += 'townNo=' + me.$cboTown.val();
+            downloadUrl += '&staffUserNo=' +me.$cboUser.val();
+            downloadUrl += '&status=' + me.$cboStatus.val();
+            downloadUrl += '&searchText=' + $.trim(me.$textSearch.val());
+            window.location.href = downloadUrl;
         });
 
     },
