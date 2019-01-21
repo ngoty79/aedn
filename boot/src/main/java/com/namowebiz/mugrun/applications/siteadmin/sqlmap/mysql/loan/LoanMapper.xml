@@ -298,6 +298,100 @@
     </select>
 
 
+    <select id="getLoanList" resultMap="loanVO" parameterType="map">
+        <bind name="currentDate" value="@com.namowebiz.mugrun.applications.framework.common.utils.DateUtil@getCurrentDate()"/>
+        SELECT
+            L.*
+            , U.name staff_user_name
+            , cust.name customerName
+            , cust.customer_code
+            , cust.town_no town_no
+            , cust.district_no
+            , cust.province_no
+            , (select SUM(capital)  from loan_detail where loan_no = L.loan_no and confirm_date IS NULL) as currentDebt
+            <![CDATA[ , IFNULL((select COUNT(loan_no)  from loan_detail where loan_no = L.loan_no and confirm_date IS NULL and end_date <= DATE(#{currentDate}) and L.status != 'F'), 0) as delay_days  ]]>
+        FROM loan L
+        LEFT OUTER JOIN customer cust ON cust.customer_no = L.customer_no
+        LEFT OUTER JOIN user_info U ON U.user_no = L.staff_user_no
+        <where>
+            AND (L.delete_yn IS NULL OR L.delete_yn = 0)
+            <if test="staffUserNo != null">
+                AND L.staff_user_no = #{staffUserNo}
+            </if>
+            <if test="townNo != null">
+                AND cust.town_no = #{townNo}
+            </if>
+            <if test="customerNo != null">
+                AND cust.customer_no = #{customerNo}
+            </if>
+            <if test="loanPayType != null">
+                AND L.loan_pay_type = #{loanPayType}
+            </if>
+            <if test="customerCode != null">
+                AND L.customer_code LIKE CONCAT('%', #{customerCode}, '%')
+            </if>
+            <if test="status != null">
+                <choose>
+                    <when test="status == 'NA'">
+                        AND L.status IN ('N', 'A')
+                    </when>
+                    <otherwise>
+                        AND L.status = #{status}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="searchText != null">
+                AND CONCAT(L.customerName ,L.customer_code, L.contract_code) LIKE CONCAT('%',#{searchText},'%')
+            </if>
+        </where>
+        ORDER BY L.reg_date DESC
+        <if test="pageSize != null">
+            LIMIT #{startIndex}, #{pageSize}
+        </if>
+    </select>
+
+
+    <select id="countLoanList" resultType="long" parameterType="map">
+        SELECT
+            COUNT(L.loan_no)
+        FROM loan L
+        LEFT OUTER JOIN customer cust ON cust.customer_no = L.customer_no
+        LEFT OUTER JOIN user_info U ON U.user_no = L.staff_user_no
+        <where>
+            AND (L.delete_yn IS NULL OR L.delete_yn = 0)
+            <if test="staffUserNo != null">
+                AND L.staff_user_no = #{staffUserNo}
+            </if>
+            <if test="townNo != null">
+                AND cust.town_no = #{townNo}
+            </if>
+            <if test="customerNo != null">
+                AND cust.customer_no = #{customerNo}
+            </if>
+            <if test="loanPayType != null">
+                AND L.loan_pay_type = #{loanPayType}
+            </if>
+            <if test="customerCode != null">
+                AND L.customer_code LIKE CONCAT('%', #{customerCode}, '%')
+            </if>
+            <if test="status != null">
+                <choose>
+                    <when test="status == 'NA'">
+                        AND L.status IN ('N', 'A')
+                    </when>
+                    <otherwise>
+                        AND L.status = #{status}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="searchText != null">
+                AND CONCAT(L.customerName ,L.customer_code, L.contract_code) LIKE CONCAT('%',#{searchText},'%')
+            </if>
+        </where>
+    </select>
+
+
+
     <select id="list" resultMap="loanVO" parameterType="map">
         <bind name="currentDate" value="@com.namowebiz.mugrun.applications.framework.common.utils.DateUtil@getCurrentDate()"/>
         SELECT

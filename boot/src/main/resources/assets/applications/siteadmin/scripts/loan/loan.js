@@ -68,9 +68,12 @@ $.extend(LoanController.prototype, {
                     sortable: false,
                     align: 'left'
                 },{
-                    field: 'loanAmountFormat',
+                    field: 'loanAmount',
                     align: 'right',
-                    title: 'Số tiền vay'
+                    title: 'Số tiền vay',
+                    formatter: function(value, row){
+                        return value? numeral(value).format("0,0") : '-';
+                    }
                 },{
                     field: 'loanPeriod',
                     title: 'Hạn vay',
@@ -88,14 +91,14 @@ $.extend(LoanController.prototype, {
                         return str;
                     }
                 },{
-                    field: 'currentDebtFormat',
+                    field: 'currentDebt',
                     title: 'Dư nợ',
                     align: 'right',
                     formatter: function(value,object){
                         if(object.status == 'F'){
                             return "-";
                         }else{
-                            return value;
+                            return value? numeral(value).format("0,0") : '-';
                         }
                     }
                 },{

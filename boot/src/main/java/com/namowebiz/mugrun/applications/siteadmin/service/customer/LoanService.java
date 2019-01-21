@@ -72,12 +72,20 @@ public class LoanService {
         return loanDao.list(params);
     }
 
+    public List<LoanVO> getLoanList(Map<String, Object> params){
+        return loanDao.getLoanList(params);
+    }
+
     public List<LoanVO> getPayment(Map<String, Object> params){
         return loanDao.getPayment(params);
     }
 
 
 
+    public Long countLoanList(Map<String, Object> params){
+        Long count = loanDao.countLoanList(params);
+        return count == null? 0L : count;
+    }
     public Long count(Map<String, Object> params){
         Long count = loanDao.count(params);
         return count == null? 0L : count;

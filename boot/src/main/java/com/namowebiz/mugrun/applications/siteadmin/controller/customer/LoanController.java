@@ -96,8 +96,8 @@ public class LoanController {
         params.put("pageSize", pageSize);
         PaginationList<LoanVO> paging = new PaginationList<>(pageNumber, pageSize);
 
-        List<LoanVO> loans = loanService.list(params);
-        Long count = loanService.count(params);
+        List<LoanVO> loans = loanService.getLoanList(params);
+        Long count = loanService.countLoanList(params);
         paging.setRows(loans);
         paging.setTotal(count);
 

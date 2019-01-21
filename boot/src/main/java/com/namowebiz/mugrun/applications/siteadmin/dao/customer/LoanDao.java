@@ -30,11 +30,15 @@ public interface LoanDao {
 
     public Integer getCountLoanPlan(Map<String, Object> params);
 
+    List<LoanVO> getLoanList(Map<String, Object> params);
+
     List<LoanVO> list(Map<String, Object> params);
 
     List<LoanVO> getPayment(Map<String, Object> params);
 
     List<LoanVO> getByCustomerNo(Long customerNo);
+
+    public Long countLoanList(Map<String, Object> params);
 
     public Long count(Map<String, Object> params);
 
