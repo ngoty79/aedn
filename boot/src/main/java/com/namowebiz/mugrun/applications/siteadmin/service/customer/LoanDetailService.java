@@ -114,6 +114,7 @@ public class LoanDetailService {
                 if(payment != null){
                     List<Long> detailNoList = convertToLongList(payment.getDetailNoList());
                     loanDetailDao.confirmLoanDetail(detailNoList, RequestUtil.getLoginUserInfo().getUserNo());
+
                     loanPaymentService.delete(paymentNo);
                     payments.add(payment);
                 }

@@ -3,6 +3,7 @@ package com.namowebiz.mugrun.applications.siteadmin.controller.report;
 import com.namowebiz.mugrun.applications.framework.common.utils.PaginationList;
 import com.namowebiz.mugrun.applications.siteadmin.models.moenyflow.MoneyFlowVO;
 import com.namowebiz.mugrun.applications.siteadmin.models.moenyflow.Property;
+import com.namowebiz.mugrun.applications.siteadmin.service.customer.LoanService;
 import com.namowebiz.mugrun.applications.siteadmin.service.moenyflow.MoneyFlowService;
 import com.namowebiz.mugrun.applications.siteadmin.service.moenyflow.PropertyService;
 import lombok.extern.apachecommons.CommonsLog;
@@ -31,7 +32,8 @@ public class MoneyFlowController {
     private PropertyService propertyService;
     @Autowired
     private MoneyFlowService moneyFlowService;
-
+    @Autowired
+    private LoanService loanService;
 
     @RequestMapping(value = "/admin/moneyflow/index", method = RequestMethod.GET)
     public String moneyFlowIndex(Map<String, Object> map, HttpServletRequest request) throws Exception {
@@ -43,19 +45,7 @@ public class MoneyFlowController {
     @Transactional
     public String calculate(Map<String, Object> map, HttpServletRequest request) throws Exception {
         Property property = propertyService.get();
-        Map<String, Object> params = new HashMap<>();
-        List<MoneyFlowVO> list = moneyFlowService.list(params);
-        for (int i = 0; i < list.size(); i++) {
-            MoneyFlowVO record = list.get(i);
-            if(i == 0){
-                record.setRemainCash(property.getCash().doubleValue());
-                moneyFlowService.updateRemainCash(record);
-            }else{
-                MoneyFlowVO prev = list.get(i - 1);
-                record.setRemainCash(prev.getRemainCash() - prev.getAmount());
-                moneyFlowService.updateRemainCash(record);
-            }
-        }
+        loanService.updateIsPaidAll();
 
 
         map.put("property", property);

@@ -32,6 +32,7 @@
         <result column="finish_return_amount" property="finishReturnAmount"/>
         <result column="customer_asset" property="customerAsset"/>
         <result column="delete_yn" property="deleteYn"/>
+        <result column="is_paid_all" property="isPaidAll"/>
 
         <result column="reg_date" property="regDate"/>
         <result column="reg_user_no" property="regUserNo"/>
@@ -307,6 +308,8 @@
             , cust.town_no town_no
             , cust.district_no
             , cust.province_no
+            , IFNULL((select COUNT(loan_no) from loan_detail where loan_no = L.loan_no and status = 'P' and confirm_date IS NOT NULL), 0) as alreadyPaidSession
+            , (select COUNT(loan_no) from loan_detail where loan_no = L.loan_no) as totalSession
             , (select SUM(capital)  from loan_detail where loan_no = L.loan_no and confirm_date IS NULL) as currentDebt
             <![CDATA[ , IFNULL((select COUNT(loan_no)  from loan_detail where loan_no = L.loan_no and confirm_date IS NULL and end_date <= DATE(#{currentDate}) and L.status != 'F'), 0) as delay_days  ]]>
         FROM loan L
@@ -485,34 +488,69 @@
 
     <select id="getPayment" resultMap="loanVO" parameterType="map">
         <bind name="currentDate" value="@com.namowebiz.mugrun.applications.framework.common.utils.DateUtil@getCurrentDate()"/>
-        SELECT A.*
-            , (Select name from user_info Where user_no = A.duty_staff_no) as duty_user_name
-            , IFNULL((select COUNT(loan_no)  from loan_detail where loan_no = A.loan_no and confirm_date IS NULL and <![CDATA[ end_date <= DATE(#{currentDate})  ]]> and A.status != 'F'), 0) as delay_days
-            , (select SUM(capital) from loan_detail where loan_no = A.loan_no and confirm_date IS NULL) as currentDebt
-
-        FROM (
-            <![CDATA[
-            SELECT * FROM (
-                SELECT L.*
-                      , U.name staff_user_name
-                      , cust.name customerName
-                      , cust.customer_code
-                      , cust.town_no town_no
-                      , (select COUNT(loan_no) from loan_detail where loan_no = L.loan_no) as totalSession
-                      , IFNULL((select COUNT(loan_no) from loan_detail where loan_no = L.loan_no and status = 'P' and confirm_date IS NOT NULL), 0) as alreadyPaidSession
-                    FROM loan L
-                    LEFT OUTER JOIN customer cust ON cust.customer_no = L.customer_no
-                    LEFT OUTER JOIN user_info U ON U.user_no = L.staff_user_no
-
-            ) L
-            ]]>
-            <include refid="whereClause"/>
-            ORDER BY L.reg_date DESC
-            <if test="pageSize != null">
-                LIMIT #{startIndex}, #{pageSize}
+        SELECT
+            L.*
+            , U.name staff_user_name
+            , cust.name customerName
+            , cust.customer_code
+            , cust.town_no town_no
+            , (select COUNT(loan_no) from loan_detail where loan_no = L.loan_no) as totalSession
+            , IFNULL((select COUNT(loan_no) from loan_detail where loan_no = L.loan_no and status = 'P' and confirm_date IS NOT NULL), 0) as alreadyPaidSession
+            , IFNULL((select COUNT(loan_no)  from loan_detail where loan_no = L.loan_no and confirm_date IS NULL and <![CDATA[ end_date <= DATE(#{currentDate})  ]]> and L.status != 'F'), 0) as delay_days
+            , (select SUM(capital) from loan_detail where loan_no = L.loan_no and confirm_date IS NULL) as currentDebt
+        FROM loan L
+            LEFT OUTER JOIN customer cust ON cust.customer_no = L.customer_no
+            LEFT OUTER JOIN user_info U ON U.user_no = L.staff_user_no
+        WHERE (L.delete_yn IS NULL OR L.delete_yn = 0) AND L.is_paid_all = 0
+            <if test="status != null">
+                <choose>
+                    <when test="status == 'NA'">
+                        AND L.status IN ('N', 'A')
+                    </when>
+                    <otherwise>
+                        AND L.status = #{status}
+                    </otherwise>
+                </choose>
             </if>
-        ) A
+            <if test="searchText != null">
+                AND L.contract_code LIKE CONCAT('%',#{searchText},'%')
+            </if>
+            <if test="staffUserNo != null">
+                AND L.staff_user_no = #{staffUserNo}
+            </if>
+        ORDER BY L.reg_date DESC
+        <if test="pageSize != null">
+            LIMIT #{startIndex}, #{pageSize}
+        </if>
     </select>
+
+
+    <select id="getPaymentCount" resultType="long" parameterType="map">
+        <bind name="currentDate" value="@com.namowebiz.mugrun.applications.framework.common.utils.DateUtil@getCurrentDate()"/>
+        SELECT
+            COUNT(L.loan_no)
+        FROM loan L
+            LEFT OUTER JOIN customer cust ON cust.customer_no = L.customer_no
+            LEFT OUTER JOIN user_info U ON U.user_no = L.staff_user_no
+        WHERE (L.delete_yn IS NULL OR L.delete_yn = 0) AND L.is_paid_all = 0
+            <if test="status != null">
+                <choose>
+                    <when test="status == 'NA'">
+                        AND L.status IN ('N', 'A')
+                    </when>
+                    <otherwise>
+                        AND L.status = #{status}
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="searchText != null">
+                AND L.contract_code LIKE CONCAT('%',#{searchText},'%')
+            </if>
+            <if test="staffUserNo != null">
+                AND L.staff_user_no = #{staffUserNo}
+            </if>
+    </select>
+
 
 
     <select id="count" resultType="long" parameterType="map">
@@ -564,5 +602,24 @@
         WHERE title LIKE concat('%', #{contractCode}, '%')
     </update>
 
+    <update id="updateIsPaidAll" parameterType="map">
+        UPDATE loan
+        SET
+          is_paid_all = 1
+        WHERE loan_no IN
+        <foreach collection="loanNoList" item="item" separator="," open="(" close=")" >
+            #{item}
+        </foreach>
+    </update>
+
+    <select id="getPaidAllLoans" resultType="long">
+        SELECT L.loan_no
+        FROM loan L
+        WHERE L.status = 'A'
+            AND (L.delete_yn IS NULL OR L.delete_yn = 0)
+            AND L.loan_no NOT IN (
+                select loan_no from loan_detail where status = 'N' and confirm_date IS NULL GROUP BY loan_no
+            )
+    </select>
 
 </mapper>

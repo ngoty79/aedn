@@ -86,8 +86,14 @@ public class LoanService {
         Long count = loanDao.countLoanList(params);
         return count == null? 0L : count;
     }
+
     public Long count(Map<String, Object> params){
         Long count = loanDao.count(params);
+        return count == null? 0L : count;
+    }
+
+    public Long getPaymentCount(Map<String, Object> params){
+        Long count = loanDao.getPaymentCount(params);
         return count == null? 0L : count;
     }
 
@@ -342,6 +348,13 @@ public class LoanService {
             return nextCode;
         }
     }
+
+    @Transactional
+    public void updateIsPaidAll(){
+        List<Long> loanNoList = loanDao.getPaidAllLoans();
+        loanDao.updateIsPaidAll(loanNoList);
+    }
+
 
 
 }

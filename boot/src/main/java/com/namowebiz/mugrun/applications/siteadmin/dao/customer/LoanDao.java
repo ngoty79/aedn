@@ -26,6 +26,8 @@ public interface LoanDao {
 
     void delete(Long customerNo);
 
+    void updateIsPaidAll(@Param("loanNoList") List<Long> loanNoList);
+
     List<LoanVO> getLoanPlan(Map<String, Object> params);
 
     public Integer getCountLoanPlan(Map<String, Object> params);
@@ -38,9 +40,13 @@ public interface LoanDao {
 
     List<LoanVO> getByCustomerNo(Long customerNo);
 
+    List<Long> getPaidAllLoans();
+
     public Long countLoanList(Map<String, Object> params);
 
     public Long count(Map<String, Object> params);
+
+    public Long getPaymentCount(Map<String, Object> params);
 
     List<LoanCount> getCountOfStaff(Map<String, Object> params);
 

@@ -53,6 +53,7 @@ public class Loan extends BaseObject {
     private String finishedNote;
     private String customerAsset;
     private Integer finishReturnAmount;
+    private Boolean isPaidAll;
 
 
 
