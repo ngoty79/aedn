@@ -198,7 +198,11 @@
             , (select common_code_name FROM common_code WHERE common_code = B.revenue_type AND group_code = 'OtherIncome') commonCodeName
             FROM
                 (
-                    SELECT IFNULL(A.revenue_type, '99') revenue_type, A.amount, A.approve_date, DATE_FORMAT(A.approve_date, '%Y-%m') ym
+                    SELECT
+                        IFNULL(A.revenue_type, '99') revenue_type,
+                        A.amount,
+                        A.date,
+                        DATE_FORMAT(A.date, '%Y-%m') ym
                     FROM revenue_detail A
                     WHERE A.status = 'A'
                 ) B
@@ -214,7 +218,7 @@
                 , (select common_code_name FROM common_code WHERE common_code = B.cost_type AND group_code = 'OtherCost') commonCodeName
           FROM
             (
-                    SELECT IFNULL(A.cost_type, '13') cost_type, A.amount, A.approve_date, DATE_FORMAT(A.approve_date, '%Y-%m') ym
+                    SELECT IFNULL(A.cost_type, '13') cost_type, A.amount, A.date, DATE_FORMAT(A.date, '%Y-%m') ym
                     FROM cost_detail A
                     WHERE A.status = 'A'
             ) B

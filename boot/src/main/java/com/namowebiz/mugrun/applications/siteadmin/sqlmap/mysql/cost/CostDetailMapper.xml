@@ -126,10 +126,10 @@
                 <![CDATA[ AND DATE(cost.date) <= DATE(#{endDate}) ]]>
             </if>
             <if test="startApproveDate != null">
-                AND cost.approve_date >= DATE(#{startApproveDate})
+                AND cost.date >= DATE(#{startApproveDate})
             </if>
             <if test="endApproveDate != null">
-                <![CDATA[ AND DATE(cost.approve_date) <= DATE(#{endApproveDate}) ]]>
+                <![CDATA[ AND DATE(cost.date) <= DATE(#{endApproveDate}) ]]>
             </if>
 
             <if test="searchText != null">

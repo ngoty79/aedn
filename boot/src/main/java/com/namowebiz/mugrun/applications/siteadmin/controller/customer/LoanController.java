@@ -201,14 +201,18 @@ public class LoanController {
                 cDelayDay.setCellStyle(cellStyle);
                 cDelayDay.setCellValue(data.getDelayDays());
 
-//                Cell cDay = row.createCell(9);
-//                cDay.setCellStyle(cellStyle);
-//                cDay.setCellValue(data.getEstimateDays());
-//
-//                Cell cTotal = row.createCell(10);
-//                int total = data.getDelayDays() + data.getEstimateDays();
-//                cTotal.setCellStyle(cellStyle);
-//                cTotal.setCellValue(total);
+                Cell cPaidSession = row.createCell(9);
+                cPaidSession.setCellStyle(cellStyle);
+                cPaidSession.setCellValue(data.getAlreadyPaidSession());
+
+                Cell cChuThu = row.createCell(10);
+                int chuthu = data.getTotalPaySessions() - data.getAlreadyPaidSession();
+                cChuThu.setCellStyle(cellStyle);
+                cChuThu.setCellValue(chuthu);
+
+                Cell cTotalSession = row.createCell(11);
+                cTotalSession.setCellStyle(cellStyle);
+                cTotalSession.setCellValue(data.getTotalPaySessions());
             }
 
             workbook.write(outputStream);
