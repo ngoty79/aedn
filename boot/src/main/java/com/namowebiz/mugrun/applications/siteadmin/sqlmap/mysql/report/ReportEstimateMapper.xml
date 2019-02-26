@@ -159,13 +159,13 @@
         <![CDATA[
           SELECT A.ym AS month, SUM(A.amount) AS revenue, SUM(A.profit) AS profit
             FROM (
-                SELECT detail.confirm_date date, DATE_FORMAT(detail.confirm_date, '%Y-%m') ym, SUM(detail.amount) amount, SUM(detail.profit) profit
+                SELECT detail.end_date date, DATE_FORMAT(detail.end_date, '%Y-%m') ym, SUM(detail.amount) amount, SUM(detail.profit) profit
                     FROM Loan L
                     INNER JOIN loan_detail detail ON L.loan_no = detail.loan_no
                 WHERE
                     L.delete_yn = 0 AND L.status != 'N'
-                    AND (detail.delete_yn = 0 AND detail.status = 'P'  AND detail.confirm_date IS NOT NULL)
-                    GROUP BY detail.confirm_date
+                    AND (detail.delete_yn = 0 AND detail.status = 'P'  AND detail.confirm_date IS NOT NULL AND detail.end_date <= DATE(NOW()))
+                    GROUP BY detail.end_date
             ) A
           GROUP BY A.ym
           ORDER BY A.ym desc
